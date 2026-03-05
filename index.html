@@ -289,7 +289,7 @@
     <div class="card-footer">
       <button class="btn btn-prev" id="btn-prev" onclick="prev_question()">← Înapoi</button>
       <button class="btn btn-confirm" id="btn-confirm" onclick="confirm_answer()">Confirmă răspunsul</button>
-      <button class="btn btn-next" id="btn-next" onclick="next_question()" style="display:none">Următoarea →</button>
+      <button class="btn btn-next" id="btn-next" onclick="next_question()">Următoarea →</button>
     </div>
   </div>
 </div>
@@ -321,6 +321,7 @@ let score = 0;
 let selected = [];
 let confirmed = false;
 let history = [];
+let answeredState = []; // starea fiecărei întrebări: { selected, confirmed, correct }
 
 // Load questions from JSON
 fetch('questions.json')
@@ -342,6 +343,7 @@ function startQuiz() {
   const size = sizeVal === 'all' ? ALL_Q.length : parseInt(sizeVal);
   questions = shuffle(ALL_Q).slice(0, size);
   current = 0; score = 0; selected = []; confirmed = false; history = [];
+  answeredState = questions.map(() => null); // null = nerăspuns
 
   document.getElementById('menu').style.display = 'none';
   document.getElementById('quiz-area').style.display = 'block';
@@ -354,6 +356,7 @@ function startQuiz() {
 
 function renderQuestion() {
   const q = questions[current];
+  const state = answeredState[current];
   document.getElementById('card').classList.remove('card-shake');
 
   // header
@@ -384,25 +387,47 @@ function renderQuestion() {
     container.appendChild(btn);
   });
 
-  // reset feedback & buttons
   const fb = document.getElementById('feedback');
-  fb.className = 'show' in fb.classList ? '' : '';
-  fb.classList.remove('show', 'correct-fb', 'wrong-fb');
 
-  // prev button — ascuns la prima întrebare
-  document.getElementById('btn-prev').style.display = current === 0 ? 'none' : 'inline-block';
-  document.getElementById('btn-confirm').style.display = 'inline-block';
-  document.getElementById('btn-next').style.display = 'none';
-
-  // ultima întrebare → buton "Termină testul"
-  if (current + 1 >= questions.length) {
-    document.getElementById('btn-next').textContent = 'Termină testul ✓';
+  if (state) {
+    // întrebare deja răspunsă — restaurează starea și blochează
+    selected = state.selected;
+    confirmed = true;
+    q.options.forEach((_, i) => {
+      const btn = document.getElementById(`opt-${i}`);
+      const isCorrect = q.answers.includes(i);
+      const isSelected = state.selected.includes(i);
+      btn.disabled = true;
+      const mark = document.getElementById(`mark-${i}`);
+      if (isCorrect) { btn.classList.add('correct'); mark.textContent = '✓'; }
+      else if (isSelected && !isCorrect) { btn.classList.add('wrong'); mark.textContent = '✗'; }
+    });
+    document.getElementById('feedback-icon').textContent = state.correct ? '✅' : '❌';
+    if (state.correct) {
+      document.getElementById('feedback-text').textContent = 'Corect! Bine făcut.';
+      fb.className = 'show correct-fb';
+    } else {
+      const correctLabels = q.answers.map(a => q.options[a]).join(', ');
+      document.getElementById('feedback-text').textContent =
+        `Greșit. Răspuns${q.answers.length > 1 ? 'urile corecte sunt' : 'ul corect este'}: ${correctLabels}`;
+      fb.className = 'show wrong-fb';
+    }
+    document.getElementById('btn-confirm').style.display = 'none';
+    document.getElementById('btn-next').style.display = 'inline-block';
   } else {
-    document.getElementById('btn-next').textContent = 'Următoarea →';
+    // întrebare nouă
+    selected = [];
+    confirmed = false;
+    fb.classList.remove('show', 'correct-fb', 'wrong-fb');
+    document.getElementById('btn-confirm').style.display = 'inline-block';
+    document.getElementById('btn-next').style.display = 'none';
   }
 
-  selected = [];
-  confirmed = false;
+  // prev ascuns la prima întrebare
+  document.getElementById('btn-prev').style.display = current === 0 ? 'none' : 'inline-block';
+
+  // ultima întrebare
+  document.getElementById('btn-next').textContent = current + 1 >= questions.length ? 'Termină testul ✓' : 'Următoarea →';
 
   // re-animate card
   document.getElementById('card').style.animation = 'none';
@@ -449,6 +474,9 @@ function confirm_answer() {
   }
   history.push({ topic: q.topic, correct });
 
+  // salvează starea
+  answeredState[current] = { selected: [...selected], correct };
+
   // color options
   q.options.forEach((_, i) => {
     const btn = document.getElementById(`opt-${i}`);
@@ -481,6 +509,7 @@ function confirm_answer() {
 
   document.getElementById('btn-confirm').style.display = 'none';
   document.getElementById('btn-next').style.display = 'inline-block';
+  document.getElementById('btn-next').textContent = current + 1 >= questions.length ? 'Termină testul ✓' : 'Următoarea →';
 }
 
 function prev_question() {
