@@ -152,6 +152,14 @@
     }
     .btn:hover { opacity: .88; }
     .btn-confirm { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; }
+    .btn-skip    { background: transparent; color: #94a3b8; border: 1px solid #334155; }
+    .btn-skip:hover { background: #1e293b; color: #cbd5e1; }
+    .skipped-card {
+      background: #1e293b; border: 1px solid #334155; border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 12px; text-align: left;
+    }
+    .skipped-q   { color: #e2e8f0; font-size: .92rem; margin-bottom: 8px; }
+    .skipped-ans { color: #4ade80; font-size: .85rem; }
     .btn-next    { background: linear-gradient(135deg, #059669, #0284c7); color: #fff; }
 
     /* ── RESULTS ── */
@@ -278,6 +286,7 @@
     </div>
     <div class="card-footer">
       <button class="btn btn-confirm" id="btn-confirm" onclick="confirm_answer()">Confirmă răspunsul</button>
+      <button class="btn btn-skip"    id="btn-skip"    onclick="skip_question()">⏭ Skip</button>
       <button class="btn btn-next"    id="btn-next"    onclick="next_question()" style="display:none">Următoarea →</button>
     </div>
   </div>
@@ -295,6 +304,10 @@
     <div class="breakdown-title">Performanță pe capitole</div>
     <div id="topic-rows"></div>
   </div>
+  <div id="skipped-section" style="display:none; margin-top:24px; width:100%; max-width:560px;">
+    <div class="breakdown-title">⏭ Întrebări sărite</div>
+    <div id="skipped-rows"></div>
+  </div>
   <button class="btn-restart" onclick="backToMenu()">↺ Meniu principal</button>
 </div>
 
@@ -306,6 +319,7 @@ let score = 0;
 let selected = [];
 let confirmed = false;
 let history = [];
+let skipped = [];
 
 // Load questions from JSON
 fetch('questions.json')
@@ -326,7 +340,7 @@ function startQuiz() {
   const sizeVal = document.getElementById('quiz-size').value;
   const size = sizeVal === 'all' ? ALL_Q.length : parseInt(sizeVal);
   questions = shuffle(ALL_Q).slice(0, size);
-  current = 0; score = 0; selected = []; confirmed = false; history = [];
+  current = 0; score = 0; selected = []; confirmed = false; history = []; skipped = [];
 
   document.getElementById('menu').style.display = 'none';
   document.getElementById('quiz-area').style.display = 'block';
@@ -374,6 +388,7 @@ function renderQuestion() {
   fb.className = 'show' in fb.classList ? '' : '';
   fb.classList.remove('show', 'correct-fb', 'wrong-fb');
   document.getElementById('btn-confirm').style.display = 'inline-block';
+  document.getElementById('btn-skip').style.display = 'inline-block';
   document.getElementById('btn-next').style.display = 'none';
 
   // update last question button
@@ -462,7 +477,18 @@ function confirm_answer() {
   }
 
   document.getElementById('btn-confirm').style.display = 'none';
+  document.getElementById('btn-skip').style.display = 'none';
   document.getElementById('btn-next').style.display = 'inline-block';
+}
+
+function skip_question() {
+  skipped.push(questions[current]);
+  if (current + 1 >= questions.length) {
+    showResults();
+  } else {
+    current++;
+    renderQuestion();
+  }
 }
 
 function next_question() {
@@ -489,7 +515,25 @@ function showResults() {
   document.getElementById('result-emoji').textContent = emoji;
   document.getElementById('result-grade').textContent = grade;
   document.getElementById('result-score').textContent = score;
-  document.getElementById('result-den').textContent = `/${questions.length}`;
+  document.getElementById('result-den').textContent = `/${questions.length - skipped.length}`;
+
+  // skipped section
+  const skippedSection = document.getElementById('skipped-section');
+  const skippedRows = document.getElementById('skipped-rows');
+  skippedRows.innerHTML = '';
+  if (skipped.length > 0) {
+    skippedSection.style.display = 'block';
+    skipped.forEach(q => {
+      const correctLabels = q.answers.map(a => q.options[a]).join(', ');
+      skippedRows.innerHTML += `
+        <div class="skipped-card">
+          <div class="skipped-q">${q.question}</div>
+          <div class="skipped-ans">✓ Răspuns corect: ${correctLabels}</div>
+        </div>`;
+    });
+  } else {
+    skippedSection.style.display = 'none';
+  }
 
   // topic breakdown
   const stats = {};
