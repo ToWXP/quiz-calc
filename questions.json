@@ -1,0 +1,714 @@
+[
+  {
+    "id": 1,
+    "topic": "Introducere",
+    "chapter": 0,
+    "type": "single",
+    "question": "Ce rol principal are sistemul de operare într-un sistem de calcul?",
+    "options": [
+      "Creează conținut pentru utilizator",
+      "Gestionează resursele hardware și facilitează folosirea lor de către aplicații",
+      "Înlocuiește driverele hardware defecte",
+      "Rulează exclusiv aplicații de birou"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 2,
+    "topic": "Introducere",
+    "chapter": 0,
+    "type": "multi",
+    "question": "Care dintre următoarele distribuții Linux folosesc formatul de pachete .deb și managerul apt?",
+    "options": ["Ubuntu", "Fedora", "Debian", "CentOS"],
+    "answers": [0, 2]
+  },
+  {
+    "id": 3,
+    "topic": "Introducere",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care distribuție Linux are un model de lansare continuă (rolling release)?",
+    "options": ["Ubuntu", "Fedora", "Arch Linux", "Debian"],
+    "answers": [2]
+  },
+  {
+    "id": 4,
+    "topic": "Introducere",
+    "chapter": 0,
+    "type": "single",
+    "question": "Ce este shell-ul în cadrul unui sistem de operare?",
+    "options": [
+      "Un tip de procesor specializat",
+      "O aplicație de sistem care oferă interfața pentru interacțiunea utilizatorului cu SO",
+      "Un sistem de fișiere special",
+      "Un protocol de rețea"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 5,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce înseamnă acronimul WIMP în contextul interfețelor grafice?",
+    "options": [
+      "Web, Interface, Mouse, Panel",
+      "Window, Icon, Menu, Pointer",
+      "Workspace, Input, Monitor, Pixel",
+      "Widget, Interface, Mode, Process"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 6,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "multi",
+    "question": "Care sunt funcționalități specifice interfeței grafice în Linux față de alte sisteme?",
+    "options": [
+      "Spații de lucru (workspace) multiple",
+      "Compilarea automată a codului sursă",
+      "Scurtături de tastatură configurabile",
+      "Gestionarea automată a driverelor"
+    ],
+    "answers": [0, 2]
+  },
+  {
+    "id": 7,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Serverul grafic X de tip XMing este disponibil pentru ce platformă?",
+    "options": ["macOS", "Linux", "Windows", "Android"],
+    "answers": [2]
+  },
+  {
+    "id": 8,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este directorul rădăcină al sistemului de fișiere în Linux?",
+    "options": ["C:\\", "~", "/", "/root"],
+    "answers": [2]
+  },
+  {
+    "id": 9,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Cum alocă Windows literele de unitate (ex. C:, D:) partițiilor?",
+    "options": [
+      "În funcție de sistemul de fișiere de pe partiție",
+      "În funcție de partiții, nu de sistemul de fișiere",
+      "Aleatoriu la fiecare pornire",
+      "În ordine alfabetică după dimensiune"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 10,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce tip de legătură creează comanda `ln -s` în Linux?",
+    "options": [
+      "Hard link",
+      "Soft copy",
+      "Symbolic link (legătură simbolică)",
+      "Mount point"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 11,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "multi",
+    "question": "Care sisteme de fișiere sunt suportate nativ de Linux, Windows și macOS în același timp?",
+    "options": ["FAT32", "NTFS", "Ext4", "HFS+"],
+    "answers": [0]
+  },
+  {
+    "id": 12,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce face comanda `./program > /dev/null 2>&1`?",
+    "options": [
+      "Salvează outputul în fișierul /dev/null",
+      "Suprimă complet orice output (stdout și stderr)",
+      "Redirecționează doar erorile",
+      "Rulează programul în background"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 13,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce comandă creează un director nou în Linux?",
+    "options": ["mkfile", "touch", "mkdir", "newdir"],
+    "answers": [2]
+  },
+  {
+    "id": 14,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce sunt metadatele unui pachet software?",
+    "options": [
+      "Fișierele executabile din pachet",
+      "Informații despre pachet: descriere, versiune, dependențe",
+      "Codul sursă al aplicației",
+      "Fișierele de configurare ale aplicației"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 15,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce problemă descrie termenul 'dependency hell'?",
+    "options": [
+      "Lipsă de spațiu pe disc la instalarea pachetelor",
+      "Eroare de rețea la descărcarea pachetelor",
+      "Conflicte între versiunile diferite ale pachetelor dependente",
+      "Imposibilitatea dezinstalării unui pachet"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 16,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "multi",
+    "question": "Care sunt motive valide pentru a instala o aplicație din cod sursă în loc din pachet?",
+    "options": [
+      "Aplicația nu există în depozitul distribuției",
+      "Este întotdeauna mai rapid decât din pachet",
+      "Vrem să compilăm cu opțiuni specifice hardware-ului",
+      "Dorim să modificăm codul sursă al aplicației"
+    ],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 17,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce manager de pachete folosește distribuția Arch Linux?",
+    "options": ["apt", "dnf", "pacman", "rpm"],
+    "answers": [2]
+  },
+  {
+    "id": 18,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce face operatorul `&` la sfârșitul unei comenzi în Linux?",
+    "options": [
+      "Suspendă procesul imediat",
+      "Pune procesul în background în starea rulând",
+      "Termină procesul",
+      "Repornește procesul"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 19,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce combinație de taste plasează un proces activ în background în starea suspendată?",
+    "options": ["Ctrl+C", "Ctrl+D", "Ctrl+Z", "Ctrl+S"],
+    "answers": [2]
+  },
+  {
+    "id": 20,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce comandă readuce un proces din background în foreground?",
+    "options": ["bg", "fg", "jobs", "resume"],
+    "answers": [1]
+  },
+  {
+    "id": 21,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "multi",
+    "question": "Ce utilitare pot fi folosite pentru listarea proceselor active în Linux?",
+    "options": ["ps", "ls", "top", "pgrep"],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 22,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce face utilitarul `lsof` în Linux?",
+    "options": [
+      "Listează opțiunile de formatare disc",
+      "Afișează fișierele deschise de procese",
+      "Configurează interfețele de rețea",
+      "Listează modulele kernel încărcate"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 23,
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "multi",
+    "question": "Ce garanții oferă sistemul de operare proceselor care rulează simultan?",
+    "options": [
+      "Izolarea resurselor fiecărui proces",
+      "Arbitrarea accesului la resurse partajate",
+      "Mecanisme explicite de comunicare între procese",
+      "Acces direct la hardware fără restricții"
+    ],
+    "answers": [0, 1, 2]
+  },
+  {
+    "id": 24,
+    "topic": "Utilizatori",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce fișier stochează parolele criptate ale utilizatorilor în Linux?",
+    "options": ["/etc/passwd", "/etc/shadow", "/etc/group", "/etc/users"],
+    "answers": [1]
+  },
+  {
+    "id": 25,
+    "topic": "Utilizatori",
+    "chapter": 5,
+    "type": "multi",
+    "question": "Care fișiere sunt modificate la adăugarea unui utilizator nou cu `useradd` în Linux?",
+    "options": ["/etc/passwd", "/etc/shadow", "/etc/group", "/etc/hosts"],
+    "answers": [0, 1, 2]
+  },
+  {
+    "id": 26,
+    "topic": "Utilizatori",
+    "chapter": 5,
+    "type": "single",
+    "question": "Care este directorul home al utilizatorului 'student' în Linux?",
+    "options": ["/root/student", "/home/student", "/users/student", "/var/home/student"],
+    "answers": [1]
+  },
+  {
+    "id": 27,
+    "topic": "Utilizatori",
+    "chapter": 5,
+    "type": "multi",
+    "question": "Care sunt utilitarele wrapper Debian pentru gestiunea utilizatorilor (în loc de useradd/userdel)?",
+    "options": ["adduser", "useradd", "deluser", "userdel"],
+    "answers": [0, 2]
+  },
+  {
+    "id": 28,
+    "topic": "Dezvoltarea Aplicațiilor",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce este procesul de compilare în dezvoltarea software?",
+    "options": [
+      "Executarea directă a codului sursă de către procesor",
+      "Transformarea codului sursă în cod mașină executabil",
+      "Instalarea unui pachet software din depozit",
+      "Testarea automată a aplicației"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 29,
+    "topic": "Dezvoltarea Aplicațiilor",
+    "chapter": 6,
+    "type": "single",
+    "question": "Care este diferența principală între un limbaj compilat și unul interpretat?",
+    "options": [
+      "Limbajele compilate sunt mai noi",
+      "Limbajele interpretate produc cod mai rapid",
+      "Limbajele compilate transformă codul înainte de rulare; cele interpretate îl execută direct linie cu linie",
+      "Nu există diferență practică"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 30,
+    "topic": "Dezvoltarea Aplicațiilor",
+    "chapter": 6,
+    "type": "multi",
+    "question": "Ce instrumente sunt necesare pentru a rula un limbaj de programare pe un sistem?",
+    "options": [
+      "Compilator sau interpretor specific limbajului",
+      "Biblioteci necesare rulării aplicației",
+      "Obligatoriu un IDE (mediu de dezvoltare integrat)",
+      "Mediul de rulare (runtime)"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 31,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "De ce se numește shell CLI 'interpretor de comenzi'?",
+    "options": [
+      "Compilează comenzile introduse de utilizator",
+      "Traduce comenzile din engleză în română",
+      "Interpretează șirul introdus ca o comandă și execută acțiunea corespunzătoare",
+      "Interpretează fișiere de configurare XML"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 32,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "multi",
+    "question": "Ce informații poate conține un prompt de shell CLI?",
+    "options": [
+      "Numele utilizatorului curent",
+      "Directorul curent",
+      "Temperatura procesorului",
+      "Numele stației de lucru (hostname)"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 33,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Ce se întâmplă când tastezi comanda `cd` fără argumente în bash?",
+    "options": [
+      "Afișează directorul curent",
+      "Te mută în directorul rădăcină /",
+      "Te mută în directorul home al utilizatorului curent",
+      "Produce o eroare"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 34,
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce este memoria cache a procesorului și de ce a fost introdusă?",
+    "options": [
+      "Memorie pe disc pentru date temporare, introdusă pentru a economisi RAM",
+      "Memorie specifică procesorului, introdusă deoarece memoria RAM principală este mult mai lentă decât CPU",
+      "O partiție specială pe SSD pentru viteze mai mari",
+      "Memoria video dedicată plăcii grafice"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 35,
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "single",
+    "question": "Care este dimensiunea standard a unei unități de rack (1U)?",
+    "options": ["2.54 cm", "4.445 cm", "10 cm", "19 inch"],
+    "answers": [1]
+  },
+  {
+    "id": 36,
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "multi",
+    "question": "Care sunt caracteristicile specifice unui server față de un desktop obișnuit?",
+    "options": [
+      "Construcție robustă cu sisteme speciale de prindere în rack",
+      "Circulație a aerului pe orizontală (față → spate)",
+      "Ecran integrat de mare rezoluție",
+      "Raport preț/performanță mai bun decât desktopul"
+    ],
+    "answers": [0, 1]
+  },
+  {
+    "id": 37,
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce a determinat introducerea arhitecturii Harvard față de arhitectura von Neumann clasică?",
+    "options": [
+      "Costul mai redus al componentelor",
+      "Separarea memoriei de instrucțiuni de memoria de date pentru optimizarea performanței",
+      "Compatibilitatea cu mai multe sisteme de operare",
+      "Reducerea consumului de energie"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 38,
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
+    "type": "single",
+    "question": "Unde se află fizic firmware-ul BIOS pe platformele Intel 64 / AMD64?",
+    "options": [
+      "Pe hard disk, în sectorul de boot MBR",
+      "Pe un chip flash de pe placa de bază",
+      "În memoria RAM, încărcat la pornire",
+      "Pe o partiție specială EFI de pe SSD"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 39,
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
+    "type": "multi",
+    "question": "Care sunt responsabilitățile BIOS-ului în procesul de pornire?",
+    "options": [
+      "Inițializează și verifică componentele hardware",
+      "Permite configurarea componentelor",
+      "Instalează automat drivere noi pentru hardware",
+      "Lansează bootloader-ul sistemului de operare"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 40,
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce caracterizează un HDD față de un SSD din punct de vedere constructiv?",
+    "options": [
+      "HDD-ul nu are piese mobile și este mai silențios",
+      "HDD-ul are piese mobile (braț și platane), ceea ce îl face mai predispus la defectări",
+      "HDD-ul este mai rapid la accesul aleatoriu",
+      "HDD-ul consumă mai puțină energie"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 41,
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce este RAID0 și care este caracteristica sa principală?",
+    "options": [
+      "Date replicate pe două discuri pentru redundanță",
+      "Un singur disc cu informații de paritate",
+      "Date distribuite pe mai multe discuri fără niciun nivel de replicare",
+      "Backup automat în cloud al datelor de pe disc"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 42,
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "multi",
+    "question": "Care sunt modalitățile de conectare pentru discurile interne la placa de bază?",
+    "options": ["SATA", "SAS", "USB", "Thunderbolt"],
+    "answers": [0, 1]
+  },
+  {
+    "id": 43,
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce este LVM (Logical Volume Manager)?",
+    "options": [
+      "Linux Virtual Memory — sistemul de memorie virtuală al Linux",
+      "Un manager de volume logice care permite administrarea flexibilă a spațiului de stocare",
+      "Local Volume Mount — utilitarul de montare a partițiilor",
+      "Un tip special de sistem de fișiere pentru servere"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 44,
+    "topic": "Rețea & Internet",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce este Internetul din punct de vedere tehnic?",
+    "options": [
+      "O singură rețea globală gestionată de un organism internațional",
+      "Ansamblul tuturor rețelelor de pe glob, interconectate între ele",
+      "Un protocol de comunicare TCP/IP",
+      "O companie privată de telecomunicații"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 45,
+    "topic": "Rețea & Internet",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce fișier conține configurația serverelor DNS pe Linux și cine îl editează de obicei?",
+    "options": [
+      "/etc/hosts, editat manual de administrator",
+      "/etc/resolv.conf, editat automat de NetworkManager sau alte utilitare de rețea",
+      "/etc/network/interfaces, editat la instalarea sistemului",
+      "/etc/dns.conf, editat de serviciul systemd-resolved"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 46,
+    "topic": "Rețea & Internet",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce suită modernă de utilitare se folosește pentru configurarea rețelei în Linux?",
+    "options": ["ifconfig / route", "iproute2 (utilitarul ip)", "netconfig", "iptools"],
+    "answers": [1]
+  },
+  {
+    "id": 47,
+    "topic": "Securitate",
+    "chapter": 12,
+    "type": "multi",
+    "question": "Care sunt consecințele principale ale unui atac de securitate reușit asupra unui sistem?",
+    "options": [
+      "Pierderea controlului sistemului de către administrator",
+      "Furtul de informații sensibile",
+      "Îmbunătățirea automată a performanței sistemului",
+      "Abuzarea resurselor sistemului"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 48,
+    "topic": "Securitate",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce este un 'connection downgrade attack' în contextul TLS?",
+    "options": [
+      "Un atac care întrerupe conexiunea rețelei",
+      "Un atac care impune folosirea unui algoritm criptografic mai slab, cunoscut ca vulnerabil",
+      "Un atac care reduce viteza conexiunii",
+      "Un atac care falsifică certificatele SSL"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 49,
+    "topic": "Securitate",
+    "chapter": 12,
+    "type": "single",
+    "question": "Care este diferența esențială între perspectiva atacatorului și cea a apărătorului?",
+    "options": [
+      "Atacatorul are mai multe resurse decât apărătorul",
+      "Atacatorul trebuie să găsească o singură breșă; apărătorul trebuie să le acopere pe toate",
+      "Apărătorul cunoaște toate vulnerabilitățile sistemului",
+      "Nu există o diferență esențială"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 50,
+    "topic": "Automatizare",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce este un script în contextul automatizării în Linux?",
+    "options": [
+      "Un program compilat binar gata de executat",
+      "Un fișier cu comenzi și instrucțiuni care este interpretat și rulat automat",
+      "Un fișier de configurare în format XML",
+      "O extensie a kernel-ului Linux"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 51,
+    "topic": "Automatizare",
+    "chapter": 13,
+    "type": "multi",
+    "question": "Ce tipuri de scripturi sunt asociate frecvent cu automatizarea în linie de comandă?",
+    "options": ["Scripturi shell (bash)", "Scripturi Python", "Scripturi CSS", "Scripturi Perl"],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 52,
+    "topic": "Automatizare",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce comandă cron permite listarea planificărilor curente ale unui utilizator?",
+    "options": ["cron -l", "crontab -l", "crontab -r", "cron --list"],
+    "answers": [1]
+  },
+  {
+    "id": 53,
+    "topic": "Mașini Virtuale",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce este un hipervizor (hypervisor / VMM)?",
+    "options": [
+      "Un procesor special dedicat virtualizării",
+      "Componenta software care gestionează și monitorizează mașinile virtuale",
+      "O mașină virtuală specială de administrare",
+      "Un protocol de comunicare între mașini virtuale"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 54,
+    "topic": "Mașini Virtuale",
+    "chapter": 14,
+    "type": "multi",
+    "question": "Care sunt avantajele principale ale virtualizării serverelor?",
+    "options": [
+      "Consolidarea resurselor — mai multe aplicații pe același server fizic",
+      "Securitate prin izolarea aplicațiilor în VM-uri separate",
+      "Posibilitatea migrării VM-urilor fără întreruperea serviciului",
+      "Eliminarea completă a necesității hardware-ului fizic"
+    ],
+    "answers": [0, 1, 2]
+  },
+  {
+    "id": 55,
+    "topic": "Sisteme Încorporate & IoT",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este un sistem IoT (Internet of Things)?",
+    "options": [
+      "Un sistem de operare special pentru servere de mare performanță",
+      "Un sistem de obiecte/dispozitive interconectate, conectat și la Internet",
+      "Un protocol wireless de comunicare între dispozitive",
+      "O rețea privată corporativă"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 56,
+    "topic": "Sisteme Încorporate & IoT",
+    "chapter": 15,
+    "type": "multi",
+    "question": "Care sunt caracteristicile principale ale dispozitivelor încorporate față de calculatoarele obișnuite?",
+    "options": [
+      "Mai puțină putere de procesare",
+      "Mai puțină memorie RAM",
+      "Trebuie să funcționeze continuu luni sau chiar ani",
+      "Au întotdeauna display tactil"
+    ],
+    "answers": [0, 1, 2]
+  },
+  {
+    "id": 57,
+    "topic": "Sisteme Încorporate & IoT",
+    "chapter": 15,
+    "type": "single",
+    "question": "Care este principala vulnerabilitate de securitate a dispozitivelor IoT?",
+    "options": [
+      "Consumul mare de energie",
+      "Conectivitatea permanentă la Internet, care le expune la atacuri cibernetice",
+      "Lipsa unui sistem de operare propriu-zis",
+      "Dimensiunea fizică redusă"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 58,
+    "topic": "Sisteme Încorporate & IoT",
+    "chapter": 15,
+    "type": "single",
+    "question": "Prin ce protocol comunică de obicei un smartwatch cu telefonul asociat?",
+    "options": ["Wi-Fi 802.11n", "NFC", "Bluetooth 4.0", "Zigbee"],
+    "answers": [2]
+  }
+]

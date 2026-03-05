@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USO Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #050d1a;
+      --card:      #0a1525;
+      --border:    #0f2040;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --accent:    #38bdf8;
+      --purple:    #818cf8;
+      --green:     #4ade80;
+      --red:       #f87171;
+      --yellow:    #facc15;
+      --opt-bg:    #1a2333;
+      --opt-bord:  #2a3a50;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 80px;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 15% 10%, #0a204060 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 90%, #0a153560 0%, transparent 70%);
+    }
+
+    /* ── HEADER ── */
+    #header {
+      width: 100%; max-width: 620px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .logo { display: flex; align-items: baseline; gap: 6px; }
+    .logo-uso {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .logo-sub { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #334155; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    #score-display {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      background: #0d1f35; padding: 4px 12px; border-radius: 8px;
+      border: 1px solid #1e3a5f;
+    }
+    #score-display .g { color: var(--green); font-weight: 700; }
+    #score-display .d { color: #334155; }
+    #q-counter { font-size: 12px; color: #3b5276; font-family: 'JetBrains Mono', monospace; }
+
+    /* ── PROGRESS ── */
+    #progress-wrap {
+      width: 100%; max-width: 620px; height: 3px;
+      background: #0d1a2e; border-radius: 2px; overflow: hidden; margin-bottom: 22px;
+    }
+    #progress-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+
+    /* ── CARD ── */
+    #card {
+      width: 100%; max-width: 620px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 26px 24px 22px;
+      box-shadow: 0 0 50px #00000070;
+      animation: cardIn .35s ease;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}   60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+    }
+    .card-shake { animation: shake .4s ease !important; }
+
+    .card-top { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .pill {
+      font-size: 11px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 6px;
+    }
+    .pill-topic  { background: #0d2240; color: var(--accent); border: 1px solid #0e3060; }
+    .pill-type   { background: #1a1040; color: var(--purple);  border: 1px solid #2d1a60; }
+
+    #question { font-size: 16px; font-weight: 500; line-height: 1.65; margin-bottom: 22px; }
+
+    /* ── OPTIONS ── */
+    #options { display: flex; flex-direction: column; gap: 9px; }
+    .opt-btn {
+      display: flex; align-items: center; gap: 12;
+      padding: 12px 14px; border-radius: 11px;
+      background: var(--opt-bg); border: 1.5px solid var(--opt-bord);
+      color: #cbd5e1; cursor: pointer; text-align: left;
+      font-family: 'Outfit', sans-serif; font-size: 14px;
+      transition: background .15s, border-color .15s, color .15s;
+      width: 100%;
+    }
+    .opt-btn:hover:not(:disabled) { border-color: #3b82f6; background: #1a2d4a; }
+    .opt-btn.selected  { background: #1e3a6e; border-color: #3b82f6; color: #93c5fd; }
+    .opt-btn.correct   { background: #0d2e1a; border-color: var(--green); color: var(--green); }
+    .opt-btn.wrong     { background: #2d0f0f; border-color: var(--red);   color: var(--red); }
+    .opt-letter {
+      width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: #0f1a28; transition: background .15s;
+    }
+    .opt-btn.selected  .opt-letter { background: #1d4ed8; }
+    .opt-btn.correct   .opt-letter { background: #14532d; }
+    .opt-btn.wrong     .opt-letter { background: #7f1d1d; }
+    .opt-text { flex: 1; line-height: 1.4; }
+    .opt-mark { font-size: 16px; font-weight: 700; margin-left: 6px; }
+
+    /* ── FEEDBACK ── */
+    #feedback {
+      display: none; margin-top: 18px;
+      padding: 12px 16px; border-radius: 10px; border: 1px solid;
+      font-size: 14px; line-height: 1.5; align-items: flex-start; gap: 10px;
+    }
+    #feedback.show { display: flex; }
+    #feedback.correct-fb { background: #0d2e1a; border-color: var(--green); color: var(--green); }
+    #feedback.wrong-fb   { background: #2d0f0f; border-color: var(--red);   color: #fca5a5; }
+
+    /* ── FOOTER BUTTONS ── */
+    .card-footer { margin-top: 22px; display: flex; justify-content: flex-end; }
+    .btn {
+      padding: 11px 24px; border-radius: 10px; border: none;
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; letter-spacing: .02em; transition: opacity .15s;
+    }
+    .btn:hover { opacity: .88; }
+    .btn-confirm { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; }
+    .btn-next    { background: linear-gradient(135deg, #059669, #0284c7); color: #fff; }
+
+    /* ── RESULTS ── */
+    #results {
+      display: none; width: 100%; max-width: 620px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 28px 32px;
+      flex-direction: column; align-items: center;
+      box-shadow: 0 0 60px #00000060;
+    }
+    #results.show { display: flex; }
+    #result-emoji { font-size: 52px; margin-bottom: 8px; }
+    #result-grade { font-size: 20px; font-weight: 600; color: var(--muted); margin-bottom: 12px; }
+    #result-score {
+      font-family: 'JetBrains Mono', monospace; font-size: 72px; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    #result-den { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #1e3a5f; }
+    #result-sub { font-size: 13px; color: #334155; margin-bottom: 32px; }
+
+    #topic-breakdown { width: 100%; margin-bottom: 28px; }
+    .breakdown-title {
+      font-size: 11px; font-weight: 700; color: #334155;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px;
+    }
+    .topic-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .topic-name { font-size: 12px; color: var(--muted); width: 170px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .topic-bar-wrap { flex: 1; height: 5px; background: #0d1f35; border-radius: 3px; overflow: hidden; }
+    .topic-bar-fill { height: 100%; border-radius: 3px; transition: width .6s ease; }
+    .topic-frac { font-size: 11px; color: #475569; font-family: 'JetBrains Mono', monospace; width: 28px; text-align: right; }
+
+    .btn-restart { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; padding: 12px 36px; font-size: 15px; border-radius: 12px; border: none; font-family: 'Outfit', sans-serif; font-weight: 600; cursor: pointer; }
+
+    /* ── SCREEN: MENU ── */
+    #menu {
+      width: 100%; max-width: 620px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px 32px;
+      display: flex; flex-direction: column; align-items: center;
+      box-shadow: 0 0 50px #00000060;
+    }
+    #menu h1 {
+      font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    #menu p { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+    .menu-row { display: flex; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; justify-content: center; }
+    .menu-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; text-align: center; }
+    select {
+      background: #0d1f35; color: var(--text); border: 1px solid #1e3a5f;
+      border-radius: 8px; padding: 8px 14px; font-size: 14px;
+      font-family: 'Outfit', sans-serif; cursor: pointer; outline: none;
+    }
+    #stats-bar {
+      display: flex; gap: 24px; margin-bottom: 32px;
+      background: #0d1f35; padding: 14px 24px; border-radius: 12px;
+      border: 1px solid #1e3a5f;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--accent); }
+    .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .btn-start { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; padding: 13px 44px; font-size: 16px; border-radius: 12px; border: none; font-family: 'Outfit', sans-serif; font-weight: 700; cursor: pointer; letter-spacing: .03em; }
+  </style>
+</head>
+<body>
+
+<!-- MENU -->
+<div id="menu">
+  <h1>USO Quiz</h1>
+  <p>Utilizarea Sistemelor de Operare — întrebări din toate capitolele</p>
+  <div id="stats-bar">
+    <div class="stat">
+      <div class="stat-num" id="stat-total">—</div>
+      <div class="stat-lbl">Întrebări</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-chapters">—</div>
+      <div class="stat-lbl">Capitole</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-multi">—</div>
+      <div class="stat-lbl">Multi-răspuns</div>
+    </div>
+  </div>
+  <div class="menu-label">Câte întrebări vrei în această sesiune?</div>
+  <div class="menu-row">
+    <select id="quiz-size">
+      <option value="10">10 întrebări</option>
+      <option value="15" selected>15 întrebări</option>
+      <option value="20">20 întrebări</option>
+      <option value="all">Toate</option>
+    </select>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">Începe Quiz-ul →</button>
+</div>
+
+<!-- QUIZ AREA (hidden initially) -->
+<div id="quiz-area" style="display:none; width:100%; max-width:620px;">
+  <div id="header">
+    <div class="logo">
+      <span class="logo-uso">USO</span>
+      <span class="logo-sub">Quiz</span>
+    </div>
+    <div class="header-right">
+      <div id="score-display"><span class="g" id="score-val">0</span><span class="d">/<span id="score-of">0</span></span></div>
+      <div id="q-counter">1/15</div>
+    </div>
+  </div>
+  <div id="progress-wrap"><div id="progress-fill"></div></div>
+
+  <div id="card">
+    <div class="card-top">
+      <span class="pill pill-topic" id="pill-topic"></span>
+      <span class="pill pill-type" id="pill-type"></span>
+    </div>
+    <p id="question"></p>
+    <div id="options"></div>
+    <div id="feedback">
+      <span id="feedback-icon"></span>
+      <span id="feedback-text"></span>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-confirm" id="btn-confirm" onclick="confirm_answer()">Confirmă răspunsul</button>
+      <button class="btn btn-next"    id="btn-next"    onclick="next_question()" style="display:none">Următoarea →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div id="result-emoji"></div>
+  <div id="result-grade"></div>
+  <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:4px;">
+    <span id="result-score"></span><span id="result-den"></span>
+  </div>
+  <div id="result-sub">puncte corecte</div>
+  <div id="topic-breakdown">
+    <div class="breakdown-title">Performanță pe capitole</div>
+    <div id="topic-rows"></div>
+  </div>
+  <button class="btn-restart" onclick="backToMenu()">↺ Meniu principal</button>
+</div>
+
+<script>
+let ALL_Q = [];
+let questions = [];
+let current = 0;
+let score = 0;
+let selected = [];
+let confirmed = false;
+let history = [];
+
+// Load questions from JSON
+fetch('questions.json')
+  .then(r => r.json())
+  .then(data => {
+    ALL_Q = data;
+    document.getElementById('stat-total').textContent = data.length;
+    const chapters = new Set(data.map(q => q.chapter));
+    document.getElementById('stat-chapters').textContent = chapters.size;
+    document.getElementById('stat-multi').textContent = data.filter(q => q.type === 'multi').length;
+  });
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function startQuiz() {
+  const sizeVal = document.getElementById('quiz-size').value;
+  const size = sizeVal === 'all' ? ALL_Q.length : parseInt(sizeVal);
+  questions = shuffle(ALL_Q).slice(0, size);
+  current = 0; score = 0; selected = []; confirmed = false; history = [];
+
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('score-val').textContent = '0';
+  document.getElementById('score-of').textContent = '0';
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('card').classList.remove('card-shake');
+
+  // header
+  document.getElementById('q-counter').textContent = `${current + 1}/${questions.length}`;
+  document.getElementById('score-of').textContent = current;
+  document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
+
+  // pills
+  document.getElementById('pill-topic').textContent = q.topic;
+  document.getElementById('pill-type').textContent = q.type === 'single' ? '☑ Unul corect' : '☑ Mai multe corecte';
+
+  // question
+  document.getElementById('question').textContent = q.question;
+
+  // options
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.onclick = () => toggleOption(i);
+    btn.innerHTML = `
+      <span class="opt-letter">${['A','B','C','D'][i]}</span>
+      <span class="opt-text">${opt}</span>
+      <span class="opt-mark" id="mark-${i}"></span>
+    `;
+    btn.id = `opt-${i}`;
+    container.appendChild(btn);
+  });
+
+  // reset feedback & buttons
+  const fb = document.getElementById('feedback');
+  fb.className = 'show' in fb.classList ? '' : '';
+  fb.classList.remove('show', 'correct-fb', 'wrong-fb');
+  document.getElementById('btn-confirm').style.display = 'inline-block';
+  document.getElementById('btn-next').style.display = 'none';
+
+  // update last question button
+  if (current + 1 >= questions.length) {
+    document.getElementById('btn-next').textContent = 'Vezi rezultatele →';
+  } else {
+    document.getElementById('btn-next').textContent = 'Următoarea →';
+  }
+
+  selected = [];
+  confirmed = false;
+
+  // re-animate card
+  document.getElementById('card').style.animation = 'none';
+  requestAnimationFrame(() => {
+    document.getElementById('card').style.animation = 'cardIn .35s ease';
+  });
+}
+
+function toggleOption(i) {
+  if (confirmed) return;
+  const q = questions[current];
+  if (q.type === 'single') {
+    selected = [i];
+  } else {
+    if (selected.includes(i)) {
+      selected = selected.filter(x => x !== i);
+    } else {
+      selected.push(i);
+    }
+  }
+  // update visuals
+  q.options.forEach((_, idx) => {
+    const btn = document.getElementById(`opt-${idx}`);
+    btn.classList.toggle('selected', selected.includes(idx));
+  });
+}
+
+function confirm_answer() {
+  if (selected.length === 0) {
+    const card = document.getElementById('card');
+    card.classList.add('card-shake');
+    setTimeout(() => card.classList.remove('card-shake'), 500);
+    return;
+  }
+  confirmed = true;
+  const q = questions[current];
+  const sortSel = [...selected].sort().join(',');
+  const sortAns = [...q.answers].sort().join(',');
+  const correct = sortSel === sortAns;
+
+  if (correct) {
+    score++;
+    document.getElementById('score-val').textContent = score;
+  }
+  history.push({ topic: q.topic, correct });
+
+  // color options
+  q.options.forEach((_, i) => {
+    const btn = document.getElementById(`opt-${i}`);
+    const isCorrect = q.answers.includes(i);
+    const isSelected = selected.includes(i);
+    btn.disabled = true;
+    btn.classList.remove('selected');
+    const mark = document.getElementById(`mark-${i}`);
+    if (isCorrect) {
+      btn.classList.add('correct');
+      mark.textContent = '✓';
+    } else if (isSelected && !isCorrect) {
+      btn.classList.add('wrong');
+      mark.textContent = '✗';
+    }
+  });
+
+  // feedback
+  const fb = document.getElementById('feedback');
+  document.getElementById('feedback-icon').textContent = correct ? '✅' : '❌';
+  if (correct) {
+    document.getElementById('feedback-text').textContent = 'Corect! Bine făcut.';
+    fb.className = 'show correct-fb';
+  } else {
+    const correctLabels = q.answers.map(a => q.options[a]).join(', ');
+    document.getElementById('feedback-text').textContent =
+      `Greșit. Răspuns${q.answers.length > 1 ? 'urile corecte sunt' : 'ul corect este'}: ${correctLabels}`;
+    fb.className = 'show wrong-fb';
+  }
+
+  document.getElementById('btn-confirm').style.display = 'none';
+  document.getElementById('btn-next').style.display = 'inline-block';
+}
+
+function next_question() {
+  if (current + 1 >= questions.length) {
+    showResults();
+  } else {
+    current++;
+    renderQuestion();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+
+  const pct = score / questions.length;
+  let emoji, grade;
+  if      (pct >= .9) { emoji = '🏆'; grade = 'Excelent!'; }
+  else if (pct >= .7) { emoji = '👍'; grade = 'Foarte bine!'; }
+  else if (pct >= .5) { emoji = '📚'; grade = 'Mai studiază'; }
+  else                { emoji = '💡'; grade = 'Continuă să înveți'; }
+
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-score').textContent = score;
+  document.getElementById('result-den').textContent = `/${questions.length}`;
+
+  // topic breakdown
+  const stats = {};
+  history.forEach(h => {
+    if (!stats[h.topic]) stats[h.topic] = { c: 0, t: 0 };
+    stats[h.topic].t++;
+    if (h.correct) stats[h.topic].c++;
+  });
+
+  const rows = document.getElementById('topic-rows');
+  rows.innerHTML = '';
+  Object.entries(stats).forEach(([topic, s]) => {
+    const pctT = s.c / s.t;
+    const color = pctT === 1 ? '#4ade80' : pctT >= 0.5 ? '#facc15' : '#f87171';
+    rows.innerHTML += `
+      <div class="topic-row">
+        <span class="topic-name">${topic}</span>
+        <div class="topic-bar-wrap">
+          <div class="topic-bar-fill" style="width:${pctT*100}%;background:${color}"></div>
+        </div>
+        <span class="topic-frac">${s.c}/${s.t}</span>
+      </div>`;
+  });
+}
+
+function backToMenu() {
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('menu').style.display = 'flex';
+}
+</script>
+</body>
+</html>
