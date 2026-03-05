@@ -102,6 +102,7 @@
     }
     .pill-topic  { background: #0d2240; color: var(--accent); border: 1px solid #0e3060; }
     .pill-type   { background: #1a1040; color: var(--purple);  border: 1px solid #2d1a60; }
+    .pill-skip   { background: #2d1a00; color: #fb923c; border: 1px solid #7c3500; }
 
     #question { font-size: 16px; font-weight: 500; line-height: 1.65; margin-bottom: 22px; }
 
@@ -277,6 +278,7 @@
     <div class="card-top">
       <span class="pill pill-topic" id="pill-topic"></span>
       <span class="pill pill-type" id="pill-type"></span>
+      <span class="pill pill-skip" id="pill-skip" style="display:none">⏭ Sărită</span>
     </div>
     <p id="question"></p>
     <div id="options"></div>
@@ -320,6 +322,8 @@ let selected = [];
 let confirmed = false;
 let history = [];
 let skipped = [];
+let skippedIds = new Set();
+let consecutiveSkips = 0;
 
 // Load questions from JSON
 fetch('questions.json')
@@ -340,7 +344,7 @@ function startQuiz() {
   const sizeVal = document.getElementById('quiz-size').value;
   const size = sizeVal === 'all' ? ALL_Q.length : parseInt(sizeVal);
   questions = shuffle(ALL_Q).slice(0, size);
-  current = 0; score = 0; selected = []; confirmed = false; history = []; skipped = [];
+  current = 0; score = 0; selected = []; confirmed = false; history = []; skipped = []; skippedIds = new Set(); consecutiveSkips = 0;
 
   document.getElementById('menu').style.display = 'none';
   document.getElementById('quiz-area').style.display = 'block';
@@ -356,6 +360,8 @@ function renderQuestion() {
   document.getElementById('card').classList.remove('card-shake');
 
   // header
+  const remaining = questions.length - current;
+  const skippedInQueue = questions.slice(current).filter((q, i) => i > 0 && questions.indexOf(q) > current).length;
   document.getElementById('q-counter').textContent = `${current + 1}/${questions.length}`;
   document.getElementById('score-of').textContent = current;
   document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
@@ -363,6 +369,12 @@ function renderQuestion() {
   // pills
   document.getElementById('pill-topic').textContent = q.topic;
   document.getElementById('pill-type').textContent = q.type === 'single' ? '☑ Unul corect' : '☑ Mai multe corecte';
+  const skipPill = document.getElementById('pill-skip');
+  if (skippedIds.has(q.id)) {
+    skipPill.style.display = 'inline-block';
+  } else {
+    skipPill.style.display = 'none';
+  }
 
   // question
   document.getElementById('question').textContent = q.question;
@@ -435,7 +447,9 @@ function confirm_answer() {
     return;
   }
   confirmed = true;
+  consecutiveSkips = 0;
   const q = questions[current];
+  skippedIds.delete(q.id);
   const sortSel = [...selected].sort().join(',');
   const sortAns = [...q.answers].sort().join(',');
   const correct = sortSel === sortAns;
@@ -482,13 +496,18 @@ function confirm_answer() {
 }
 
 function skip_question() {
-  skipped.push(questions[current]);
-  if (current + 1 >= questions.length) {
+  consecutiveSkips++;
+  skippedIds.add(questions[current].id);
+  if (consecutiveSkips >= questions.length - current) {
+    for (let i = current; i < questions.length; i++) {
+      skipped.push(questions[i]);
+    }
     showResults();
-  } else {
-    current++;
-    renderQuestion();
+    return;
   }
+  questions.push(questions[current]);
+  questions.splice(current, 1);
+  renderQuestion();
 }
 
 function next_question() {
