@@ -1,714 +1,3861 @@
 [
   {
     "id": 1,
-    "topic": "Introducere",
-    "chapter": 0,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
     "type": "single",
-    "question": "Ce rol principal are sistemul de operare într-un sistem de calcul?",
+    "question": "În Linux, ce simbolizează directorul `.`?",
     "options": [
-      "Creează conținut pentru utilizator",
-      "Gestionează resursele hardware și facilitează folosirea lor de către aplicații",
-      "Înlocuiește driverele hardware defecte",
-      "Rulează exclusiv aplicații de birou"
+      "Un director special care conține toate fișierele ascunse",
+      "Directorul null, un director inexistent",
+      "Directorul rădăcină /",
+      "Directorul curent"
     ],
-    "answers": [1]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 2,
-    "topic": "Introducere",
-    "chapter": 0,
-    "type": "multi",
-    "question": "Care dintre următoarele distribuții Linux folosesc formatul de pachete .deb și managerul apt?",
-    "options": ["Ubuntu", "Fedora", "Debian", "CentOS"],
-    "answers": [0, 2]
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce este o legătură simbolică (symbolic link)?",
+    "options": [
+      "O semnătură digitală a unui fișier",
+      "O copie imutabilă a unui fișier",
+      "Un executabil ascuns",
+      "O referință la un fișier prin altă cale"
+    ],
+    "answers": [
+      3
+    ]
   },
   {
     "id": 3,
-    "topic": "Introducere",
-    "chapter": 0,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
     "type": "single",
-    "question": "Care distribuție Linux are un model de lansare continuă (rolling release)?",
-    "options": ["Ubuntu", "Fedora", "Arch Linux", "Debian"],
-    "answers": [2]
+    "question": "În urma executării cărei comenzi va afișa `cat logic.txt` o eroare? Fișierul a fost creat cu: `ln -s fizic.txt logic.txt`",
+    "options": [
+      "touch fizic.txt",
+      "rm fizic.txt",
+      "> fizic.txt",
+      "echo '2024' >> fizic.txt"
+    ],
+    "answers": [
+      1
+    ]
   },
   {
     "id": 4,
-    "topic": "Introducere",
-    "chapter": 0,
-    "type": "single",
-    "question": "Ce este shell-ul în cadrul unui sistem de operare?",
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "multi",
+    "question": "Care comenzi creează un fișier nou gol? (Alegeți 2.)",
     "options": [
-      "Un tip de procesor specializat",
-      "O aplicație de sistem care oferă interfața pentru interacțiunea utilizatorului cu SO",
-      "Un sistem de fișiere special",
-      "Un protocol de rețea"
+      "newfile file.txt",
+      "touch file.txt",
+      "file file.txt",
+      "> file.txt"
     ],
-    "answers": [1]
+    "answers": [
+      1,
+      3
+    ]
   },
   {
     "id": 5,
-    "topic": "Interfața cu Utilizatorul",
-    "chapter": 1,
-    "type": "single",
-    "question": "Ce înseamnă acronimul WIMP în contextul interfețelor grafice?",
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "multi",
+    "question": "Comanda `ls -l` afișează tipul fișierului prin primul caracter. Care perechi caracter:semnificație sunt corecte? (Alegeți 4.)",
     "options": [
-      "Web, Interface, Mouse, Panel",
-      "Window, Icon, Menu, Pointer",
-      "Workspace, Input, Monitor, Pixel",
-      "Widget, Interface, Mode, Process"
+      "– : fișier normal",
+      "d : director",
+      "l : legătură simbolică",
+      "s : socket"
     ],
-    "answers": [1]
+    "answers": [
+      0,
+      1,
+      2,
+      3
+    ]
   },
   {
     "id": 6,
-    "topic": "Interfața cu Utilizatorul",
-    "chapter": 1,
-    "type": "multi",
-    "question": "Care sunt funcționalități specifice interfeței grafice în Linux față de alte sisteme?",
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Sub ce cale va fi găsit `2.jar` după `mv ./2.jar ../././.././client/../`, executat din `/program/bin/client/lib`?",
     "options": [
-      "Spații de lucru (workspace) multiple",
-      "Compilarea automată a codului sursă",
-      "Scurtături de tastatură configurabile",
-      "Gestionarea automată a driverelor"
+      "/program/2.jar",
+      "/program/bin/2.jar",
+      "/program/conf/2.jar",
+      "/program/certs/2.jar"
     ],
-    "answers": [0, 2]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 7,
-    "topic": "Interfața cu Utilizatorul",
-    "chapter": 1,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
     "type": "single",
-    "question": "Serverul grafic X de tip XMing este disponibil pentru ce platformă?",
-    "options": ["macOS", "Linux", "Windows", "Android"],
-    "answers": [2]
+    "question": "Care este output-ul comenzii `cut -d \" \" -f 1 nefil.txt` dacă fișierul conține linii de forma `Marian 2004`, `Flavia 2002`, etc.?",
+    "options": [
+      "Marian 2, Flavia 2, ...",
+      "Marian2004, Flavia2002, ...",
+      "Marian, Flavia, Ionut, Adela, Bianca, Răzvan",
+      "2004, 2002, 1995, ..."
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 8,
     "topic": "Sistemul de Fișiere",
     "chapter": 2,
-    "type": "single",
-    "question": "Care este directorul rădăcină al sistemului de fișiere în Linux?",
-    "options": ["C:\\", "~", "/", "/root"],
-    "answers": [2]
+    "type": "multi",
+    "question": "Care sunt cele mai largi și mai comune categorii generale de fișiere? (Alegeți 2.)",
+    "options": [
+      "Fișiere text",
+      "Fișiere audio",
+      "Fișiere binare",
+      "Fișiere imagine"
+    ],
+    "answers": [
+      0,
+      2
+    ]
   },
   {
     "id": 9,
-    "topic": "Sistemul de Fișiere",
+    "topic": "Metadate",
     "chapter": 2,
-    "type": "single",
-    "question": "Cum alocă Windows literele de unitate (ex. C:, D:) partițiilor?",
+    "type": "multi",
+    "question": "Care dintre următoarele sunt tipuri de metadate ale unui fișier? (Alegeți 3.)",
     "options": [
-      "În funcție de sistemul de fișiere de pe partiție",
-      "În funcție de partiții, nu de sistemul de fișiere",
-      "Aleatoriu la fiecare pornire",
-      "În ordine alfabetică după dimensiune"
+      "Dimensiunea fișierului",
+      "Data ultimei accesări",
+      "Conținutul fișierului text",
+      "Creatorul fișierului"
     ],
-    "answers": [1]
+    "answers": [
+      0,
+      1,
+      3
+    ]
   },
   {
     "id": 10,
-    "topic": "Sistemul de Fișiere",
-    "chapter": 2,
+    "topic": "Permisiuni",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce tip de legătură creează comanda `ln -s` în Linux?",
+    "question": "Fișierul `avahi.sh` are permisiunile `-rw-r-x--x 1 elev staff`. Ce proprietate NOUă are după `chmod g-x,o+x avahi.sh`?",
     "options": [
-      "Hard link",
-      "Soft copy",
-      "Symbolic link (legătură simbolică)",
-      "Mount point"
+      "Grupul staff acum poate rula scriptul",
+      "Fișierul poate fi executat de toți utilizatorii",
+      "Utilizatorul elev acum poate rula scriptul, pe când înainte nu putea",
+      "Grupul staff nu mai poate scrie în fișier"
     ],
-    "answers": [2]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 11,
-    "topic": "Sistemul de Fișiere",
-    "chapter": 2,
-    "type": "multi",
-    "question": "Care sisteme de fișiere sunt suportate nativ de Linux, Windows și macOS în același timp?",
-    "options": ["FAT32", "NTFS", "Ext4", "HFS+"],
-    "answers": [0]
+    "topic": "Permisiuni",
+    "chapter": 5,
+    "type": "single",
+    "question": "Determinați valoarea octală pentru un folder: accesibil de proprietar, proprietarul poate scrie un script executabil de grup. Orice altă permisiune este negată.",
+    "options": [
+      "750",
+      "710",
+      "310",
+      "754"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 12,
-    "topic": "Sistemul de Fișiere",
-    "chapter": 2,
+    "topic": "Permisiuni",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce face comanda `./program > /dev/null 2>&1`?",
+    "question": "Utilizatorul `marian` are `groups=1002(marian),1003(adela)`. Fișierul `special.sh` are `-rw-r-xr-- 1 ionut adela`. Poate `marian` executa scriptul?",
     "options": [
-      "Salvează outputul în fișierul /dev/null",
-      "Suprimă complet orice output (stdout și stderr)",
-      "Redirecționează doar erorile",
-      "Rulează programul în background"
+      "Da",
+      "Nu",
+      "Depinde de alte permisiuni",
+      "Nu poate fi determinat"
     ],
-    "answers": [1]
+    "answers": [
+      0
+    ]
   },
   {
     "id": 13,
-    "topic": "Sistemul de Fișiere",
-    "chapter": 2,
+    "topic": "Permisiuni",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce comandă creează un director nou în Linux?",
-    "options": ["mkfile", "touch", "mkdir", "newdir"],
-    "answers": [2]
+    "question": "Utilizatorul `marian` copiază un fișier în `/home/elev/twist/` (folder cu `drwxrwsrwx 2 elev elev`). Ce proprietari va avea fișierul?",
+    "options": [
+      "1 marian marian",
+      "1 elev elev",
+      "1 marian elev",
+      "1 elev marian"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 14,
-    "topic": "Pachete Software",
-    "chapter": 3,
-    "type": "single",
-    "question": "Ce sunt metadatele unui pachet software?",
+    "topic": "Permisiuni",
+    "chapter": 5,
+    "type": "multi",
+    "question": "Care acțiuni necesită privilegii de root pe Linux? (Alegeți 3.)",
     "options": [
-      "Fișierele executabile din pachet",
-      "Informații despre pachet: descriere, versiune, dependențe",
-      "Codul sursă al aplicației",
-      "Fișierele de configurare ale aplicației"
+      "Vizualizarea fișierului /etc/shadow",
+      "Adăugarea unui utilizator",
+      "Instalarea unui pachet",
+      "Crearea unui fișier în /tmp/"
     ],
-    "answers": [1]
+    "answers": [
+      0,
+      1,
+      2
+    ]
   },
   {
     "id": 15,
-    "topic": "Pachete Software",
-    "chapter": 3,
+    "topic": "Utilizatori",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce problemă descrie termenul 'dependency hell'?",
+    "question": "Unde se poate găsi parola în format ORIGINAL (necriptată) a unui utilizator Linux?",
     "options": [
-      "Lipsă de spațiu pe disc la instalarea pachetelor",
-      "Eroare de rețea la descărcarea pachetelor",
-      "Conflicte între versiunile diferite ale pachetelor dependente",
-      "Imposibilitatea dezinstalării unui pachet"
+      "/etc/passwd",
+      "/etc/shadow",
+      "/etc/group",
+      "Nicăieri — parolele nu se stochează în format original"
     ],
-    "answers": [2]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 16,
-    "topic": "Pachete Software",
-    "chapter": 3,
-    "type": "multi",
-    "question": "Care sunt motive valide pentru a instala o aplicație din cod sursă în loc din pachet?",
+    "topic": "Utilizatori",
+    "chapter": 5,
+    "type": "single",
+    "question": "Din câte grupuri face parte, inițial, un utilizator creat nou pe Linux?",
     "options": [
-      "Aplicația nu există în depozitul distribuției",
-      "Este întotdeauna mai rapid decât din pachet",
-      "Vrem să compilăm cu opțiuni specifice hardware-ului",
-      "Dorim să modificăm codul sursă al aplicației"
+      "0",
+      "1",
+      "2",
+      "Câte sunt prezente pe sistem"
     ],
-    "answers": [0, 2, 3]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 17,
-    "topic": "Pachete Software",
-    "chapter": 3,
+    "topic": "Utilizatori",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce manager de pachete folosește distribuția Arch Linux?",
-    "options": ["apt", "dnf", "pacman", "rpm"],
-    "answers": [2]
+    "question": "Când rulăm comanda `sudo`, parola cărui utilizator ne este cerută?",
+    "options": [
+      "Utilizatorul root",
+      "Utilizatorul Administrator",
+      "Utilizatorul curent",
+      "Utilizatorul nobody"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 18,
-    "topic": "Procese",
-    "chapter": 4,
+    "topic": "Utilizatori",
+    "chapter": 5,
     "type": "single",
-    "question": "Ce face operatorul `&` la sfârșitul unei comenzi în Linux?",
+    "question": "Care sunt GID-urile din `id` pentru: `uid=501(elev) gid=20(staff) groups=20(staff),101(access_bpf),80(admin)`?",
     "options": [
-      "Suspendă procesul imediat",
-      "Pune procesul în background în starea rulând",
-      "Termină procesul",
-      "Repornește procesul"
+      "501",
+      "staff, access_bpf, admin",
+      "20, 101, 80",
+      "elev"
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 19,
-    "topic": "Procese",
-    "chapter": 4,
+    "topic": "Pachete Software",
+    "chapter": 3,
     "type": "single",
-    "question": "Ce combinație de taste plasează un proces activ în background în starea suspendată?",
-    "options": ["Ctrl+C", "Ctrl+D", "Ctrl+Z", "Ctrl+S"],
-    "answers": [2]
+    "question": "Un utilizator Fedora descarcă `ultraterm-10.0.1.deb`. Care comandă îl va instala corect?",
+    "options": [
+      "sudo dpkg -i ultraterm-10.0.1.deb",
+      "sudo apt install ultraterm-10.0.1.deb",
+      "sudo dnf localinstall ultraterm-10.0.1.deb",
+      "Niciuna dintre acestea"
+    ],
+    "answers": [
+      3
+    ]
   },
   {
     "id": 20,
-    "topic": "Procese",
-    "chapter": 4,
+    "topic": "Pachete Software",
+    "chapter": 3,
     "type": "single",
-    "question": "Ce comandă readuce un proces din background în foreground?",
-    "options": ["bg", "fg", "jobs", "resume"],
-    "answers": [1]
+    "question": "Cum poate vedea un utilizator informații despre pachetul instalat `inkscape` pe Ubuntu?",
+    "options": [
+      "apt info inkscape",
+      "apt display inkscape",
+      "apt show inkscape",
+      "apt inspect inkscape"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 21,
-    "topic": "Procese",
-    "chapter": 4,
-    "type": "multi",
-    "question": "Ce utilitare pot fi folosite pentru listarea proceselor active în Linux?",
-    "options": ["ps", "ls", "top", "pgrep"],
-    "answers": [0, 2, 3]
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Cum poate găsi un utilizator pachete care au în nume sau descriere termenul `image`?",
+    "options": [
+      "apt find image",
+      "apt search image",
+      "apt query image",
+      "apt lookup image"
+    ],
+    "answers": [
+      1
+    ]
   },
   {
     "id": 22,
-    "topic": "Procese",
-    "chapter": 4,
+    "topic": "Pachete Software",
+    "chapter": 3,
     "type": "single",
-    "question": "Ce face utilitarul `lsof` în Linux?",
+    "question": "Un utilizator pe Ubuntu vrea să instaleze GIMP, Inkscape, Steam și VLC. Care comandă funcționează?",
     "options": [
-      "Listează opțiunile de formatare disc",
-      "Afișează fișierele deschise de procese",
-      "Configurează interfețele de rețea",
-      "Listează modulele kernel încărcate"
+      "sudo apt install gimp inkscape steam vlc",
+      "sudo apt install gimp,inkscape,steam,vlc",
+      "sudo apt install gimp && inkscape && steam && vlc",
+      "sudo dpkg -i gimp inkscape steam vlc"
     ],
-    "answers": [1]
+    "answers": [
+      0
+    ]
   },
   {
     "id": 23,
-    "topic": "Procese",
-    "chapter": 4,
-    "type": "multi",
-    "question": "Ce garanții oferă sistemul de operare proceselor care rulează simultan?",
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Care este diferența dintre `mkfs.ntfs /dev/sdb` și `mkfs.ntfs /dev/sdb2`?",
     "options": [
-      "Izolarea resurselor fiecărui proces",
-      "Arbitrarea accesului la resurse partajate",
-      "Mecanisme explicite de comunicare între procese",
-      "Acces direct la hardware fără restricții"
+      "Prima comandă va eșua",
+      "Ambele au același rezultat",
+      "Una șterge partiția specificată, cealaltă șterge toate partițiile de pe disc",
+      "Cea de-a doua este mai rapidă"
     ],
-    "answers": [0, 1, 2]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 24,
-    "topic": "Utilizatori",
-    "chapter": 5,
+    "topic": "Stocare",
+    "chapter": 10,
     "type": "single",
-    "question": "Ce fișier stochează parolele criptate ale utilizatorilor în Linux?",
-    "options": ["/etc/passwd", "/etc/shadow", "/etc/group", "/etc/users"],
-    "answers": [1]
+    "question": "Care comandă verifică sistemul de fișiere de pe partiția `/dev/sdc3`?",
+    "options": [
+      "sudo check-fs /dev/sdc3",
+      "fsck /dev/sdc3",
+      "sudo fsck /dev/sdc3",
+      "fscheck /dev/sdc3"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 25,
-    "topic": "Utilizatori",
-    "chapter": 5,
-    "type": "multi",
-    "question": "Care fișiere sunt modificate la adăugarea unui utilizator nou cu `useradd` în Linux?",
-    "options": ["/etc/passwd", "/etc/shadow", "/etc/group", "/etc/hosts"],
-    "answers": [0, 1, 2]
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Care comandă verifică integritatea sistemului de fișiere de pe partiția montată `/dev/nvme1n0p3`?",
+    "options": [
+      "sudo umount /dev/nvme1n0p3 && sudo fsck /dev/nvme1n0p3",
+      "sudo umount -f /dev/nvme1n0p3 && fsck /dev/nvme1n0p3",
+      "umount /dev/nvme1n0p3 && fsck /dev/nvme1n0p3",
+      "sudo umount /dev/nvme0n1p3 && sudo fsck /dev/nvme1n0p3"
+    ],
+    "answers": [
+      0
+    ]
   },
   {
     "id": 26,
-    "topic": "Utilizatori",
-    "chapter": 5,
+    "topic": "Stocare",
+    "chapter": 10,
     "type": "single",
-    "question": "Care este directorul home al utilizatorului 'student' în Linux?",
-    "options": ["/root/student", "/home/student", "/users/student", "/var/home/student"],
-    "answers": [1]
+    "question": "Cu care comandă montăm `/dev/sda2` în `/var/lib/vz/mount`, rulând din `/var/lib/vz/template/iso`?",
+    "options": [
+      "mnt /dev/sda2 ../../mount",
+      "mount /dev/sda2 ../../mount",
+      "mount /dev/sda 2 ../mount",
+      "mnt /dev/sda 2 ../../../mount"
+    ],
+    "answers": [
+      1
+    ]
   },
   {
     "id": 27,
-    "topic": "Utilizatori",
-    "chapter": 5,
-    "type": "multi",
-    "question": "Care sunt utilitarele wrapper Debian pentru gestiunea utilizatorilor (în loc de useradd/userdel)?",
-    "options": ["adduser", "useradd", "deluser", "userdel"],
-    "answers": [0, 2]
+    "topic": "Stocare",
+    "chapter": 10,
+    "type": "single",
+    "question": "Care este UUID-ul volumului `/dev/sda2` conform: `UUID=\"5a14ccf7-6bac-47b7-a3d6-6c10822fb10d\" TYPE=\"ext4\" PARTUUID=\"64a9b1c8-...\"`?",
+    "options": [
+      "ext4",
+      "64a9b1c8-188f-4162-8cc7-b1763135ee3f",
+      "5a14ccf7-6bac-47b7-a3d6-6c10822fb10d",
+      "4096"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 28,
-    "topic": "Dezvoltarea Aplicațiilor",
-    "chapter": 6,
+    "topic": "Stocare",
+    "chapter": 10,
     "type": "single",
-    "question": "Ce este procesul de compilare în dezvoltarea software?",
+    "question": "Output-ul `fdisk -l` arată: /dev/sda (222GB), /dev/sdb (278GB), /dev/sdc (1.82TB), /dev/nvme1n1 (1.82TB). Câte medii de stocare are calculatorul?",
     "options": [
-      "Executarea directă a codului sursă de către procesor",
-      "Transformarea codului sursă în cod mașină executabil",
-      "Instalarea unui pachet software din depozit",
-      "Testarea automată a aplicației"
+      "2",
+      "3",
+      "4",
+      "6"
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 29,
-    "topic": "Dezvoltarea Aplicațiilor",
-    "chapter": 6,
+    "topic": "Stocare",
+    "chapter": 10,
     "type": "single",
-    "question": "Care este diferența principală între un limbaj compilat și unul interpretat?",
+    "question": "Câte depozite sunt în `/etc/apt/sources.list` dacă are 4 linii `deb ...` și 4 linii `deb-src ...`?",
     "options": [
-      "Limbajele compilate sunt mai noi",
-      "Limbajele interpretate produc cod mai rapid",
-      "Limbajele compilate transformă codul înainte de rulare; cele interpretate îl execută direct linie cu linie",
-      "Nu există diferență practică"
+      "4",
+      "1",
+      "0",
+      "8"
     ],
-    "answers": [2]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 30,
-    "topic": "Dezvoltarea Aplicațiilor",
-    "chapter": 6,
-    "type": "multi",
-    "question": "Ce instrumente sunt necesare pentru a rula un limbaj de programare pe un sistem?",
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "single",
+    "question": "`lscpu` arată: Thread(s) per core: 2, Core(s) per socket: 10, Socket(s): 2. Hyperthreading activ. Câte nuclee FIZICE total?",
     "options": [
-      "Compilator sau interpretor specific limbajului",
-      "Biblioteci necesare rulării aplicației",
-      "Obligatoriu un IDE (mediu de dezvoltare integrat)",
-      "Mediul de rulare (runtime)"
+      "10",
+      "20",
+      "40",
+      "32"
     ],
-    "answers": [0, 1, 3]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 31,
-    "topic": "Shell & CLI",
-    "chapter": 7,
+    "topic": "Hardware",
+    "chapter": 8,
     "type": "single",
-    "question": "De ce se numește shell CLI 'interpretor de comenzi'?",
+    "question": "Un utilizator rulează `uname -a` și primește: `Darwin acadnet 23.0.0 Darwin Kernel Version ... arm64`. Folosește Linux?",
     "options": [
-      "Compilează comenzile introduse de utilizator",
-      "Traduce comenzile din engleză în română",
-      "Interpretează șirul introdus ca o comandă și execută acțiunea corespunzătoare",
-      "Interpretează fișiere de configurare XML"
+      "Da",
+      "Nu",
+      "Este bazat parțial pe Linux",
+      "Nu poate fi determinat"
     ],
-    "answers": [2]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 32,
-    "topic": "Shell & CLI",
-    "chapter": 7,
-    "type": "multi",
-    "question": "Ce informații poate conține un prompt de shell CLI?",
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "single",
+    "question": "`file macsec.ko` returnează: `ELF 64-bit LSB relocatable, x86-64`. Pentru ce arhitectură a fost creat?",
     "options": [
-      "Numele utilizatorului curent",
-      "Directorul curent",
-      "Temperatura procesorului",
-      "Numele stației de lucru (hostname)"
+      "AArch64",
+      "Power ISA",
+      "AMD64",
+      "IA-64"
     ],
-    "answers": [0, 1, 3]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 33,
-    "topic": "Shell & CLI",
-    "chapter": 7,
-    "type": "single",
-    "question": "Ce se întâmplă când tastezi comanda `cd` fără argumente în bash?",
+    "topic": "Hardware",
+    "chapter": 8,
+    "type": "multi",
+    "question": "Care caracteristici ale arhitecturii ARM o fac potrivită pentru dispozitive mobile? (Alegeți 2.)",
     "options": [
-      "Afișează directorul curent",
-      "Te mută în directorul rădăcină /",
-      "Te mută în directorul home al utilizatorului curent",
-      "Produce o eroare"
+      "Eficiența energetică bună",
+      "Utilizarea design-urilor SoC cu procesoare ARM",
+      "Viteza inerentă mai mare datorată ISA",
+      "Prețul mic datorat arhitecturii"
     ],
-    "answers": [2]
+    "answers": [
+      0,
+      1
+    ]
   },
   {
     "id": 34,
-    "topic": "Hardware",
-    "chapter": 8,
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
     "type": "single",
-    "question": "Ce este memoria cache a procesorului și de ce a fost introdusă?",
+    "question": "`file vmlinuz-6.2.16-8-pve` returnează `version 6.2.16-8-pve`. Care este versiunea kernelului?",
     "options": [
-      "Memorie pe disc pentru date temporare, introdusă pentru a economisi RAM",
-      "Memorie specifică procesorului, introdusă deoarece memoria RAM principală este mult mai lentă decât CPU",
-      "O partiție specială pe SSD pentru viteze mai mari",
-      "Memoria video dedicată plăcii grafice"
+      "vmlinuz-6.2.16-8-pve",
+      "2023-08-02T12:17Z",
+      "6.2.16-8-pve",
+      "bzImage"
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 35,
-    "topic": "Hardware",
-    "chapter": 8,
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
     "type": "single",
-    "question": "Care este dimensiunea standard a unei unități de rack (1U)?",
-    "options": ["2.54 cm", "4.445 cm", "10 cm", "19 inch"],
-    "answers": [1]
+    "question": "Un administrator adaugă o opțiune în `/etc/default/grub`. Ce comandă face schimbarea persistentă?",
+    "options": [
+      "grub --update",
+      "sudo update-grub",
+      "sudo update-grub --component=virtualization",
+      "grub --update-all"
+    ],
+    "answers": [
+      1
+    ]
   },
   {
     "id": 36,
-    "topic": "Hardware",
-    "chapter": 8,
-    "type": "multi",
-    "question": "Care sunt caracteristicile specifice unui server față de un desktop obișnuit?",
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
+    "type": "single",
+    "question": "Care este primul proces lansat de sistem în Linux?",
     "options": [
-      "Construcție robustă cu sisteme speciale de prindere în rack",
-      "Circulație a aerului pe orizontală (față → spate)",
-      "Ecran integrat de mare rezoluție",
-      "Raport preț/performanță mai bun decât desktopul"
+      "systemctl",
+      "launchd",
+      "init",
+      "manager"
     ],
-    "answers": [0, 1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 37,
-    "topic": "Hardware",
-    "chapter": 8,
+    "topic": "Pornirea Sistemului",
+    "chapter": 9,
     "type": "single",
-    "question": "Ce a determinat introducerea arhitecturii Harvard față de arhitectura von Neumann clasică?",
+    "question": "În procesul de boot, de către cine se face încărcarea driverelor?",
     "options": [
-      "Costul mai redus al componentelor",
-      "Separarea memoriei de instrucțiuni de memoria de date pentru optimizarea performanței",
-      "Compatibilitatea cu mai multe sisteme de operare",
-      "Reducerea consumului de energie"
+      "POST",
+      "Firmware de boot",
+      "Bootloader",
+      "Nucleul (kernel)"
     ],
-    "answers": [1]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 38,
-    "topic": "Pornirea Sistemului",
-    "chapter": 9,
+    "topic": "Rețea",
+    "chapter": 11,
     "type": "single",
-    "question": "Unde se află fizic firmware-ul BIOS pe platformele Intel 64 / AMD64?",
+    "question": "Ce rol are utilitarul `ipconfig` pe sistemele Linux?",
     "options": [
-      "Pe hard disk, în sectorul de boot MBR",
-      "Pe un chip flash de pe placa de bază",
-      "În memoria RAM, încărcat la pornire",
-      "Pe o partiție specială EFI de pe SSD"
+      "Configurează parametrii interfețelor",
+      "Afișează parametrii interfețelor",
+      "Configurează stiva de rețea a kernelului",
+      "Niciunul — ipconfig nu există pe Linux"
     ],
-    "answers": [1]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 39,
-    "topic": "Pornirea Sistemului",
-    "chapter": 9,
-    "type": "multi",
-    "question": "Care sunt responsabilitățile BIOS-ului în procesul de pornire?",
+    "topic": "Rețea",
+    "chapter": 11,
+    "type": "single",
+    "question": "`ip route show` afișează: `default via 172.17.1.254 dev enp7s18`. Pe ce interfață se află ruta implicită?",
     "options": [
-      "Inițializează și verifică componentele hardware",
-      "Permite configurarea componentelor",
-      "Instalează automat drivere noi pentru hardware",
-      "Lansează bootloader-ul sistemului de operare"
+      "enp7s20",
+      "enp7s19",
+      "kube-bridge",
+      "enp7s18"
     ],
-    "answers": [0, 1, 3]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 40,
-    "topic": "Stocare",
-    "chapter": 10,
+    "topic": "Rețea",
+    "chapter": 11,
     "type": "single",
-    "question": "Ce caracterizează un HDD față de un SSD din punct de vedere constructiv?",
+    "question": "`/etc/resolv.conf` conține `nameserver 172.17.0.1` și `nameserver 172.17.0.2`. Ce se poate afirma?",
     "options": [
-      "HDD-ul nu are piese mobile și este mai silențios",
-      "HDD-ul are piese mobile (braț și platane), ceea ce îl face mai predispus la defectări",
-      "HDD-ul este mai rapid la accesul aleatoriu",
-      "HDD-ul consumă mai puțină energie"
+      "Serverele DNS folosesc DNSSEC",
+      "Serverele DNS se află într-o clasă de IP-uri private",
+      "Serverele DNS au funcție de blocare malware",
+      "Serverele DNS returnează doar înregistrări de tip A"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 41,
-    "topic": "Stocare",
-    "chapter": 10,
+    "topic": "Rețea",
+    "chapter": 11,
     "type": "single",
-    "question": "Ce este RAID0 și care este caracteristica sa principală?",
+    "question": "Cum inițiezi configurarea prin DHCP pe interfața `enp7s5f8`?",
     "options": [
-      "Date replicate pe două discuri pentru redundanță",
-      "Un singur disc cu informații de paritate",
-      "Date distribuite pe mai multe discuri fără niciun nivel de replicare",
-      "Backup automat în cloud al datelor de pe disc"
+      "sudo ip dhcp --configure enp7s5f8",
+      "sudo dhclient enp7s5f8",
+      "sudo ip interface enp7s5f8 --autoconfigure dhcp",
+      "dhclient enp7s5f8"
     ],
-    "answers": [2]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 42,
-    "topic": "Stocare",
-    "chapter": 10,
+    "topic": "Rețea",
+    "chapter": 11,
     "type": "multi",
-    "question": "Care sunt modalitățile de conectare pentru discurile interne la placa de bază?",
-    "options": ["SATA", "SAS", "USB", "Thunderbolt"],
-    "answers": [0, 1]
+    "question": "Care protocoale sunt de nivel Aplicație? (Alegeți 3.)",
+    "options": [
+      "HTTP",
+      "IP",
+      "FTP",
+      "POP3"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
   },
   {
     "id": 43,
-    "topic": "Stocare",
-    "chapter": 10,
+    "topic": "Rețea",
+    "chapter": 11,
     "type": "single",
-    "question": "Ce este LVM (Logical Volume Manager)?",
+    "question": "`ping 2600::` arată `rtt min/avg/max/mdev = 135.768/136.259/136.541/0.246 ms`. Care afirmație este corectă?",
     "options": [
-      "Linux Virtual Memory — sistemul de memorie virtuală al Linux",
-      "Un manager de volume logice care permite administrarea flexibilă a spațiului de stocare",
-      "Local Volume Mount — utilitarul de montare a partițiilor",
-      "Un tip special de sistem de fișiere pentru servere"
+      "Timpul minim dus-întors este 0.246 ms",
+      "Timpul maxim de la server înapoi este 136.541 ms",
+      "Timpul maxim dus-întors (până la destinație și înapoi) este 136.541 ms",
+      "Timpul minim doar până la server este 0.246 ms"
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 44,
-    "topic": "Rețea & Internet",
+    "topic": "Rețea",
     "chapter": 11,
     "type": "single",
-    "question": "Ce este Internetul din punct de vedere tehnic?",
+    "question": "`systemctl status ssh` arată `Active: active (running)`. Rulează serverul SSH?",
     "options": [
-      "O singură rețea globală gestionată de un organism internațional",
-      "Ansamblul tuturor rețelelor de pe glob, interconectate între ele",
-      "Un protocol de comunicare TCP/IP",
-      "O companie privată de telecomunicații"
+      "Nu poate fi determinat",
+      "Nu",
+      "Da",
+      "Rulează dar nu acceptă conexiuni"
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 45,
-    "topic": "Rețea & Internet",
+    "topic": "Rețea",
     "chapter": 11,
     "type": "single",
-    "question": "Ce fișier conține configurația serverelor DNS pe Linux și cine îl editează de obicei?",
+    "question": "Care este adresa MAC validă?",
     "options": [
-      "/etc/hosts, editat manual de administrator",
-      "/etc/resolv.conf, editat automat de NetworkManager sau alte utilitare de rețea",
-      "/etc/network/interfaces, editat la instalarea sistemului",
-      "/etc/dns.conf, editat de serviciul systemd-resolved"
+      "127.0.0.1",
+      "0xabcdef01",
+      "a*b*cd+",
+      "12:34:56:78:90:AB"
     ],
-    "answers": [1]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 46,
-    "topic": "Rețea & Internet",
-    "chapter": 11,
+    "topic": "Securitate",
+    "chapter": 12,
     "type": "single",
-    "question": "Ce suită modernă de utilitare se folosește pentru configurarea rețelei în Linux?",
-    "options": ["ifconfig / route", "iproute2 (utilitarul ip)", "netconfig", "iptools"],
-    "answers": [1]
+    "question": "Două fișiere au hash-uri SHA512 identice. Este conținutul lor identic?",
+    "options": [
+      "Este imposibil de determinat",
+      "Nu",
+      "Da",
+      "Depinde de dimensiunea fișierelor"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 47,
     "topic": "Securitate",
     "chapter": 12,
-    "type": "multi",
-    "question": "Care sunt consecințele principale ale unui atac de securitate reușit asupra unui sistem?",
+    "type": "single",
+    "question": "Algoritmii MD5 și SHA sunt folosiți pentru hash-uri. Ce proprietate asigură?",
     "options": [
-      "Pierderea controlului sistemului de către administrator",
-      "Furtul de informații sensibile",
-      "Îmbunătățirea automată a performanței sistemului",
-      "Abuzarea resurselor sistemului"
+      "Confidențialitate",
+      "Autorizare",
+      "Integritate",
+      "Disponibilitate"
     ],
-    "answers": [0, 1, 3]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 48,
     "topic": "Securitate",
     "chapter": 12,
     "type": "single",
-    "question": "Ce este un 'connection downgrade attack' în contextul TLS?",
+    "question": "Când vorbim de chei asimetrice, cu ce cheie facem CRIPTAREA unui mesaj?",
     "options": [
-      "Un atac care întrerupe conexiunea rețelei",
-      "Un atac care impune folosirea unui algoritm criptografic mai slab, cunoscut ca vulnerabil",
-      "Un atac care reduce viteza conexiunii",
-      "Un atac care falsifică certificatele SSL"
+      "Cu cheia privată",
+      "Cu cheia publică",
+      "Cu orice cheie",
+      "Cu nici una"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 49,
     "topic": "Securitate",
     "chapter": 12,
     "type": "single",
-    "question": "Care este diferența esențială între perspectiva atacatorului și cea a apărătorului?",
+    "question": "La ce se referă conceptul de 'cel mai mic privilegiu' (principle of least privilege)?",
     "options": [
-      "Atacatorul are mai multe resurse decât apărătorul",
-      "Atacatorul trebuie să găsească o singură breșă; apărătorul trebuie să le acopere pe toate",
-      "Apărătorul cunoaște toate vulnerabilitățile sistemului",
-      "Nu există o diferență esențială"
+      "Performanță",
+      "Securitate",
+      "Fișiere Makefile",
+      "Configurarea adresei IP"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 50,
-    "topic": "Automatizare",
-    "chapter": 13,
+    "topic": "Securitate",
+    "chapter": 12,
     "type": "single",
-    "question": "Ce este un script în contextul automatizării în Linux?",
+    "question": "Un utilizator rulează `ssh-copy-id elev@server`. Ce va conține `~/.ssh/authorized_keys` de pe server?",
     "options": [
-      "Un program compilat binar gata de executat",
-      "Un fișier cu comenzi și instrucțiuni care este interpretat și rulat automat",
-      "Un fișier de configurare în format XML",
-      "O extensie a kernel-ului Linux"
+      "Cheia privată SSH",
+      "Cheia publică SSH (conținutul id_ed25519.pub)",
+      "Parola în format criptat",
+      "Ambele chei"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 51,
-    "topic": "Automatizare",
-    "chapter": 13,
-    "type": "multi",
-    "question": "Ce tipuri de scripturi sunt asociate frecvent cu automatizarea în linie de comandă?",
-    "options": ["Scripturi shell (bash)", "Scripturi Python", "Scripturi CSS", "Scripturi Perl"],
-    "answers": [0, 1, 3]
+    "topic": "Securitate",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce protocol de conexiune la distanță a fost folosit în: `ssh marian@acadnet.ad.acadnet.eu`?",
+    "options": [
+      "Telnet",
+      "Remote Desktop Protocol",
+      "Secure Shell Protocol",
+      "Virtual Network Computing"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 52,
-    "topic": "Automatizare",
-    "chapter": 13,
+    "topic": "Procese",
+    "chapter": 4,
     "type": "single",
-    "question": "Ce comandă cron permite listarea planificărilor curente ale unui utilizator?",
-    "options": ["cron -l", "crontab -l", "crontab -r", "cron --list"],
-    "answers": [1]
+    "question": "Care este identificatorul unic al unui proces la nivelul sistemului de operare?",
+    "options": [
+      "GID-ul",
+      "UID-ul",
+      "PID-ul",
+      "Numele procesului"
+    ],
+    "answers": [
+      2
+    ]
   },
   {
     "id": 53,
-    "topic": "Mașini Virtuale",
-    "chapter": 14,
+    "topic": "Procese",
+    "chapter": 4,
     "type": "single",
-    "question": "Ce este un hipervizor (hypervisor / VMM)?",
+    "question": "Care este caracteristica definitorie a unui proces care rulează în foreground?",
     "options": [
-      "Un procesor special dedicat virtualizării",
-      "Componenta software care gestionează și monitorizează mașinile virtuale",
-      "O mașină virtuală specială de administrare",
-      "Un protocol de comunicare între mașini virtuale"
+      "Deține toate resursele sistemului",
+      "Deține controlul intrării standard (stdin)",
+      "Apare peste toate programele",
+      "Poate opri executabilul shell"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 54,
-    "topic": "Mașini Virtuale",
-    "chapter": 14,
-    "type": "multi",
-    "question": "Care sunt avantajele principale ale virtualizării serverelor?",
+    "topic": "Procese",
+    "chapter": 4,
+    "type": "single",
+    "question": "Două procese: PID 8192 cu nice -15 și PID 4096 cu nice 10. Care are prioritatea mai mare?",
     "options": [
-      "Consolidarea resurselor — mai multe aplicații pe același server fizic",
-      "Securitate prin izolarea aplicațiilor în VM-uri separate",
-      "Posibilitatea migrării VM-urilor fără întreruperea serviciului",
-      "Eliminarea completă a necesității hardware-ului fizic"
+      "PID 4096 — nice mai mare = prioritate mai mare",
+      "Sunt egale",
+      "PID 8192 — nice mai mic = prioritate mai mare",
+      "Valoarea nice nu afectează prioritatea"
     ],
-    "answers": [0, 1, 2]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 55,
-    "topic": "Sisteme Încorporate & IoT",
-    "chapter": 15,
+    "topic": "Procese",
+    "chapter": 4,
     "type": "single",
-    "question": "Ce este un sistem IoT (Internet of Things)?",
+    "question": "Cu care comandă poate fi omorât procesul cu PID 3504, rulând sub UID 0?",
     "options": [
-      "Un sistem de operare special pentru servere de mare performanță",
-      "Un sistem de obiecte/dispozitive interconectate, conectat și la Internet",
-      "Un protocol wireless de comunicare între dispozitive",
-      "O rețea privată corporativă"
+      "sudo kill --pid 3504",
+      "kill 3504",
+      "pkill 3504",
+      "kill 3504 --uid 0"
     ],
-    "answers": [1]
+    "answers": [
+      1
+    ]
   },
   {
     "id": 56,
-    "topic": "Sisteme Încorporate & IoT",
-    "chapter": 15,
-    "type": "multi",
-    "question": "Care sunt caracteristicile principale ale dispozitivelor încorporate față de calculatoarele obișnuite?",
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Care este interpretorul unui script care începe cu `#!/bin/bash`?",
     "options": [
-      "Mai puțină putere de procesare",
-      "Mai puțină memorie RAM",
-      "Trebuie să funcționeze continuu luni sau chiar ani",
-      "Au întotdeauna display tactil"
+      "cat",
+      "shell",
+      "script.sh",
+      "/bin/bash"
     ],
-    "answers": [0, 1, 2]
+    "answers": [
+      3
+    ]
   },
   {
     "id": 57,
-    "topic": "Sisteme Încorporate & IoT",
-    "chapter": 15,
+    "topic": "Shell & CLI",
+    "chapter": 7,
     "type": "single",
-    "question": "Care este principala vulnerabilitate de securitate a dispozitivelor IoT?",
+    "question": "Cu care comandă scriem pe ecran: `Simon says: \"stop, drop && roll\"`?",
     "options": [
-      "Consumul mare de energie",
-      "Conectivitatea permanentă la Internet, care le expune la atacuri cibernetice",
-      "Lipsa unui sistem de operare propriu-zis",
-      "Dimensiunea fizică redusă"
+      "echo Simon says: \"stop, drop && roll\"",
+      "echo \"Simon says: \\\"stop, drop \\&\\& roll\\\"\"",
+      "echo Simon says: \\\"stop, drop \\&\\& roll\\\"",
+      "echo \"Simon\" \"says:\" \"stop,\" \"drop\" \"&&\" \"roll\""
     ],
-    "answers": [1]
+    "answers": [
+      2
+    ]
   },
   {
     "id": 58,
-    "topic": "Sisteme Încorporate & IoT",
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "PATH nu conține `/usr/local/bin/priv`. Cum rulezi executabilul `/usr/local/bin/priv/drift`?",
+    "options": [
+      "./drift",
+      "drift",
+      "$PATH/priv/drift",
+      "/usr/local/bin/priv/drift"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 59,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Ce reprezintă `$0` într-un script Bash?",
+    "options": [
+      "Numărul de argumente",
+      "Primul argument",
+      "Numele scriptului",
+      "Lista cu toate argumentele"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 60,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Ce este redirectarea output-ului unei comenzi?",
+    "options": [
+      "Copierea datelor de ieșire în mai multe locații",
+      "Schimbarea referinței unui descriptor de la terminal la un fișier",
+      "Paralelizarea fluxurilor de date",
+      "Filtrarea inteligentă a fluxurilor"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 61,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "multi",
+    "question": "Care sunt denumirile celor 3 fișiere speciale de intrare/ieșire? (Alegeți 3.)",
+    "options": [
+      "standard input",
+      "standard output",
+      "standard error",
+      "std-err"
+    ],
+    "answers": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "id": 62,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Un utilizator are nevoie de 300 fișiere `task-1.txt` până la `task-300.txt`. Care comandă funcționează?",
+    "options": [
+      "touch task-[1-300].txt",
+      "touch $(count 'task-%r.txt' 1 300)",
+      "touch $(seq -f 'task-%g.txt' 1 300)",
+      "touch $(nums -n 'task-%n.txt' 1 300)"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 63,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Care comandă listează fișierele al căror nume începe cu litere mici de la `a` la `e`?",
+    "options": [
+      "ls --regex [a-e]*",
+      "ls {a-e}*",
+      "ls (a-e)*",
+      "ls [a-e]*"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 64,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "multi",
+    "question": "Care comenzi afișează conținutul unui fișier text? (Alegeți 2.)",
+    "options": [
+      "show file.txt",
+      "cat file.txt",
+      "less file.txt",
+      "bash file.txt"
+    ],
+    "answers": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 65,
+    "topic": "Automatizare",
+    "chapter": 13,
+    "type": "single",
+    "question": "Programul Transmission folosește `TR_DEBUG` (1/0). Cum rulăm `transmission-cli` în modul debug DOAR la această pornire?",
+    "options": [
+      "set TR_DEBUG=1 transmission-cli",
+      "transmission-cli TR_DEBUG=1",
+      "TR_DEBUG=1 transmission-cli",
+      "$TR_DEBUG=1 transmission-cli"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 66,
+    "topic": "Automatizare",
+    "chapter": 13,
+    "type": "single",
+    "question": "Care comandă creează folderele `/mnt/sdaX` și montează partițiile `/dev/sdaX`, pentru X de la 1 la 40?",
+    "options": [
+      "sudo mkdir /mnt/sda[1-40] && sudo mount /dev/sda[1-40] /mnt/sda[1-40]",
+      "sudo mkdir $(seq -f '/mnt/sda%g' 1 40) && sudo mount $(seq -f '/dev/sda%g /mnt/sda%g' 1 40)",
+      "mkdir $(seq -f '/mnt/sda%g' 1 40) && mount $(nums -n '/dev/sda%n /mnt/sda%n' 1 40)",
+      "sudo mkdir $(nums -n '/mnt/sda%n' 1 40) && sudo mount $(seq -f '/dev/sda%n /mnt/sda%n' 1 40)"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 67,
+    "topic": "Dezvoltarea Aplicațiilor",
+    "chapter": 6,
+    "type": "single",
+    "question": "Cum compilăm `/home/elev/proj/src/bin/dem/main.c`, rulând din `/home/elev/proj/dep/bin/dem`, output `main`?",
+    "options": [
+      "gcc ../../src/bin/dem/main.c -o main",
+      "g++ /home/elev/proj/src/bin/dem/main.c --output main",
+      "gcc ../../../src/bin/dem/main.c -o main",
+      "gcc /home/elev/proj/src/bin/main.c -out main"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 68,
+    "topic": "Mașini Virtuale",
+    "chapter": 14,
+    "type": "single",
+    "question": "Câtă RAM are VM creată cu: `qemu-system-arm -cpu arm1176 -m 256 -M versatilepb ...`?",
+    "options": [
+      "1176 MB",
+      "2012 MB",
+      "256 MB",
+      "RAM alocată dinamic"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 69,
+    "topic": "Mașini Virtuale",
+    "chapter": 14,
+    "type": "single",
+    "question": "Care este hypervisorul distribuit cu Windows?",
+    "options": [
+      "VirtualBox",
+      "KVM",
+      "Workstation Player",
+      "Hyper-V"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 70,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "multi",
+    "question": "Care SO sunt specializate, rulând pe dispozitive cu rol specific? (Alegeți 4.)",
+    "options": [
+      "Cisco IOS",
+      "Tizen",
+      "Apple watchOS",
+      "Juniper Junos OS"
+    ],
+    "answers": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 75,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "multi",
+    "question": "Ce oferă SO proceselor? (Alegeți 4.)",
+    "options": [
+      "Izolarea resurselor proprii",
+      "Administrarea accesului la resurse comune",
+      "Mecanisme de comunicare între procese",
+      "Alocare echitabilă a resurselor de procesare"
+    ],
+    "answers": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 76,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este echivalentul Windows al unui proces daemon din Linux?",
+    "options": [
+      "Spooler",
+      "Scheduled Task",
+      "Background Intelligent Transfer Service",
+      "Service"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 77,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "multi",
+    "question": "Care asocieri Linux–Windows NU sunt corecte? (Alegeți 2.)",
+    "options": [
+      "ls și Windows Store",
+      "apt și Windows Defender",
+      "/ și \\",
+      "/etc/ și Windows Registry"
+    ],
+    "answers": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": 78,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este instrumentul standard Windows pentru instalarea pachetelor `.msi`?",
+    "options": [
+      "Chocolatey",
+      "Windows Installer",
+      "InstallShield",
+      "NSIS"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 79,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este protocolul de conexiune la distanță folosit implicit pe Windows?",
+    "options": [
+      "VNC – Virtual Network Computing",
+      "SSH – Secure Shell",
+      "RDP – Remote Desktop Protocol",
+      "X Forwarding"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 83,
+    "topic": "Backup & Arhivare",
+    "chapter": 13,
+    "type": "multi",
+    "question": "Care sunt cele mai răspândite utilizări ale arhivării cu compresie? (Alegeți 2.)",
+    "options": [
+      "Unirea mai multor fișiere într-unul singur",
+      "Reducerea spațiului de stocare necesar",
+      "Creșterea complexității administrării",
+      "Pierderea de metadate"
+    ],
+    "answers": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": 84,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Un client rulează un server X pe laptop și se conectează la serverul `tank` cu X Forwarding. Unde rulează ce sarcini?",
+    "options": [
+      "Toată procesarea pe laptop",
+      "Toată procesarea pe tank",
+      "Randarea și input-ul pe laptop; aplicația pe tank",
+      "Alocarea sarcinilor este dinamică"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 85,
+    "topic": "Shell & CLI",
+    "chapter": 7,
+    "type": "single",
+    "question": "Care argument în Command Prompt (Windows) afișează ajutor despre o comandă?",
+    "options": [
+      "--help",
+      "-?",
+      "/Help",
+      "/?"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 88,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este utilitarul CLI Windows pentru administrarea utilizatorilor?",
+    "options": [
+      "netsh",
+      "dsa.msc",
+      "net",
+      "pwsh"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 89,
+    "topic": "Rețea",
+    "chapter": 11,
+    "type": "single",
+    "question": "Care este instrumentul pentru interogări DNS pe Windows?",
+    "options": [
+      "dig",
+      "host",
+      "dscacheutil",
+      "nslookup"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 90,
+    "topic": "Rețea",
+    "chapter": 11,
+    "type": "single",
+    "question": "Care este adresa MAC validă?",
+    "options": [
+      "127.0.0.1",
+      "0xabcdef01",
+      "a*b*cd+",
+      "12:34:56:78:90:AB"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 91,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Pe baza output-ului comenzii `fdisk -l` de mai jos, câte partiții are discul /dev/sda?\n\n```\nDisk /dev/sda: 500 GiB\nDevice     Start       End   Sectors  Size Type\n/dev/sda1   2048   1050623   1048576  512M EFI System\n/dev/sda2 1050624  53477375  52426752   25G Linux filesystem\n/dev/sda3 53477376 976773134 923295759  440G Linux LVM\n```",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 92,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Care este diferența dintre comenzile `mkfs.ext4 /dev/sdb` și `mkfs.ext4 /dev/sdb1`?",
+    "options": [
+      "Comenzile sunt echivalente",
+      "Prima comandă formatează întregul disc, a doua doar partiția specificată",
+      "Prima comandă este mai rapidă decât a doua",
+      "A doua comandă va eșua deoarece /dev/sdb1 nu există"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 93,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Conform output-ului următor, ce adresă IP are interfața enp3s0?\n\n```\nelev@acadnet:~$ ip addr show enp3s0\n2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP>\n    inet 192.168.1.105/24 brd 192.168.1.255 scope global\n    inet6 fe80::a1b2:c3d4:e5f6:1234/64 scope link\n```",
+    "options": [
+      "192.168.1.255",
+      "192.168.1.105",
+      "fe80::a1b2:c3d4:e5f6:1234",
+      "Nu poate fi determinat"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 94,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Care comandă va testa conectivitatea la adresa 8.8.8.8 trimițând exact 3 pachete?",
+    "options": [
+      "ping -n 3 8.8.8.8",
+      "ping --count=3 8.8.8.8",
+      "ping -c 3 8.8.8.8",
+      "ping -t 3 8.8.8.8"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 95,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Conform output-ului următor, care este UID-ul utilizatorului `student`?\n\n```\nelev@acadnet:~$ id student\nuid=1005(student) gid=1005(student) groups=1005(student),27(sudo)\n```",
+    "options": [
+      "1005",
+      "27",
+      "student",
+      "sudo"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 96,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce comandă adaugă utilizatorul `ion` în grupul `docker`?",
+    "options": [
+      "usermod -G docker ion",
+      "usermod -aG docker ion",
+      "groupadd docker ion",
+      "addgroup ion docker"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 97,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Un fișier are permisiunile `-rwxr-x---`. Ce poate face un utilizator care nu este nici proprietarul fișierului, nici în grupul fișierului?",
+    "options": [
+      "Poate citi fișierul",
+      "Poate executa fișierul",
+      "Poate scrie în fișier",
+      "Nu poate face nimic cu fișierul"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 98,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care va fi output-ul comenzii:\n\n```\nelev@acadnet:~$ echo $((3 * 4 + 2))\n```",
+    "options": [
+      "3 * 4 + 2",
+      "14",
+      "$((3 * 4 + 2))",
+      "Eroare de sintaxă"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 99,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Care va fi output-ul comenzii `ls` după execuția secvenței de mai jos?\n\n```\nelev@acadnet:~$ mkdir test\nelev@acadnet:~$ cd test\nelev@acadnet:~/test$ touch {a,b,c}.txt\nelev@acadnet:~/test$ ls\n```",
+    "options": [
+      "a.txt b.txt c.txt",
+      "{a,b,c}.txt",
+      "a b c",
+      "Eroare: brace expansion nu este suportată"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 100,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce face operatorul `>>` în comanda `echo 'text' >> fisier.txt`?",
+    "options": [
+      "Suprascrie fișierul cu textul dat",
+      "Adaugă textul la sfârșitul fișierului fără a-l șterge",
+      "Creează un hard link",
+      "Redirecționează stderr"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 101,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Conform output-ului următor, care proces are cel mai mare consum de CPU?\n\n```\nelev@acadnet:~$ ps aux --sort=-%cpu | head -4\nUSER  PID %CPU %MEM COMMAND\nroot  1234 89.2  2.1 ffmpeg\nelev  5678  4.3  0.8 firefox\nelev  9012  1.1  0.3 bash\n```",
+    "options": [
+      "firefox",
+      "bash",
+      "ffmpeg",
+      "Nu poate fi determinat"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 102,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce semnal trimite comanda `kill -9 PID`?",
+    "options": [
+      "SIGTERM – terminare elegantă",
+      "SIGKILL – terminare forțată, nu poate fi ignorată",
+      "SIGHUP – reîncărcare configurație",
+      "SIGSTOP – suspendare proces"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 103,
+    "topic": "Pachete Software",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce comandă actualizează lista de pachete disponibile pe Ubuntu fără a instala nimic?",
+    "options": [
+      "sudo apt upgrade",
+      "sudo apt update",
+      "sudo apt refresh",
+      "sudo apt-get sync"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 104,
+    "topic": "Pachete Software",
+    "chapter": 4,
+    "type": "single",
+    "question": "Conform output-ului următor, este instalat pachetul `curl`?\n\n```\nelev@acadnet:~$ dpkg -l curl\n||/ Name  Version Architecture Description\n+++-=====-========-============-================\nii  curl  7.88.1   amd64        tool for transferring data\n```",
+    "options": [
+      "Nu, pachetul are erori",
+      "Da, pachetul este instalat corect",
+      "Nu poate fi determinat",
+      "Da, dar este o versiune veche"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 105,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Care este ordinea corectă a etapelor procesului de boot pe un sistem Linux cu UEFI?",
+    "options": [
+      "UEFI → GRUB → Kernel → init/systemd",
+      "GRUB → UEFI → Kernel → init/systemd",
+      "UEFI → Kernel → GRUB → init/systemd",
+      "init/systemd → UEFI → GRUB → Kernel"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 106,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce fișier trebuie editat pentru a modifica parametrii de boot ai kernel-ului Linux pe un sistem cu GRUB?",
+    "options": [
+      "/boot/grub/menu.lst",
+      "/etc/default/grub",
+      "/boot/grub.cfg",
+      "/etc/grub.conf"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 107,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Conform output-ului următor, ce putem afirma despre fișierul `backup.tar.gz`?\n\n```\nelev@acadnet:~$ md5sum backup.tar.gz\na3f8c2e1b5d47f90123456789abcdef0  backup.tar.gz\nelev@server:~$ md5sum backup.tar.gz\na3f8c2e1b5d47f90123456789abcdef0  backup.tar.gz\n```",
+    "options": [
+      "Fișierele sunt identice ca conținut",
+      "Fișierele au același nume dar conținut diferit",
+      "Nu putem face nicio concluzie",
+      "Fișierele au aceeași dimensiune"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 108,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Care fișier conține lista utilizatorilor care pot folosi `sudo` pe Linux?",
+    "options": [
+      "/etc/passwd",
+      "/etc/sudo",
+      "/etc/sudoers",
+      "/etc/security/sudo.conf"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 109,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Care va fi output-ul scriptului următor?\n\n```bash\n#!/bin/bash\nfor i in 1 2 3; do\n  echo \"numărul $i\"\ndone\n```",
+    "options": [
+      "numărul 1 2 3",
+      "numărul 1\\nnumărul 2\\nnumărul 3",
+      "1 2 3",
+      "Eroare de sintaxă"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 110,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce face comanda `crontab -e`?",
+    "options": [
+      "Execută imediat toate task-urile cron",
+      "Deschide editorul pentru a modifica task-urile cron ale utilizatorului curent",
+      "Șterge toate task-urile cron",
+      "Afișează log-urile cron"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 111,
+    "topic": "Mașini Virtuale",
     "chapter": 15,
     "type": "single",
-    "question": "Prin ce protocol comunică de obicei un smartwatch cu telefonul asociat?",
-    "options": ["Wi-Fi 802.11n", "NFC", "Bluetooth 4.0", "Zigbee"],
-    "answers": [2]
+    "question": "Care este diferența principală dintre un hypervisor de tip 1 (bare-metal) și unul de tip 2 (hosted)?",
+    "options": [
+      "Hypervisorul de tip 1 rulează direct pe hardware, fără OS gazdă; cel de tip 2 rulează pe un OS existent",
+      "Hypervisorul de tip 2 este mai performant decât cel de tip 1",
+      "Hypervisorul de tip 1 suportă doar Windows ca OS oaspete",
+      "Nu există diferențe semnificative între ele"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 112,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Care comandă afișează tabela de rutare pe Linux?",
+    "options": [
+      "route -n",
+      "netstat --route",
+      "ip route show",
+      "Variantele a și c sunt corecte"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 113,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce face comanda:\n\n```\nelev@acadnet:~$ grep -r 'error' /var/log/\n```",
+    "options": [
+      "Caută textul 'error' doar în fișierul /var/log/",
+      "Caută textul 'error' recursiv în toate fișierele din /var/log/",
+      "Înlocuiește toate apariții de 'error' din /var/log/",
+      "Numără liniile care conțin 'error' în /var/log/"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 114,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Care va fi output-ul comenzii `wc -l fisier.txt` dacă fișierul conține 5 linii?",
+    "options": [
+      "5 words",
+      "5 fisier.txt",
+      "5",
+      "lines: 5"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 115,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce reprezintă `..` în sistemul de fișiere Linux?",
+    "options": [
+      "Directorul home al utilizatorului",
+      "Directorul curent",
+      "Directorul părinte al directorului curent",
+      "Un fișier ascuns"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 116,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este echivalentul absolut al căii `~/documente/raport.pdf` pentru utilizatorul `ana` (home: /home/ana)?",
+    "options": [
+      "/root/documente/raport.pdf",
+      "/home/documente/raport.pdf",
+      "/home/ana/documente/raport.pdf",
+      "/usr/ana/documente/raport.pdf"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 117,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce comandă schimbă parola utilizatorului `maria` (rulată ca root)?",
+    "options": [
+      "passwd -u maria",
+      "passwd maria",
+      "chpasswd maria",
+      "usermod --password maria"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 118,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Care fișier conține informații despre grupurile existente pe sistem (nume grup, GID, membri)?",
+    "options": [
+      "/etc/passwd",
+      "/etc/shadow",
+      "/etc/group",
+      "/etc/gshadow"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 119,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce face comanda `jobs` în bash?",
+    "options": [
+      "Afișează toate procesele din sistem",
+      "Afișează procesele background/suspended din shell-ul curent",
+      "Pornește un job nou",
+      "Oprește toate procesele background"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 120,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Cum poți trimite un proces în background imediat la pornire?",
+    "options": [
+      "comanda &",
+      "bg comanda",
+      "background comanda",
+      "comanda --bg"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 121,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce comandă montează persistent partiția `/dev/sdb1` în `/mnt/date` la fiecare pornire a sistemului?",
+    "options": [
+      "Adaugând `/dev/sdb1 /mnt/date ext4 defaults 0 0` în `/etc/fstab`",
+      "Rulând `mount -p /dev/sdb1 /mnt/date`",
+      "Rulând `systemctl enable mount@sdb1`",
+      "Adaugând comanda mount în `/etc/rc.local`"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 122,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce comandă verifică utilizarea spațiului pe disc pentru toate sistemele de fișiere montate?",
+    "options": [
+      "ls -lh",
+      "du -sh",
+      "df -h",
+      "fdisk -l"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 123,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Pe baza output-ului următor, ce putem afirma?\n\n```\nelev@acadnet:~$ ss -tlnp\nState  Recv-Q Send-Q Local Address:Port\nLISTEN 0      128   0.0.0.0:22\nLISTEN 0      128   0.0.0.0:80\nLISTEN 0      128   0.0.0.0:443\n```",
+    "options": [
+      "Calculatorul are 3 interfețe de rețea active",
+      "Calculatorul ascultă conexiuni pe porturile SSH, HTTP și HTTPS",
+      "Calculatorul este conectat la 3 servere",
+      "Sunt 3 utilizatori conectați la sistem"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 124,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce comandă descarcă un fișier de la URL-ul dat salvându-l cu numele original?",
+    "options": [
+      "curl https://example.com/fisier.zip",
+      "wget https://example.com/fisier.zip",
+      "fetch https://example.com/fisier.zip",
+      "download https://example.com/fisier.zip"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 125,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce comandă generează o pereche de chei SSH ed25519?",
+    "options": [
+      "ssh-keygen -t ed25519",
+      "ssh-keygen --type=ed25519",
+      "openssl genrsa -out key ed25519",
+      "ssh-create-key ed25519"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 126,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce conține fișierul `~/.ssh/authorized_keys`?",
+    "options": [
+      "Cheia privată SSH a utilizatorului",
+      "Cheile publice SSH ale utilizatorilor care se pot conecta fără parolă",
+      "Lista serverelor SSH de încredere",
+      "Configurația clientului SSH"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 127,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce va afișa scriptul următor dacă `$1` are valoarea 15?\n\n```bash\n#!/bin/bash\nif [ $1 -gt 10 ]; then\n  echo 'mare'\nelse\n  echo 'mic'\nfi\n```",
+    "options": [
+      "mic",
+      "mare",
+      "15",
+      "Nimic"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 128,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce înseamnă intrarea cron `0 2 * * 0 /script.sh`?",
+    "options": [
+      "Rulează scriptul în fiecare zi la ora 2:00",
+      "Rulează scriptul în fiecare duminică la ora 2:00",
+      "Rulează scriptul la fiecare 2 ore duminica",
+      "Rulează scriptul la ora 0:02 în fiecare zi"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 129,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce face pipe-ul `|` în comanda `ps aux | grep nginx`?",
+    "options": [
+      "Salvează output-ul lui ps aux într-un fișier numit grep",
+      "Trimite output-ul lui ps aux ca input pentru grep",
+      "Rulează ps aux și grep în paralel independent",
+      "Compară output-urile celor două comenzi"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 130,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "multi",
+    "question": "Care dintre comenzile următoare vor afișa ultimele 20 de linii din fișierul `access.log`? (Alegeți toate variantele corecte.)",
+    "options": [
+      "tail -20 access.log",
+      "tail -n 20 access.log",
+      "head -20 access.log",
+      "cat access.log | tail -20"
+    ],
+    "answers": [
+      0,
+      1,
+      3
+    ]
+  },
+  {
+    "id": 131,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "multi",
+    "question": "Care dintre comenzile următoare creează directorul `/home/elev/proiecte/web` inclusiv toate directoarele intermediare care nu există? (Alegeți toate variantele corecte.)",
+    "options": [
+      "mkdir /home/elev/proiecte/web",
+      "mkdir -p /home/elev/proiecte/web",
+      "mkdir --parents /home/elev/proiecte/web",
+      "mkdirs /home/elev/proiecte/web"
+    ],
+    "answers": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 132,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "multi",
+    "question": "Care dintre informațiile de mai jos sunt afișate de comanda `top`? (Alegeți 3 variante de răspuns.)",
+    "options": [
+      "PID-ul fiecărui proces",
+      "Conținutul fișierelor deschise de procese",
+      "Procentul de CPU folosit de fiecare proces",
+      "Memoria RAM folosită de fiecare proces",
+      "Parola utilizatorului care a pornit procesul"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 133,
+    "topic": "Introducere",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce este un sistem de operare?",
+    "options": [
+      "Un program care gestionează resursele hardware și oferă servicii aplicațiilor",
+      "Un limbaj de programare de nivel înalt",
+      "Un driver pentru placa de rețea",
+      "O interfață grafică pentru utilizator"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 134,
+    "topic": "Introducere",
+    "chapter": 1,
+    "type": "single",
+    "question": "Care dintre următoarele sisteme de operare sunt bazate pe nucleul Linux?",
+    "options": [
+      "macOS și Windows",
+      "Ubuntu, Fedora și Android",
+      "Windows și Android",
+      "macOS și FreeBSD"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 135,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Care este diferența principală dintre o interfață CLI și una GUI?",
+    "options": [
+      "CLI necesită mai multă memorie RAM decât GUI",
+      "GUI poate rula doar pe Windows, CLI pe Linux",
+      "CLI se bazează pe comenzi text, GUI pe elemente vizuale interactive",
+      "Nu există diferențe funcționale între ele"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 136,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Ce reprezintă un inode în sistemul de fișiere Linux?",
+    "options": [
+      "Numele unui fișier",
+      "O structură de date care conține metadatele unui fișier (permisiuni, proprietar, dimensiune, locație pe disc)",
+      "Conținutul unui fișier text",
+      "Un tip special de director"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 137,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este rolul directorului `/etc` în Linux?",
+    "options": [
+      "Conține fișierele executabile ale aplicațiilor instalate",
+      "Conține fișierele de configurare ale sistemului",
+      "Conține directoarele home ale utilizatorilor",
+      "Conține fișierele temporare ale sistemului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 138,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este rolul directorului `/var` în Linux?",
+    "options": [
+      "Fișiere variabile: log-uri, baze de date, mail, cache",
+      "Variabile de mediu ale sistemului",
+      "Fișierele kernel-ului",
+      "Aplicațiile utilizatorilor"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 139,
+    "topic": "Pachete Software",
+    "chapter": 4,
+    "type": "single",
+    "question": "Care este managerul de pachete implicit pe distribuțiile bazate pe Debian/Ubuntu?",
+    "options": [
+      "rpm",
+      "dnf",
+      "apt",
+      "pacman"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 140,
+    "topic": "Pachete Software",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce extensie au pachetele software pe distribuțiile Fedora/RHEL?",
+    "options": [
+      ".deb",
+      ".pkg",
+      ".msi",
+      ".rpm"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 141,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce este un proces daemon pe Linux?",
+    "options": [
+      "Un proces care rulează în fundal fără terminal asociat, oferind de obicei un serviciu",
+      "Un proces cu privilegii de root",
+      "Un proces care consumă toată memoria disponibilă",
+      "Un proces care rulează o singură dată la boot"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 142,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce este PPID-ul unui proces?",
+    "options": [
+      "Prioritatea procesului",
+      "Procentul de CPU folosit",
+      "PID-ul procesului părinte",
+      "Portul de rețea al procesului"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 143,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce UID are întotdeauna utilizatorul `root` pe Linux?",
+    "options": [
+      "1000",
+      "999",
+      "1",
+      "0"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 144,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce este setuid (SUID) pe un executabil?",
+    "options": [
+      "Fișierul poate fi șters de orice utilizator",
+      "Fișierul rulează cu privilegiile proprietarului fișierului, nu ale utilizatorului care îl execută",
+      "Fișierul este vizibil doar pentru root",
+      "Fișierul nu poate fi executat"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 145,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce este un driver de dispozitiv?",
+    "options": [
+      "Un program care gestionează comunicarea dintre sistemul de operare și un dispozitiv hardware",
+      "Un utilizator cu drepturi de administrare hardware",
+      "Un protocol de rețea pentru dispozitive IoT",
+      "Un fișier de configurare pentru periferice"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 146,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce comandă afișează informații detaliate despre hardware-ul calculatorului pe Linux?",
+    "options": [
+      "sysinfo",
+      "hwinfo sau lshw",
+      "devinfo",
+      "cpuinfo"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 147,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce este MBR (Master Boot Record)?",
+    "options": [
+      "Un tip de sistem de fișiere Linux",
+      "Primii 512 bytes ai unui disc care conțin codul de boot și tabela de partiții",
+      "Un protocol de rețea",
+      "Un tip de hypervisor"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 148,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce este LVM (Logical Volume Manager)?",
+    "options": [
+      "Un sistem de fișiere alternativ la ext4",
+      "Un strat de abstractizare care permite gestionarea flexibilă a spațiului de stocare",
+      "Un program de backup",
+      "Un tip de RAID"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 149,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Care este rolul protocolului DHCP?",
+    "options": [
+      "Traduce nume de domeniu în adrese IP",
+      "Criptează traficul de rețea",
+      "Atribuie automat adrese IP dispozitivelor din rețea",
+      "Rutează pachete între rețele diferite"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 150,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Pe ce port implicit ascultă serviciul SSH?",
+    "options": [
+      "21",
+      "80",
+      "443",
+      "22"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 151,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce este un firewall?",
+    "options": [
+      "Un program antivirus",
+      "Un sistem care monitorizează și controlează traficul de rețea pe baza unor reguli",
+      "Un protocol de criptare",
+      "Un tip de VPN"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 152,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Care este diferența dintre autentificare și autorizare?",
+    "options": [
+      "Nu există nicio diferență",
+      "Autentificarea verifică identitatea, autorizarea verifică drepturile de acces",
+      "Autorizarea verifică identitatea, autentificarea verifică drepturile",
+      "Autentificarea se aplică doar pe Windows"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 153,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Care este avantajul principal al virtualizării?",
+    "options": [
+      "Crește performanța aplicațiilor față de rularea nativă",
+      "Permite rularea mai multor sisteme de operare izolate pe același hardware",
+      "Elimină necesitatea driverelor de dispozitiv",
+      "Reduce consumul de energie la zero"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 154,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este un snapshot (instantaneu) în contextul mașinilor virtuale?",
+    "options": [
+      "O captură de ecran a interfeței grafice",
+      "O copie a stării complete a unei mașini virtuale la un moment dat",
+      "Un fișier de configurare al hypervisorului",
+      "O imagine ISO a sistemului de operare"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 155,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "multi",
+    "question": "Care dintre caracteristicile de mai jos sunt specifice shellului Bash? (Alegeți 3 variante de răspuns.)",
+    "options": [
+      "Suportă variabile de mediu",
+      "Este disponibil implicit pe Windows",
+      "Permite crearea de scripturi (shell scripting)",
+      "Suportă tab-completion",
+      "Necesită compilare înainte de rulare"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 156,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "multi",
+    "question": "Care dintre protocoalele de mai jos operează la nivelul Transport al modelului OSI? (Alegeți 2 variante de răspuns.)",
+    "options": [
+      "HTTP",
+      "TCP",
+      "IP",
+      "UDP",
+      "Ethernet"
+    ],
+    "answers": [
+      1,
+      3
+    ]
+  },
+  {
+    "id": 157,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "multi",
+    "question": "Care dintre directoarele de mai jos sunt parte din Filesystem Hierarchy Standard (FHS) pe Linux? (Alegeți 4 variante de răspuns.)",
+    "options": [
+      "/bin",
+      "/program files",
+      "/usr",
+      "/tmp",
+      "/windows",
+      "/home"
+    ],
+    "answers": [
+      0,
+      2,
+      3,
+      5
+    ]
+  },
+  {
+    "id": 158,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "multi",
+    "question": "Care dintre următoarele sunt bune practici de securitate pentru parolele utilizatorilor? (Alegeți 3 variante de răspuns.)",
+    "options": [
+      "Folosirea aceleiași parole pe mai multe servicii",
+      "Parole de minim 12 caractere",
+      "Scrierea parolei pe un post-it lipit pe monitor",
+      "Folosirea autentificării cu doi factori (2FA)",
+      "Schimbarea periodică a parolelor"
+    ],
+    "answers": [
+      1,
+      3,
+      4
+    ]
+  },
+  {
+    "id": 159,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce este hyperthreading-ul (Intel) sau SMT (AMD)?",
+    "options": [
+      "O tehnologie de overclocking automat",
+      "O tehnologie care permite unui singur nucleu fizic să execute două fire de execuție simultan",
+      "Un tip de memorie cache L3",
+      "O metodă de răcire a procesorului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 160,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce tipuri de stocare sunt considerate SSD (Solid State Drive)? (Alegeți două variante de răspuns.)",
+    "options": [
+      "SATA SSD",
+      "HDD 7200 RPM",
+      "NVMe M.2",
+      "Floppy disk"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 161,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce este POST (Power-On Self Test)?",
+    "options": [
+      "Un protocol de email",
+      "Un test de diagnosticare rulat de firmware (BIOS/UEFI) la pornire pentru a verifica hardware-ul",
+      "Un serviciu de boot al Linux",
+      "Un tip de partiție"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 162,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce este RAID 1?",
+    "options": [
+      "Date distribuite pe mai multe discuri pentru performanță",
+      "Oglindire completă a datelor pe două discuri pentru redundanță",
+      "Un sistem de fișiere special",
+      "O metodă de compresie a datelor"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 163,
+    "topic": "Introducere",
+    "chapter": 1,
+    "type": "single",
+    "question": "Care este rolul kernel-ului într-un sistem de operare?",
+    "options": [
+      "Oferă interfața grafică utilizatorului",
+      "Gestionează resursele hardware și oferă abstracțiuni pentru programe",
+      "Stochează configurațiile aplicațiilor",
+      "Rulează aplicațiile în spațiul utilizatorului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 164,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este reprezentarea octală a permisiunilor `rwxr-xr--`?",
+    "options": [
+      "755",
+      "754",
+      "644",
+      "777"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 165,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce face comanda `find /home -name '*.log' -mtime +30`?",
+    "options": [
+      "Găsește fișiere .log din /home modificate în ultimele 30 de zile",
+      "Găsește fișiere .log din /home modificate acum mai mult de 30 de zile",
+      "Șterge fișierele .log mai vechi de 30 de zile",
+      "Numără fișierele .log din /home"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 166,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce este o adresă IP privată? Care dintre adresele de mai jos este privată?",
+    "options": [
+      "8.8.8.8",
+      "172.16.0.1",
+      "200.100.50.25",
+      "1.1.1.1"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 167,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce este NAT (Network Address Translation)?",
+    "options": [
+      "Un protocol de criptare pentru rețele wireless",
+      "O metodă prin care un router traduce adrese IP private în adrese publice pentru accesul la internet",
+      "Un serviciu de rezolvare a numelor de domeniu",
+      "Un tip de cablu de rețea"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 168,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce reprezintă `$?` în Bash?",
+    "options": [
+      "Numărul de argumente pasate scriptului",
+      "PID-ul shellului curent",
+      "Codul de returnare al ultimei comenzi executate",
+      "Toate argumentele ca un singur string"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 169,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce face construcția `$(comanda)` în Bash?",
+    "options": [
+      "Rulează comanda în background",
+      "Înlocuiește expresia cu output-ul comenzii (command substitution)",
+      "Testează dacă comanda există",
+      "Ignoră erorile comenzii"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 170,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce este criptarea simetrică față de cea asimetrică?",
+    "options": [
+      "Criptarea simetrică folosește aceeași cheie pentru criptare și decriptare; cea asimetrică folosește o pereche de chei (publică/privată)",
+      "Criptarea simetrică este mai lentă decât cea asimetrică",
+      "Criptarea asimetrică se folosește doar pentru parole",
+      "Nu există diferențe practice între ele"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 171,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este Docker față de o mașină virtuală tradițională?",
+    "options": [
+      "Docker este un hypervisor de tip 1",
+      "Docker folosește containere care partajează kernel-ul sistemului gazdă, fără a emula hardware complet",
+      "Docker necesită mai multe resurse decât o VM",
+      "Docker poate rula doar aplicații Windows"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 172,
+    "topic": "Procese",
+    "chapter": 5,
+    "type": "single",
+    "question": "Ce se întâmplă cu procesele copil când procesul lor părinte se termină înainte de ele?",
+    "options": [
+      "Se termină automat",
+      "Devin procese zombie",
+      "Devin procese orfane și sunt adoptate de init/systemd (PID 1)",
+      "Se suspendă până la repornirea sistemului"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 173,
+    "topic": "Pachete Software",
+    "chapter": 4,
+    "type": "single",
+    "question": "Ce este un depozit (repository) de pachete software?",
+    "options": [
+      "Un folder local unde sunt instalate aplicațiile",
+      "Un server sau locație care conține pachete software disponibile pentru instalare",
+      "O bază de date cu configurațiile aplicațiilor",
+      "Un tip de arhivă comprimată"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 174,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Care este shell-ul implicit pe majoritatea distribuțiilor Linux moderne?",
+    "options": [
+      "sh",
+      "zsh",
+      "bash",
+      "fish"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 175,
+    "topic": "Sistemul de Fișiere",
+    "chapter": 2,
+    "type": "single",
+    "question": "Care este diferența dintre un hard link și un symbolic link (symlink)?",
+    "options": [
+      "Un hard link este o referință directă la inode-ul fișierului; un symlink este o referință la calea fișierului",
+      "Hard link-ul funcționează între sisteme de fișiere diferite; symlink-ul nu",
+      "Symlink-ul consumă mai mult spațiu pe disc",
+      "Nu există diferențe practice"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 176,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce comandă afișează configurația interfețelor de rețea (adrese IP, MAC, stare) pe Linux?",
+    "options": [
+      "ifconfig (deprecated) sau ip addr",
+      "netstat -i",
+      "route -n",
+      "arp -a"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 177,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce face comanda `chmod 600 ~/.ssh/id_rsa`?",
+    "options": [
+      "Permite tuturor utilizatorilor să citească cheia privată",
+      "Permite doar proprietarului să citească și să scrie fișierul; nimeni altcineva nu are acces",
+      "Permite grupului să execute fișierul",
+      "Șterge permisiunile pentru toți utilizatorii"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 178,
+    "topic": "Shell și CLI",
+    "chapter": 8,
+    "type": "single",
+    "question": "Ce face comanda `sort -u fisier.txt`?",
+    "options": [
+      "Sortează fișierul în ordine inversă",
+      "Sortează fișierul și elimină liniile duplicate",
+      "Sortează fișierul după dimensiunea liniilor",
+      "Actualizează (update) fișierul"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 179,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce comandă afișează utilizarea spațiului pe disc pentru directorul curent și subdirectoarele sale?",
+    "options": [
+      "df -h .",
+      "ls -lh",
+      "du -sh *",
+      "fdisk -l"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 180,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce este systemd pe Linux?",
+    "options": [
+      "Un shell alternativ la bash",
+      "Sistemul de inițializare și gestionare a serviciilor folosit de majoritatea distribuțiilor Linux moderne",
+      "Un hypervisor integrat în kernel",
+      "Un manager de pachete"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 183,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Ce este Hyper-V pe Windows?",
+    "options": [
+      "Un antivirus integrat",
+      "Un hypervisor de tip 1 integrat în Windows pentru mașini virtuale",
+      "Un sistem de fișiere",
+      "Un manager de pachete"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 184,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este echivalentul Windows al comenzii Linux `ps aux`?",
+    "options": [
+      "tasklist",
+      "proclist",
+      "services /all",
+      "sysinfo"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 185,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Ce comandă Windows afișează configurația rețelei (echivalent `ip addr`)?",
+    "options": [
+      "netstat -a",
+      "ipconfig /all",
+      "ifconfig",
+      "netconfig"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 186,
+    "topic": "Sisteme de Operare",
+    "chapter": 0,
+    "type": "single",
+    "question": "Care este extensia unui script PowerShell pe Windows?",
+    "options": [
+      ".bat",
+      ".cmd",
+      ".sh",
+      ".ps1"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 187,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce este un terminal emulator?",
+    "options": [
+      "Un program hardware special",
+      "O aplicație software care emulează un terminal text în mediu grafic",
+      "Un tip de shell",
+      "Un protocol de comunicare"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 188,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce shortcut de tastatură curăță ecranul terminalului (echivalent `clear`)?",
+    "options": [
+      "Ctrl+L",
+      "Ctrl+C",
+      "Ctrl+D",
+      "Ctrl+Z"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 189,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce este Wayland pe Linux?",
+    "options": [
+      "Un manager de ferestre pentru Windows",
+      "Un protocol modern pentru afișarea grafică, succesor al X11/X.Org",
+      "Un shell grafic",
+      "Un driver de placă video"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 190,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Care mediu desktop este implicit pe Ubuntu 22.04+?",
+    "options": [
+      "KDE Plasma",
+      "XFCE",
+      "GNOME",
+      "LXDE"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 191,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce face tasta Tab în terminal?",
+    "options": [
+      "Inserează un tab în fișierul curent",
+      "Autocomplete pentru comenzi și căi de fișiere",
+      "Comută între ferestre deschise",
+      "Anulează comanda curentă"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 192,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Ce face Ctrl+C în terminal?",
+    "options": [
+      "Copiază textul selectat",
+      "Trimite semnalul SIGINT procesului curent, întrerupând execuția",
+      "Curăță ecranul",
+      "Închide terminalul"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 193,
+    "topic": "Interfața cu Utilizatorul",
+    "chapter": 1,
+    "type": "single",
+    "question": "Cum poți rula o comandă anterioară din istoricul shellului?",
+    "options": [
+      "Cu tasta F1",
+      "Cu săgețile sus/jos sau comanda history + !număr",
+      "Cu Ctrl+H",
+      "Nu este posibil"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 194,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce face comanda `apt-cache search cuvânt`?",
+    "options": [
+      "Instalează pachetul căutat",
+      "Caută pachete disponibile al căror nume sau descriere conține cuvântul dat",
+      "Verifică integritatea pachetului",
+      "Afișează dependențele pachetului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 195,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce comandă elimină un pachet și fișierele sale de configurare pe Ubuntu?",
+    "options": [
+      "apt remove pachet",
+      "apt purge pachet",
+      "apt delete pachet",
+      "apt uninstall pachet"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 196,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce este un PPA (Personal Package Archive) pe Ubuntu?",
+    "options": [
+      "Un tip de fișier .deb",
+      "Un depozit de pachete găzduit de un utilizator sau organizație pe Launchpad",
+      "Un manager de versiuni",
+      "O arhivă de backup a pachetelor instalate"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 197,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce face comanda `dpkg -i pachet.deb`?",
+    "options": [
+      "Instalează pachetul .deb local",
+      "Inspectează conținutul pachetului",
+      "Dezinstalează pachetul",
+      "Descarcă pachetul din internet"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 198,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce comandă afișează toate pachetele instalate pe un sistem Debian/Ubuntu?",
+    "options": [
+      "apt list",
+      "dpkg -l",
+      "apt show all",
+      "pkg list --installed"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 199,
+    "topic": "Pachete Software",
+    "chapter": 3,
+    "type": "single",
+    "question": "Ce este Snap față de apt?",
+    "options": [
+      "Snap este mai vechi decât apt",
+      "Snap distribuie aplicații auto-conținute cu dependențele incluse, independent de distribuție",
+      "Snap este disponibil doar pe Fedora",
+      "Snap și apt sunt identice"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 200,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este o imagine Docker (Docker image)?",
+    "options": [
+      "Un fișier ISO al unui sistem de operare",
+      "Un șablon read-only care conține sistemul de fișiere și configurația necesară pentru un container",
+      "O mașină virtuală comprimată",
+      "Un snapshot al unui VM VirtualBox"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 201,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce comandă pornește un container Docker din imaginea `ubuntu:22.04`?",
+    "options": [
+      "docker start ubuntu:22.04",
+      "docker run ubuntu:22.04",
+      "docker create ubuntu:22.04",
+      "docker exec ubuntu:22.04"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 202,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este un Dockerfile?",
+    "options": [
+      "Un fișier de configurare pentru VirtualBox",
+      "Un script cu instrucțiuni pentru construirea automată a unei imagini Docker",
+      "Un fișier de log al containerelor",
+      "O rețetă de instalare a Docker"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 203,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce face comanda `docker ps`?",
+    "options": [
+      "Afișează toate imaginile Docker disponibile local",
+      "Afișează containerele Docker care rulează în momentul curent",
+      "Publică o imagine pe Docker Hub",
+      "Oprește toate containerele"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 204,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Care este diferența dintre `docker stop` și `docker kill`?",
+    "options": [
+      "Nu există nicio diferență",
+      "`docker stop` trimite SIGTERM (oprire elegantă); `docker kill` trimite SIGKILL (oprire forțată)",
+      "`docker kill` este mai lent decât `docker stop`",
+      "`docker stop` șterge containerul, `docker kill` doar îl oprește"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 205,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "single",
+    "question": "Ce este KVM (Kernel-based Virtual Machine)?",
+    "options": [
+      "Un emulator software pur",
+      "Un modul kernel Linux care transformă Linux într-un hypervisor de tip 1",
+      "Un hypervisor de tip 2 similar cu VirtualBox",
+      "Un protocol de rețea pentru mașini virtuale"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 206,
+    "topic": "Mașini Virtuale",
+    "chapter": 15,
+    "type": "multi",
+    "question": "Care dintre afirmațiile despre containere Docker sunt corecte? (Alegeți 3.)",
+    "options": [
+      "Containerele partajează kernel-ul sistemului gazdă",
+      "Containerele sunt mai grele decât VM-urile tradiționale",
+      "Containerele pornesc mult mai rapid decât VM-urile",
+      "Containerele oferă izolare la nivel de proces",
+      "Un container necesită propriul BIOS"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 207,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Care este output-ul comenzii:\n\n```\nelev@acadnet:~$ whoami\n```",
+    "options": [
+      "root",
+      "acadnet",
+      "elev",
+      "hostname"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 208,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce comandă creează utilizatorul `alex` cu directorul home automat pe Ubuntu?",
+    "options": [
+      "useradd alex",
+      "adduser alex",
+      "useradd -m alex",
+      "Variantele b și c sunt corecte"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 209,
+    "topic": "Utilizatori",
+    "chapter": 6,
+    "type": "single",
+    "question": "Ce afișează comanda `groups` fără argumente?",
+    "options": [
+      "Toți utilizatorii din sistem",
+      "Grupurile din care face parte utilizatorul curent",
+      "Toți utilizatorii dintr-un grup",
+      "Grupurile cu privilegii de root"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 210,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce afișează comanda `lscpu` pe Linux?",
+    "options": [
+      "Lista de discuri conectate",
+      "Informații despre procesor (arhitectură, nuclee, frecvență, cache)",
+      "Utilizarea curentă a CPU",
+      "Lista de procese sortată după CPU"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 211,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce comandă afișează informații despre memoria RAM (total, folosită, liberă)?",
+    "options": [
+      "meminfo",
+      "free -h",
+      "ram -h",
+      "top --memory"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 212,
+    "topic": "Hardware",
+    "chapter": 9,
+    "type": "single",
+    "question": "Ce fișier din `/proc` conține informații despre procesor pe Linux?",
+    "options": [
+      "/proc/meminfo",
+      "/proc/cpuinfo",
+      "/proc/sysinfo",
+      "/proc/hardware"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 213,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce va afișa scriptul următor?\n\n```bash\n#!/bin/bash\nx=5\necho \"valoarea este $x\"\n```",
+    "options": [
+      "valoarea este $x",
+      "valoarea este 5",
+      "x=5",
+      "Eroare: variabila nu este definită"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 214,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce face linia `#!/bin/bash` la începutul unui script?",
+    "options": [
+      "Este un comentariu decorativ",
+      "Specifică interpretorul care va executa scriptul (shebang line)",
+      "Importă biblioteca bash",
+      "Setează permisiunile scriptului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 215,
+    "topic": "Automatizare",
+    "chapter": 14,
+    "type": "single",
+    "question": "Ce comandă face un script executabil?",
+    "options": [
+      "exec script.sh",
+      "chmod +x script.sh",
+      "run script.sh",
+      "bash -x script.sh"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 216,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce comandă gestionează serviciile systemd (pornire, oprire, status)?",
+    "options": [
+      "service",
+      "systemctl",
+      "init",
+      "daemon"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 217,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce face comanda `systemctl enable nginx`?",
+    "options": [
+      "Pornește nginx imediat",
+      "Configurează nginx să pornească automat la boot",
+      "Reinstalează nginx",
+      "Verifică configurația nginx"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 218,
+    "topic": "Pornirea Sistemului",
+    "chapter": 10,
+    "type": "single",
+    "question": "Ce comandă afișează log-urile systemd în timp real?",
+    "options": [
+      "systemctl logs -f",
+      "journalctl -f",
+      "tail -f /var/log/system.log",
+      "dmesg --follow"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 219,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Care este output-ul comenzii de mai jos și ce înseamnă?\n\n```\nelev@acadnet:~$ ufw status\nStatus: active\nTo          Action  From\n22/tcp      ALLOW   Anywhere\n80/tcp      ALLOW   Anywhere\n```",
+    "options": [
+      "Firewall-ul este dezactivat",
+      "Firewall-ul este activ și permite conexiuni SSH și HTTP de oriunde",
+      "Porturile 22 și 80 sunt blocate",
+      "Sunt 2 utilizatori conectați la sistem"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 220,
+    "topic": "Securitate",
+    "chapter": 13,
+    "type": "single",
+    "question": "Ce face comanda `gpg --verify fisier.sig fisier.tar.gz`?",
+    "options": [
+      "Criptează fișierul cu GPG",
+      "Verifică semnătura digitală GPG a fișierului",
+      "Generează o cheie GPG nouă",
+      "Decriptează fișierul"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 221,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce face comanda `traceroute 8.8.8.8`?",
+    "options": [
+      "Testează viteza conexiunii la 8.8.8.8",
+      "Afișează calea (hop cu hop) parcursă de pachete până la destinație",
+      "Blochează traficul spre 8.8.8.8",
+      "Rezolvă DNS-ul pentru 8.8.8.8"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 222,
+    "topic": "Rețea",
+    "chapter": 12,
+    "type": "single",
+    "question": "Ce comandă rezolvă un nume de domeniu în adresă IP?",
+    "options": [
+      "nslookup google.com sau dig google.com",
+      "resolve google.com",
+      "host --ip google.com",
+      "ip dns google.com"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 223,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Ce este un sistem de fișiere journaling?",
+    "options": [
+      "Un sistem de fișiere care ține un jurnal (log) al operațiilor, permițând recuperare după căderi",
+      "Un sistem de fișiere pentru log-uri de sistem",
+      "Un sistem de fișiere read-only",
+      "Un sistem de fișiere fără inoduri"
+    ],
+    "answers": [
+      0
+    ]
+  },
+  {
+    "id": 224,
+    "topic": "Stocare",
+    "chapter": 11,
+    "type": "single",
+    "question": "Care comandă verifică și repară erorile unui sistem de fișiere ext4 de pe `/dev/sdb1` (partiția trebuie să fie demontată)?",
+    "options": [
+      "fdisk -c /dev/sdb1",
+      "fsck /dev/sdb1",
+      "mkfs.ext4 --repair /dev/sdb1",
+      "e2fsck -f /dev/sdb1"
+    ],
+    "answers": [
+      3
+    ]
+  },
+  {
+    "id": 225,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce este un sistem încorporat (embedded system)?",
+    "options": [
+      "Un calculator desktop cu hardware personalizat",
+      "Un sistem de calcul dedicat, integrat într-un dispozitiv, proiectat pentru o funcție specifică",
+      "Un sistem de operare pentru servere",
+      "Un tip de mașină virtuală"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 226,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce înseamnă acronimul IoT?",
+    "options": [
+      "Internet of Technology",
+      "Input/Output Transfer",
+      "Internet of Things — Internetul Obiectelor",
+      "Integrated Operating Terminal"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 227,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Care dintre următoarele este un exemplu de dispozitiv IoT?",
+    "options": [
+      "Un laptop Dell",
+      "Un termostat inteligent care se conectează la internet",
+      "Un monitor extern",
+      "O tastatură USB"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 228,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Care este diferența principală dintre un microcontroler și un microprocesor?",
+    "options": [
+      "Nu există nicio diferență",
+      "Microprocesorul este mai lent decât microcontrolerul",
+      "Microcontrolerul integrează CPU, memorie și periferice pe același chip; microprocesorul necesită componente externe",
+      "Microcontrolerul rulează doar Windows"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 229,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce sistem de operare în timp real (RTOS) este popular pentru sisteme încorporate?",
+    "options": [
+      "Ubuntu Server",
+      "FreeRTOS",
+      "Windows 11",
+      "Debian"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 230,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce înseamnă RTOS?",
+    "options": [
+      "Remote Terminal Operating System",
+      "Real-Time Operating System — sistem de operare în timp real",
+      "Reduced Thread OS",
+      "Runtime Object System"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 231,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Care este caracteristica principală a unui RTOS față de un OS general?",
+    "options": [
+      "Consumă mai multă memorie",
+      "Are interfață grafică avansată",
+      "Garantează timpi de răspuns deterministici (real-time)",
+      "Rulează doar pe ARM"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 232,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce este Arduino?",
+    "options": [
+      "Un sistem de operare pentru IoT",
+      "O platformă open-source de prototipare electronică cu microcontroler și mediu de programare",
+      "Un limbaj de programare derivat din Python",
+      "Un protocol de comunicare wireless"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 233,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce limbaj de programare este folosit implicit pentru programarea unui Arduino?",
+    "options": [
+      "Python",
+      "Java",
+      "C/C++ (prin Arduino IDE)",
+      "Assembly"
+    ],
+    "answers": [
+      2
+    ]
+  },
+  {
+    "id": 234,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Care sunt cele două funcții obligatorii într-un sketch Arduino?",
+    "options": [
+      "main() și exit()",
+      "setup() și loop()",
+      "init() și run()",
+      "begin() și end()"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 235,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face funcția `setup()` într-un sketch Arduino?",
+    "options": [
+      "Rulează continuu în buclă infinită",
+      "Se execută o singură dată la pornire, pentru inițializarea pinilor și perifericelor",
+      "Citește senzori în timp real",
+      "Trimite date prin Serial"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 236,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face funcția `loop()` într-un sketch Arduino?",
+    "options": [
+      "Se execută o singură dată după setup()",
+      "Rulează continuu în buclă infinită, constituind logica principală a programului",
+      "Inițializează porturile seriale",
+      "Dezactivează microcontrolerul"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 237,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face `pinMode(13, OUTPUT)` în Arduino?",
+    "options": [
+      "Citește valoarea de pe pinul 13",
+      "Configurează pinul 13 ca pin de ieșire",
+      "Setează pinul 13 la tensiunea de 5V",
+      "Activează rezistența pull-up a pinului 13"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 238,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face `digitalWrite(13, HIGH)` în Arduino?",
+    "options": [
+      "Citește starea pinului 13",
+      "Aplică tensiune 5V (HIGH) pe pinul 13 — de ex. aprinde un LED conectat la el",
+      "Scrie valoarea 13 în memorie",
+      "Activează întreruperea pe pinul 13"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 239,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face funcția `analogRead(A0)` în Arduino?",
+    "options": [
+      "Setează pinul A0 ca output analogic",
+      "Citește tensiunea de pe pinul analogic A0 și returnează o valoare între 0 și 1023",
+      "Generează un semnal PWM pe A0",
+      "Calibrează convertorul ADC"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 240,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce este PWM (Pulse Width Modulation) în contextul Arduino?",
+    "options": [
+      "Un protocol de comunicare I2C",
+      "O tehnică de simulare a unui semnal analogic prin varierea raportului ON/OFF al unui semnal digital",
+      "Un tip de memorie flash",
+      "O metodă de reset al microcontrolerului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 241,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face `Serial.begin(9600)` în Arduino?",
+    "options": [
+      "Setează viteza procesorului la 9600 MHz",
+      "Inițializează comunicarea serială la 9600 baud pentru debug/comunicare cu PC-ul",
+      "Conectează Arduino la internet cu 9600 bps",
+      "Activează 9600 de întreruperi pe secundă"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 242,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce face `delay(1000)` în Arduino?",
+    "options": [
+      "Reduce frecvența procesorului cu 1000 Hz",
+      "Oprește execuția pentru 1000 milisecunde (1 secundă)",
+      "Repetă instrucțiunea anterioară de 1000 ori",
+      "Setează un timer de 1000 microsecunde"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 243,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce este protocolul MQTT?",
+    "options": [
+      "Un protocol de transfer de fișiere pentru IoT",
+      "Un protocol lightweight publish/subscribe de mesagerie, popular în IoT",
+      "Un protocol de autentificare pentru senzori",
+      "Un protocol de sincronizare a timpului"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 244,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce protocol de comunicare wireless de mică putere este popular pentru IoT la distanțe scurte?",
+    "options": [
+      "Ethernet",
+      "Bluetooth Low Energy (BLE)",
+      "Fiber optic",
+      "HDMI"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 245,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Care dintre modulele de mai jos adaugă conectivitate Wi-Fi unui Arduino?",
+    "options": [
+      "Arduino Mega",
+      "ESP8266 sau ESP32",
+      "Arduino Nano",
+      "Shield Ethernet W5100 (cablu)"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 246,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "multi",
+    "question": "Care dintre protocoalele de mai jos sunt folosite frecvent în comunicarea între componente pe un circuit Arduino? (Alegeți 3.)",
+    "options": [
+      "I2C",
+      "USB 3.0",
+      "SPI",
+      "UART/Serial",
+      "HDMI"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 247,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce este Raspberry Pi față de Arduino?",
+    "options": [
+      "Raspberry Pi și Arduino sunt identice ca funcționalitate",
+      "Raspberry Pi este un mini-calculator complet cu OS (Linux), procesor mai puternic; Arduino este un microcontroler simplu fără OS",
+      "Arduino este mai puternic decât Raspberry Pi",
+      "Raspberry Pi nu poate rula Linux"
+    ],
+    "answers": [
+      1
+    ]
+  },
+  {
+    "id": 248,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "multi",
+    "question": "Care sunt avantajele unui sistem embedded față de un PC general? (Alegeți 3.)",
+    "options": [
+      "Consum de energie mult mai mic",
+      "Poate rula aplicații grafice complexe",
+      "Dimensiuni fizice reduse",
+      "Cost mai scăzut pentru funcție specifică",
+      "Suportă mai multe sisteme de operare simultan"
+    ],
+    "answers": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 249,
+    "topic": "IoT & Sisteme Încorporate",
+    "chapter": 16,
+    "type": "single",
+    "question": "Ce înseamnă GPIO (General Purpose Input/Output)?",
+    "options": [
+      "Un protocol de comunicare în rețea",
+      "Pini configurabili ca intrare sau ieșire digitală pe un microcontroler/SBC",
+      "Un tip de memorie non-volatilă",
+      "Un standard pentru alimentarea cu energie"
+    ],
+    "answers": [
+      1
+    ]
   }
 ]
