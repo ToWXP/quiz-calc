@@ -153,8 +153,8 @@
     }
     .btn:hover { opacity: .88; }
     .btn-confirm { background: linear-gradient(135deg, #1d4ed8, #6d28d9); color: #fff; }
-    .btn-skip    { background: transparent; color: #94a3b8; border: 1px solid #334155; }
-    .btn-skip:hover { background: #1e293b; color: #cbd5e1; }
+    .btn-prev    { background: transparent; color: #94a3b8; border: 1px solid #334155; }
+    .btn-prev:hover { background: #1e293b; color: #cbd5e1; }
     .skipped-card {
       background: #1e293b; border: 1px solid #334155; border-radius: 10px;
       padding: 14px 16px; margin-bottom: 12px; text-align: left;
@@ -287,9 +287,9 @@
       <span id="feedback-text"></span>
     </div>
     <div class="card-footer">
+      <button class="btn btn-prev" id="btn-prev" onclick="prev_question()">← Înapoi</button>
       <button class="btn btn-confirm" id="btn-confirm" onclick="confirm_answer()">Confirmă răspunsul</button>
-      <button class="btn btn-skip"    id="btn-skip"    onclick="skip_question()">⏭ Skip</button>
-      <button class="btn btn-next"    id="btn-next"    onclick="next_question()" style="display:none">Următoarea →</button>
+      <button class="btn btn-next" id="btn-next" onclick="next_question()" style="display:none">Următoarea →</button>
     </div>
   </div>
 </div>
@@ -321,9 +321,6 @@ let score = 0;
 let selected = [];
 let confirmed = false;
 let history = [];
-let skipped = [];
-let skippedIds = new Set();
-let consecutiveSkips = 0;
 
 // Load questions from JSON
 fetch('questions.json')
@@ -344,7 +341,7 @@ function startQuiz() {
   const sizeVal = document.getElementById('quiz-size').value;
   const size = sizeVal === 'all' ? ALL_Q.length : parseInt(sizeVal);
   questions = shuffle(ALL_Q).slice(0, size);
-  current = 0; score = 0; selected = []; confirmed = false; history = []; skipped = []; skippedIds = new Set(); consecutiveSkips = 0;
+  current = 0; score = 0; selected = []; confirmed = false; history = [];
 
   document.getElementById('menu').style.display = 'none';
   document.getElementById('quiz-area').style.display = 'block';
@@ -360,8 +357,6 @@ function renderQuestion() {
   document.getElementById('card').classList.remove('card-shake');
 
   // header
-  const remaining = questions.length - current;
-  const skippedInQueue = questions.slice(current).filter((q, i) => i > 0 && questions.indexOf(q) > current).length;
   document.getElementById('q-counter').textContent = `${current + 1}/${questions.length}`;
   document.getElementById('score-of').textContent = current;
   document.getElementById('progress-fill').style.width = `${(current / questions.length) * 100}%`;
@@ -369,12 +364,6 @@ function renderQuestion() {
   // pills
   document.getElementById('pill-topic').textContent = q.topic;
   document.getElementById('pill-type').textContent = q.type === 'single' ? '☑ Unul corect' : '☑ Mai multe corecte';
-  const skipPill = document.getElementById('pill-skip');
-  if (skippedIds.has(q.id)) {
-    skipPill.style.display = 'inline-block';
-  } else {
-    skipPill.style.display = 'none';
-  }
 
   // question
   document.getElementById('question').textContent = q.question;
@@ -399,13 +388,15 @@ function renderQuestion() {
   const fb = document.getElementById('feedback');
   fb.className = 'show' in fb.classList ? '' : '';
   fb.classList.remove('show', 'correct-fb', 'wrong-fb');
+
+  // prev button — ascuns la prima întrebare
+  document.getElementById('btn-prev').style.display = current === 0 ? 'none' : 'inline-block';
   document.getElementById('btn-confirm').style.display = 'inline-block';
-  document.getElementById('btn-skip').style.display = 'inline-block';
   document.getElementById('btn-next').style.display = 'none';
 
-  // update last question button
+  // ultima întrebare → buton "Termină testul"
   if (current + 1 >= questions.length) {
-    document.getElementById('btn-next').textContent = 'Vezi rezultatele →';
+    document.getElementById('btn-next').textContent = 'Termină testul ✓';
   } else {
     document.getElementById('btn-next').textContent = 'Următoarea →';
   }
@@ -447,9 +438,7 @@ function confirm_answer() {
     return;
   }
   confirmed = true;
-  consecutiveSkips = 0;
   const q = questions[current];
-  skippedIds.delete(q.id);
   const sortSel = [...selected].sort().join(',');
   const sortAns = [...q.answers].sort().join(',');
   const correct = sortSel === sortAns;
@@ -491,23 +480,14 @@ function confirm_answer() {
   }
 
   document.getElementById('btn-confirm').style.display = 'none';
-  document.getElementById('btn-skip').style.display = 'none';
   document.getElementById('btn-next').style.display = 'inline-block';
 }
 
-function skip_question() {
-  consecutiveSkips++;
-  skippedIds.add(questions[current].id);
-  if (consecutiveSkips >= questions.length - current) {
-    for (let i = current; i < questions.length; i++) {
-      skipped.push(questions[i]);
-    }
-    showResults();
-    return;
+function prev_question() {
+  if (current > 0) {
+    current--;
+    renderQuestion();
   }
-  questions.push(questions[current]);
-  questions.splice(current, 1);
-  renderQuestion();
 }
 
 function next_question() {
@@ -534,16 +514,10 @@ function showResults() {
   document.getElementById('result-emoji').textContent = emoji;
   document.getElementById('result-grade').textContent = grade;
   document.getElementById('result-score').textContent = score;
-  document.getElementById('result-den').textContent = `/${questions.length - skipped.length}`;
+  document.getElementById('result-den').textContent = `/${questions.length}`;
 
-  // skipped section
-  const skippedSection = document.getElementById('skipped-section');
-  if (skipped.length > 0) {
-    skippedSection.style.display = 'block';
-    document.getElementById('skipped-count').textContent = skipped.length;
-  } else {
-    skippedSection.style.display = 'none';
-  }
+  // skipped section ascuns
+  document.getElementById('skipped-section').style.display = 'none';
 
   // topic breakdown
   const stats = {};
@@ -567,23 +541,6 @@ function showResults() {
         <span class="topic-frac">${s.c}/${s.t}</span>
       </div>`;
   });
-}
-
-function retrySkipped() {
-  questions = shuffle(skipped);
-  skipped = [];
-  skippedIds = new Set();
-  consecutiveSkips = 0;
-  current = 0;
-  selected = [];
-  confirmed = false;
-
-  document.getElementById('results').classList.remove('show');
-  document.getElementById('quiz-area').style.display = 'block';
-  document.getElementById('score-val').textContent = score;
-  document.getElementById('score-of').textContent = '0';
-
-  renderQuestion();
 }
 
 function backToMenu() {
