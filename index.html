@@ -306,9 +306,9 @@
     <div class="breakdown-title">Performanță pe capitole</div>
     <div id="topic-rows"></div>
   </div>
-  <div id="skipped-section" style="display:none; margin-top:24px; width:100%; max-width:560px;">
-    <div class="breakdown-title">⏭ Întrebări sărite</div>
-    <div id="skipped-rows"></div>
+  <div id="skipped-section" style="display:none; margin-top:24px; width:100%; max-width:560px; text-align:center;">
+    <div class="breakdown-title">⏭ Ai sărit <span id="skipped-count"></span> întrebări</div>
+    <button class="btn-restart" style="margin-top:12px; background: linear-gradient(135deg,#c2410c,#7c3aed);" onclick="retrySkipped()">🔁 Rezolvă întrebările sărite</button>
   </div>
   <button class="btn-restart" onclick="backToMenu()">↺ Meniu principal</button>
 </div>
@@ -538,18 +538,9 @@ function showResults() {
 
   // skipped section
   const skippedSection = document.getElementById('skipped-section');
-  const skippedRows = document.getElementById('skipped-rows');
-  skippedRows.innerHTML = '';
   if (skipped.length > 0) {
     skippedSection.style.display = 'block';
-    skipped.forEach(q => {
-      const correctLabels = q.answers.map(a => q.options[a]).join(', ');
-      skippedRows.innerHTML += `
-        <div class="skipped-card">
-          <div class="skipped-q">${q.question}</div>
-          <div class="skipped-ans">✓ Răspuns corect: ${correctLabels}</div>
-        </div>`;
-    });
+    document.getElementById('skipped-count').textContent = skipped.length;
   } else {
     skippedSection.style.display = 'none';
   }
@@ -576,6 +567,23 @@ function showResults() {
         <span class="topic-frac">${s.c}/${s.t}</span>
       </div>`;
   });
+}
+
+function retrySkipped() {
+  questions = shuffle(skipped);
+  skipped = [];
+  skippedIds = new Set();
+  consecutiveSkips = 0;
+  current = 0;
+  selected = [];
+  confirmed = false;
+
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('score-val').textContent = score;
+  document.getElementById('score-of').textContent = '0';
+
+  renderQuestion();
 }
 
 function backToMenu() {
