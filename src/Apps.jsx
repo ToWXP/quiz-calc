@@ -458,317 +458,9 @@ function Menu({ allQ, onStart }) {
 }
 
 /* ─── APP ─────────────────────────────────────────────────── */
-
-/* ─── ADMIN PANEL ─────────────────────────────────────────── */
-const ADMIN_PASSWORD = "uso2025admin";
-
-function AdminPanel({ allQ, onAddQuestions, onBack }) {
-  const [step, setStep] = useState("auth"); // auth | config | generating | done
-  const [password, setPassword] = useState("");
-  const [authError, setAuthError] = useState("");
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem("gemini_key") || "");
-  const [pdfFile, setPdfFile] = useState(null);
-  const [pdfName, setPdfName] = useState("");
-  const [difficulty, setDifficulty] = useState("medium");
-  const [count, setCount] = useState(50);
-  const [topic, setTopic] = useState("");
-  const [log, setLog] = useState([]);
-  const [generated, setGenerated] = useState([]);
-  const [generating, setGenerating] = useState(false);
-
-  function addLog(msg, type = "info") {
-    setLog(l => [...l, { msg, type, t: Date.now() }]);
-  }
-
-  function handleAuth() {
-    if (password === ADMIN_PASSWORD) {
-      setStep("config");
-    } else {
-      setAuthError("Parolă greșită");
-      setTimeout(() => setAuthError(""), 2000);
-    }
-  }
-
-  function handlePDF(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    setPdfFile(file);
-    setPdfName(file.name);
-  }
-
-  async function handleGenerate() {
-    if (!apiKey) { addLog("Introdu API key-ul Gemini!", "error"); return; }
-    if (!pdfFile) { addLog("Selectează un PDF!", "error"); return; }
-
-    setGenerating(true);
-    setLog([]);
-    setStep("generating");
-
-    try {
-      addLog("Citesc PDF-ul...", "info");
-      const base64 = await new Promise((res, rej) => {
-        const r = new FileReader();
-        r.onload = () => res(r.result.split(",")[1]);
-        r.onerror = rej;
-        r.readAsDataURL(pdfFile);
-      });
-
-      addLog(`PDF încărcat (${(pdfFile.size / 1024).toFixed(0)} KB). Trimit la Gemini...`, "info");
-
-      const diffLabel = difficulty === "easy" ? "ușoare (nivel clasa 11-12, comenzi de bază)" :
-                        difficulty === "medium" ? "intermediare (comenzi avansate, scripting, procese)" :
-                        "dificile (nivel județean, subiecte complexe)";
-
-      const topicHint = topic ? `Focusează-te pe subiectul: ${topic}.` : "Acoperă toate subiectele din document uniform.";
-
-      const prompt = `Ești un profesor de informatică. Generează exact ${count} întrebări de tip quiz ${diffLabel} bazate pe documentul PDF atașat.
-
-${topicHint}
-
-REGULI CRITICE:
-1. Toate variantele de răspuns trebuie să aibă lungimi SIMILARE (±15 caractere) — nu da de gol răspunsul corect prin lungime
-2. Răspunsul corect trebuie distribuit uniform la pozițiile 0, 1, 2, 3
-3. Variantele greșite trebuie să fie plauzibile și tehnic corecte parțial
-4. Întrebările trebuie să testeze înțelegerea, nu memorarea
-
-Returnează DOAR un array JSON valid, fără markdown, fără explicații, fără \`\`\`json:
-[
-  {
-    "id": 1000,
-    "topic": "Numele capitolului",
-    "type": "single",
-    "question": "Textul întrebării?",
-    "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
-    "answers": [2]
-  }
-]
-
-ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${count} întrebări.`;
-
-      const body = {
-        contents: [{
-          parts: [
-            { inline_data: { mime_type: "application/pdf", data: base64 } },
-            { text: prompt }
-          ]
-        }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 65536 }
-      };
-
-      const resp = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
-      );
-
-      const data = await resp.json();
-
-      if (data.error) {
-        addLog(`Eroare API: ${data.error.message}`, "error");
-        setGenerating(false);
-        setStep("config");
-        return;
-      }
-
-      addLog("Răspuns primit. Parsez JSON-ul...", "info");
-      let text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-      // Clean up markdown if present
-      text = text.replace(/```json/g, "").replace(/```/g, "").trim();
-
-      let questions;
-      try {
-        questions = JSON.parse(text);
-      } catch(e) {
-        // Try to extract JSON array
-        const match = text.match(/\[[\s\S]*\]/);
-        if (match) {
-          questions = JSON.parse(match[0]);
-        } else {
-          addLog("Nu am putut parsa JSON-ul. Răspuns neașteptat de la Gemini.", "error");
-          console.error("Raw response:", text);
-          setGenerating(false);
-          setStep("config");
-          return;
-        }
-      }
-
-      // Fix IDs to avoid conflicts — use timestamp base
-      const base = Date.now() % 100000;
-      questions = questions.map((q, i) => ({ ...q, id: base + i, difficulty }));
-
-      addLog(`✅ ${questions.length} întrebări generate cu succes!`, "success");
-      setGenerated(questions);
-
-      // Save API key
-      localStorage.setItem("gemini_key", apiKey);
-
-      // Add to quiz
-      onAddQuestions(difficulty, questions);
-      addLog(`Adăugate în quiz la nivelul "${difficulty}". Joacă acum!`, "success");
-
-      setStep("done");
-    } catch(e) {
-      addLog(`Eroare: ${e.message}`, "error");
-      setGenerating(false);
-      setStep("config");
-    }
-    setGenerating(false);
-  }
-
-  function downloadJSON() {
-    const blob = new Blob([JSON.stringify(generated, null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `questions_generated_${difficulty}_${Date.now()}.json`;
-    a.click();
-  }
-
-  const S = {
-    wrap: { width:"100%", maxWidth:540, margin:"0 auto" },
-    card: { background:T.card, border:`1px solid ${T.border}`, borderRadius:16, padding:28 },
-    title: { fontSize:22, fontWeight:700, color:T.accent, marginBottom:6, fontFamily:"'JetBrains Mono',monospace" },
-    sub: { fontSize:13, color:T.muted, marginBottom:28 },
-    label: { fontSize:12, color:T.muted, marginBottom:6, display:"block", textTransform:"uppercase", letterSpacing:".08em" },
-    input: { width:"100%", background:T.surface, border:`1px solid ${T.border}`, borderRadius:8,
-             padding:"10px 14px", color:T.text, fontSize:14, outline:"none", boxSizing:"border-box" },
-    btn: (col) => ({ background:col+"18", border:`1px solid ${col}`, color:col,
-                     borderRadius:8, padding:"11px 22px", cursor:"pointer", fontWeight:600,
-                     fontSize:14, width:"100%", marginTop:8 }),
-    logBox: { background:T.surface, border:`1px solid ${T.border}`, borderRadius:8,
-              padding:14, maxHeight:200, overflowY:"auto", fontFamily:"'JetBrains Mono',monospace", fontSize:12 },
-  };
-
-  if (step === "auth") return (
-    <div style={S.wrap}>
-      <div style={{ textAlign:"center", marginBottom:32 }}>
-        <div style={{ fontSize:36, marginBottom:8 }}>🔐</div>
-        <div style={S.title}>Admin Panel</div>
-        <div style={S.sub}>Generare întrebări cu Gemini AI</div>
-      </div>
-      <div style={S.card}>
-        <label style={S.label}>Parolă admin</label>
-        <input style={S.input} type="password" placeholder="Introdu parola..."
-          value={password} onChange={e => setPassword(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && handleAuth()} autoFocus />
-        {authError && <div style={{ color:T.red, fontSize:12, marginTop:8 }}>{authError}</div>}
-        <button style={S.btn(T.accent)} onClick={handleAuth}>Intră →</button>
-        <button style={{ ...S.btn(T.muted), marginTop:8 }} onClick={onBack}>← Înapoi la quiz</button>
-      </div>
-    </div>
-  );
-
-  if (step === "config") return (
-    <div style={S.wrap}>
-      <div style={{ textAlign:"center", marginBottom:24 }}>
-        <div style={{ fontSize:32, marginBottom:6 }}>⚙️</div>
-        <div style={S.title}>Generează întrebări</div>
-        <div style={S.sub}>Folosește Gemini AI pentru a genera din PDF</div>
-      </div>
-      <div style={{ ...S.card, display:"flex", flexDirection:"column", gap:20 }}>
-
-        <div>
-          <label style={S.label}>Gemini API Key</label>
-          <input style={S.input} type="password" placeholder="AIza..."
-            value={apiKey} onChange={e => setApiKey(e.target.value)} />
-          <div style={{ fontSize:11, color:T.muted, marginTop:4 }}>
-            Obții de la aistudio.google.com • Salvat local în browser
-          </div>
-        </div>
-
-        <div>
-          <label style={S.label}>PDF sursă</label>
-          <label style={{ ...S.input, display:"flex", alignItems:"center", gap:10,
-                          cursor:"pointer", color: pdfName ? T.text : T.muted }}>
-            <span style={{ fontSize:20 }}>📄</span>
-            <span>{pdfName || "Click pentru a selecta PDF-ul..."}</span>
-            <input type="file" accept=".pdf" onChange={handlePDF} style={{ display:"none" }} />
-          </label>
-        </div>
-
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
-          <div>
-            <label style={S.label}>Nivel dificultate</label>
-            <select style={S.input} value={difficulty} onChange={e => setDifficulty(e.target.value)}>
-              <option value="easy">📗 Normal</option>
-              <option value="medium">📘 Mediu</option>
-              <option value="hard">🏆 Județean</option>
-            </select>
-          </div>
-          <div>
-            <label style={S.label}>Număr întrebări</label>
-            <select style={S.input} value={count} onChange={e => setCount(parseInt(e.target.value))}>
-              {[10,20,30,50,100].map(n => <option key={n} value={n}>{n} întrebări</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label style={S.label}>Topic specific (opțional)</label>
-          <input style={S.input} type="text" placeholder="ex: Permisiuni, Docker, Bash scripting..."
-            value={topic} onChange={e => setTopic(e.target.value)} />
-        </div>
-
-        <button style={S.btn(T.accent)} onClick={handleGenerate}>
-          ✨ Generează {count} întrebări
-        </button>
-        <button style={S.btn(T.muted)} onClick={onBack}>← Înapoi la quiz</button>
-      </div>
-    </div>
-  );
-
-  if (step === "generating") return (
-    <div style={S.wrap}>
-      <div style={{ textAlign:"center", marginBottom:24 }}>
-        <div style={{ width:48, height:48, borderRadius:"50%", border:`3px solid ${T.border}`,
-                      borderTop:`3px solid ${T.accent}`, animation:"spin 0.9s linear infinite",
-                      margin:"0 auto 16px" }} />
-        <div style={S.title}>Se generează...</div>
-        <div style={S.sub}>Gemini citește PDF-ul și creează întrebările</div>
-      </div>
-      <div style={S.logBox}>
-        {log.map((l, i) => (
-          <div key={i} style={{ color: l.type==="error" ? T.red : l.type==="success" ? T.green : T.muted,
-                                 marginBottom:4 }}>
-            › {l.msg}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  if (step === "done") return (
-    <div style={S.wrap}>
-      <div style={{ textAlign:"center", marginBottom:24 }}>
-        <div style={{ fontSize:48, marginBottom:8 }}>🎉</div>
-        <div style={S.title}>Gata!</div>
-        <div style={S.sub}>{generated.length} întrebări adăugate în quiz</div>
-      </div>
-      <div style={S.logBox}>
-        {log.map((l, i) => (
-          <div key={i} style={{ color: l.type==="error" ? T.red : l.type==="success" ? T.green : T.muted,
-                                 marginBottom:4 }}>
-            › {l.msg}
-          </div>
-        ))}
-      </div>
-      <div style={{ marginTop:16, display:"flex", flexDirection:"column", gap:8 }}>
-        <button style={S.btn(T.green)} onClick={onBack}>▶ Joacă acum</button>
-        <button style={S.btn(T.yellow)} onClick={downloadJSON}>⬇ Descarcă questions.json</button>
-        <button style={S.btn(T.accent)} onClick={() => { setStep("config"); setGenerated([]); setLog([]); }}>
-          ↺ Generează din nou
-        </button>
-      </div>
-    </div>
-  );
-
-  return null;
-}
-
-
-/* ─── MAIN APP ───────────────────────────────────────────── */
 export default function App() {
   const [screen, setScreen] = useState("loading");
-  const [allQ, setAllQ] = useState({easy:[], medium:[], hard:[]});
+  const [allQ, setAllQ] = useState({easy:[], hard:[]});
   const [questions, setQuestions] = useState([]);
   const [finalScore, setFinalScore] = useState(0);
   const [finalHistory, setFinalHistory] = useState([]);
@@ -777,21 +469,13 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Load base questions.json
     fetch("./questions.json")
       .then(r => {
         if (!r.ok) throw new Error("Nu s-a putut încărca questions.json");
         return r.json();
       })
       .then(data => {
-        // Merge with any locally generated questions from localStorage
-        const local = JSON.parse(localStorage.getItem("generated_questions") || "{}");
-        const merged = {
-          easy:   [...(data.easy   || []), ...(local.easy   || [])],
-          medium: [...(data.medium || []), ...(local.medium || [])],
-          hard:   [...(data.hard   || []), ...(local.hard   || [])],
-        };
-        setAllQ(merged);
+        setAllQ(data);
         setScreen("menu");
       })
       .catch(e => {
@@ -799,18 +483,6 @@ export default function App() {
         setScreen("error");
       });
   }, []);
-
-  function addGeneratedQuestions(difficulty, newQ) {
-    // Add to current session
-    setAllQ(prev => ({
-      ...prev,
-      [difficulty]: [...(prev[difficulty] || []), ...newQ]
-    }));
-    // Persist in localStorage
-    const local = JSON.parse(localStorage.getItem("generated_questions") || "{}");
-    local[difficulty] = [...(local[difficulty] || []), ...newQ];
-    localStorage.setItem("generated_questions", JSON.stringify(local));
-  }
 
   function start(count, diff) {
     const pool = allQ[diff] || [];
@@ -838,7 +510,6 @@ export default function App() {
       `,
     }}>
       <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
 
       {screen === "loading" && (
         <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:20, marginTop:80 }}>
@@ -847,6 +518,7 @@ export default function App() {
             border:`3px solid ${T.border}`, borderTop:`3px solid ${T.accent}`,
             animation:"spin 0.9s linear infinite",
           }} />
+          <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           <span style={{ color:T.muted, fontFamily:"'JetBrains Mono',monospace", fontSize:13 }}>se încarcă întrebările...</span>
         </div>
       )}
@@ -862,27 +534,7 @@ export default function App() {
         </div>
       )}
 
-      {screen === "menu" && (
-        <>
-          <Menu allQ={allQ} onStart={start} />
-          <button
-            onClick={() => setScreen("admin")}
-            style={{
-              marginTop:24, background:"transparent", border:`1px solid ${T.border}`,
-              color:T.muted, borderRadius:8, padding:"8px 18px", cursor:"pointer",
-              fontSize:12, fontFamily:"'JetBrains Mono',monospace",
-            }}
-          >⚙ admin</button>
-        </>
-      )}
-
-      {screen === "admin" && (
-        <AdminPanel
-          allQ={allQ}
-          onAddQuestions={addGeneratedQuestions}
-          onBack={() => setScreen("menu")}
-        />
-      )}
+      {screen === "menu" && <Menu allQ={allQ} onStart={start} />}
 
       {screen === "quiz" && questions.length > 0 && (
         <Quiz questions={questions} onFinish={finish} onMenu={() => setScreen("menu")} />
