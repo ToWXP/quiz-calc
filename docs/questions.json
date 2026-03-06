@@ -1,0 +1,2161 @@
+[
+  {
+    "id": 300, "topic": "tar & arhivare", "chapter": 13, "type": "single",
+    "question": "Ce face comanda: `tar -czf backup.tar.gz /etc /home --exclude='*.log'`?",
+    "options": [
+      "Arhivează /etc și /home cu compresie gzip, excluzând fișierele .log",
+      "Dezarhivează backup.tar.gz în /etc și /home",
+      "Listează conținutul arhivei fără a exclude nimic",
+      "Arhivează cu compresie bzip2 și exclude directoarele .log"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 301, "topic": "tar & arhivare", "chapter": 13, "type": "order",
+    "question": "Aranjează pașii pentru a extrage arhiva `backup.tar.gz` în directorul `/restore`, verificând mai întâi conținutul:",
+    "options": [
+      "tar -xzf backup.tar.gz -C /restore",
+      "mkdir -p /restore",
+      "tar -tzf backup.tar.gz",
+      "ls /restore"
+    ],
+    "answers": [2, 1, 0, 3]
+  },
+  {
+    "id": 302, "topic": "Permisiuni", "chapter": 5, "type": "single",
+    "question": "Un fișier are permisiunile `---s--x--x`. Ce bit special este setat și ce efect are?",
+    "options": [
+      "Sticky bit — fișierul rămâne în memorie după execuție",
+      "SGID — fișierul rulează cu privilegiile grupului proprietar",
+      "SUID — fișierul rulează cu privilegiile utilizatorului proprietar",
+      "SGID — fișierele create în director moștenesc grupul directorului"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 303, "topic": "Permisiuni", "chapter": 5, "type": "single",
+    "question": "Care este reprezentarea octală a permisiunilor care setează SUID, permite rwx proprietarului, rx grupului, și nimic restului?",
+    "options": ["4750", "2750", "1750", "4700"],
+    "answers": [0]
+  },
+  {
+    "id": 304, "topic": "Permisiuni", "chapter": 5, "type": "multi",
+    "question": "Un director are permisiunile `drwxrwxrwt`. Ce afirmații sunt corecte? (Alegeți 3)",
+    "options": [
+      "Sticky bit este setat",
+      "Orice utilizator poate șterge fișierele altora din acest director",
+      "Utilizatorii pot crea fișiere în director",
+      "Un utilizator poate șterge doar propriile fișiere din director",
+      "SUID este setat pe director"
+    ],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 305, "topic": "Permisiuni", "chapter": 5, "type": "single",
+    "question": "Fișierul `script.sh` are `-rwxr-x---` cu proprietar `alice` și grup `dev`. Utilizatorul `bob` face parte din grupul `dev`. Ce poate face bob?",
+    "options": [
+      "Poate citi și executa scriptul, dar nu îl poate modifica",
+      "Poate citi, executa și modifica scriptul",
+      "Nu poate face nimic cu scriptul",
+      "Poate doar să citească scriptul"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 306, "topic": "Shell scripting", "chapter": 7, "type": "order",
+    "question": "Ordonează corect liniile unui script bash care verifică dacă un fișier există și îl șterge dacă are dimensiunea 0:",
+    "options": [
+      "fi",
+      "if [ -f \"$1\" ] && [ ! -s \"$1\" ]; then",
+      "#!/bin/bash",
+      "rm \"$1\" && echo \"Fișier gol șters\"",
+      "else\n  echo \"Fișierul nu există sau nu este gol\""
+    ],
+    "answers": [2, 1, 3, 4, 0]
+  },
+  {
+    "id": 307, "topic": "Shell scripting", "chapter": 7, "type": "single",
+    "question": "Ce afișează scriptul următor?\n```bash\nx=10\ny=3\necho $((x % y))\n```",
+    "options": ["3", "1", "3.33", "0"],
+    "answers": [1]
+  },
+  {
+    "id": 308, "topic": "Shell scripting", "chapter": 7, "type": "single",
+    "question": "Ce face construcția `${var:-valoare_default}` în Bash?",
+    "options": [
+      "Setează variabila la valoare_default permanent",
+      "Returnează valoare_default dacă var este nesetată sau goală, fără a modifica var",
+      "Returnează valoare_default doar dacă var este nesetată (nu și dacă e goală)",
+      "Șterge variabila și o înlocuiește cu valoare_default"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 309, "topic": "Shell scripting", "chapter": 7, "type": "multi",
+    "question": "Care construcții bash testează dacă fișierul `/etc/passwd` există și este citibil? (Alegeți 2)",
+    "options": [
+      "[ -r /etc/passwd ]",
+      "test -e /etc/passwd && test -r /etc/passwd",
+      "[ -x /etc/passwd ]",
+      "test -rw /etc/passwd"
+    ],
+    "answers": [0, 1]
+  },
+  {
+    "id": 310, "topic": "Procese", "chapter": 4, "type": "single",
+    "question": "Ce se întâmplă cu un proces dacă rulezi `kill -SIGSTOP PID`?",
+    "options": [
+      "Procesul este terminat imediat",
+      "Procesul este suspendat și nu poate ignora acest semnal",
+      "Procesul primește o cerere de terminare elegantă",
+      "Procesul este trimis în background"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 311, "topic": "Procese", "chapter": 4, "type": "order",
+    "question": "Ordonează pașii pentru a monitoriza un proces care consumă prea mult CPU și a-l termina:",
+    "options": [
+      "kill -9 PID",
+      "top -o %CPU",
+      "ps aux | grep nume_proces",
+      "Identifică PID-ul din output"
+    ],
+    "answers": [1, 2, 3, 0]
+  },
+  {
+    "id": 312, "topic": "Procese", "chapter": 4, "type": "single",
+    "question": "Ce afișează comanda `ps -eo pid,ppid,cmd --sort=-%cpu | head -5`?",
+    "options": [
+      "Primele 5 procese sortate după memorie cu PID, PPID și comandă",
+      "Primele 5 procese sortate descrescător după CPU cu PID, PPID și comandă",
+      "Toate procesele utilizatorului curent sortate după CPU",
+      "Procesele cu cel mai mare PID"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 313, "topic": "Rețea", "chapter": 11, "type": "single",
+    "question": "Ce comandă afișează toate conexiunile TCP active și porturile în starea LISTEN, cu PID-ul procesului asociat?",
+    "options": [
+      "netstat -tulpn",
+      "ss -tlnp",
+      "ip route show",
+      "Variantele a și b sunt corecte"
+    ],
+    "answers": [3]
+  },
+  {
+    "id": 314, "topic": "Rețea", "chapter": 11, "type": "single",
+    "question": "Adresa IP `169.254.x.x` ce indică de obicei pe un sistem Linux?",
+    "options": [
+      "O adresă IPv6 mapped",
+      "Configurare DHCP eșuată — adresă APIPA auto-asignată",
+      "O adresă de loopback extinsă",
+      "O adresă de broadcast"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 315, "topic": "Rețea", "chapter": 11, "type": "multi",
+    "question": "Care dintre comenzile următoare pot testa conectivitatea la portul 80 al unui server? (Alegeți 3)",
+    "options": [
+      "curl -I http://server",
+      "telnet server 80",
+      "ping server",
+      "nc -zv server 80",
+      "traceroute server"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 316, "topic": "SSH & Securitate", "chapter": 12, "type": "order",
+    "question": "Ordonează pașii corecți pentru configurarea autentificării SSH fără parolă de pe `client` pe `server`:",
+    "options": [
+      "ssh-copy-id user@server",
+      "ssh-keygen -t ed25519 -C 'comentariu'",
+      "ssh user@server",
+      "chmod 600 ~/.ssh/id_ed25519"
+    ],
+    "answers": [1, 3, 0, 2]
+  },
+  {
+    "id": 317, "topic": "SSH & Securitate", "chapter": 12, "type": "single",
+    "question": "Ce face `-L 8080:localhost:80` în comanda `ssh -L 8080:localhost:80 user@server`?",
+    "options": [
+      "Deschide portul 80 pe server accesibil public",
+      "Creează un tunel SSH: portul local 8080 este redirecționat către portul 80 al serverului",
+      "Conectează portul 80 local la portul 8080 al serverului",
+      "Face server-ul să asculte pe portul 8080"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 318, "topic": "SSH & Securitate", "chapter": 12, "type": "single",
+    "question": "Care fișier de configurare SSH de pe server specifică dacă autentificarea cu parolă este permisă?",
+    "options": [
+      "/etc/ssh/ssh_config",
+      "~/.ssh/config",
+      "/etc/ssh/sshd_config",
+      "/etc/security/sshd.conf"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 319, "topic": "Virtualizare", "chapter": 14, "type": "single",
+    "question": "Care este diferența principală între KVM și QEMU?",
+    "options": [
+      "KVM și QEMU sunt identice",
+      "QEMU este emulator software pur; KVM este modul kernel care permite virtualizare hardware — combinate oferă performanță nativă",
+      "KVM rulează pe Windows, QEMU pe Linux",
+      "QEMU este hypervisor tip 1, KVM este tip 2"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 320, "topic": "Virtualizare", "chapter": 14, "type": "order",
+    "question": "Ordonează pașii pentru crearea și pornirea unei mașini virtuale cu QEMU/KVM:",
+    "options": [
+      "qemu-system-x86_64 -hda vm.qcow2 -m 2048 -enable-kvm",
+      "qemu-img create -f qcow2 vm.qcow2 20G",
+      "Instalează SO pe VM cu ISO: qemu-system-x86_64 -hda vm.qcow2 -cdrom os.iso -boot d",
+      "Verifică că KVM este disponibil: ls /dev/kvm"
+    ],
+    "answers": [3, 1, 2, 0]
+  },
+  {
+    "id": 321, "topic": "Docker", "chapter": 14, "type": "single",
+    "question": "Ce face `docker run -d -p 8080:80 -v /host/data:/app/data --name myapp nginx`?",
+    "options": [
+      "Pornește nginx în foreground, mapează portul 80 local la 8080 container",
+      "Pornește nginx în background, mapează portul 8080 local la 80 container, montează /host/data la /app/data",
+      "Construiește imaginea nginx cu portul 8080",
+      "Oprește containerul myapp și îl redenumește"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 322, "topic": "Docker", "chapter": 14, "type": "multi",
+    "question": "Care comenzi docker afișează informații despre containere? (Alegeți 3)",
+    "options": [
+      "docker ps -a",
+      "docker inspect mycontainer",
+      "docker build .",
+      "docker logs mycontainer",
+      "docker push myimage"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 323, "topic": "Docker", "chapter": 14, "type": "order",
+    "question": "Ordonează pașii pentru a construi și publica o imagine Docker pe Docker Hub:",
+    "options": [
+      "docker push username/myapp:v1",
+      "docker build -t username/myapp:v1 .",
+      "docker login",
+      "Creează Dockerfile în directorul proiectului"
+    ],
+    "answers": [3, 1, 2, 0]
+  },
+  {
+    "id": 324, "topic": "Sistemul de fișiere", "chapter": 2, "type": "single",
+    "question": "Ce comandă găsește toate fișierele modificate în ultimele 24 de ore în /var/log, mai mari de 10MB?",
+    "options": [
+      "find /var/log -mtime -1 -size +10M",
+      "find /var/log -mtime +1 -size +10k",
+      "locate /var/log -newer 24h -size 10M",
+      "ls -la /var/log --newer=24h"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 325, "topic": "Sistemul de fișiere", "chapter": 2, "type": "single",
+    "question": "Ce diferență există între `rm -rf /tmp/test` și `find /tmp/test -delete`?",
+    "options": [
+      "Nu există nicio diferență",
+      "`rm -rf` șterge recursiv directorul; `find -delete` șterge fișierele găsite dar necesită să fie combinate cu `-type f`",
+      "`find -delete` este mai sigur deoarece confirmă fiecare ștergere",
+      "`rm -rf` necesită privilegii root, `find -delete` nu"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 326, "topic": "Sistemul de fișiere", "chapter": 2, "type": "order",
+    "question": "Ordonează pașii pentru a găsi toate fișierele .conf din /etc aparținând root-ului și a le copia în /backup:",
+    "options": [
+      "find /etc -name '*.conf' -user root -exec cp {} /backup/ \\;",
+      "ls /backup",
+      "mkdir -p /backup",
+      "find /etc -name '*.conf' -user root"
+    ],
+    "answers": [3, 2, 0, 1]
+  },
+  {
+    "id": 327, "topic": "grep & text processing", "chapter": 7, "type": "single",
+    "question": "Ce face comanda `grep -rn 'ERROR\\|CRITICAL' /var/log/ 2>/dev/null | wc -l`?",
+    "options": [
+      "Numără fișierele din /var/log care conțin erori",
+      "Numără liniile din /var/log care conțin 'ERROR' sau 'CRITICAL', ignorând erorile de permisiuni",
+      "Listează toate erorile și le sortează",
+      "Caută recursiv și afișează numărul de fișiere cu erori"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 328, "topic": "grep & text processing", "chapter": 7, "type": "single",
+    "question": "Ce afișează: `echo 'Hello World 123' | sed 's/[0-9]\\+/NUM/g'`?",
+    "options": [
+      "Hello World NUM",
+      "Hello World",
+      "NUM NUM NUM",
+      "Hello World 123"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 329, "topic": "grep & text processing", "chapter": 7, "type": "multi",
+    "question": "Care comenzi extrag doar adresele IP dintr-un fișier log? (Alegeți 2)",
+    "options": [
+      "grep -oE '[0-9]{1,3}(\\.[0-9]{1,3}){3}' log.txt",
+      "cut -d' ' -f1 log.txt",
+      "awk '{print $1}' log.txt",
+      "grep -P '\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b' log.txt"
+    ],
+    "answers": [0, 3]
+  },
+  {
+    "id": 330, "topic": "Stocare & LVM", "chapter": 10, "type": "single",
+    "question": "Ce face comanda `lvextend -L +10G /dev/vg0/lv_data && resize2fs /dev/vg0/lv_data`?",
+    "options": [
+      "Creează un volum logic nou de 10GB",
+      "Extinde volumul logic cu 10GB și redimensionează sistemul de fișiere ext4 fără a pierde date",
+      "Micșorează volumul logic cu 10GB",
+      "Verifică integritatea volumului logic"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 331, "topic": "Stocare & LVM", "chapter": 10, "type": "order",
+    "question": "Ordonează pașii pentru adăugarea unui disc nou la un grup de volume LVM existent:",
+    "options": [
+      "vgextend vg0 /dev/sdc",
+      "fdisk /dev/sdc (creare partiție tip LVM)",
+      "pvcreate /dev/sdc1",
+      "lvextend -l +100%FREE /dev/vg0/lv_data"
+    ],
+    "answers": [1, 2, 0, 3]
+  },
+  {
+    "id": 332, "topic": "Compilare & dezvoltare", "chapter": 6, "type": "single",
+    "question": "Ce face `gcc -Wall -O2 -o program main.c utils.c -lm`?",
+    "options": [
+      "Compilează main.c și utils.c cu toate avertismentele, optimizare nivel 2, link cu libmath, output 'program'",
+      "Compilează doar main.c și ignoră utils.c",
+      "Compilează fără optimizare și fără avertismente",
+      "Creează o bibliotecă statică din main.c și utils.c"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 333, "topic": "Compilare & dezvoltare", "chapter": 6, "type": "order",
+    "question": "Ordonează etapele complete ale compilării unui program C (de la sursă la executabil):",
+    "options": [
+      "Asamblare (.s → .o)",
+      "Compilare (.i → .s)",
+      "Preprocesare (.c → .i)",
+      "Link-editare (.o → executabil)"
+    ],
+    "answers": [2, 1, 0, 3]
+  },
+  {
+    "id": 334, "topic": "Compilare & dezvoltare", "chapter": 6, "type": "single",
+    "question": "Ce diferență există între o bibliotecă statică (.a) și una dinamică (.so)?",
+    "options": [
+      "Nu există nicio diferență practică",
+      "Biblioteca statică este copiată în executabil la compilare; cea dinamică este încărcată la rulare — executabilul cu .so este mai mic",
+      "Biblioteca dinamică este copiată în executabil; cea statică este încărcată la rulare",
+      "Bibliotecile statice sunt mai rapide la rulare și mai mici ca dimensiune"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 335, "topic": "Cron & automatizare", "chapter": 13, "type": "single",
+    "question": "Ce înseamnă intrarea cron: `*/15 6-18 * * 1-5 /script.sh`?",
+    "options": [
+      "Rulează scriptul la fiecare 15 minute, în fiecare zi",
+      "Rulează scriptul la fiecare 15 minute, între orele 6-18, de luni până vineri",
+      "Rulează scriptul la ora 15, între orele 6 și 18, în zilele 1-5 ale lunii",
+      "Rulează scriptul de 15 ori pe zi, în weekend"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 336, "topic": "Cron & automatizare", "chapter": 13, "type": "multi",
+    "question": "Care afirmații despre cron sunt corecte? (Alegeți 3)",
+    "options": [
+      "crontab -l listează task-urile cron ale utilizatorului curent",
+      "crontab -r șterge toate task-urile cron ale utilizatorului curent",
+      "Fișierul /etc/crontab este pentru task-uri globale de sistem",
+      "cron rulează task-urile cu privilegii root indiferent de utilizator",
+      "Variabila PATH în crontab poate fi diferită față de shell-ul interactiv"
+    ],
+    "answers": [0, 1, 4]
+  },
+  {
+    "id": 337, "topic": "Boot & systemd", "chapter": 9, "type": "single",
+    "question": "Ce face `systemctl mask nginx`?",
+    "options": [
+      "Dezactivează nginx să pornească la boot",
+      "Oprește nginx imediat",
+      "Creează un symlink la /dev/null, împiedicând complet pornirea serviciului (chiar și manual)",
+      "Ascunde serviciul nginx din lista systemctl"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 338, "topic": "Boot & systemd", "chapter": 9, "type": "order",
+    "question": "Ordonează etapele de boot pe un sistem Linux modern cu UEFI și systemd:",
+    "options": [
+      "systemd pornește serviciile în funcție de dependențe",
+      "UEFI POST și inițializare hardware",
+      "Kernel se încarcă, inițializează driverele și montează rootfs",
+      "GRUB bootloader se execută și selectează kernelul",
+      "initramfs se execută temporar pentru montarea rootfs real"
+    ],
+    "answers": [1, 3, 2, 4, 0]
+  },
+  {
+    "id": 339, "topic": "Boot & systemd", "chapter": 9, "type": "single",
+    "question": "Ce comandă afișează timpul de boot detaliat pe componentele systemd?",
+    "options": [
+      "systemctl status --boot",
+      "systemd-analyze blame",
+      "journalctl -b --boot-time",
+      "dmesg --time-format"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 340, "topic": "Variabile Shell", "chapter": 7, "type": "single",
+    "question": "Ce afișează scriptul următor dacă este rulat cu `./script.sh a b c d e`?\n```bash\necho ${@:2:3}\n```",
+    "options": [
+      "a b c",
+      "b c d",
+      "c d e",
+      "b c d e"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 341, "topic": "Variabile Shell", "chapter": 7, "type": "multi",
+    "question": "Care afirmații despre variabilele speciale bash sunt corecte? (Alegeți 3)",
+    "options": [
+      "$$ conține PID-ul shell-ului curent",
+      "$! conține PID-ul ultimului proces din background",
+      "$? conține numărul de argumente",
+      "$0 conține numele scriptului sau shell-ului",
+      "$# conține PID-ul procesului părinte"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 342, "topic": "Redirectări", "chapter": 7, "type": "single",
+    "question": "Ce face `comando 2>&1 | tee output.log`?",
+    "options": [
+      "Redirecționează doar stderr la fișier",
+      "Combină stdout și stderr, le trimite prin pipe la tee care scrie în fișier ȘI afișează pe ecran simultan",
+      "Redirecționează stdout la fișier și ignoră stderr",
+      "Execută comanda în background și salvează output-ul"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 343, "topic": "Redirectări", "chapter": 7, "type": "order",
+    "question": "Ordonează elementele pentru a forma comanda care execută un script, salvează stdout în out.log, stderr în err.log, și afișează stderr pe ecran:",
+    "options": [
+      "err.log",
+      "./script.sh",
+      "2> >(tee",
+      "> out.log",
+      ">&2)"
+    ],
+    "answers": [1, 3, 2, 0, 4]
+  },
+  {
+    "id": 344, "topic": "Rețea avansată", "chapter": 11, "type": "single",
+    "question": "Ce face comanda `ip route add 192.168.10.0/24 via 10.0.0.1 dev eth0`?",
+    "options": [
+      "Adaugă o adresă IP pe interfața eth0",
+      "Adaugă o rută statică: pachetele pentru 192.168.10.0/24 sunt trimise prin gateway 10.0.0.1 pe eth0",
+      "Șterge ruta implicită și o înlocuiește",
+      "Configurează DHCP pentru rețeaua 192.168.10.0"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 345, "topic": "Rețea avansată", "chapter": 11, "type": "single",
+    "question": "Ce înseamnă `/24` în adresa `192.168.1.0/24`?",
+    "options": [
+      "Rețeaua are 24 de hosturi",
+      "Masca de subrețea are 24 de biți de 1 consecutivi (255.255.255.0), lăsând 8 biți pentru hosturi",
+      "Viteza rețelei este de 24 Mbps",
+      "Există 24 de subrețele disponibile"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 346, "topic": "iptables & firewall", "chapter": 12, "type": "single",
+    "question": "Ce face regula: `iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT`?",
+    "options": [
+      "Blochează SSH din rețeaua 192.168.1.0/24",
+      "Permite conexiuni SSH din rețeaua 192.168.1.0/24",
+      "Redirecționează SSH la portul 2222",
+      "Limitează conexiunile SSH la 24 pe secundă"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 347, "topic": "iptables & firewall", "chapter": 12, "type": "order",
+    "question": "Ordonează regulile iptables pentru a permite doar SSH și HTTP din exterior, blocând orice altceva:",
+    "options": [
+      "iptables -A INPUT -p tcp --dport 80 -j ACCEPT",
+      "iptables -P INPUT DROP",
+      "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+      "iptables -A INPUT -p tcp --dport 22 -j ACCEPT"
+    ],
+    "answers": [1, 2, 3, 0]
+  },
+  {
+    "id": 348, "topic": "Arduino & IoT", "chapter": 16, "type": "single",
+    "question": "Ce face codul Arduino următor?\n```cpp\nvoid loop() {\n  int val = analogRead(A0);\n  int brightness = map(val, 0, 1023, 0, 255);\n  analogWrite(9, brightness);\n}\n```",
+    "options": [
+      "Citește un buton digital și aprinde un LED",
+      "Citește un senzor analogic (A0) și controlează luminozitatea unui LED pe pinul 9 proporțional cu valoarea senzorului",
+      "Generează un semnal PWM fix pe pinul 9",
+      "Trimite valoarea senzorului prin Serial la PC"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 349, "topic": "Arduino & IoT", "chapter": 16, "type": "order",
+    "question": "Ordonează pașii pentru a crea un sketch Arduino care face LED-ul să clipească la 1Hz:",
+    "options": [
+      "delay(500);",
+      "pinMode(13, OUTPUT);",
+      "digitalWrite(13, LOW);",
+      "void setup() {",
+      "void loop() {\n  digitalWrite(13, HIGH);"
+    ],
+    "answers": [3, 1, 4, 0, 2]
+  },
+  {
+    "id": 350, "topic": "Arduino & IoT", "chapter": 16, "type": "multi",
+    "question": "Care afirmații despre comunicarea I2C pe Arduino sunt corecte? (Alegeți 3)",
+    "options": [
+      "I2C folosește 2 fire: SDA (date) și SCL (clock)",
+      "Fiecare dispozitiv I2C are o adresă unică pe bus (de obicei 7 biți)",
+      "I2C permite comunicare full-duplex simultană",
+      "Biblioteca Wire.h este folosită pentru I2C pe Arduino",
+      "I2C poate conecta maxim 2 dispozitive pe bus"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 351, "topic": "Căi & navigare", "chapter": 2, "type": "single",
+    "question": "Din `/home/elev/proiecte/web/src`, care cale duce la `/home/elev/backup/db`?",
+    "options": [
+      "../../backup/db",
+      "../../../backup/db",
+      "~/backup/db",
+      "Variantele b și c sunt corecte"
+    ],
+    "answers": [3]
+  },
+  {
+    "id": 352, "topic": "Căi & navigare", "chapter": 2, "type": "single",
+    "question": "Ce afișează `pwd` după secvența: `cd /var/lib && cd ../../usr/./local/../bin`?",
+    "options": [
+      "/usr/local/bin",
+      "/usr/bin",
+      "/var/usr/bin",
+      "/bin"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 353, "topic": "Utilizatori & grupuri", "chapter": 5, "type": "single",
+    "question": "Ce comandă creează utilizatorul `deploy` fără director home, cu shell `/bin/false`, în grupul `www-data`?",
+    "options": [
+      "useradd -M -s /bin/false -g www-data deploy",
+      "adduser --no-home --shell /bin/false deploy www-data",
+      "useradd -m -s /bin/false -G www-data deploy",
+      "usermod -s /bin/false -g www-data deploy"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 354, "topic": "Utilizatori & grupuri", "chapter": 5, "type": "order",
+    "question": "Ordonează pașii pentru a bloca temporar accesul unui utilizator fără a-i șterge contul:",
+    "options": [
+      "Verifică: su - username (ar trebui să eșueze)",
+      "passwd -l username",
+      "usermod -s /sbin/nologin username",
+      "Sau alternativ folosește:"
+    ],
+    "answers": [1, 3, 2, 0]
+  },
+  {
+    "id": 355, "topic": "Pachete & software", "chapter": 3, "type": "single",
+    "question": "Ce face `apt-mark hold nginx`?",
+    "options": [
+      "Dezinstalează nginx și îl blochează",
+      "Împiedică nginx să fie actualizat automat prin apt upgrade",
+      "Ține nginx oprit permanent",
+      "Marchează nginx ca instalat manual"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 356, "topic": "Pachete & software", "chapter": 3, "type": "multi",
+    "question": "Care comenzi pot instala un pachet .deb local pe Ubuntu? (Alegeți 2)",
+    "options": [
+      "apt install ./pachet.deb",
+      "dpkg -i pachet.deb",
+      "snap install pachet.deb",
+      "rpm -i pachet.deb"
+    ],
+    "answers": [0, 1]
+  },
+  {
+    "id": 357, "topic": "Monitorizare sistem", "chapter": 8, "type": "single",
+    "question": "Ce comandă afișează în timp real utilizarea CPU, memorie, și procesele top 10, actualizată la 2 secunde?",
+    "options": [
+      "ps aux --sort=-%cpu | head -10",
+      "top -d 2",
+      "htop --refresh=2",
+      "watch -n 2 ps aux"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 358, "topic": "Monitorizare sistem", "chapter": 8, "type": "single",
+    "question": "Ce înseamnă load average `5.23 3.14 2.01` pe un sistem cu 4 nuclee CPU?",
+    "options": [
+      "Sistemul este subîncărcat — procesele nu folosesc tot CPU-ul",
+      "Sistemul este supraîncărcat în ultimul minut (5.23 > 4 nuclee), dar se îmbunătățește",
+      "Valorile reprezintă utilizarea procentuală a CPU",
+      "Există 5 procese active, 3 în așteptare, 2 suspendate"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 359, "topic": "QEMU & emulare", "chapter": 14, "type": "single",
+    "question": "De ce comanda `qemu-system-aarch64` cu `-enable-kvm` funcționează fără emulare pe un Raspberry Pi 4 (aarch64), dar nu pe un PC x86_64?",
+    "options": [
+      "KVM necesită hardware x86_64",
+      "KVM permite virtualizare nativă doar când arhitectura gazdă și a VM sunt identice — aarch64 pe aarch64",
+      "Raspberry Pi are un hypervisor integrat",
+      "qemu-system-aarch64 nu suportă -enable-kvm pe nicio platformă"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 360, "topic": "QEMU & emulare", "chapter": 14, "type": "order",
+    "question": "Ordonează pentru a crea și configura o imagine QEMU de 20GB, a instala Ubuntu pe ea și a porni VM-ul:",
+    "options": [
+      "qemu-system-x86_64 -hda ubuntu.qcow2 -m 2048 -enable-kvm",
+      "qemu-img info ubuntu.qcow2",
+      "qemu-img create -f qcow2 ubuntu.qcow2 20G",
+      "qemu-system-x86_64 -hda ubuntu.qcow2 -cdrom ubuntu.iso -boot d -m 2048"
+    ],
+    "answers": [2, 1, 3, 0]
+  },
+  {
+    "id": 361, "topic": "Cloud & infrastructură", "chapter": 14, "type": "single",
+    "question": "Care este diferența între IaaS, PaaS și SaaS?",
+    "options": [
+      "Sunt identice, doar denumiri diferite pentru același serviciu",
+      "IaaS oferă infrastructură virtuală; PaaS adaugă platformă de dezvoltare; SaaS oferă aplicații gata de folosit",
+      "IaaS este pentru întreprinderi, PaaS pentru developersi, SaaS pentru utilizatori casnici",
+      "IaaS rulează pe hardware fizic, PaaS pe virtual, SaaS în browser"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 362, "topic": "Cloud & infrastructură", "chapter": 14, "type": "multi",
+    "question": "Care sunt exemple de IaaS? (Alegeți 3)",
+    "options": [
+      "Amazon EC2",
+      "Google Docs",
+      "Microsoft Azure VMs",
+      "Proxmox VE (on-premise)",
+      "Salesforce"
+    ],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 363, "topic": "Shell scripting avansat", "chapter": 7, "type": "single",
+    "question": "Ce afișează: `echo {a..e} | tr ' ' '\\n' | grep -v '[bcd]'`?",
+    "options": [
+      "a e",
+      "b c d",
+      "a\ne",
+      "a b c d e"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 364, "topic": "Shell scripting avansat", "chapter": 7, "type": "single",
+    "question": "Ce face `while IFS= read -r line; do echo \"$line\"; done < fisier.txt`?",
+    "options": [
+      "Citește fișierul caracter cu caracter",
+      "Citește fișierul linie cu linie, păstrând spațiile și backslash-urile, și afișează fiecare linie",
+      "Scrie în fișier linie cu linie de la stdin",
+      "Numără liniile din fișier"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 365, "topic": "Shell scripting avansat", "chapter": 7, "type": "order",
+    "question": "Ordonează elementele unui script bash care citește fiecare linie dintr-un CSV și extrage al doilea câmp:",
+    "options": [
+      "done < date.csv",
+      "while IFS=',' read -r col1 col2 rest; do",
+      "echo \"$col2\"",
+      "#!/bin/bash"
+    ],
+    "answers": [3, 1, 2, 0]
+  },
+  {
+    "id": 366, "topic": "Securitate avansată", "chapter": 12, "type": "single",
+    "question": "Ce face `gpg --encrypt --recipient alice@example.com fisier.txt`?",
+    "options": [
+      "Semnează digital fișierul cu cheia privată a lui alice",
+      "Criptează fișierul cu cheia PUBLICĂ a lui alice — doar alice poate decripta cu cheia sa privată",
+      "Criptează cu cheia privată locală",
+      "Generează o cheie GPG nouă pentru alice"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 367, "topic": "Securitate avansată", "chapter": 12, "type": "multi",
+    "question": "Care afirmații despre criptarea asimetrică RSA sunt corecte? (Alegeți 3)",
+    "options": [
+      "Cheia publică poate fi distribuită liber",
+      "Criptarea se face cu cheia publică a destinatarului",
+      "Decriptarea se face cu cheia publică a expeditorului",
+      "Semnătura digitală se face cu cheia privată a expeditorului",
+      "RSA este mai rapid decât AES pentru volume mari de date"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 368, "topic": "ls avansat", "chapter": 2, "type": "single",
+    "question": "Ce opțiune `ls` afișează dimensiunile în format human-readable, sortate descrescător după dimensiune, inclusiv fișierele ascunse?",
+    "options": [
+      "ls -lhSra",
+      "ls -lhSr --all",
+      "ls -lahS --reverse",
+      "Variantele a și b sunt corecte"
+    ],
+    "answers": [3]
+  },
+  {
+    "id": 369, "topic": "ls avansat", "chapter": 2, "type": "single",
+    "question": "Ce afișează `ls -la` când dimensiunile sunt în blocuri de 512 bytes și total este 48?",
+    "options": [
+      "Total disk usage este 48KB",
+      "Total blocuri alocate este 48 × 512 bytes = 24KB de spațiu pe disc",
+      "Există 48 de fișiere",
+      "Total 48MB"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 370, "topic": "Procese avansate", "chapter": 4, "type": "single",
+    "question": "Ce face `nohup command > output.log 2>&1 &` față de `command &`?",
+    "options": [
+      "Sunt identice",
+      "nohup face procesul imun la semnalul SIGHUP (logout), salvează output în fișier; command & se termină la logout",
+      "nohup rulează cu prioritate mai mare",
+      "command & salvează automat output-ul"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 371, "topic": "Procese avansate", "chapter": 4, "type": "order",
+    "question": "Ordonează pașii pentru a suspenda un proces, a-l trimite în background și a-l aduce înapoi în foreground:",
+    "options": [
+      "fg %1",
+      "Ctrl+Z (suspendă procesul curent)",
+      "jobs (verifică job-urile)",
+      "bg %1"
+    ],
+    "answers": [1, 2, 3, 0]
+  },
+  {
+    "id": 372, "topic": "Hypervisoare", "chapter": 14, "type": "single",
+    "question": "Proxmox VE folosește ce tehnologie de virtualizare pentru mașini virtuale Linux?",
+    "options": [
+      "VirtualBox ca hypervisor principal",
+      "KVM/QEMU pentru VM-uri și LXC pentru containere",
+      "Hyper-V integrat",
+      "VMware ESXi ca backend"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 373, "topic": "Hypervisoare", "chapter": 14, "type": "multi",
+    "question": "Care sunt hypervisoare de tip 1 (bare-metal)? (Alegeți 4)",
+    "options": [
+      "VMware ESXi",
+      "VirtualBox",
+      "Proxmox VE",
+      "Microsoft Hyper-V",
+      "Xen",
+      "VMware Workstation"
+    ],
+    "answers": [0, 2, 3, 4]
+  },
+  {
+    "id": 374, "topic": "Sistemul de fișiere avansat", "chapter": 2, "type": "single",
+    "question": "Ce face comanda `stat fisier.txt` față de `ls -la fisier.txt`?",
+    "options": [
+      "Sunt identice",
+      "stat afișează informații detaliate despre inode: dimensiune, blocuri, timestamps de acces/modificare/schimbare, inode number",
+      "ls -la afișează mai multe informații decât stat",
+      "stat poate fi rulat doar de root"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 375, "topic": "Sistemul de fișiere avansat", "chapter": 2, "type": "single",
+    "question": "Ce se întâmplă cu datele unui fișier când `rm fisier.txt` este executat pe ext4?",
+    "options": [
+      "Datele sunt șterse imediat de pe disc",
+      "Intrarea din director este eliminată și inode-ul marcat ca liber, dar datele pot rămâne pe disc până sunt suprascrise",
+      "Fișierul este mutat în Coșul de gunoi",
+      "Datele sunt criptate și inode-ul este șters"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 376, "topic": "AWK & procesare text", "chapter": 7, "type": "single",
+    "question": "Ce afișează: `echo '10 20 30 40' | awk '{sum=0; for(i=1;i<=NF;i++) sum+=$i; print sum}'`?",
+    "options": ["10", "40", "100", "25"],
+    "answers": [2]
+  },
+  {
+    "id": 377, "topic": "AWK & procesare text", "chapter": 7, "type": "single",
+    "question": "Ce face `awk -F: '$3 >= 1000 {print $1, $3}' /etc/passwd`?",
+    "options": [
+      "Afișează utilizatorii cu UID >= 1000 (utilizatori normali, nu de sistem)",
+      "Afișează toți utilizatorii cu parola lor",
+      "Afișează utilizatorii root",
+      "Listează grupurile cu GID >= 1000"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 378, "topic": "Rețea & DNS", "chapter": 11, "type": "order",
+    "question": "Ordonează pașii pentru rezolvarea unui nume de domeniu (ce se întâmplă când browser-ul accesează google.com):",
+    "options": [
+      "Server DNS root răspunde cu adresa serverelor TLD .com",
+      "Verificare cache local (/etc/hosts, cache DNS local)",
+      "Server DNS autoritativ pentru google.com răspunde cu IP-ul",
+      "Cerere trimisă la resolver DNS configurat (/etc/resolv.conf)",
+      "Server TLD .com indică serverele DNS ale google.com"
+    ],
+    "answers": [1, 3, 0, 4, 2]
+  },
+  {
+    "id": 379, "topic": "Rețea & DNS", "chapter": 11, "type": "single",
+    "question": "Ce face `dig +short google.com MX`?",
+    "options": [
+      "Testează conectivitatea la google.com",
+      "Afișează recordurile MX (mail exchange) ale google.com în format scurt",
+      "Modifică serverul DNS pentru google.com",
+      "Afișează toate recordurile DNS ale google.com"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 380, "topic": "Containere avansate", "chapter": 14, "type": "single",
+    "question": "Ce face `docker-compose up -d --scale web=3`?",
+    "options": [
+      "Pornește 3 instanțe ale serviciului 'web' din docker-compose.yml în background",
+      "Creează 3 imagini diferite",
+      "Limitează resursele containerului web la 3 nuclee",
+      "Pornește serviciul web de 3 ori secvențial"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 381, "topic": "Containere avansate", "chapter": 14, "type": "order",
+    "question": "Ordonează elementele unui Dockerfile corect pentru o aplicație Python:",
+    "options": [
+      "COPY requirements.txt .",
+      "FROM python:3.11-slim",
+      "CMD [\"python\", \"app.py\"]",
+      "RUN pip install -r requirements.txt",
+      "COPY . ."
+    ],
+    "answers": [1, 0, 3, 4, 2]
+  },
+  {
+    "id": 382, "topic": "make & build systems", "chapter": 6, "type": "single",
+    "question": "Ce face `make clean && make -j4` într-un proiect C cu Makefile?",
+    "options": [
+      "Compilează proiectul fără a șterge nimic, folosind 4 fișiere",
+      "Șterge fișierele compilate anterioare, apoi recompilează folosind 4 joburi în paralel",
+      "Rulează testele cu 4 thread-uri",
+      "Instalează proiectul în 4 locații diferite"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 383, "topic": "Securitate sistem", "chapter": 12, "type": "single",
+    "question": "Ce face `sudo visudo` față de editarea directă a `/etc/sudoers`?",
+    "options": [
+      "Sunt identice ca funcționalitate",
+      "visudo validează sintaxa înainte de salvare — o eroare în /etc/sudoers direct poate bloca tot accesul sudo",
+      "visudo criptează fișierul sudoers",
+      "Doar visudo poate fi rulat de root"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 384, "topic": "PWM & semnale", "chapter": 16, "type": "single",
+    "question": "Un semnal PWM are frecvența de 1kHz și duty cycle de 25%. Cât timp este semnalul HIGH per perioadă?",
+    "options": [
+      "250 microsecunde",
+      "750 microsecunde",
+      "25 milisecunde",
+      "0.25 milisecunde"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 385, "topic": "PWM & semnale", "chapter": 16, "type": "single",
+    "question": "Pe Arduino Uno, `analogWrite(pin, 128)` generează un semnal PWM cu duty cycle de aproximativ:",
+    "options": [
+      "12.8%", "50%", "128%", "25%"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 386, "topic": "Căi avansate", "chapter": 2, "type": "single",
+    "question": "Care cale este ABSOLUTĂ și care este RELATIVĂ?\n1. `~/Documents/../Downloads`\n2. `./config/../../etc/nginx`\n3. `/home/elev/./proiecte`",
+    "options": [
+      "Toate sunt relative",
+      "1 și 3 sunt absolute, 2 este relativă",
+      "Toate sunt absolute",
+      "2 este relativă, 1 și 3 sunt absolute"
+    ],
+    "answers": [3]
+  },
+  {
+    "id": 387, "topic": "Kernel & hardware", "chapter": 8, "type": "single",
+    "question": "Ce face `lsmod | grep -i bluetooth`?",
+    "options": [
+      "Instalează modulele Bluetooth",
+      "Listează modulele kernel încărcate care conțin 'bluetooth' în nume",
+      "Activează interfața Bluetooth",
+      "Afișează dispozitivele Bluetooth detectate"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 388, "topic": "Kernel & hardware", "chapter": 8, "type": "order",
+    "question": "Ordonează pașii pentru adăugarea unui modul kernel la boot (ex: module_name):",
+    "options": [
+      "modprobe module_name (test manual)",
+      "echo 'module_name' >> /etc/modules",
+      "Verifică: lsmod | grep module_name",
+      "modinfo module_name (verifică că modulul există)"
+    ],
+    "answers": [3, 0, 2, 1]
+  },
+  {
+    "id": 389, "topic": "Backup & rsync", "chapter": 13, "type": "single",
+    "question": "Ce face `rsync -avz --delete /source/ user@server:/backup/`?",
+    "options": [
+      "Copiază /source la server, comprimat, verbose, ștergând fișierele din /backup care nu există în /source",
+      "Sincronizează în ambele direcții",
+      "Copiază doar fișierele modificate fără a șterge nimic",
+      "Creează o arhivă comprimată pe server"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 390, "topic": "Backup & rsync", "chapter": 13, "type": "single",
+    "question": "Care este diferența dintre un backup incremental și unul diferențial?",
+    "options": [
+      "Sunt identice",
+      "Incremental salvează modificările față de ultimul backup (indiferent de tip); diferențial salvează modificările față de ultimul backup COMPLET",
+      "Diferențial salvează modificările față de ultimul backup; incremental față de backup-ul complet",
+      "Incremental este mai lent decât diferențial"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 391, "topic": "Sisteme de operare", "chapter": 0, "type": "single",
+    "question": "Ce este Wine pe Linux?",
+    "options": [
+      "Un emulator Windows complet",
+      "Un strat de compatibilitate care implementează API-urile Windows, permițând rularea aplicațiilor Windows pe Linux fără VM",
+      "Un hypervisor de tip 2 pentru Windows",
+      "Un manager de pachete pentru aplicații Windows"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 392, "topic": "Sisteme de operare", "chapter": 0, "type": "multi",
+    "question": "Care sunt diferențele între WSL (Windows Subsystem for Linux) 1 și 2? (Alegeți 3)",
+    "options": [
+      "WSL 2 folosește un kernel Linux real într-o VM lightweight",
+      "WSL 1 traduce syscall-urile Linux în syscall-uri Windows",
+      "WSL 2 este mai lent decât WSL 1 pentru toate operațiile",
+      "WSL 2 are compatibilitate mai bună cu aplicațiile Linux",
+      "WSL 1 suportă Docker nativ"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 393, "topic": "Variabile de mediu", "chapter": 7, "type": "single",
+    "question": "Ce diferență există între `export VAR=value` și `VAR=value`?",
+    "options": [
+      "Sunt identice",
+      "export face variabila disponibilă proceselor copil; fără export, variabila există doar în shell-ul curent",
+      "VAR=value este permanent, export este temporar",
+      "export necesită privilegii root"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 394, "topic": "Variabile de mediu", "chapter": 7, "type": "single",
+    "question": "Ce afișează: `A=hello; B=$A; A=world; echo $B`?",
+    "options": ["world", "hello", "hello world", "$A"],
+    "answers": [1]
+  },
+  {
+    "id": 395, "topic": "Rețea & protocoale", "chapter": 11, "type": "single",
+    "question": "Ce este diferența între TCP și UDP?",
+    "options": [
+      "TCP și UDP sunt identice",
+      "TCP oferă conexiune fiabilă cu confirmare de primire și ordonare; UDP este fără conexiune, mai rapid, fără garanții",
+      "UDP oferă conexiune fiabilă; TCP este fără conexiune",
+      "TCP rulează doar pe IPv4; UDP pe IPv6"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 396, "topic": "Rețea & protocoale", "chapter": 11, "type": "multi",
+    "question": "Care protocoale folosesc UDP? (Alegeți 3)",
+    "options": [
+      "DNS (rezolvare nume)",
+      "HTTP",
+      "DHCP",
+      "SSH",
+      "VoIP/RTP"
+    ],
+    "answers": [0, 2, 4]
+  },
+  {
+    "id": 397, "topic": "Scripting avansat", "chapter": 7, "type": "single",
+    "question": "Ce face `trap 'echo Întrerupt; exit 1' INT TERM` la începutul unui script?",
+    "options": [
+      "Ignoră semnalele INT și TERM",
+      "Definește o funcție de cleanup care se execută când scriptul primește SIGINT sau SIGTERM",
+      "Trimite semnale INT și TERM la procese copil",
+      "Blochează toate semnalele în script"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 398, "topic": "Scripting avansat", "chapter": 7, "type": "order",
+    "question": "Ordonează un script bash robust care verifică un server web la fiecare 30 secunde și loghează rezultatele:",
+    "options": [
+      "sleep 30",
+      "while true; do",
+      "done",
+      "curl -sf http://server > /dev/null && echo \"$(date): OK\" >> status.log || echo \"$(date): DOWN\" >> status.log"
+    ],
+    "answers": [1, 3, 0, 2]
+  },
+  {
+    "id": 399, "topic": "Compilare JIT vs AOT", "chapter": 6, "type": "single",
+    "question": "Java folosește compilare JIT. Ce avantaj are față de compilarea AOT?",
+    "options": [
+      "JIT produce cod mai mic pe disc",
+      "JIT poate optimiza codul în funcție de comportamentul real la rulare (hotspot optimization), potențial mai rapid decât AOT după warm-up",
+      "JIT este mai rapid la prima pornire",
+      "JIT nu necesită JVM"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 400, "topic": "Sistemul de fișiere", "chapter": 2, "type": "single",
+    "question": "Un fișier are 3 hard link-uri. Ce se întâmplă cu datele când ștergi 2 din cele 3 link-uri?",
+    "options": [
+      "Datele sunt șterse imediat",
+      "Datele rămân intacte — sunt șterse doar când numărul de hard link-uri ajunge la 0",
+      "Datele sunt copiate pentru fiecare link rămas",
+      "O eroare apare deoarece nu poți șterge link-uri"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 401, "topic": "tar & arhivare", "chapter": 13, "type": "single",
+    "question": "Care este diferența între `tar -czf` și `tar -cjf`?",
+    "options": [
+      "Nu există nicio diferență",
+      "-czf folosește gzip (mai rapid, compresie moderată); -cjf folosește bzip2 (mai lent, compresie mai bună)",
+      "-czf arhivează fără compresie; -cjf cu compresie maximă",
+      "-cjf este pentru arhive JSON"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 402, "topic": "Bash arrays", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\narr=(a b c d e)\necho ${arr[@]:1:3}\n```",
+    "options": [
+      "a b c",
+      "b c d",
+      "c d e",
+      "b c d e"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 403, "topic": "Bash arrays", "chapter": 7, "type": "single",
+    "question": "Ce face `${#arr[@]}` unde `arr=(1 2 3 4 5)`?",
+    "options": ["Suma elementelor: 15", "Numărul de elemente: 5", "Ultimul element: 5", "Indexul maxim: 4"],
+    "answers": [1]
+  },
+  {
+    "id": 404, "topic": "Procese & semnale", "chapter": 4, "type": "single",
+    "question": "Care semnal POATE fi ignorat de un proces, spre deosebire de SIGKILL?",
+    "options": ["SIGTERM", "SIGKILL", "SIGSTOP", "Ambele SIGKILL și SIGSTOP"],
+    "answers": [0]
+  },
+  {
+    "id": 405, "topic": "Procese & semnale", "chapter": 4, "type": "multi",
+    "question": "Care afirmații despre procese zombie sunt corecte? (Alegeți 3)",
+    "options": [
+      "Un proces zombie a terminat execuția dar intrarea din tabela de procese nu a fost eliberată",
+      "Procesul zombie consumă resurse CPU semnificative",
+      "Procesul părinte trebuie să apeleze wait() pentru a elibera procesul zombie",
+      "Procesele zombie apar când părintele nu citește codul de exit al copilului",
+      "SIGKILL poate termina un proces zombie"
+    ],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 406, "topic": "Căi complexe", "chapter": 2, "type": "single",
+    "question": "Din `/a/b/c/d`, care este rezultatul `cd ./../e/./f/../../g/../h`?",
+    "options": [
+      "/a/b/e/h",
+      "/a/b/h",
+      "/a/b/c/h",
+      "/a/h"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 407, "topic": "Sisteme de fișiere speciale", "chapter": 2, "type": "multi",
+    "question": "Care directoare din Linux sunt sisteme de fișiere virtuale (nu stochează date pe disc)? (Alegeți 3)",
+    "options": [
+      "/proc",
+      "/sys",
+      "/home",
+      "/dev",
+      "/etc"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 408, "topic": "Compilare avansată", "chapter": 6, "type": "single",
+    "question": "Ce face `gcc -shared -fPIC -o libutil.so util.c`?",
+    "options": [
+      "Compilează util.c ca executabil",
+      "Creează o bibliotecă dinamică (.so) din util.c cu cod independent de poziție (PIC)",
+      "Creează o bibliotecă statică",
+      "Compilează util.c cu debugging activat"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 409, "topic": "Docker avansát", "chapter": 14, "type": "single",
+    "question": "Ce este un Docker volume față de un bind mount?",
+    "options": [
+      "Sunt identice",
+      "Volume-ul este gestionat de Docker în /var/lib/docker/volumes; bind mount mapează direct un director de pe gazdă",
+      "Bind mount este mai sigur decât volume",
+      "Volume-urile nu persistă datele la oprirea containerului"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 410, "topic": "Rețea avansată", "chapter": 11, "type": "order",
+    "question": "Ordonează pașii pentru configurarea manuală a unei interfețe de rețea cu IP static pe Linux:",
+    "options": [
+      "ip link set eth0 up",
+      "ip route add default via 192.168.1.1",
+      "ip addr add 192.168.1.100/24 dev eth0",
+      "Verifică: ping 8.8.8.8"
+    ],
+    "answers": [0, 2, 1, 3]
+  },
+  {
+    "id": 411, "topic": "Securitate & hashing", "chapter": 12, "type": "single",
+    "question": "De ce nu se stochează parolele în clar, ci hash-urile lor în /etc/shadow?",
+    "options": [
+      "Hash-urile ocupă mai puțin spațiu",
+      "Hash-urile sunt ireversibile — chiar dacă /etc/shadow este compromis, parolele originale nu pot fi recuperate direct",
+      "Hash-urile sunt mai rapide de comparat",
+      "Este o cerință legală, nu tehnică"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 412, "topic": "Securitate & hashing", "chapter": 12, "type": "single",
+    "question": "Ce este un 'salt' în contextul hash-urilor de parole?",
+    "options": [
+      "Un algoritm de criptare",
+      "O valoare aleatorie adăugată la parolă înainte de hashing, pentru a preveni atacurile de tip rainbow table",
+      "O metodă de compresie a hash-ului",
+      "Un tip de cheie criptografică"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 413, "topic": "Bash functions", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\nfoo() { echo $1; return 42; }\nfoo hello\necho $?\n```",
+    "options": ["hello\\n0", "hello\\n42", "42\\nhello", "hello"],
+    "answers": [1]
+  },
+  {
+    "id": 414, "topic": "Bash functions", "chapter": 7, "type": "single",
+    "question": "Cum returnezi o valoare string dintr-o funcție bash (bash nu suportă return pentru string)?",
+    "options": [
+      "return 'string_value'",
+      "Folosești o variabilă globală sau command substitution: result=$(functie)",
+      "echo return 'string_value'",
+      "Nu este posibil în bash"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 415, "topic": "Stocare avansată", "chapter": 10, "type": "single",
+    "question": "Ce este RAID 5 față de RAID 1?",
+    "options": [
+      "RAID 5 oglindește pe 2 discuri; RAID 1 pe 3",
+      "RAID 5 distribuie date și paritate pe minim 3 discuri; RAID 1 oglindește complet pe 2 discuri. RAID 5 oferă mai mult spațiu util",
+      "RAID 5 nu oferă redundanță; RAID 1 da",
+      "RAID 1 este mai rapid la scriere decât RAID 5"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 416, "topic": "Stocare avansată", "chapter": 10, "type": "multi",
+    "question": "Care afirmații despre fstab sunt corecte? (Alegeți 3)",
+    "options": [
+      "fstab se află în /etc/fstab",
+      "Fiecare linie din fstab specifică: dispozitiv, punct de montare, tip FS, opțiuni, dump, pass",
+      "Modificările în fstab se aplică imediat fără reboot",
+      "UUID-ul unui dispozitiv este mai stabil decât /dev/sda1 pentru identificare în fstab",
+      "fstab poate monta doar discuri locale, nu NFS"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 417, "topic": "X11 & display", "chapter": 0, "type": "single",
+    "question": "Ce face `DISPLAY=:0 xterm &` când SSH-at pe un server cu X11 forwarding activ?",
+    "options": [
+      "Deschide un terminal text pe server",
+      "Deschide o fereastră xterm pe display-ul :0 al serverului (sau al clientului cu X forwarding)",
+      "Configurează rezoluția monitorului",
+      "Repornește serverul X"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 418, "topic": "Căi & fișiere speciale", "chapter": 2, "type": "single",
+    "question": "Ce este `/dev/null` și cum se folosește în scripting?",
+    "options": [
+      "Un fișier de log special al kernel-ului",
+      "Un dispozitiv special care ignoră tot ce i se scrie și returnează EOF la citire — `comando 2>/dev/null` elimină silențios erorile",
+      "Un director pentru fișiere temporare",
+      "Echivalentul Linux al Coșului de gunoi"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 419, "topic": "Scripting & condiții", "chapter": 7, "type": "single",
+    "question": "Ce face `[[ $str =~ ^[0-9]+$ ]]` în bash?",
+    "options": [
+      "Testează dacă $str conține cel puțin un caracter",
+      "Testează dacă $str conține DOAR cifre (regex: unul sau mai mulți de la 0-9)",
+      "Înlocuiește cifrele din $str",
+      "Convertește $str la număr"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 420, "topic": "Scripting & condiții", "chapter": 7, "type": "order",
+    "question": "Ordonează un script bash care verifică dacă un argument este un număr pozitiv:",
+    "options": [
+      "fi",
+      "if [[ $1 =~ ^[0-9]+$ ]] && [ $1 -gt 0 ]; then",
+      "echo \"Eroare: nu este un număr pozitiv\"",
+      "echo \"Valid: $1 este număr pozitiv\"",
+      "#!/bin/bash\n[ $# -eq 0 ] && echo 'Lipsă argument' && exit 1"
+    ],
+    "answers": [4, 1, 3, 0, 2]
+  },
+  {
+    "id": 421, "topic": "Hardware & CPU", "chapter": 8, "type": "single",
+    "question": "Ce înseamnă că un CPU are arhitectura RISC față de CISC?",
+    "options": [
+      "RISC are mai multe instrucțiuni complexe; CISC are instrucțiuni simple",
+      "RISC (Reduced Instruction Set) are instrucțiuni simple și puține, execuție rapidă; CISC (Complex) are instrucțiuni complexe care pot face mai mult per instrucțiune",
+      "RISC este folosit doar pe servere; CISC pe desktop",
+      "Nu există diferențe practice moderne"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 422, "topic": "Hardware & CPU", "chapter": 8, "type": "multi",
+    "question": "Care arhitecturi CPU sunt RISC? (Alegeți 3)",
+    "options": [
+      "ARM",
+      "x86",
+      "RISC-V",
+      "x86_64",
+      "MIPS"
+    ],
+    "answers": [0, 2, 4]
+  },
+  {
+    "id": 423, "topic": "Rețea & interfețe", "chapter": 11, "type": "single",
+    "question": "Ce face `ip link set eth0 promisc on`?",
+    "options": [
+      "Activează interfața eth0",
+      "Pune interfața în modul promiscuous — captează TOATE pachetele din rețea, nu doar cele destinate ei",
+      "Setează viteza la 100Mbps",
+      "Activează DHCP pe interfață"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 424, "topic": "Redirectări avansate", "chapter": 7, "type": "single",
+    "question": "Ce face `exec 3> fisier.txt` în bash?",
+    "options": [
+      "Execută scriptul fisier.txt",
+      "Deschide file descriptor-ul 3 pentru scriere în fisier.txt — ulterior `echo text >&3` scrie în fișier",
+      "Redirectează fd 3 la stdout",
+      "Creează un pipe cu id 3"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 425, "topic": "Servicii systemd", "chapter": 9, "type": "order",
+    "question": "Ordonează pașii pentru crearea și activarea unui serviciu systemd personalizat:",
+    "options": [
+      "systemctl daemon-reload",
+      "systemctl enable --now myservice",
+      "Creează /etc/systemd/system/myservice.service",
+      "systemctl status myservice"
+    ],
+    "answers": [2, 0, 1, 3]
+  },
+  {
+    "id": 426, "topic": "Servicii systemd", "chapter": 9, "type": "single",
+    "question": "Ce secțiuni obligatorii are un fișier .service minimal pentru systemd?",
+    "options": [
+      "[Service] cu ExecStart",
+      "[Unit], [Service] cu ExecStart, și [Install] cu WantedBy",
+      "Doar [ExecStart]",
+      "[Unit] și [Install] sunt suficiente"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 427, "topic": "Pachete avansate", "chapter": 3, "type": "single",
+    "question": "Ce face `apt-get install -f`?",
+    "options": [
+      "Forțează instalarea unui pachet",
+      "Repară dependențele sparte — instalează/șterge pachete pentru a aduce sistemul într-o stare consistentă",
+      "Instalează o versiune veche (fix) a pachetului",
+      "Verifică integritatea pachetelor instalate"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 428, "topic": "Grep avansat", "chapter": 7, "type": "single",
+    "question": "Ce face `grep -P '(?<=user: )\\w+' log.txt`?",
+    "options": [
+      "Caută 'user:' urmat de un cuvânt",
+      "Folosind lookbehind Perl-compatible, extrage cuvântul care urmează după 'user: '",
+      "Caută utilizatori cu parole",
+      "Afișează liniile care conțin 'user:'"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 429, "topic": "Rețea & tcpdump", "chapter": 11, "type": "single",
+    "question": "Ce face `tcpdump -i eth0 -n 'port 80 and host 192.168.1.10'`?",
+    "options": [
+      "Blochează traficul HTTP de la 192.168.1.10",
+      "Capturează și afișează pachetele pe interfața eth0 de la/la 192.168.1.10 pe portul 80, fără rezolvare DNS",
+      "Redirecționează traficul HTTP la alt server",
+      "Monitorizează utilizarea benzii de pe eth0"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 430, "topic": "Arduino avansat", "chapter": 16, "type": "single",
+    "question": "Ce problemă apare la folosirea `delay()` în Arduino când ai mai multe task-uri simultane?",
+    "options": [
+      "Consume prea multă memorie",
+      "delay() blochează complet execuția — nu poți face altceva în acel timp. Soluția: millis() cu verificare non-blocking",
+      "delay() nu funcționează corect sub 100ms",
+      "delay() nu poate fi folosit în loop()"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 431, "topic": "Arduino avansat", "chapter": 16, "type": "order",
+    "question": "Ordonează structura unui sketch Arduino care citește temperatura și trimite prin Serial la fiecare 2 secunde fără delay() blocat:",
+    "options": [
+      "if (millis() - lastTime >= 2000) {",
+      "unsigned long lastTime = 0;",
+      "Serial.println(temp);",
+      "float temp = analogRead(A0) * 0.48828;",
+      "lastTime = millis(); }"
+    ],
+    "answers": [1, 0, 3, 2, 4]
+  },
+  {
+    "id": 432, "topic": "Bash heredoc", "chapter": 7, "type": "single",
+    "question": "Ce face blocul următor?\n```bash\ncat << EOF > config.txt\nhost=localhost\nport=8080\nEOF\n```",
+    "options": [
+      "Citește config.txt și afișează conținutul",
+      "Creează/suprascrie config.txt cu conținutul 'host=localhost\\nport=8080' folosind heredoc",
+      "Adaugă la sfârșitul config.txt",
+      "Execută comenzile din blocul heredoc"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 433, "topic": "Sisteme de operare avansate", "chapter": 0, "type": "single",
+    "question": "Ce este un microkernel față de un kernel monolitic?",
+    "options": [
+      "Microkernelul este mai mare și mai complex",
+      "Microkernelul rulează minimal în spațiul kernel (IPC, scheduling, memorie); serviciile rulează în user space — mai sigur dar potențial mai lent; kernelul monolitic are totul în spațiul kernel",
+      "Kernelul monolitic este folosit doar pe servere",
+      "Nu există diferențe practice"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 434, "topic": "Systemd targets", "chapter": 9, "type": "single",
+    "question": "Ce comandă comută sistemul în modul single-user (rescue) fără reboot?",
+    "options": [
+      "systemctl set-default rescue.target",
+      "systemctl isolate rescue.target",
+      "init 1",
+      "systemctl reboot rescue"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 435, "topic": "Compresie avansată", "chapter": 13, "type": "single",
+    "question": "Care algoritm de compresie oferă cel mai bun raport de compresie, dar este cel mai lent?",
+    "options": [
+      "gzip (.gz)",
+      "bzip2 (.bz2)",
+      "xz (.xz)",
+      "lz4"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 436, "topic": "Compresie avansată", "chapter": 13, "type": "single",
+    "question": "Ce face `tar -xJf arhiva.tar.xz -C /dest --strip-components=1`?",
+    "options": [
+      "Creează arhiva cu compresie xz",
+      "Extrage arhiva .xz în /dest, eliminând primul nivel de director din calea arhivată",
+      "Listează conținutul arhivei fără extragere",
+      "Extrage doar primul fișier din arhivă"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 437, "topic": "Localizare fișiere", "chapter": 2, "type": "single",
+    "question": "Care este diferența între `find` și `locate` pentru găsirea fișierelor?",
+    "options": [
+      "Sunt identice ca funcționalitate",
+      "find parcurge sistemul de fișiere în timp real (mereu actualizat, mai lent); locate caută într-o bază de date indexată (rapid, dar poate fi neactualizată — necesită updatedb)",
+      "locate este mai precis decât find",
+      "find necesită privilegii root, locate nu"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 438, "topic": "Procese & prioritate", "chapter": 4, "type": "single",
+    "question": "Ce face `renice -n -10 -p 1234`?",
+    "options": [
+      "Termină procesul 1234",
+      "Crește prioritatea procesului 1234 (nice mai mic = prioritate mai mare — necesită root pentru valori negative)",
+      "Setează procesul 1234 la prioritatea minimă",
+      "Redenumește procesul 1234"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 439, "topic": "Securitate certificare", "chapter": 12, "type": "single",
+    "question": "Ce este un certificat X.509 și unde este folosit?",
+    "options": [
+      "Un tip de cheie SSH",
+      "Un standard pentru certificate digitale care leagă o cheie publică de o identitate, folosit în TLS/HTTPS, S/MIME, VPN",
+      "Un algoritm de hashing",
+      "Un protocol de autentificare"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 440, "topic": "Bash string operations", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\nstr='Hello World'\necho ${str/World/Linux}\n```",
+    "options": [
+      "Hello World",
+      "Hello Linux",
+      "World Linux",
+      "Error"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 441, "topic": "Bash string operations", "chapter": 7, "type": "single",
+    "question": "Ce afișează `echo ${#str}` unde `str='Hello'`?",
+    "options": ["Hello", "5", "1", "$#str"],
+    "answers": [1]
+  },
+  {
+    "id": 442, "topic": "Rețea & subnetting", "chapter": 11, "type": "single",
+    "question": "Câte hosturi utilizabile are rețeaua 192.168.10.0/26?",
+    "options": ["62", "64", "30", "126"],
+    "answers": [0]
+  },
+  {
+    "id": 443, "topic": "Rețea & subnetting", "chapter": 11, "type": "single",
+    "question": "Care adresă face parte din rețeaua 10.0.0.0/8?",
+    "options": ["172.16.5.1", "10.255.255.254", "192.168.0.1", "11.0.0.1"],
+    "answers": [1]
+  },
+  {
+    "id": 444, "topic": "Căi & symlinks", "chapter": 2, "type": "single",
+    "question": "Ce se întâmplă când ștergi fișierul țintă al unui symlink?",
+    "options": [
+      "Symlink-ul este șters automat",
+      "Symlink-ul devine 'dangling' (broken) — există dar nu mai arată nicăieri valid",
+      "Datele sunt duplicate în symlink",
+      "O eroare oprește ștergerea dacă există symlink-uri"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 445, "topic": "Kernel modules", "chapter": 8, "type": "multi",
+    "question": "Care comenzi gestionează modulele kernel pe Linux? (Alegeți 3)",
+    "options": [
+      "modprobe (încarcă cu dependențe)",
+      "insmod (încarcă fără dependențe automate)",
+      "rmmod (descarcă modul)",
+      "modfix (repară module corupte)",
+      "kernmod (listează module)"
+    ],
+    "answers": [0, 1, 2]
+  },
+  {
+    "id": 446, "topic": "Bash subshell", "chapter": 7, "type": "single",
+    "question": "Ce diferență există între `(comenzi)` și `{comenzi;}` în bash?",
+    "options": [
+      "Sunt identice",
+      "(comenzi) rulează într-un subshell nou — modificările de variabile nu afectează shell-ul părinte; {comenzi;} rulează în shell-ul curent",
+      "{comenzi;} rulează într-un subshell; (comenzi) în shell-ul curent",
+      "(comenzi) este pentru comenzi asincrone"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 447, "topic": "Monitorizare avansată", "chapter": 8, "type": "order",
+    "question": "Ordonează pașii pentru a depana un server care nu răspunde la HTTP (port 80):",
+    "options": [
+      "curl -v http://localhost",
+      "systemctl status nginx",
+      "ss -tlnp | grep :80",
+      "journalctl -u nginx -n 50",
+      "ping localhost"
+    ],
+    "answers": [4, 2, 1, 3, 0]
+  },
+  {
+    "id": 448, "topic": "sed avansat", "chapter": 7, "type": "single",
+    "question": "Ce face `sed -i 's/^#Port 22/Port 2222/' /etc/ssh/sshd_config`?",
+    "options": [
+      "Adaugă o linie nouă cu Port 2222",
+      "Modifică direct fișierul: înlocuiește '#Port 22' de la începutul liniei cu 'Port 2222'",
+      "Comentează linia Port 22",
+      "Afișează liniile care conțin #Port"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 449, "topic": "Sistemul de fișiere /proc", "chapter": 8, "type": "multi",
+    "question": "Care fișiere din /proc conțin informații utile despre sistem? (Alegeți 3)",
+    "options": [
+      "/proc/cpuinfo — informații despre procesor",
+      "/proc/meminfo — utilizarea memoriei",
+      "/proc/netstat — statistici rețea (incorect: este /proc/net/)",
+      "/proc/uptime — timpul de funcționare al sistemului",
+      "/proc/passwd — utilizatorii sistemului"
+    ],
+    "answers": [0, 1, 3]
+  },
+  {
+    "id": 450, "topic": "Containere LXC", "chapter": 14, "type": "single",
+    "question": "Care este diferența principală între LXC și Docker?",
+    "options": [
+      "Sunt identice",
+      "LXC creează containere de sistem complet (cu init, servicii multiple); Docker este orientat pe aplicații — un container, un proces",
+      "Docker este mai vechi decât LXC",
+      "LXC nu suportă networking"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 451, "topic": "Bash loops", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\nfor i in $(seq 1 3); do\n  echo -n \"$i \"\ndone\n```",
+    "options": ["1 2 3", "1\\n2\\n3", "1 2 3\\n", "seq 1 3"],
+    "answers": [2]
+  },
+  {
+    "id": 452, "topic": "Bash loops", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\ni=0\nwhile [ $i -lt 3 ]; do\n  ((i++))\ndone\necho $i\n```",
+    "options": ["0", "2", "3", "4"],
+    "answers": [2]
+  },
+  {
+    "id": 453, "topic": "Rețea & curl", "chapter": 11, "type": "single",
+    "question": "Ce face `curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"val\"}' http://api/endpoint`?",
+    "options": [
+      "Descarcă datele de la API",
+      "Trimite un request HTTP POST cu body JSON la API endpoint",
+      "Creează un endpoint nou",
+      "Testează dacă API-ul este online"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 454, "topic": "Permisiuni avansate", "chapter": 5, "type": "single",
+    "question": "Un director are `drwxrws---`. Ce înseamnă 's' în loc de 'x' pentru grup?",
+    "options": [
+      "Grupul nu poate executa directorul",
+      "SGID este setat — fișierele create în acest director moștenesc grupul directorului, nu grupul utilizatorului creator",
+      "Directorul este read-only pentru grup",
+      "SUID este setat pe director"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 455, "topic": "Comunicare IoT", "chapter": 16, "type": "single",
+    "question": "Ce protocol IoT folosește modelul publish/subscribe cu un broker central (ex: Mosquitto)?",
+    "options": ["HTTP REST", "MQTT", "Modbus", "I2C"],
+    "answers": [1]
+  },
+  {
+    "id": 456, "topic": "Comunicare IoT", "chapter": 16, "type": "order",
+    "question": "Ordonează pașii pentru comunicarea MQTT între un senzor Arduino și un server:",
+    "options": [
+      "Serverul primește mesajul pe topic-ul 'temperatura'",
+      "Serverul se abonează (subscribe) la topic-ul 'temperatura'",
+      "Arduino publică (publish) valoarea temperaturii pe topic-ul 'temperatura'",
+      "Pornește brokerul MQTT (ex: mosquitto)"
+    ],
+    "answers": [3, 1, 2, 0]
+  },
+  {
+    "id": 457, "topic": "Bash case", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\ncase $1 in\n  start|begin) echo 'Pornit' ;;\n  stop|end) echo 'Oprit' ;;\n  *) echo 'Necunoscut' ;;\nesac\n```\ncând este rulat cu `./script.sh begin`?",
+    "options": ["Necunoscut", "Pornit", "start|begin", "begin"],
+    "answers": [1]
+  },
+  {
+    "id": 458, "topic": "Virtualizare rețea", "chapter": 14, "type": "single",
+    "question": "Ce este SDN (Software Defined Networking)?",
+    "options": [
+      "Un tip de cablu de rețea",
+      "O arhitectură unde planul de control al rețelei este decuplat de hardware și centralizat software — permite configurare programatică a rețelei",
+      "Un protocol de securitate",
+      "Un tip de switch hardware"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 459, "topic": "Bash arithmetic", "chapter": 7, "type": "single",
+    "question": "Care dintre acestea NU este o metodă validă de aritmetică în bash?",
+    "options": [
+      "$((5 + 3))",
+      "expr 5 + 3",
+      "let result=5+3",
+      "calc 5+3"
+    ],
+    "answers": [3]
+  },
+  {
+    "id": 460, "topic": "Stocare & partiții", "chapter": 10, "type": "single",
+    "question": "Care este diferența între MBR și GPT ca scheme de partiționare?",
+    "options": [
+      "Sunt identice",
+      "MBR suportă maxim 4 partiții primare și discuri de maxim 2TB; GPT suportă 128+ partiții și discuri >2TB, cu redundanță",
+      "GPT este mai vechi și mai limitat",
+      "MBR este necesar pentru UEFI"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 461, "topic": "Bash debug", "chapter": 7, "type": "single",
+    "question": "Ce face `bash -x script.sh`?",
+    "options": [
+      "Execută scriptul cu privilegii extinse",
+      "Execută scriptul în modul debug — afișează fiecare comandă executată, precedată de '+', înainte de execuție",
+      "Verifică sintaxa fără a executa",
+      "Execută scriptul în fundal"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 462, "topic": "Bash debug", "chapter": 7, "type": "single",
+    "question": "Ce face `set -e` la începutul unui script bash?",
+    "options": [
+      "Activează modul echo pentru toate comenzile",
+      "Face scriptul să se oprească imediat dacă oricare comandă returnează un cod de eroare non-zero",
+      "Activează variabilele de mediu extinse",
+      "Setează scriptul ca executabil"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 463, "topic": "Rețea & VPN", "chapter": 11, "type": "single",
+    "question": "Ce face un VPN (Virtual Private Network)?",
+    "options": [
+      "Blochează reclamele online",
+      "Creează un tunel criptat între dispozitiv și server VPN — traficul apare ca venind din locația serverului VPN",
+      "Crește viteza conexiunii la internet",
+      "Oferă acces root la rețeaua locală"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 464, "topic": "Sistemul de fișiere ext4", "chapter": 10, "type": "single",
+    "question": "Ce este journaling-ul în ext4 și ce avantaj oferă?",
+    "options": [
+      "Un sistem de compresie al fișierelor",
+      "Înregistrează modificările înainte de a le aplica — dacă sistemul cade, jurnalul permite recuperarea rapidă fără fsck complet",
+      "Un sistem de criptare integrat",
+      "O metodă de defragmentare automată"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 465, "topic": "Căi & link-uri", "chapter": 2, "type": "multi",
+    "question": "Care afirmații despre hard link-uri sunt corecte? (Alegeți 3)",
+    "options": [
+      "Hard link-urile pot traversa sisteme de fișiere diferite",
+      "Un hard link referențiază același inode ca fișierul original",
+      "Ștergerea fișierului original nu afectează hard link-ul",
+      "Hard link-urile pot fi create pentru directoare (de utilizatori normali)",
+      "Hard link-urile au același conținut și permisiuni ca originalul"
+    ],
+    "answers": [1, 2, 4]
+  },
+  {
+    "id": 466, "topic": "Procese & IPC", "chapter": 4, "type": "single",
+    "question": "Ce este un named pipe (FIFO) pe Linux?",
+    "options": [
+      "Un fișier special care permite comunicarea între procese fără relație părinte-copil, prin sistemul de fișiere",
+      "Un pipe normal între două comenzi",
+      "Un tip de socket de rețea",
+      "Un mecanism de sincronizare a thread-urilor"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 467, "topic": "Bash getopts", "chapter": 7, "type": "single",
+    "question": "Ce face `getopts 'hf:v' opt` într-un script bash?",
+    "options": [
+      "Parsează argumentele: -h (flag), -f urmată de valoare obligatorie, -v (flag)",
+      "Generează automat opțiunile pentru script",
+      "Afișează help-ul scriptului",
+      "Verifică dacă opțiunile sunt valide"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 468, "topic": "Sisteme de fișiere montare", "chapter": 10, "type": "single",
+    "question": "Ce înseamnă opțiunea `noexec` în fstab?",
+    "options": [
+      "Sistemul de fișiere este read-only",
+      "Nu se pot executa fișiere binare montate pe acel sistem de fișiere — securitate pentru /tmp sau /home",
+      "Montarea este dezactivată la boot",
+      "Nu se pot crea fișiere executabile"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 469, "topic": "Rețea & wireshark", "chapter": 11, "type": "single",
+    "question": "Ce filtru Wireshark/tcpdump afișează DOAR traficul HTTP (port 80) care NU vine de la 192.168.1.1?",
+    "options": [
+      "port 80 && host 192.168.1.1",
+      "port 80 and not host 192.168.1.1",
+      "port 80 or not host 192.168.1.1",
+      "!port 80 and host 192.168.1.1"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 470, "topic": "Arduino & sensori", "chapter": 16, "type": "single",
+    "question": "De ce ai nevoie de un rezistor pull-up când citești un buton pe Arduino?",
+    "options": [
+      "Pentru a limita curentul prin buton",
+      "Fără pull-up, pinul este 'floating' (nedefinit) când butonul e deschis — citiri aleatorii. Pull-up asigură nivel HIGH logic definit",
+      "Pentru a crește tensiunea la 5V",
+      "Pull-up-ul protejează Arduino de scurtcircuit"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 471, "topic": "Bash heredoc avansat", "chapter": 7, "type": "single",
+    "question": "Ce diferență există între `<< EOF` și `<< 'EOF'` în bash?",
+    "options": [
+      "Nu există nicio diferență",
+      "Cu `<< EOF` variabilele sunt expandate; cu `<< 'EOF'` conținutul este tratat literal (fără expansiune variabile)",
+      "Cu `<< 'EOF'` conținutul este criptat",
+      "Sunt identice, doar convențional diferit"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 472, "topic": "Sisteme embedded", "chapter": 16, "type": "single",
+    "question": "Ce este un watchdog timer pe un microcontroler?",
+    "options": [
+      "Un timer pentru afișarea orei curente",
+      "Un circuit hardware care resetează automat microcontrolerul dacă firmware-ul îngheață (nu mai resetează timer-ul periodic)",
+      "Un modul de securitate",
+      "Un timer de economisire a energiei"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 473, "topic": "Sisteme embedded", "chapter": 16, "type": "multi",
+    "question": "Care sunt avantajele unui RTOS față de rularea bare-metal pe un microcontroler? (Alegeți 3)",
+    "options": [
+      "Task-uri multiple pot rula pseudo-simultan prin scheduling",
+      "RTOS elimină necesitatea de programare în C",
+      "Sincronizare între task-uri prin semafoare și mutex-uri",
+      "Garantează timpi de răspuns deterministici",
+      "RTOS rulează mai rapid decât bare-metal"
+    ],
+    "answers": [0, 2, 3]
+  },
+  {
+    "id": 474, "topic": "Bash xargs", "chapter": 7, "type": "single",
+    "question": "Ce face `find /tmp -name '*.tmp' | xargs rm -f`?",
+    "options": [
+      "Listează fișierele .tmp din /tmp",
+      "Găsește toate fișierele .tmp din /tmp și le șterge, trecând lista ca argumente la rm",
+      "Creează fișiere .tmp în /tmp",
+      "Comprimă fișierele .tmp"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 475, "topic": "Permisiuni avansate", "chapter": 5, "type": "order",
+    "question": "Ordonează pașii pentru a configura corect permisiunile unui director web (/var/www/html) accesibil de nginx (www-data) și editabil de developersi (grup 'dev'):",
+    "options": [
+      "chmod 2775 /var/www/html",
+      "chown root:dev /var/www/html",
+      "usermod -aG dev developer_username",
+      "usermod -aG dev www-data"
+    ],
+    "answers": [2, 3, 1, 0]
+  },
+  {
+    "id": 476, "topic": "Rețea IPv6", "chapter": 11, "type": "single",
+    "question": "Ce este adresa `::1` în IPv6?",
+    "options": [
+      "Adresa de broadcast IPv6",
+      "Adresa de loopback IPv6 — echivalentul lui 127.0.0.1 din IPv4",
+      "Prima adresă dintr-o rețea IPv6",
+      "Adresa gateway-ului implicit"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 477, "topic": "Virtualizare avansată", "chapter": 14, "type": "single",
+    "question": "Ce este live migration în contextul mașinilor virtuale?",
+    "options": [
+      "Instalarea unui SO nou pe VM",
+      "Mutarea unei VM care rulează de pe un hypervisor pe altul fără oprire — utilizatorul nu observă întreruperea",
+      "Clonarea unei VM pe același hypervisor",
+      "Backup-ul automát al stării VM"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 478, "topic": "Shell & terminal", "chapter": 7, "type": "multi",
+    "question": "Care shortcut-uri de tastatură funcționează în bash/terminal? (Alegeți 4)",
+    "options": [
+      "Ctrl+A — mută cursorul la începutul liniei",
+      "Ctrl+E — mută cursorul la sfârșitul liniei",
+      "Ctrl+R — caută în istoricul comenzilor",
+      "Ctrl+B — rulează comanda în background",
+      "Ctrl+K — șterge de la cursor până la sfârșitul liniei"
+    ],
+    "answers": [0, 1, 2, 4]
+  },
+  {
+    "id": 479, "topic": "Sisteme de fișiere avansate", "chapter": 2, "type": "single",
+    "question": "Ce face comanda `tune2fs -l /dev/sda1 | grep 'Mount count'`?",
+    "options": [
+      "Setează numărul maxim de montări",
+      "Afișează de câte ori partiția a fost montată (după un număr fix, fsck este rulat automat)",
+      "Montează partiția",
+      "Formatează partiția"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 480, "topic": "Bash string avansat", "chapter": 7, "type": "single",
+    "question": "Ce afișează:\n```bash\nstr='/home/elev/fisier.txt'\necho ${str##*/}\n```",
+    "options": [
+      "/home/elev/",
+      "fisier.txt",
+      "fisier",
+      ".txt"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 481, "topic": "Bash string avansat", "chapter": 7, "type": "single",
+    "question": "Ce afișează `echo ${str%.*}` unde `str='fisier.tar.gz'`?",
+    "options": [
+      "fisier",
+      "fisier.tar",
+      ".gz",
+      "fisier.tar.gz"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 482, "topic": "Sisteme de operare", "chapter": 0, "type": "order",
+    "question": "Ordonează nivelurile modelului OSI de la fizic la aplicație:",
+    "options": [
+      "Transport (TCP/UDP)",
+      "Fizic (biți pe mediu)",
+      "Aplicație (HTTP, FTP)",
+      "Rețea (IP, routing)",
+      "Legătură de date (MAC, switch)"
+    ],
+    "answers": [1, 4, 3, 0, 2]
+  },
+  {
+    "id": 483, "topic": "Securitate Linux", "chapter": 12, "type": "single",
+    "question": "Ce este SELinux/AppArmor și ce problemă rezolvă?",
+    "options": [
+      "Un antivirus pentru Linux",
+      "Un sistem de control al accesului mandatory (MAC) — chiar dacă un proces este compromis, accesul său este limitat de politici stricte dincolo de permisiunile Unix clasice",
+      "Un firewall de aplicații",
+      "Un sistem de detectare a intruziunilor"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 484, "topic": "Docker networking", "chapter": 14, "type": "single",
+    "question": "Ce diferență există între rețelele Docker `bridge`, `host` și `none`?",
+    "options": [
+      "Sunt identice",
+      "bridge = rețea izolată cu NAT (implicit); host = containerul partajează rețeaua gazdei direct; none = fără rețea",
+      "host = izolat cu NAT; bridge = partajează rețeaua gazdei",
+      "none = rețea criptată"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 485, "topic": "Bash pipelines", "chapter": 7, "type": "single",
+    "question": "Ce afișează: `echo 'ana are mere' | tr ' ' '\\n' | sort | uniq -c | sort -rn`?",
+    "options": [
+      "ana are mere (sortat)",
+      "Fiecare cuvânt pe linie, sortat alfabetic",
+      "Fiecare cuvânt cu numărul de apariții, sortat descrescător după frecvență",
+      "ana are mere (în ordine inversă)"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 486, "topic": "Hardware IoT", "chapter": 16, "type": "single",
+    "question": "Ce este un ADC (Analog-to-Digital Converter) și de ce este important în IoT?",
+    "options": [
+      "Un protocol de comunicare wireless",
+      "Un circuit care convertește un semnal analog (tensiune continuă) în valoare digitală — permite microcontrolerelor să citească senzori analogici",
+      "Un tip de memorie non-volatilă",
+      "Un regulator de tensiune"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 487, "topic": "Permisiuni umask", "chapter": 5, "type": "single",
+    "question": "Cu umask `022`, ce permisiuni va avea un fișier nou creat de un utilizator normal?",
+    "options": [
+      "777",
+      "755",
+      "644",
+      "022"
+    ],
+    "answers": [2]
+  },
+  {
+    "id": 488, "topic": "Permisiuni umask", "chapter": 5, "type": "single",
+    "question": "Cu umask `022`, ce permisiuni va avea un director nou creat?",
+    "options": [
+      "644",
+      "755",
+      "777",
+      "700"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 489, "topic": "Boot avansat", "chapter": 9, "type": "single",
+    "question": "Ce este initramfs și care este rolul său în boot?",
+    "options": [
+      "Prima partiție de pe disc",
+      "Un sistem de fișiere temporar încărcat în RAM de kernel la boot — conține driverele necesare pentru montarea sistemului de fișiere real (ex: drivere RAID, LVM, criptare)",
+      "Configurația GRUB",
+      "Un tip de kernel comprimat"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 490, "topic": "Rețea & ping avansat", "chapter": 11, "type": "single",
+    "question": "Ce face `ping -c 4 -i 0.2 -s 1400 192.168.1.1`?",
+    "options": [
+      "Trimite 4 pachete de 1400 bytes cu interval de 0.2 secunde",
+      "Pingă cu 4 bytes la 1400ms",
+      "Trimite pachete infinite la 4 secunde interval",
+      "Testează cu 1400 pachete de 0.2 bytes"
+    ],
+    "answers": [0]
+  },
+  {
+    "id": 491, "topic": "Bash printf", "chapter": 7, "type": "single",
+    "question": "Ce afișează `printf '%05d\\n' 42`?",
+    "options": [
+      "42",
+      "00042",
+      "42000",
+      "%05d"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 492, "topic": "Virtualizare hardware", "chapter": 14, "type": "single",
+    "question": "Ce este VT-x (Intel) / AMD-V și de ce este necesar pentru KVM?",
+    "options": [
+      "Un protocol de rețea pentru VM-uri",
+      "Extensii hardware ale procesorului care permit execuția instrucțiunilor guest-ului direct pe CPU fără emulare — KVM le necesită pentru virtualizare nativă",
+      "Un standard pentru discuri virtuale",
+      "Un tip de memorie dedicat VM-urilor"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 493, "topic": "Bash test avansat", "chapter": 7, "type": "single",
+    "question": "Ce diferență există între `[ ]` (test) și `[[ ]]` în bash?",
+    "options": [
+      "Sunt identice",
+      "`[[ ]]` este o construcție bash extinsă care suportă `&&`, `||`, `=~` (regex), pattern matching, fără necesitatea ghilimelelor pentru variabile",
+      "`[ ]` suportă mai multe funcții decât `[[ ]]`",
+      "`[[ ]]` necesită bash 5+"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 494, "topic": "Stocare & iSCSI", "chapter": 10, "type": "single",
+    "question": "Ce este iSCSI și cum diferă de NFS?",
+    "options": [
+      "Sunt identice",
+      "iSCSI exportă blocuri de stocare brute prin rețea (clientul vede disc); NFS exportă sisteme de fișiere (clientul vede directoare)",
+      "NFS exportă blocuri; iSCSI exportă fișiere",
+      "iSCSI este doar pentru SAN fizice"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 495, "topic": "Bash error handling", "chapter": 7, "type": "order",
+    "question": "Ordonează un script bash robust cu gestionare completă a erorilor:",
+    "options": [
+      "set -euo pipefail",
+      "trap 'echo \"Eroare la linia $LINENO\"; exit 1' ERR",
+      "main_function",
+      "#!/bin/bash",
+      "# Logică principală în main_function()"
+    ],
+    "answers": [3, 0, 1, 4, 2]
+  },
+  {
+    "id": 496, "topic": "Rețea & NAT", "chapter": 11, "type": "single",
+    "question": "Ce face `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE`?",
+    "options": [
+      "Blochează tot traficul pe eth0",
+      "Activează NAT masquerading — pachetele ieșite prin eth0 au adresa sursă înlocuită cu adresa IP a interfetei (pentru partajarea internetului)",
+      "Redirecționează tot traficul prin proxy",
+      "Limitează viteza pe eth0"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 497, "topic": "Bash colors", "chapter": 7, "type": "single",
+    "question": "Ce face `echo -e '\\033[1;32mSucees\\033[0m'`?",
+    "options": [
+      "Afișează 'Sucees' în roșu",
+      "Afișează 'Sucees' cu bold și culoare verde, resetând stilul după",
+      "Afișează codul ANSI literal",
+      "Creează un fișier cu numele dat"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 498, "topic": "Compilare & linking", "chapter": 6, "type": "single",
+    "question": "Ce face `ldd /usr/bin/nginx`?",
+    "options": [
+      "Dezasamblează executabilul nginx",
+      "Listează bibliotecile dinamice (.so) de care depinde nginx",
+      "Verifică integritatea executabilului",
+      "Afișează permisiunile executabilului"
+    ],
+    "answers": [1]
+  },
+  {
+    "id": 499, "topic": "Sisteme de operare", "chapter": 0, "type": "order",
+    "question": "Ordonează pașii prin care SO gestionează un page fault (acces la pagină de memorie nemapată):",
+    "options": [
+      "CPU continuă execuția cu pagina disponibilă",
+      "Kernel-ul caută pagina pe disc (swap) sau o alocă nouă",
+      "CPU generează excepția page fault",
+      "Kernel-ul mapează pagina în spațiul de adrese al procesului"
+    ],
+    "answers": [2, 1, 3, 0]
+  }
+]
