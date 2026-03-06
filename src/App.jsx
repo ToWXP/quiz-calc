@@ -552,7 +552,7 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
             { text: prompt }
           ]
         }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 65536 }
+        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
       };
 
       const resp = await fetch(
