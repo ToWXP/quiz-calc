@@ -387,13 +387,14 @@ function Menu({ allQ, onStart }) {
         <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:16, color:T.muted, marginLeft:10 }}>quiz</span>
       </div>
       <p style={{ color:T.muted, fontSize:13, marginBottom:24, textAlign:"center", lineHeight:1.6, maxWidth:380 }}>
-        {total} întrebări — {difficulty === "easy" ? "nivel normal (clasa 11-12)" : "nivel județean (dificil)"}
+        {total} întrebări — {difficulty === "easy" ? "nivel normal (clasa 11-12)" : difficulty === "medium" ? "nivel mediu (intermediar)" : "nivel județean (dificil)"}
       </p>
 
       {/* Difficulty selector */}
-      <div style={{ display:"flex", gap:10, marginBottom:24, width:"100%" }}>
+      <div style={{ display:"flex", gap:8, marginBottom:24, width:"100%" }}>
         {[
           {v:"easy", label:"📗 Normal", col:T.green},
+          {v:"medium", label:"📘 Mediu", col:T.yellow},
           {v:"hard", label:"🏆 Județean", col:T.red},
         ].map(({v,label,col}) => (
           <button key={v} onClick={() => setDifficulty(v)} style={{

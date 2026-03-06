@@ -7,7 +7,7 @@
 
 ## ✨ Funcționalități
 
-- **300 de întrebări** organizate pe două niveluri de dificultate
+- **500 de întrebări** organizate pe trei niveluri de dificultate
 - **3 tipuri de întrebări** — single choice, multi choice, și ordonare drag & drop
 - **Feedback instant** după fiecare răspuns cu explicația soluției corecte
 - **Statistici pe capitole** la finalul fiecărei sesiuni
@@ -22,7 +22,8 @@
 | Nivel | Întrebări | Descriere |
 |-------|-----------|-----------|
 | 📗 **Normal** | 100 | Comenzi de bază Linux, permisiuni, bash scripting, rețea, Arduino |
-| 🏆 **Județean** | 200 | Nivel examen județean — QEMU, Docker, LVM, scripting avansat, securitate |
+| 📘 **Mediu** | 200 | Comenzi avansate, scripting, procese, Docker, compilare, monitorizare |
+| 🏆 **Județean** | 200 | Nivel examen județean — QEMU, LVM, scripting complex, securitate avansată |
 
 ---
 
@@ -32,6 +33,7 @@
 `Rețea & protocoale` `SSH & securitate` `Virtualizare & Docker` `QEMU & KVM`
 `Sistemul de fișiere` `Compilare & linking` `Boot & systemd` `Arduino & IoT`
 `Cron & automatizare` `Stocare & LVM` `Cloud (IaaS/PaaS/SaaS)` `Compresie & arhivare`
+`AWK & sed` `grep & text processing` `Kernel & module` `Monitorizare sistem`
 
 ---
 
@@ -58,7 +60,7 @@ Deschide [http://localhost:5173](http://localhost:5173) în browser.
 ```
 quiz-calc/
 ├── public/
-│   └── questions.json      # Toate întrebările (easy + hard)
+│   └── questions.json      # Toate întrebările (easy + medium + hard)
 ├── src/
 │   └── App.jsx             # Componenta principală React
 ├── index.css               # Stiluri globale
@@ -86,11 +88,11 @@ npm run build && npm run deploy
 
 ## 📝 Adăugare întrebări noi
 
-Deschide `public/questions.json` și adaugă întrebări în formatul:
+Deschide `public/questions.json` și adaugă întrebări în secțiunea dorită (`easy`, `medium` sau `hard`):
 
 ```json
 {
-  "id": 600,
+  "id": 900,
   "topic": "Numele capitolului",
   "type": "single",
   "question": "Textul întrebării?",
@@ -102,7 +104,7 @@ Deschide `public/questions.json` și adaugă întrebări în formatul:
 **Tipuri disponibile:**
 - `"single"` — o singură variantă corectă, `answers: [index]`
 - `"multi"` — mai multe variante corecte, `answers: [0, 2]`
-- `"order"` — ordonare, `answers: [2, 0, 1]` (ordinea corectă a indexurilor)
+- `"order"` — ordonare drag & drop, `answers: [2, 0, 1]` (ordinea corectă a indexurilor)
 
 ---
 
