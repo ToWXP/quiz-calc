@@ -1,1 +1,324 @@
-[]
+[
+  {
+    "id": 1772893737392,
+    "difficulty": "easy",
+    "date": "07.03.2026 16:28",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 37391,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Care este principalul avantaj al interfeței în linia de comandă (CLI) pentru un utilizator tehnic?",
+        "options": [
+          "Este mai ușor de învățat și utilizat. ",
+          "Oferă acces rapid la funcționalitățile sistemului.",
+          "Are un aspect estetic plăcut și modern. ",
+          "Permite rularea aplicațiilor neinteractive."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37392,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce rol are promptul într-o interfață shell CLI?",
+        "options": [
+          "Afișează rezultatele comenzilor rulate anterior.",
+          "Indică utilizatorului unde să introducă comanda sa.",
+          "Controlează standardele de intrare și ieșire.",
+          "Lansează automat aplicații în background."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37393,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce tastă este folosită în shell pentru completarea automată a comenzilor sau argumentelor?",
+        "options": [
+          "Tasta Enter.",
+          "Tasta Shift.",
+          "Tasta Tab.",
+          "Tasta Escape."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37394,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce comandă afișează întregul istoric al comenzilor dintr-o sesiune curentă de shell?",
+        "options": [
+          "show-hist-all",
+          "list-commands",
+          "history",
+          "cmd-log"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37395,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce variabilă de mediu utilizează shellul pentru a localiza fișierele executabile ale comenzilor?",
+        "options": [
+          "HOME",
+          "SHELL",
+          "PATH",
+          "USER"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37396,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Care este principalul motiv pentru care comanda `cd` este implementată ca o comandă internă (builtin) a shellului?",
+        "options": [
+          "Pentru a reduce dimensiunea fișierelor executabile.",
+          "Pentru a permite shellului să schimbe directorul său curent.",
+          "Pentru a asigura compatibilitatea cu alte sisteme. ",
+          "Pentru a facilita crearea de procese noi în background."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37397,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce simbol se folosește pentru a afișa valoarea unei variabile în shell?",
+        "options": [
+          "`#` (hash)",
+          "`@` (at)",
+          "`$` (dolar)",
+          "`%` (procent)"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37398,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce tip de expansiune permite trecerea prin multiple opțiuni, cum ar fi `lab{02,03,04}`?",
+        "options": [
+          "Expansiunea aritmetică a valorilor.",
+          "Expansiunea de acolade a șirurilor.",
+          "Expansiunea parametrică a datelor.",
+          "Expansiunea de comenzi pentru rezultate."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37399,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Care dintre următoarele metode de escaping interpretează caracterele literal, inclusiv caracterul dolar?",
+        "options": [
+          "Escaparea prin ghilimele duble (`\"`).",
+          "Escaparea prin apostrofuri (`'`).",
+          "Escaparea prin backslash (`\\`).",
+          "Escaparea prin paranteze drepte (`[]`)."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37400,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce variabilă de shell este folosită pentru a personaliza promptul în Bash?",
+        "options": [
+          "PROMPT_STYLE_VAR",
+          "SHELL_PROMPT_VAL",
+          "PS1",
+          "BASH_PROMPT_SET"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37401,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "În expresiile regulate, ce metacaracter se potrivește cu orice caracter de oricâte ori (inclusiv niciodată)?",
+        "options": [
+          "`?` (zero sau o dată)",
+          "`+` (o dată sau de oricâte ori)",
+          "`*` (zero sau de oricâte ori)",
+          "`.` (orice caracter o singură dată)"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37402,
+        "topic": "Interfața în linia de comandă",
+        "type": "single",
+        "question": "Ce operator este cel mai des folosit pentru a combina un generator de text cu unul sau mai multe prelucrătoare de text în one-linere?",
+        "options": [
+          "Operatorul `&&` (AND logic).",
+          "Operatorul `|` (pipe).",
+          "Operatorul `;` (separare comenzi).",
+          "Operatorul `>` (redirectare ieșire)."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37403,
+        "topic": "Interfața în linia de comandă",
+        "type": "multi",
+        "question": "Care sunt două tipuri de interfețe interactive menționate în text, pe lângă GUI?",
+        "options": [
+          "Interfața în linia de comandă (CLI).",
+          "Interfața prin recunoaștere vocală (VUI).",
+          "Interfața web (WebUI).",
+          "Interfața tactilă (TouchUI)."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 37404,
+        "topic": "Interfața în linia de comandă",
+        "type": "multi",
+        "question": "Care dintre următoarele combinații de taste sunt folosite pentru a naviga rapid în cadrul unei comenzi în shell?",
+        "options": [
+          "Ctrl+c (Oprire proces)",
+          "Ctrl+a (Plasare la început de linie)",
+          "Alt+b (Plasare un cuvânt înapoi)",
+          "Ctrl+k (Ștergere până la sfârșitul liniei)"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37405,
+        "topic": "Interfața în linia de comandă",
+        "type": "multi",
+        "question": "Care dintre următoarele comenzi pot fi folosite pentru a afișa variabilele de mediu definite într-un shell?",
+        "options": [
+          "printenv",
+          "env",
+          "export -p",
+          "declare -a"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37406,
+        "topic": "Interfața în linia de comandă",
+        "type": "multi",
+        "question": "Care dintre următoarele sunt metode corecte pentru a realiza expansiunea comenzilor în shell (folosind outputul unei comenzi ca argument)?",
+        "options": [
+          "Folosind `$(command)`.",
+          "Folosind `[command]`.",
+          "Folosind `` `command` ``.",
+          "Folosind `{command}`."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 37407,
+        "topic": "Interfața în linia de comandă",
+        "type": "multi",
+        "question": "Care dintre următoarele utilitare Linux sunt considerate filtre de text, prelucrând textul de la intrare?",
+        "options": [
+          "`ls` (listare conținut)",
+          "`grep` (filtrare linii)",
+          "`sort` (ordonare linii)",
+          "`df` (afișare spațiu disc)"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37408,
+        "topic": "Interfața în linia de comandă",
+        "type": "order",
+        "question": "Ordonează pașii pe care shellul îi parcurge pentru a crea un proces nou dintr-o comandă externă:",
+        "options": [
+          "Identifică fișierul executabil corespunzător comenzii.",
+          "Shellul folosește `exec()` pentru a înlocui imaginea procesului copil.",
+          "Shellul primește comanda de la utilizator.",
+          "Shellul folosește `fork()` pentru a crea un proces copil identic."
+        ],
+        "answers": [
+          2,
+          0,
+          3,
+          1
+        ]
+      },
+      {
+        "id": 37409,
+        "topic": "Interfața în linia de comandă",
+        "type": "order",
+        "question": "Ordonează pașii pentru a utiliza căutarea înapoi (reverse search) în istoricul comenzilor din shell:",
+        "options": [
+          "Tastați Ctrl+r pentru a iniția căutarea.",
+          "Apăsați din nou Ctrl+r dacă sunt mai multe potriviri.",
+          "Introduceți un șir de caractere pentru căutare.",
+          "Rulați comanda găsită sau editați-o."
+        ],
+        "answers": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "id": 37410,
+        "topic": "Interfața în linia de comandă",
+        "type": "order",
+        "question": "Ordonează pașii pe care shellul îi urmează pentru a localiza un fișier executabil pentru o comandă externă introdusă, când calea nu este specificată:",
+        "options": [
+          "Shellul ia numele comenzii introduse de utilizator.",
+          "Iterează prin directoarele specificate în variabila de mediu PATH.",
+          "Pentru fiecare director, verifică dacă există un fișier executabil cu numele comenzii.",
+          "La prima potrivire, creează un proces din executabilul găsit."
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  }
+]
