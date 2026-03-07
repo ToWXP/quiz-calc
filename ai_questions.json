@@ -1,1 +1,488 @@
-[]
+[
+  {
+    "id": 1772894312988,
+    "difficulty": "medium",
+    "date": "07.03.2026 16:38",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 12988,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Ce este un proces în contextul sistemului de operare?",
+        "options": [
+          "Un fișier executabil stocat pe disc, gata de rulare.",
+          "O entitate statică ce conține instrucțiuni pentru sistem.",
+          "O aplicație în execuție, utilizând resursele sistemului.",
+          "Un bloc de memorie rezervat pentru stocarea datelor temporare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 12989,
+        "topic": "Programe și procese",
+        "type": "single",
+        "question": "Ce reprezintă 'imaginea procesului' conform materialului studiat?",
+        "options": [
+          "O reprezentare grafică a stării curente a procesului.",
+          "Fișierul executabil din care a fost creat procesul activ.",
+          "O copie a memoriei procesului stocată pentru depanare.",
+          "Setul de resurse alocate unui proces la momentul creării."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 12990,
+        "topic": "Starea proceselor",
+        "type": "single",
+        "question": "Ce indică o valoare 'load average' ridicată într-un sistem Linux?",
+        "options": [
+          "Numărul total de procese care rulează pe sistem.",
+          "Un număr mare de procese blocate în așteptarea I/O.",
+          "O cantitate semnificativă de memorie RAM disponibilă.",
+          "Multe procese gata de execuție, dar neplanificate pe procesor."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 12991,
+        "topic": "Prioritatea proceselor",
+        "type": "single",
+        "question": "Ce efect are creșterea valorii 'nice' a unui proces în Linux?",
+        "options": [
+          "Îmbunătățește prioritatea procesului, alocându-i mai mult CPU.",
+          "Procesul devine mai puțin important și cedează CPU altora.",
+          "Scade consumul de memorie al procesului, eliberând resurse.",
+          "Procesul este trimis în background, detașat de terminalul său."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 12992,
+        "topic": "Procese și fișiere",
+        "type": "single",
+        "question": "Ce rol principal are un descriptor de fișier pentru un proces?",
+        "options": [
+          "Identifică utilizatorul care deține fișierul deschis de proces.",
+          "Indică tipul de sistem de fișiere unde este stocat fișierul.",
+          "Servește ca un identificator unic pentru fișier în cadrul procesului.",
+          "Stochează calea absolută către fișierul pe care procesul îl accesează."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 12993,
+        "topic": "Procese daemon",
+        "type": "single",
+        "question": "Care este o caracteristică definitorie a unui proces daemon?",
+        "options": [
+          "Interacționează direct cu utilizatorul prin interfața grafică.",
+          "Este întotdeauna un proces copil al shell-ului curent activ.",
+          "Rulează în background, fără un terminal asociat direct.",
+          "Consumă întotdeauna resurse minime pentru a nu încetini sistemul."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 12994,
+        "topic": "Atributele unui proces",
+        "type": "multi",
+        "question": "Care dintre următoarele atribute ale unui proces sunt, în mod normal, stabilite la pornirea sa (load-time) și nu pot fi modificate ulterior?",
+        "options": [
+          "Identificatorul procesului (PID).",
+          "Prioritatea de rulare a procesului (nice).",
+          "Imaginea procesului (programul executabil).",
+          "Starea curentă de execuție a procesului (running, sleeping)."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 12995,
+        "topic": "Operatii cu procese. Interactiunea între procese",
+        "type": "multi",
+        "question": "Care dintre următoarele metode pot fi utilizate pentru a transfera informații de la ieșirea standard a unei comenzi la intrarea standard a alteia, în Linux?",
+        "options": [
+          "Utilizarea operatorului de concatenare '&&'.",
+          "Redirecționarea prin fișiere temporare.",
+          "Utilizarea operatorului pipe '|'.",
+          "Trimiterea de semnale SIGPIPE între procese."
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 12996,
+        "topic": "Investigarea proceselor",
+        "type": "multi",
+        "question": "Care dintre următoarele utilitare sunt folosite în Linux pentru a monitoriza în timp real resursele utilizate de procese, oferind o interfață interactivă?",
+        "options": [
+          "Comanda 'ps' cu argumente extinse.",
+          "Utilitarele 'top' și 'htop'.",
+          "Comanda 'lsof' pentru fișiere deschise.",
+          "Utilitarele 'sysstat' pentru statistici periodice."
+        ],
+        "answers": [
+          1,
+          3
+        ]
+      },
+      {
+        "id": 12997,
+        "topic": "Foreground și background",
+        "type": "order",
+        "question": "Ordonează pașii pentru a rula un proces GUI în background, permițând shell-ului să rămână utilizabil, conform materialului:",
+        "options": [
+          "Se folosește comanda 'bg' pentru a trece procesul în starea running.",
+          "Se pornește aplicația GUI în foreground (ex: 'emacs').",
+          "Se utilizează combinația de taste Ctrl+Z pentru a suspenda procesul.",
+          "Se verifică starea procesului cu comanda 'jobs'."
+        ],
+        "answers": [
+          1,
+          2,
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1772893737392,
+    "difficulty": "easy",
+    "date": "07.03.2026 16:28",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 37391,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Care este principalul avantaj al interfeÈei Ã®n linia de comandÄ (CLI) pentru un utilizator tehnic?",
+        "options": [
+          "Este mai uÈor de Ã®nvÄÈat Èi utilizat. ",
+          "OferÄ acces rapid la funcÈionalitÄÈile sistemului.",
+          "Are un aspect estetic plÄcut Èi modern. ",
+          "Permite rularea aplicaÈiilor neinteractive."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37392,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce rol are promptul Ã®ntr-o interfaÈÄ shell CLI?",
+        "options": [
+          "AfiÈeazÄ rezultatele comenzilor rulate anterior.",
+          "IndicÄ utilizatorului unde sÄ introducÄ comanda sa.",
+          "ControleazÄ standardele de intrare Èi ieÈire.",
+          "LanseazÄ automat aplicaÈii Ã®n background."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37393,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce tastÄ este folositÄ Ã®n shell pentru completarea automatÄ a comenzilor sau argumentelor?",
+        "options": [
+          "Tasta Enter.",
+          "Tasta Shift.",
+          "Tasta Tab.",
+          "Tasta Escape."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37394,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce comandÄ afiÈeazÄ Ã®ntregul istoric al comenzilor dintr-o sesiune curentÄ de shell?",
+        "options": [
+          "show-hist-all",
+          "list-commands",
+          "history",
+          "cmd-log"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37395,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce variabilÄ de mediu utilizeazÄ shellul pentru a localiza fiÈierele executabile ale comenzilor?",
+        "options": [
+          "HOME",
+          "SHELL",
+          "PATH",
+          "USER"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37396,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Care este principalul motiv pentru care comanda `cd` este implementatÄ ca o comandÄ internÄ (builtin) a shellului?",
+        "options": [
+          "Pentru a reduce dimensiunea fiÈierelor executabile.",
+          "Pentru a permite shellului sÄ schimbe directorul sÄu curent.",
+          "Pentru a asigura compatibilitatea cu alte sisteme. ",
+          "Pentru a facilita crearea de procese noi Ã®n background."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37397,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce simbol se foloseÈte pentru a afiÈa valoarea unei variabile Ã®n shell?",
+        "options": [
+          "`#` (hash)",
+          "`@` (at)",
+          "`$` (dolar)",
+          "`%` (procent)"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37398,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce tip de expansiune permite trecerea prin multiple opÈiuni, cum ar fi `lab{02,03,04}`?",
+        "options": [
+          "Expansiunea aritmeticÄ a valorilor.",
+          "Expansiunea de acolade a Èirurilor.",
+          "Expansiunea parametricÄ a datelor.",
+          "Expansiunea de comenzi pentru rezultate."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37399,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Care dintre urmÄtoarele metode de escaping interpreteazÄ caracterele literal, inclusiv caracterul dolar?",
+        "options": [
+          "Escaparea prin ghilimele duble (`\"`).",
+          "Escaparea prin apostrofuri (`'`).",
+          "Escaparea prin backslash (`\\`).",
+          "Escaparea prin paranteze drepte (`[]`)."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37400,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce variabilÄ de shell este folositÄ pentru a personaliza promptul Ã®n Bash?",
+        "options": [
+          "PROMPT_STYLE_VAR",
+          "SHELL_PROMPT_VAL",
+          "PS1",
+          "BASH_PROMPT_SET"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37401,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ãn expresiile regulate, ce metacaracter se potriveÈte cu orice caracter de oricÃ¢te ori (inclusiv niciodatÄ)?",
+        "options": [
+          "`?` (zero sau o datÄ)",
+          "`+` (o datÄ sau de oricÃ¢te ori)",
+          "`*` (zero sau de oricÃ¢te ori)",
+          "`.` (orice caracter o singurÄ datÄ)"
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 37402,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "single",
+        "question": "Ce operator este cel mai des folosit pentru a combina un generator de text cu unul sau mai multe prelucrÄtoare de text Ã®n one-linere?",
+        "options": [
+          "Operatorul `&&` (AND logic).",
+          "Operatorul `|` (pipe).",
+          "Operatorul `;` (separare comenzi).",
+          "Operatorul `>` (redirectare ieÈire)."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 37403,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "multi",
+        "question": "Care sunt douÄ tipuri de interfeÈe interactive menÈionate Ã®n text, pe lÃ¢ngÄ GUI?",
+        "options": [
+          "InterfaÈa Ã®n linia de comandÄ (CLI).",
+          "InterfaÈa prin recunoaÈtere vocalÄ (VUI).",
+          "InterfaÈa web (WebUI).",
+          "InterfaÈa tactilÄ (TouchUI)."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 37404,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "multi",
+        "question": "Care dintre urmÄtoarele combinaÈii de taste sunt folosite pentru a naviga rapid Ã®n cadrul unei comenzi Ã®n shell?",
+        "options": [
+          "Ctrl+c (Oprire proces)",
+          "Ctrl+a (Plasare la Ã®nceput de linie)",
+          "Alt+b (Plasare un cuvÃ¢nt Ã®napoi)",
+          "Ctrl+k (Ètergere pÃ¢nÄ la sfÃ¢rÈitul liniei)"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37405,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "multi",
+        "question": "Care dintre urmÄtoarele comenzi pot fi folosite pentru a afiÈa variabilele de mediu definite Ã®ntr-un shell?",
+        "options": [
+          "printenv",
+          "env",
+          "export -p",
+          "declare -a"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37406,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "multi",
+        "question": "Care dintre urmÄtoarele sunt metode corecte pentru a realiza expansiunea comenzilor Ã®n shell (folosind outputul unei comenzi ca argument)?",
+        "options": [
+          "Folosind `$(command)`.",
+          "Folosind `[command]`.",
+          "Folosind `` `command` ``.",
+          "Folosind `{command}`."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 37407,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "multi",
+        "question": "Care dintre urmÄtoarele utilitare Linux sunt considerate filtre de text, prelucrÃ¢nd textul de la intrare?",
+        "options": [
+          "`ls` (listare conÈinut)",
+          "`grep` (filtrare linii)",
+          "`sort` (ordonare linii)",
+          "`df` (afiÈare spaÈiu disc)"
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 37408,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "order",
+        "question": "OrdoneazÄ paÈii pe care shellul Ã®i parcurge pentru a crea un proces nou dintr-o comandÄ externÄ:",
+        "options": [
+          "IdentificÄ fiÈierul executabil corespunzÄtor comenzii.",
+          "Shellul foloseÈte `exec()` pentru a Ã®nlocui imaginea procesului copil.",
+          "Shellul primeÈte comanda de la utilizator.",
+          "Shellul foloseÈte `fork()` pentru a crea un proces copil identic."
+        ],
+        "answers": [
+          2,
+          0,
+          3,
+          1
+        ]
+      },
+      {
+        "id": 37409,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "order",
+        "question": "OrdoneazÄ paÈii pentru a utiliza cÄutarea Ã®napoi (reverse search) Ã®n istoricul comenzilor din shell:",
+        "options": [
+          "TastaÈi Ctrl+r pentru a iniÈia cÄutarea.",
+          "ApÄsaÈi din nou Ctrl+r dacÄ sunt mai multe potriviri.",
+          "IntroduceÈi un Èir de caractere pentru cÄutare.",
+          "RulaÈi comanda gÄsitÄ sau editaÈi-o."
+        ],
+        "answers": [
+          0,
+          2,
+          1,
+          3
+        ]
+      },
+      {
+        "id": 37410,
+        "topic": "InterfaÈa Ã®n linia de comandÄ",
+        "type": "order",
+        "question": "OrdoneazÄ paÈii pe care shellul Ã®i urmeazÄ pentru a localiza un fiÈier executabil pentru o comandÄ externÄ introdusÄ, cÃ¢nd calea nu este specificatÄ:",
+        "options": [
+          "Shellul ia numele comenzii introduse de utilizator.",
+          "ItereazÄ prin directoarele specificate Ã®n variabila de mediu PATH.",
+          "Pentru fiecare director, verificÄ dacÄ existÄ un fiÈier executabil cu numele comenzii.",
+          "La prima potrivire, creeazÄ un proces din executabilul gÄsit."
+        ],
+        "answers": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  }
+]
