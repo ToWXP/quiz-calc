@@ -379,10 +379,6 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
   const [deleteModal, setDeleteModal] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [deleteLog, setDeleteLog] = useState("");
-  const [deleteModal, setDeleteModal] = useState(null); // {batch} or null
-  const [deleting, setDeleting] = useState(false);
-  const [deleteLog, setDeleteLog] = useState("");
-
   // For AI tab: all questions flat
   const allAIQ = (generatedBatches || []).flatMap(b => b.questions);
   const activeQ = isAI ? allAIQ : (allQ[difficulty] || []);
