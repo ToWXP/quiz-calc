@@ -511,7 +511,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                   : `ai_questions_${new Date().toISOString().slice(0,10)}`;
                 const blob = new Blob([JSON.stringify(generatedBatches, null, 2)], { type:"application/json" });
                 const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-                a.download = `${name}.uso`; a.click();
+                a.download = `${name}.json`; a.click();
               }} style={{
                 background:"#0a1a10", border:"1px solid #22c55e44",
                 color:"#22c55e", borderRadius:12, padding:"13px 16px",
@@ -542,7 +542,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                 cursor:"pointer", fontSize:13, fontWeight:700, whiteSpace:"nowrap",
               }}>
                 ⬆ Import
-                <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+                <input type="file" accept=".json" style={{ display:"none" }} onChange={e => {
                   const file = e.target.files[0]; if (!file) return;
                   const reader = new FileReader();
                   reader.onload = ev => {
@@ -588,7 +588,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                 cursor:"pointer", fontSize:13, fontWeight:700, textAlign:"center",
               }}>
                 ⬆ Importă fișier (.json)
-                <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+                <input type="file" accept=".json" style={{ display:"none" }} onChange={e => {
                   const file = e.target.files[0]; if (!file) return;
                   const reader = new FileReader();
                   reader.onload = ev => {
