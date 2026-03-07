@@ -367,7 +367,7 @@ function Results({ score, total, history, onMenu, onRetry }) {
 }
 
 /* ─── MENU ───────────────────────────────────────────────── */
-function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }) {
+function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch, onMarkRemote }) {
   const [count, setCount] = useState("20");
   const [difficulty, setDifficulty] = useState("easy");
 
@@ -466,8 +466,12 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                     display:"flex", alignItems:"center", gap:10,
                   }}>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:13, color:T.text, fontWeight:600 }}>
+                      <div style={{ fontSize:13, color:T.text, fontWeight:600, display:"flex", alignItems:"center", gap:6 }}>
                         {batch.questions.length} întrebări
+                        {batch._local
+                          ? <span style={{ fontSize:10, background:"#1a1a0a", border:"1px solid #ca8a04", color:"#ca8a04", borderRadius:4, padding:"1px 6px" }}>📱 local</span>
+                          : <span style={{ fontSize:10, background:"#0a1a10", border:"1px solid #22c55e", color:"#22c55e", borderRadius:4, padding:"1px 6px" }}>☁ publicat</span>
+                        }
                       </div>
                       <div style={{ fontSize:11, color:T.muted, fontFamily:"'JetBrains Mono',monospace", marginTop:2 }}>
                         {batch.date} • {batch.source}
@@ -478,12 +482,14 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                       color:T.green, borderRadius:7, padding:"5px 12px",
                       cursor:"pointer", fontSize:12, fontWeight:600,
                     }}>▶ Joacă</button>
+                    {batch._local && (
                     <button onClick={async () => {
                       if (!githubToken) { setShowTokenInput(true); setPublishLog("Introdu GitHub Token mai jos!"); return; }
                       setPublishing(true);
                       setPublishLog("⏳ Se publică...");
                       try {
                         const n = await onPublishBatch(batch, githubToken);
+                        onMarkRemote(batch.id);
                         setPublishLog(`✅ ${n} întrebări publicate! Site-ul se actualizează în ~2 min.`);
                       } catch(e) {
                         setPublishLog(`❌ ${e.message}`);
@@ -495,6 +501,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                       cursor: publishing ? "default" : "pointer", fontSize:14, fontWeight:700,
                       opacity: publishing ? 0.5 : 1,
                     }}>+</button>
+                    )}
                     <button onClick={() => { setDeleteModal(batch); setDeleteLog(""); }} style={{
                       background:"transparent", border:`1px solid ${T.red}44`,
                       color:T.red, borderRadius:7, padding:"5px 10px",
@@ -1364,8 +1371,9 @@ export default function App() {
       // Merge remote AI batches with local ones (remote takes priority, deduplicate by id)
       const localBatches = JSON.parse(localStorage.getItem("generated_batches") || "[]");
       const remoteIds = new Set(aiData.map(b => b.id));
-      const localOnly = localBatches.filter(b => !remoteIds.has(b.id));
-      setGeneratedBatches([...aiData, ...localOnly]);
+      const localOnly = localBatches.filter(b => !remoteIds.has(b.id)).map(b => ({...b, _local: true}));
+      const remoteMarked = aiData.map(b => ({...b, _local: false}));
+      setGeneratedBatches([...remoteMarked, ...localOnly]);
       setScreen("menu");
     }).catch(e => { setError(e.message); setScreen("error"); });
   }, []);
@@ -1384,6 +1392,10 @@ export default function App() {
 
   function deleteBatch(id) {
     saveBatches(generatedBatches.filter(b => b.id !== id));
+  }
+
+  function markBatchAsRemote(batchId) {
+    setGeneratedBatches(prev => prev.map(b => b.id === batchId ? {...b, _local: false} : b));
   }
 
   async function publishBatch(batch, githubToken) {
@@ -1504,6 +1516,7 @@ export default function App() {
             onStart={start}
             onDeleteBatch={deleteBatch}
             onPublishBatch={publishBatch}
+            onMarkRemote={markBatchAsRemote}
           />
           <button
             onClick={() => setScreen("admin")}
