@@ -445,6 +445,56 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                 Nu ai întrebări generate încă.<br/>
                 Mergi la <span style={{ color:T.purple, fontWeight:600 }}>⚙ admin</span> și generează din carte.
               </div>
+              <div style={{ display:"flex", gap:8, marginTop:16 }}>
+                <button onClick={() => {
+                  const url = prompt("URL către fișierul .uso / .json:");
+                  if (!url) return;
+                  setImportLog("⏳ Se încarcă...");
+                  fetch(url)
+                    .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+                    .then(data => {
+                      const batches = Array.isArray(data) ? data : [];
+                      if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                      onImportBatches(batches);
+                      setImportLog(`✅ ${batches.length} batch-uri importate!`);
+                      setTimeout(() => setImportLog(""), 3000);
+                    })
+                    .catch(e => setImportLog(`❌ ${e.message}`));
+                }} style={{
+                  flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+                  background:T.accent+"11", border:`1px solid ${T.accent}33`,
+                  color:T.accent, borderRadius:12, padding:"12px 8px",
+                  cursor:"pointer", fontSize:12, fontWeight:700,
+                }}>
+                  <span style={{ fontSize:20 }}>🔗</span>
+                  Import URL
+                </button>
+                <label style={{
+                  flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+                  background:T.accent+"11", border:`1px solid ${T.accent}33`,
+                  color:T.accent, borderRadius:12, padding:"12px 8px",
+                  cursor:"pointer", fontSize:12, fontWeight:700, textAlign:"center",
+                }}>
+                  <span style={{ fontSize:20 }}>⬆</span>
+                  Import fișier
+                  <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+                    const file = e.target.files[0]; if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                      try {
+                        const data = JSON.parse(ev.target.result);
+                        const batches = Array.isArray(data) ? data : [];
+                        if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                        onImportBatches(batches);
+                        setImportLog(`✅ ${batches.length} batch-uri importate!`);
+                        setTimeout(() => setImportLog(""), 3000);
+                      } catch { setImportLog("❌ Eroare la citirea JSON"); }
+                    };
+                    reader.readAsText(file);
+                    e.target.value = "";
+                  }} />
+                </label>
+              </div>
             </div>
           ) : (
             Object.entries(batchesByDiff).map(([diff, batches]) => (
@@ -495,16 +545,20 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
           )}
 
           {total > 0 && (
-            <div style={{ display:"flex", gap:8, marginTop:4, width:"100%" }}>
+            <div style={{ display:"flex", gap:8, marginTop:8, width:"100%" }}>
               <button onClick={() => onStart(total, "ai")} style={{
                 background:`linear-gradient(135deg,#4c1d95,#6d28d9)`,
-                color:"#fff", padding:"13px 28px", fontSize:14, borderRadius:12,
+                color:"#fff", padding:"12px 0", fontSize:14, borderRadius:12,
                 border:"none", fontFamily:"'Outfit',sans-serif", fontWeight:700,
                 cursor:"pointer", flex:1,
               }}>
-                ▶ Joacă toate ({total} întrebări)
+                ▶ Joacă toate ({total})
               </button>
-              <button title="Exportă tot ca JSON" onClick={() => {
+            </div>
+          )}
+          {/* Import/Export row */}
+          {total > 0 && <div style={{ display:"flex", gap:8, marginTop:8, width:"100%" }}>
+            <button title="Exportă ca .uso" onClick={() => {
                 const names = generatedBatches.map(b => b.name).filter(Boolean);
                 const name = names.length
                   ? names.map(n => n.replace(/[^a-z0-9_\-]/gi,"_")).join("_")
@@ -513,12 +567,16 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                 const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
                 a.download = `${name}.uso`; a.click();
               }} style={{
-                background:"#0a1a10", border:"1px solid #22c55e44",
-                color:"#22c55e", borderRadius:12, padding:"13px 16px",
-                cursor:"pointer", fontSize:13, fontWeight:700, whiteSpace:"nowrap",
-              }}>⬇ Export</button>
-              <button title="Importă din URL" onClick={() => {
-                const url = prompt("URL către fișierul JSON:");
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:"#0a1a10", border:"1px solid #22c55e33",
+              color:"#22c55e", borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>⬇</span>
+              Export .uso
+            </button>
+            <button title="Importă din URL" onClick={() => {
+                const url = prompt("URL către fișierul .uso / .json:");
                 if (!url) return;
                 setImportLog("⏳ Se încarcă...");
                 fetch(url)
@@ -532,17 +590,23 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                   })
                   .catch(e => setImportLog(`❌ ${e.message}`));
               }} style={{
-                background:T.accent+"18", border:`1px solid ${T.accent}44`,
-                color:T.accent, borderRadius:12, padding:"13px 16px",
-                cursor:"pointer", fontSize:13, fontWeight:700, whiteSpace:"nowrap",
-              }}>🔗 URL</button>
-              <label title="Importă fișier JSON" style={{
-                background:T.accent+"18", border:`1px solid ${T.accent}44`,
-                color:T.accent, borderRadius:12, padding:"13px 16px",
-                cursor:"pointer", fontSize:13, fontWeight:700, whiteSpace:"nowrap",
-              }}>
-                ⬆ Import
-                <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:T.accent+"11", border:`1px solid ${T.accent}33`,
+              color:T.accent, borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>🔗</span>
+              Import URL
+            </button>
+            <label title="Importă fișier .uso" style={{
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:T.accent+"11", border:`1px solid ${T.accent}33`,
+              color:T.accent, borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>⬆</span>
+              Import fișier
+              <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
                   const file = e.target.files[0]; if (!file) return;
                   const reader = new FileReader();
                   reader.onload = ev => {
@@ -558,55 +622,8 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches,
                   reader.readAsText(file);
                   e.target.value = "";
                 }} />
-              </label>
-            </div>
-          )}
-          {!total && (
-            <div style={{ display:"flex", flexDirection:"column", gap:8, width:"100%" }}>
-              <button onClick={() => {
-                const url = prompt("URL către fișierul JSON:");
-                if (!url) return;
-                setImportLog("⏳ Se încarcă...");
-                fetch(url)
-                  .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-                  .then(data => {
-                    const batches = Array.isArray(data) ? data : [];
-                    if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
-                    onImportBatches(batches);
-                    setImportLog(`✅ ${batches.length} batch-uri importate din URL!`);
-                    setTimeout(() => setImportLog(""), 3000);
-                  })
-                  .catch(e => setImportLog(`❌ ${e.message}`));
-              }} style={{
-                background:T.accent+"18", border:`1px solid ${T.accent}44`,
-                color:T.accent, borderRadius:12, padding:"13px 16px",
-                cursor:"pointer", fontSize:13, fontWeight:700,
-              }}>🔗 Importă din URL</button>
-              <label style={{
-                background:T.accent+"18", border:`1px solid ${T.accent}44`,
-                color:T.accent, borderRadius:12, padding:"13px 16px",
-                cursor:"pointer", fontSize:13, fontWeight:700, textAlign:"center",
-              }}>
-                ⬆ Importă fișier (.json)
-                <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
-                  const file = e.target.files[0]; if (!file) return;
-                  const reader = new FileReader();
-                  reader.onload = ev => {
-                    try {
-                      const data = JSON.parse(ev.target.result);
-                      const batches = Array.isArray(data) ? data : [];
-                      if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
-                      onImportBatches(batches);
-                      setImportLog(`✅ ${batches.length} batch-uri importate!`);
-                      setTimeout(() => setImportLog(""), 3000);
-                    } catch { setImportLog("❌ Eroare la citirea JSON"); }
-                  };
-                  reader.readAsText(file);
-                  e.target.value = "";
-                }} />
-              </label>
-            </div>
-          )}
+            </label>
+          </div>}
           {importLog && (
             <div style={{
               fontSize:12, padding:"8px 12px", borderRadius:8, marginTop:4,

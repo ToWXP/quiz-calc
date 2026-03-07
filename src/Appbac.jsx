@@ -367,18 +367,18 @@ function Results({ score, total, history, onMenu, onRetry }) {
 }
 
 /* ─── MENU ───────────────────────────────────────────────── */
-function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }) {
+function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onImportBatches, onRenameBatch }) {
   const [count, setCount] = useState("20");
   const [difficulty, setDifficulty] = useState("easy");
 
   const isAI = difficulty === "ai";
-  const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem("github_token") || "");
   const [publishing, setPublishing] = useState(false);
-  const [publishLog, setPublishLog] = useState("");
-  const [showTokenInput, setShowTokenInput] = useState(false);
   const [deleteModal, setDeleteModal] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [deleteLog, setDeleteLog] = useState("");
+  const [renameModal, setRenameModal] = useState(null);
+  const [renameValue, setRenameValue] = useState("");
+  const [importLog, setImportLog] = useState("");
   // For AI tab: all questions flat
   const allAIQ = (generatedBatches || []).flatMap(b => b.questions);
   const activeQ = isAI ? allAIQ : (allQ[difficulty] || []);
@@ -467,10 +467,10 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                   }}>
                     <div style={{ flex:1 }}>
                       <div style={{ fontSize:13, color:T.text, fontWeight:600 }}>
-                        {batch.questions.length} întrebări
+                        {batch.name || `${batch.questions.length} întrebări`}
                       </div>
                       <div style={{ fontSize:11, color:T.muted, fontFamily:"'JetBrains Mono',monospace", marginTop:2 }}>
-                        {batch.date} • {batch.source}
+                        {batch.questions.length} întrebări • {batch.date} • {batch.source}
                       </div>
                     </div>
                     <button onClick={() => onStart(batch.questions.length, "ai_batch_"+batch.id)} style={{
@@ -478,23 +478,11 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                       color:T.green, borderRadius:7, padding:"5px 12px",
                       cursor:"pointer", fontSize:12, fontWeight:600,
                     }}>▶ Joacă</button>
-                    <button onClick={async () => {
-                      if (!githubToken) { setShowTokenInput(true); setPublishLog("Introdu GitHub Token mai jos!"); return; }
-                      setPublishing(true);
-                      setPublishLog("⏳ Se publică...");
-                      try {
-                        const n = await onPublishBatch(batch, githubToken);
-                        setPublishLog(`✅ ${n} întrebări publicate! Site-ul se actualizează în ~2 min.`);
-                      } catch(e) {
-                        setPublishLog(`❌ ${e.message}`);
-                      }
-                      setPublishing(false);
-                    }} title="Publică permanent pe site" disabled={publishing} style={{
+                    <button onClick={() => { setRenameModal(batch); setRenameValue(batch.name || ""); }} title="Redenumește" style={{
                       background:T.accent+"18", border:`1px solid ${T.accent}44`,
                       color:T.accent, borderRadius:7, padding:"5px 10px",
-                      cursor: publishing ? "default" : "pointer", fontSize:14, fontWeight:700,
-                      opacity: publishing ? 0.5 : 1,
-                    }}>+</button>
+                      cursor:"pointer", fontSize:13,
+                    }}>✏️</button>
                     <button onClick={() => { setDeleteModal(batch); setDeleteLog(""); }} style={{
                       background:"transparent", border:`1px solid ${T.red}44`,
                       color:T.red, borderRadius:7, padding:"5px 10px",
@@ -507,135 +495,145 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
           )}
 
           {total > 0 && (
-            <button onClick={() => onStart(total, "ai")} style={{
-              background:`linear-gradient(135deg,#4c1d95,#6d28d9)`,
-              color:"#fff", padding:"13px 28px", fontSize:14, borderRadius:12,
-              border:"none", fontFamily:"'Outfit',sans-serif", fontWeight:700,
-              cursor:"pointer", width:"100%", marginTop:4,
-            }}>
-              ▶ Joacă toate ({total} întrebări)
-            </button>
-          )}
-
-          {/* GitHub token input for publish */}
-          {showTokenInput && (
-            <div style={{
-              background:T.surface, border:`1px solid ${T.accent}44`,
-              borderRadius:10, padding:14, marginTop:8,
-            }}>
-              <div style={{ fontSize:12, color:T.muted, marginBottom:8 }}>
-                GitHub Personal Access Token (bifează <strong style={{color:T.accent}}>repo</strong>)
-              </div>
-              <input
-                type="password" placeholder="ghp_..." autoComplete="off"
-                value={githubToken} onChange={e => setGithubToken(e.target.value)}
-                style={{
-                  width:"100%", background:T.card, border:`1px solid ${T.border}`,
-                  borderRadius:7, padding:"8px 12px", color:T.text, fontSize:13,
-                  outline:"none", boxSizing:"border-box", marginBottom:8,
-                }}
-              />
-              <div style={{ fontSize:11, color:T.muted }}>
-                <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer"
-                   style={{ color:T.accent }}>github.com/settings/tokens</a>
-                {" "}• Se șterge când închizi tab-ul
-              </div>
+            <div style={{ display:"flex", gap:8, marginTop:8, width:"100%" }}>
+              <button onClick={() => onStart(total, "ai")} style={{
+                background:`linear-gradient(135deg,#4c1d95,#6d28d9)`,
+                color:"#fff", padding:"12px 0", fontSize:14, borderRadius:12,
+                border:"none", fontFamily:"'Outfit',sans-serif", fontWeight:700,
+                cursor:"pointer", flex:1,
+              }}>
+                ▶ Joacă toate ({total})
+              </button>
             </div>
           )}
-          {publishLog && (
+          {/* Import/Export row */}
+          <div style={{ display:"flex", gap:8, marginTop:8, width:"100%" }}>
+            <button title="Exportă ca .uso" onClick={() => {
+                const names = generatedBatches.map(b => b.name).filter(Boolean);
+                const name = names.length
+                  ? names.map(n => n.replace(/[^a-z0-9_\-]/gi,"_")).join("_")
+                  : `ai_questions_${new Date().toISOString().slice(0,10)}`;
+                const blob = new Blob([JSON.stringify(generatedBatches, null, 2)], { type:"application/json" });
+                const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+                a.download = `${name}.uso`; a.click();
+              }} style={{
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:"#0a1a10", border:"1px solid #22c55e33",
+              color:"#22c55e", borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>⬇</span>
+              Export .uso
+            </button>
+            <button title="Importă din URL" onClick={() => {
+                const url = prompt("URL către fișierul .uso / .json:");
+                if (!url) return;
+                setImportLog("⏳ Se încarcă...");
+                fetch(url)
+                  .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+                  .then(data => {
+                    const batches = Array.isArray(data) ? data : [];
+                    if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                    onImportBatches(batches);
+                    setImportLog(`✅ ${batches.length} batch-uri importate din URL!`);
+                    setTimeout(() => setImportLog(""), 3000);
+                  })
+                  .catch(e => setImportLog(`❌ ${e.message}`));
+              }} style={{
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:T.accent+"11", border:`1px solid ${T.accent}33`,
+              color:T.accent, borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>🔗</span>
+              Import URL
+            </button>
+            <label title="Importă fișier .uso" style={{
+              flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+              background:T.accent+"11", border:`1px solid ${T.accent}33`,
+              color:T.accent, borderRadius:12, padding:"10px 8px",
+              cursor:"pointer", fontSize:11, fontWeight:700,
+            }}>
+              <span style={{ fontSize:18 }}>⬆</span>
+              Import fișier
+              <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+                  const file = e.target.files[0]; if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = ev => {
+                    try {
+                      const data = JSON.parse(ev.target.result);
+                      const batches = Array.isArray(data) ? data : [];
+                      if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                      onImportBatches(batches);
+                      setImportLog(`✅ ${batches.length} batch-uri importate!`);
+                      setTimeout(() => setImportLog(""), 3000);
+                    } catch { setImportLog("❌ Eroare la citirea JSON"); }
+                  };
+                  reader.readAsText(file);
+                  e.target.value = "";
+                }} />
+            </label>
+          </div>
+                    {!total && (
+            <div style={{ display:"flex", gap:8, width:"100%", marginTop:4 }}>
+              <button onClick={() => {
+                const url = prompt("URL către fișierul .uso / .json:");
+                if (!url) return;
+                setImportLog("⏳ Se încarcă...");
+                fetch(url)
+                  .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+                  .then(data => {
+                    const batches = Array.isArray(data) ? data : [];
+                    if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                    onImportBatches(batches);
+                    setImportLog(`✅ ${batches.length} batch-uri importate din URL!`);
+                    setTimeout(() => setImportLog(""), 3000);
+                  })
+                  .catch(e => setImportLog(`❌ ${e.message}`));
+              }} style={{
+                flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+                background:T.accent+"11", border:`1px solid ${T.accent}33`,
+                color:T.accent, borderRadius:14, padding:"16px 8px",
+                cursor:"pointer", fontSize:12, fontWeight:700,
+              }}>
+                <span style={{ fontSize:24 }}>🔗</span>
+                Import din URL
+              </button>
+              <label style={{
+                flex:1, display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+                background:T.accent+"11", border:`1px solid ${T.accent}33`,
+                color:T.accent, borderRadius:14, padding:"16px 8px",
+                cursor:"pointer", fontSize:12, fontWeight:700, textAlign:"center",
+              }}>
+                <span style={{ fontSize:24 }}>⬆</span>
+                Import fișier .uso
+                <input type="file" accept=".json,.uso" style={{ display:"none" }} onChange={e => {
+                  const file = e.target.files[0]; if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = ev => {
+                    try {
+                      const data = JSON.parse(ev.target.result);
+                      const batches = Array.isArray(data) ? data : [];
+                      if (!batches.length) { setImportLog("❌ JSON invalid sau gol"); return; }
+                      onImportBatches(batches);
+                      setImportLog(`✅ ${batches.length} batch-uri importate!`);
+                      setTimeout(() => setImportLog(""), 3000);
+                    } catch { setImportLog("❌ Eroare la citirea JSON"); }
+                  };
+                  reader.readAsText(file);
+                  e.target.value = "";
+                }} />
+              </label>
+            </div>
+          )}
+          {importLog && (
             <div style={{
               fontSize:12, padding:"8px 12px", borderRadius:8, marginTop:4,
-              background: publishLog.startsWith("✅") ? "#061c10" : "#1c0606",
-              color: publishLog.startsWith("✅") ? T.green : T.red,
-              border: `1px solid ${publishLog.startsWith("✅") ? T.green : T.red}44`,
+              background: importLog.startsWith("✅") ? "#061c10" : importLog.startsWith("⏳") ? "#1a1a24" : "#1c0606",
+              color: importLog.startsWith("✅") ? T.green : importLog.startsWith("⏳") ? T.yellow : T.red,
+              border: `1px solid ${importLog.startsWith("✅") ? T.green : importLog.startsWith("⏳") ? T.yellow : T.red}44`,
               fontFamily:"'JetBrains Mono',monospace",
-            }}>{publishLog}</div>
-          )}
-
-          {/* Delete modal */}
-          {deleteModal && (
-            <div style={{
-              position:"fixed", inset:0, background:"#000b",
-              display:"flex", alignItems:"center", justifyContent:"center", zIndex:999,
-            }} onClick={() => !deleting && setDeleteModal(null)}>
-              <div onClick={e => e.stopPropagation()} style={{
-                background:"#0f0f14", border:`1px solid ${T.red}66`,
-                borderRadius:14, padding:24, width:320, maxWidth:"90vw",
-              }}>
-                <div style={{ fontSize:17, fontWeight:700, color:T.text, marginBottom:4 }}>🗑 Șterge batch</div>
-                <div style={{ fontSize:12, color:T.muted, marginBottom:18 }}>
-                  {deleteModal.questions?.length} întrebări • {deleteModal.date}
-                </div>
-                <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-                  <button disabled={deleting} onClick={() => {
-                    onDeleteBatch(deleteModal.id);
-                    setDeleteModal(null);
-                  }} style={{
-                    background:"#1a1a24", border:`1px solid ${T.border}`,
-                    color:T.text, borderRadius:9, padding:"10px 14px",
-                    cursor:"pointer", fontSize:13, textAlign:"left",
-                  }}>
-                    🖥 Șterge doar local
-                    <div style={{ fontSize:11, color:T.muted, marginTop:2 }}>Dispare din browserul tău</div>
-                  </button>
-                  <button disabled={deleting} onClick={async () => {
-                    if (!githubToken) { setDeleteLog("⚠ Introdu GitHub Token mai jos!"); setShowTokenInput(true); return; }
-                    setDeleting(true);
-                    setDeleteLog("⏳ Se șterge de pe GitHub...");
-                    try {
-                      const REPO = "ToWXP/quiz-calc";
-                      const FILE = "public/ai_questions.json";
-                      const headers = {
-                        "Authorization": `token ${githubToken}`,
-                        "Accept": "application/vnd.github.v3+json",
-                        "Content-Type": "application/json",
-                      };
-                      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
-                      if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
-                      const fileData = await fileResp.json();
-                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
-                      const updated = currentBatches.filter(b => b.id !== deleteModal.id);
-                      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
-                      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-                        method:"PUT", headers,
-                        body: JSON.stringify({
-                          message: `Delete AI batch (${deleteModal.date})`,
-                          content: newContent, sha: fileData.sha,
-                        }),
-                      });
-                      if (!commitResp.ok) { const e = await commitResp.json(); throw new Error(e.message); }
-                      sessionStorage.setItem("github_token", githubToken);
-                      onDeleteBatch(deleteModal.id);
-                      setDeleteModal(null);
-                      setPublishLog("✅ Șters de pe GitHub! Se actualizează în ~2 min.");
-                    } catch(e) {
-                      setDeleteLog(`❌ ${e.message}`);
-                    }
-                    setDeleting(false);
-                  }} style={{
-                    background:"#1c0606", border:`1px solid ${T.red}`,
-                    color:T.red, borderRadius:9, padding:"10px 14px",
-                    cursor: deleting ? "default" : "pointer", fontSize:13, textAlign:"left",
-                    opacity: deleting ? 0.6 : 1,
-                  }}>
-                    🌐 Șterge local + de pe site
-                    <div style={{ fontSize:11, color:T.red+"99", marginTop:2 }}>Dispare pentru toți utilizatorii</div>
-                  </button>
-                  {deleteLog && (
-                    <div style={{ fontSize:11, padding:"6px 10px", borderRadius:7,
-                      background: deleteLog.startsWith("❌") ? "#1c0606" : deleteLog.startsWith("✅") ? "#061c10" : "#1a1a24",
-                      color: deleteLog.startsWith("❌") ? T.red : deleteLog.startsWith("✅") ? T.green : T.yellow,
-                      fontFamily:"'JetBrains Mono',monospace",
-                    }}>{deleteLog}</div>
-                  )}
-                  <button disabled={deleting} onClick={() => setDeleteModal(null)} style={{
-                    background:"transparent", border:`1px solid ${T.border}`,
-                    color:T.muted, borderRadius:9, padding:"8px 14px",
-                    cursor:"pointer", fontSize:13,
-                  }}>Anulează</button>
-                </div>
-              </div>
-            </div>
+            }}>{importLog}</div>
           )}
 
           {/* Delete modal */}
@@ -650,7 +648,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
               }}>
                 <div style={{ fontSize:18, fontWeight:700, color:T.text, marginBottom:6 }}>🗑 Șterge batch</div>
                 <div style={{ fontSize:13, color:T.muted, marginBottom:20 }}>
-                  {deleteModal.questions.length} întrebări • {deleteModal.date}
+                  {deleteModal.name || `${deleteModal.questions.length} întrebări`} • {deleteModal.date}
                 </div>
                 <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                   <button disabled={deleting} onClick={() => {
@@ -661,52 +659,8 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                     color:T.text, borderRadius:9, padding:"10px 16px",
                     cursor:"pointer", fontSize:13, textAlign:"left",
                   }}>
-                    🖥 Șterge doar local
+                    🗑 Confirmă ștergerea
                     <div style={{ fontSize:11, color:T.muted, marginTop:2 }}>Dispare din browserul tău</div>
-                  </button>
-                  <button disabled={deleting} onClick={async () => {
-                    if (!githubToken) { setDeleteLog("Introdu GitHub Token!"); setShowTokenInput(true); return; }
-                    setDeleting(true);
-                    setDeleteLog("⏳ Se șterge de pe GitHub...");
-                    try {
-                      const REPO = "ToWXP/quiz-calc";
-                      const FILE = "public/ai_questions.json";
-                      const headers = {
-                        "Authorization": `token ${githubToken}`,
-                        "Accept": "application/vnd.github.v3+json",
-                        "Content-Type": "application/json",
-                      };
-                      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
-                      if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
-                      const fileData = await fileResp.json();
-                      const sha = fileData.sha;
-                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
-                      const updated = currentBatches.filter(b => b.id !== deleteModal.id);
-                      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
-                      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-                        method:"PUT", headers,
-                        body: JSON.stringify({
-                          message: `Delete AI batch ${deleteModal.id}`,
-                          content: newContent, sha,
-                        }),
-                      });
-                      if (!commitResp.ok) { const e = await commitResp.json(); throw new Error(e.message); }
-                      sessionStorage.setItem("github_token", githubToken);
-                      onDeleteBatch(deleteModal.id);
-                      setDeleteModal(null);
-                      setPublishLog("✅ Șters de pe GitHub! Se actualizează în ~2 min.");
-                    } catch(e) {
-                      setDeleteLog(`❌ ${e.message}`);
-                    }
-                    setDeleting(false);
-                  }} style={{
-                    background:"#1c0606", border:`1px solid ${T.red}`,
-                    color:T.red, borderRadius:9, padding:"10px 16px",
-                    cursor: deleting ? "default" : "pointer", fontSize:13, textAlign:"left",
-                    opacity: deleting ? 0.6 : 1,
-                  }}>
-                    🌐 Șterge local + de pe site
-                    <div style={{ fontSize:11, color:T.red+"99", marginTop:2 }}>Dispare pentru toți utilizatorii</div>
                   </button>
                   {deleteLog && (
                     <div style={{ fontSize:11, color: deleteLog.startsWith("❌") ? T.red : T.green,
@@ -716,6 +670,47 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
                     background:"transparent", border:`1px solid ${T.border}`,
                     color:T.muted, borderRadius:9, padding:"8px 16px",
                     cursor:"pointer", fontSize:13,
+                  }}>Anulează</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Rename modal */}
+          {renameModal && (
+            <div style={{
+              position:"fixed", inset:0, background:"#000a",
+              display:"flex", alignItems:"center", justifyContent:"center", zIndex:999,
+            }} onClick={() => setRenameModal(null)}>
+              <div onClick={e => e.stopPropagation()} style={{
+                background:T.card, border:`1px solid ${T.accent}66`,
+                borderRadius:14, padding:24, width:320, maxWidth:"90vw",
+              }}>
+                <div style={{ fontSize:18, fontWeight:700, color:T.text, marginBottom:16 }}>✏️ Redenumește batch</div>
+                <input
+                  autoFocus
+                  value={renameValue}
+                  onChange={e => setRenameValue(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") { onRenameBatch(renameModal.id, renameValue); setRenameModal(null); }
+                    if (e.key === "Escape") setRenameModal(null);
+                  }}
+                  placeholder={`${renameModal.questions.length} întrebări`}
+                  style={{
+                    width:"100%", background:T.surface, border:`1px solid ${T.accent}`,
+                    borderRadius:9, padding:"10px 14px", color:T.text, fontSize:14,
+                    outline:"none", boxSizing:"border-box", marginBottom:12,
+                    fontFamily:"'Outfit',sans-serif",
+                  }}
+                />
+                <div style={{ display:"flex", gap:8 }}>
+                  <button onClick={() => { onRenameBatch(renameModal.id, renameValue); setRenameModal(null); }} style={{
+                    flex:1, background:T.accent+"22", border:`1px solid ${T.accent}`,
+                    color:T.accent, borderRadius:9, padding:"9px", cursor:"pointer", fontSize:13, fontWeight:600,
+                  }}>Salvează</button>
+                  <button onClick={() => setRenameModal(null)} style={{
+                    background:"transparent", border:`1px solid ${T.border}`,
+                    color:T.muted, borderRadius:9, padding:"9px 16px", cursor:"pointer", fontSize:13,
                   }}>Anulează</button>
                 </div>
               </div>
@@ -781,8 +776,6 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }
 function AdminPanel({ allQ, chapters, onAddQuestions, onPlayNow, onBack }) {
   const [step, setStep] = useState("config");
   const [apiKey, setApiKey] = useState(() => sessionStorage.getItem("gemini_key") || "");
-  const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem("github_token") || "");
-  const [publishing, setPublishing] = useState(false);
   const [inputMode, setInputMode] = useState("pdf"); // "pdf" | "text" | "multi" | "chapters"
   const [pdfFiles, setPdfFiles] = useState([]); // [{file, name}]
   const [pastedText, setPastedText] = useState("");
@@ -995,85 +988,7 @@ ${txt}` });
     a.click();
   }
 
-  async function publishToGitHub(allBatches) {
-    if (!githubToken) { addLog("Introdu GitHub Token!", "error"); return; }
-    setPublishing(true);
-    addLog("Conectez la GitHub...", "info");
 
-    try {
-      // Step 1: get current questions.json SHA + content
-      const REPO = "ToWXP/quiz-calc";
-      const FILE = "public/questions.json";
-      const headers = {
-        "Authorization": `token ${githubToken}`,
-        "Accept": "application/vnd.github.v3+json",
-        "Content-Type": "application/json",
-      };
-
-      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
-      if (!fileResp.ok) { addLog(`Eroare GitHub: ${fileResp.status} ${fileResp.statusText}`, "error"); setPublishing(false); return; }
-      const fileData = await fileResp.json();
-      const sha = fileData.sha;
-
-      // Step 2: decode current questions.json
-      const currentJSON = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
-
-      // Step 3: merge all batches into correct difficulty pools, renumber IDs ascending from newest
-      // Collect all AI questions grouped by difficulty
-      const byDiff = { easy: [], medium: [], hard: [] };
-      // Sort batches newest first
-      const sorted = [...allBatches].sort((a, b) => b.id - a.id);
-      sorted.forEach(batch => {
-        const d = batch.difficulty;
-        if (byDiff[d]) byDiff[d].push(...batch.questions);
-      });
-
-      // Merge: new AI questions first (newest), then existing
-      const merged = {};
-      for (const diff of ["easy", "medium", "hard"]) {
-        const existing = currentJSON[diff] || [];
-        const aiQ = byDiff[diff];
-        // Remove duplicates by question text
-        const existingTexts = new Set(existing.map(q => q.question));
-        const newOnly = aiQ.filter(q => !existingTexts.has(q.question));
-        merged[diff] = [...newOnly, ...existing];
-      }
-
-      // Renumber IDs: start from 1, newest first within each pool
-      let idCounter = 1;
-      for (const diff of ["easy", "medium", "hard"]) {
-        merged[diff] = merged[diff].map(q => ({ ...q, id: idCounter++ }));
-      }
-
-      const totalNew = Object.values(byDiff).reduce((s, a) => s + a.length, 0);
-      addLog(`Adaug ${totalNew} întrebări noi. Totaluri: easy=${merged.easy.length}, medium=${merged.medium.length}, hard=${merged.hard.length}`, "info");
-
-      // Step 4: commit
-      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
-      const now = new Date().toLocaleString("ro-RO");
-      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-        method: "PUT",
-        headers,
-        body: JSON.stringify({
-          message: `Add ${totalNew} AI-generated questions (${now})`,
-          content: newContent,
-          sha,
-        }),
-      });
-
-      if (!commitResp.ok) {
-        const err = await commitResp.json();
-        addLog(`Eroare commit: ${err.message}`, "error");
-        setPublishing(false); return;
-      }
-
-      sessionStorage.setItem("github_token", githubToken);
-      addLog("✅ Publicat pe GitHub! Site-ul se va actualiza în ~2 minute.", "success");
-    } catch(e) {
-      addLog(`Eroare: ${e.message}`, "error");
-    }
-    setPublishing(false);
-  }
 
   const S = {
     wrap: { width:"100%", maxWidth:560, margin:"0 auto" },
@@ -1115,15 +1030,6 @@ ${txt}` });
             <a href="https://aistudio.google.com" target="_blank" rel="noreferrer" style={{ color:T.accent }}>
               aistudio.google.com
             </a>{" "}• Nu se salvează permanent
-          </div>
-        </div>
-
-        <div>
-          <label style={S.label}>GitHub Token (pentru publicare permanentă)</label>
-          <input style={S.input} type="password" placeholder="ghp_..." autoComplete="off"
-            value={githubToken} onChange={e => setGithubToken(e.target.value)} />
-          <div style={{ fontSize:11, color:T.muted, marginTop:4 }}>
-            github.com → Settings → Developer Settings → Personal Access Tokens → bifează <strong style={{color:T.accent}}>repo</strong>
           </div>
         </div>
 
@@ -1364,8 +1270,9 @@ export default function App() {
       // Merge remote AI batches with local ones (remote takes priority, deduplicate by id)
       const localBatches = JSON.parse(localStorage.getItem("generated_batches") || "[]");
       const remoteIds = new Set(aiData.map(b => b.id));
-      const localOnly = localBatches.filter(b => !remoteIds.has(b.id));
-      setGeneratedBatches([...aiData, ...localOnly]);
+      const localOnly = localBatches.filter(b => !remoteIds.has(b.id)).map(b => ({...b, _local: true}));
+      const remoteMarked = aiData.map(b => ({...b, _local: false}));
+      setGeneratedBatches([...remoteMarked, ...localOnly]);
       setScreen("menu");
     }).catch(e => { setError(e.message); setScreen("error"); });
   }, []);
@@ -1386,52 +1293,16 @@ export default function App() {
     saveBatches(generatedBatches.filter(b => b.id !== id));
   }
 
-  async function publishBatch(batch, githubToken) {
-    const REPO = "ToWXP/quiz-calc";
-    const FILE = "public/ai_questions.json";
-    const headers = {
-      "Authorization": `token ${githubToken}`,
-      "Accept": "application/vnd.github.v3+json",
-      "Content-Type": "application/json",
-    };
+  function importBatches(batches) {
+    const existingIds = new Set(generatedBatches.map(b => b.id));
+    const newBatches = batches.filter(b => !existingIds.has(b.id));
+    const merged = [...generatedBatches, ...newBatches];
+    saveBatches(merged);
+  }
 
-    // Get current ai_questions.json (create if doesn't exist)
-    let sha = null;
-    let currentBatches = [];
-    const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
-    if (fileResp.ok) {
-      const fileData = await fileResp.json();
-      sha = fileData.sha;
-      currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
-    } else if (fileResp.status !== 404) {
-      throw new Error(`GitHub: ${fileResp.status} ${fileResp.statusText}`);
-    }
-
-    // Check duplicate
-    const existingIds = new Set(currentBatches.map(b => b.id));
-    if (existingIds.has(batch.id)) throw new Error("Acest batch e deja publicat!");
-
-    // Add new batch at top (newest first)
-    const updated = [batch, ...currentBatches];
-
-    const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
-    const now = new Date().toLocaleString("ro-RO");
-
-    const body = {
-      message: `Add AI batch: ${batch.questions.length} questions (${batch.difficulty}, ${now})`,
-      content: newContent,
-    };
-    if (sha) body.sha = sha;
-
-    const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-      method: "PUT", headers, body: JSON.stringify(body),
-    });
-    if (!commitResp.ok) {
-      const err = await commitResp.json();
-      throw new Error(`Commit error: ${err.message}`);
-    }
-    sessionStorage.setItem("github_token", githubToken);
-    return batch.questions.length;
+  function renameBatch(batchId, newName) {
+    const updated = generatedBatches.map(b => b.id === batchId ? {...b, name: newName} : b);
+    saveBatches(updated);
   }
 
   function start(count, diff) {
@@ -1503,7 +1374,8 @@ export default function App() {
             generatedBatches={generatedBatches}
             onStart={start}
             onDeleteBatch={deleteBatch}
-            onPublishBatch={publishBatch}
+            onImportBatches={importBatches}
+            onRenameBatch={renameBatch}
           />
           <button
             onClick={() => setScreen("admin")}
