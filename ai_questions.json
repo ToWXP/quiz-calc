@@ -1,1 +1,171 @@
-[]
+[
+  {
+    "id": 1772905310546,
+    "difficulty": "hard",
+    "date": "07.03.2026 19:41",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 10544,
+        "topic": "Procese și Resurse",
+        "type": "single",
+        "question": "Care dintre următoarele afirmații descrie cel mai precis rolul sistemului de operare în gestionarea resurselor partajate între procese, conform materialului de studiu?",
+        "options": [
+          "Permite accesul concurent fără restricții pentru a maximiza performanța generală a sistemului.",
+          "Asigură izolarea completă a resurselor pentru fiecare proces, fără excepții sau partajări posibile.",
+          "Arbitrează accesul la resurse partajate pentru a preveni suprascrierea informațiilor sau coruperea datelor.",
+          "Limitează numărul de procese care pot accesa simultan o resursă partajată la un singur proces."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 10545,
+        "topic": "Programe și Procese",
+        "type": "single",
+        "question": "De ce este considerată o aplicație precum Google Chrome compusă din mai multe procese, chiar dacă pornește dintr-un singur fișier executabil?",
+        "options": [
+          "Sistemul de operare impune o astfel de arhitectură pentru orice aplicație complexă, indiferent de design.",
+          "Fiecare proces alocă independent resurse hardware dedicate, separate fizic, pentru o stabilitate sporită.",
+          "Simplifică dezvoltarea și mentenanța, permițând codului să ruleze în mai multe medii de execuție izolate.",
+          "Permite izolarea erorilor la nivelul unui tab sau componente și utilizarea eficientă a resurselor per componentă."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 10546,
+        "topic": "Procese Daemon și Interactivitate",
+        "type": "multi",
+        "question": "Care dintre următoarele afirmații despre procesele daemon în Linux sunt corecte, conform materialului de studiu?",
+        "options": [
+          "Rulează în background, fără interacțiune directă cu utilizatorul, și oferă servicii sistemului.",
+          "Au întotdeauna procesul `init` ca părinte direct, încă de la momentul inițial al pornirii lor.",
+          "Pot fi create de utilizatori pentru a rula independent de shell-ul curent, detașate de terminal.",
+          "Sunt procese interactive cu o interfață grafică proprie, dar fără un terminal asociat direct.",
+          "Descriptorii lor standard referă întotdeauna intrarea `/dev/null` pentru a asigura non-interactivitatea."
+        ],
+        "answers": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": 10547,
+        "topic": "Starea Proceselor și Prioritatea",
+        "type": "single",
+        "question": "Care este semnificația unei valori ridicate a 'load average' pe un sistem Linux, așa cum este descrisă în material?",
+        "options": [
+          "Arată un număr mare de procese gata de execuție (ready), dar care așteaptă să fie planificate pe CPU.",
+          "Indică un număr mare de procese blocate (sleeping) care așteaptă finalizarea operațiilor de I/O.",
+          "Semnifică o cantitate mare de memorie virtuală utilizată excesiv de procesele active în sistem.",
+          "Denotă o rată ridicată de erori de sistem cauzate de procese instabile sau maligne rulate."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 10548,
+        "topic": "Ierarhia de Procese",
+        "type": "single",
+        "question": "În contextul unei ierarhii de procese Linux, ce rol fundamental are procesul `init` (sau `systemd`) în cazul proceselor orfane, conform materialului?",
+        "options": [
+          "Îi trimite semnalul SIGKILL pentru a elibera imediat resursele ocupate de acestea în sistem.",
+          "Le modifică prioritatea de rulare (valoarea nice) pentru a le integra mai eficient în sistemul de operare.",
+          "Le izolează într-un grup de procese separat, fără un părinte direct, pentru a preveni instabilitatea generală.",
+          "Le adoptă, devenind noul lor proces părinte, pentru a menține integritatea și coerența ierarhiei de procese."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 10549,
+        "topic": "Procese și Fișiere",
+        "type": "single",
+        "question": "De ce un editor de text precum Vim, chiar și atunci când editează un fișier, nu menține o referință directă deschisă către fișierul respectiv în tabela sa de descriptori, așa cum s-ar putea aștepta inițial?",
+        "options": [
+          "Pentru a permite altor procese să acceseze fișierul concomitent, fără blocaje sau întârzieri.",
+          "Optimizează performanța, lucrând cu un buffer în memorie și scriind pe disc doar la salvare explicită.",
+          "Sistemul de operare interzice editorilor să mențină referințe deschise la fișiere pe termen lung.",
+          "Utilizează un mecanism de fișiere temporare ascunse, fără descriptori expliciți, pentru securitate."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 10550,
+        "topic": "Semnale și Terminarea Proceselor",
+        "type": "single",
+        "question": "Un utilizator rulează o aplicație grafică în foreground într-un terminal și dorește să o închidă rapid, dar fără a lăsa procese reziduale în background. Ce combinație de taste este cea mai adecvată pentru acest scop, ca primă încercare, conform recomandărilor din text?",
+        "options": [
+          "Ctrl+Z, deoarece suspendă procesul și îl mută în background, permițând apoi închiderea manuală.",
+          "Ctrl+C, deoarece transmite semnalul SIGINT pentru a întrerupe execuția procesului curent.",
+          "Ctrl+D, deoarece închide shell-ul curent și, implicit, termină toate procesele asociate acestuia.",
+          "Ctrl+\\, deoarece transmite semnalul SIGQUIT, care este mai puternic decât SIGINT, forțând terminarea."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 10551,
+        "topic": "Comunicarea între Procese",
+        "type": "multi",
+        "question": "Care dintre următoarele afirmații descriu corect mecanismele de comunicare și interacțiune între procese, conform materialului de studiu?",
+        "options": [
+          "Procesele pot partaja anumite resurse, dar sistemul de operare arbitrează accesul pentru a asigura integritatea.",
+          "Pipe-urile permit transferul direct al ieșirii standard a unui proces către intrarea standard a altuia, eficientizând fluxul.",
+          "Semnalele sunt folosite exclusiv pentru terminarea forțată a proceselor de către sistem, fără alte roluri de notificare.",
+          "Redirectarea în fișiere este un mecanism implicit de comunicare între procese înlănțuite, fără necesitatea pipe-urilor.",
+          "Un proces poate accesa resursele oricărui alt proces, dacă are același UID, fără restricții suplimentare."
+        ],
+        "answers": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 10552,
+        "topic": "Detașarea de Terminal",
+        "type": "multi",
+        "question": "Care sunt motivele principale pentru utilizarea utilitarelor precum `nohup`, `disown`, `screen` sau `tmux` în gestionarea proceselor, conform materialului de studiu?",
+        "options": [
+          "Pentru a asigura rularea continuă a proceselor interactive după închiderea shell-ului, fără întrerupere.",
+          "Pentru a permite unui proces să ignore semnalul SIGHUP la închiderea terminalului, prevenind terminarea.",
+          "Pentru a îmbunătăți performanța procesorului prin alocarea de nuclee dedicate fiecărui proces detașat.",
+          "Pentru a permite reconectarea la o sesiune de terminal activă, după deconectare, menținând interactivitatea.",
+          "Pentru a schimba UID-ul unui proces și a-i acorda privilegii administrative extinse în sistem."
+        ],
+        "answers": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": 10553,
+        "topic": "Foreground și Background",
+        "type": "order",
+        "question": "Ordonează corect pașii pentru a rula o aplicație GUI (de exemplu, `emacs`) în background, apoi a o readuce în foreground, conform secvenței din materialul de studiu.",
+        "options": [
+          "Utilizează comanda `bg` pentru a continua execuția procesului în background, în starea 'running'.",
+          "Lansează aplicația `emacs` direct în terminal, aceasta rulând inițial în foreground.",
+          "Folosește comanda `fg` pentru a readuce procesul din background în foreground, cu controlul terminalului.",
+          "Apasă combinația de taste `Ctrl+Z` pentru a suspenda și a muta procesul în background, în starea 'stopped'."
+        ],
+        "answers": [
+          1,
+          3,
+          0,
+          2
+        ]
+      }
+    ],
+    "_local": true
+  }
+]
