@@ -600,7 +600,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch, 
                       const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
                       if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
                       const fileData = await fileResp.json();
-                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+                      const currentBatches = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, "")))));
                       const updated = currentBatches.filter(b => b.id !== deleteModal.id);
                       const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
                       const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
@@ -687,7 +687,7 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch, 
                       if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
                       const fileData = await fileResp.json();
                       const sha = fileData.sha;
-                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+                      const currentBatches = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, "")))));
                       const updated = currentBatches.filter(b => b.id !== deleteModal.id);
                       const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
                       const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
@@ -1023,7 +1023,7 @@ ${txt}` });
       const sha = fileData.sha;
 
       // Step 2: decode current questions.json
-      const currentJSON = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+      const currentJSON = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, "")))));
 
       // Step 3: merge all batches into correct difficulty pools, renumber IDs ascending from newest
       // Collect all AI questions grouped by difficulty
@@ -1414,7 +1414,7 @@ export default function App() {
     if (fileResp.ok) {
       const fileData = await fileResp.json();
       sha = fileData.sha;
-      currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+      currentBatches = JSON.parse(decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, "")))));
     } else if (fileResp.status !== 404) {
       throw new Error(`GitHub: ${fileResp.status} ${fileResp.statusText}`);
     }

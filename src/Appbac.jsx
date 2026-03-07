@@ -367,12 +367,18 @@ function Results({ score, total, history, onMenu, onRetry }) {
 }
 
 /* ─── MENU ───────────────────────────────────────────────── */
-function Menu({ allQ, generatedBatches, onStart, onDeleteBatch }) {
+function Menu({ allQ, generatedBatches, onStart, onDeleteBatch, onPublishBatch }) {
   const [count, setCount] = useState("20");
   const [difficulty, setDifficulty] = useState("easy");
 
   const isAI = difficulty === "ai";
-
+  const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem("github_token") || "");
+  const [publishing, setPublishing] = useState(false);
+  const [publishLog, setPublishLog] = useState("");
+  const [showTokenInput, setShowTokenInput] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteLog, setDeleteLog] = useState("");
   // For AI tab: all questions flat
   const allAIQ = (generatedBatches || []).flatMap(b => b.questions);
   const activeQ = isAI ? allAIQ : (allQ[difficulty] || []);
@@ -472,7 +478,24 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch }) {
                       color:T.green, borderRadius:7, padding:"5px 12px",
                       cursor:"pointer", fontSize:12, fontWeight:600,
                     }}>▶ Joacă</button>
-                    <button onClick={() => onDeleteBatch(batch.id)} style={{
+                    <button onClick={async () => {
+                      if (!githubToken) { setShowTokenInput(true); setPublishLog("Introdu GitHub Token mai jos!"); return; }
+                      setPublishing(true);
+                      setPublishLog("⏳ Se publică...");
+                      try {
+                        const n = await onPublishBatch(batch, githubToken);
+                        setPublishLog(`✅ ${n} întrebări publicate! Site-ul se actualizează în ~2 min.`);
+                      } catch(e) {
+                        setPublishLog(`❌ ${e.message}`);
+                      }
+                      setPublishing(false);
+                    }} title="Publică permanent pe site" disabled={publishing} style={{
+                      background:T.accent+"18", border:`1px solid ${T.accent}44`,
+                      color:T.accent, borderRadius:7, padding:"5px 10px",
+                      cursor: publishing ? "default" : "pointer", fontSize:14, fontWeight:700,
+                      opacity: publishing ? 0.5 : 1,
+                    }}>+</button>
+                    <button onClick={() => { setDeleteModal(batch); setDeleteLog(""); }} style={{
                       background:"transparent", border:`1px solid ${T.red}44`,
                       color:T.red, borderRadius:7, padding:"5px 10px",
                       cursor:"pointer", fontSize:12,
@@ -492,6 +515,211 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch }) {
             }}>
               ▶ Joacă toate ({total} întrebări)
             </button>
+          )}
+
+          {/* GitHub token input for publish */}
+          {showTokenInput && (
+            <div style={{
+              background:T.surface, border:`1px solid ${T.accent}44`,
+              borderRadius:10, padding:14, marginTop:8,
+            }}>
+              <div style={{ fontSize:12, color:T.muted, marginBottom:8 }}>
+                GitHub Personal Access Token (bifează <strong style={{color:T.accent}}>repo</strong>)
+              </div>
+              <input
+                type="password" placeholder="ghp_..." autoComplete="off"
+                value={githubToken} onChange={e => setGithubToken(e.target.value)}
+                style={{
+                  width:"100%", background:T.card, border:`1px solid ${T.border}`,
+                  borderRadius:7, padding:"8px 12px", color:T.text, fontSize:13,
+                  outline:"none", boxSizing:"border-box", marginBottom:8,
+                }}
+              />
+              <div style={{ fontSize:11, color:T.muted }}>
+                <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer"
+                   style={{ color:T.accent }}>github.com/settings/tokens</a>
+                {" "}• Se șterge când închizi tab-ul
+              </div>
+            </div>
+          )}
+          {publishLog && (
+            <div style={{
+              fontSize:12, padding:"8px 12px", borderRadius:8, marginTop:4,
+              background: publishLog.startsWith("✅") ? "#061c10" : "#1c0606",
+              color: publishLog.startsWith("✅") ? T.green : T.red,
+              border: `1px solid ${publishLog.startsWith("✅") ? T.green : T.red}44`,
+              fontFamily:"'JetBrains Mono',monospace",
+            }}>{publishLog}</div>
+          )}
+
+          {/* Delete modal */}
+          {deleteModal && (
+            <div style={{
+              position:"fixed", inset:0, background:"#000b",
+              display:"flex", alignItems:"center", justifyContent:"center", zIndex:999,
+            }} onClick={() => !deleting && setDeleteModal(null)}>
+              <div onClick={e => e.stopPropagation()} style={{
+                background:"#0f0f14", border:`1px solid ${T.red}66`,
+                borderRadius:14, padding:24, width:320, maxWidth:"90vw",
+              }}>
+                <div style={{ fontSize:17, fontWeight:700, color:T.text, marginBottom:4 }}>🗑 Șterge batch</div>
+                <div style={{ fontSize:12, color:T.muted, marginBottom:18 }}>
+                  {deleteModal.questions?.length} întrebări • {deleteModal.date}
+                </div>
+                <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
+                  <button disabled={deleting} onClick={() => {
+                    onDeleteBatch(deleteModal.id);
+                    setDeleteModal(null);
+                  }} style={{
+                    background:"#1a1a24", border:`1px solid ${T.border}`,
+                    color:T.text, borderRadius:9, padding:"10px 14px",
+                    cursor:"pointer", fontSize:13, textAlign:"left",
+                  }}>
+                    🖥 Șterge doar local
+                    <div style={{ fontSize:11, color:T.muted, marginTop:2 }}>Dispare din browserul tău</div>
+                  </button>
+                  <button disabled={deleting} onClick={async () => {
+                    if (!githubToken) { setDeleteLog("⚠ Introdu GitHub Token mai jos!"); setShowTokenInput(true); return; }
+                    setDeleting(true);
+                    setDeleteLog("⏳ Se șterge de pe GitHub...");
+                    try {
+                      const REPO = "ToWXP/quiz-calc";
+                      const FILE = "public/ai_questions.json";
+                      const headers = {
+                        "Authorization": `token ${githubToken}`,
+                        "Accept": "application/vnd.github.v3+json",
+                        "Content-Type": "application/json",
+                      };
+                      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
+                      if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
+                      const fileData = await fileResp.json();
+                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+                      const updated = currentBatches.filter(b => b.id !== deleteModal.id);
+                      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
+                      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+                        method:"PUT", headers,
+                        body: JSON.stringify({
+                          message: `Delete AI batch (${deleteModal.date})`,
+                          content: newContent, sha: fileData.sha,
+                        }),
+                      });
+                      if (!commitResp.ok) { const e = await commitResp.json(); throw new Error(e.message); }
+                      sessionStorage.setItem("github_token", githubToken);
+                      onDeleteBatch(deleteModal.id);
+                      setDeleteModal(null);
+                      setPublishLog("✅ Șters de pe GitHub! Se actualizează în ~2 min.");
+                    } catch(e) {
+                      setDeleteLog(`❌ ${e.message}`);
+                    }
+                    setDeleting(false);
+                  }} style={{
+                    background:"#1c0606", border:`1px solid ${T.red}`,
+                    color:T.red, borderRadius:9, padding:"10px 14px",
+                    cursor: deleting ? "default" : "pointer", fontSize:13, textAlign:"left",
+                    opacity: deleting ? 0.6 : 1,
+                  }}>
+                    🌐 Șterge local + de pe site
+                    <div style={{ fontSize:11, color:T.red+"99", marginTop:2 }}>Dispare pentru toți utilizatorii</div>
+                  </button>
+                  {deleteLog && (
+                    <div style={{ fontSize:11, padding:"6px 10px", borderRadius:7,
+                      background: deleteLog.startsWith("❌") ? "#1c0606" : deleteLog.startsWith("✅") ? "#061c10" : "#1a1a24",
+                      color: deleteLog.startsWith("❌") ? T.red : deleteLog.startsWith("✅") ? T.green : T.yellow,
+                      fontFamily:"'JetBrains Mono',monospace",
+                    }}>{deleteLog}</div>
+                  )}
+                  <button disabled={deleting} onClick={() => setDeleteModal(null)} style={{
+                    background:"transparent", border:`1px solid ${T.border}`,
+                    color:T.muted, borderRadius:9, padding:"8px 14px",
+                    cursor:"pointer", fontSize:13,
+                  }}>Anulează</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Delete modal */}
+          {deleteModal && (
+            <div style={{
+              position:"fixed", inset:0, background:"#000a",
+              display:"flex", alignItems:"center", justifyContent:"center", zIndex:999,
+            }} onClick={() => !deleting && setDeleteModal(null)}>
+              <div onClick={e => e.stopPropagation()} style={{
+                background:T.card, border:`1px solid ${T.red}66`,
+                borderRadius:14, padding:24, width:320, maxWidth:"90vw",
+              }}>
+                <div style={{ fontSize:18, fontWeight:700, color:T.text, marginBottom:6 }}>🗑 Șterge batch</div>
+                <div style={{ fontSize:13, color:T.muted, marginBottom:20 }}>
+                  {deleteModal.questions.length} întrebări • {deleteModal.date}
+                </div>
+                <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+                  <button disabled={deleting} onClick={() => {
+                    onDeleteBatch(deleteModal.id);
+                    setDeleteModal(null);
+                  }} style={{
+                    background:T.surface, border:`1px solid ${T.border}`,
+                    color:T.text, borderRadius:9, padding:"10px 16px",
+                    cursor:"pointer", fontSize:13, textAlign:"left",
+                  }}>
+                    🖥 Șterge doar local
+                    <div style={{ fontSize:11, color:T.muted, marginTop:2 }}>Dispare din browserul tău</div>
+                  </button>
+                  <button disabled={deleting} onClick={async () => {
+                    if (!githubToken) { setDeleteLog("Introdu GitHub Token!"); setShowTokenInput(true); return; }
+                    setDeleting(true);
+                    setDeleteLog("⏳ Se șterge de pe GitHub...");
+                    try {
+                      const REPO = "ToWXP/quiz-calc";
+                      const FILE = "public/ai_questions.json";
+                      const headers = {
+                        "Authorization": `token ${githubToken}`,
+                        "Accept": "application/vnd.github.v3+json",
+                        "Content-Type": "application/json",
+                      };
+                      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
+                      if (!fileResp.ok) throw new Error(`GitHub: ${fileResp.status}`);
+                      const fileData = await fileResp.json();
+                      const sha = fileData.sha;
+                      const currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+                      const updated = currentBatches.filter(b => b.id !== deleteModal.id);
+                      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
+                      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+                        method:"PUT", headers,
+                        body: JSON.stringify({
+                          message: `Delete AI batch ${deleteModal.id}`,
+                          content: newContent, sha,
+                        }),
+                      });
+                      if (!commitResp.ok) { const e = await commitResp.json(); throw new Error(e.message); }
+                      sessionStorage.setItem("github_token", githubToken);
+                      onDeleteBatch(deleteModal.id);
+                      setDeleteModal(null);
+                      setPublishLog("✅ Șters de pe GitHub! Se actualizează în ~2 min.");
+                    } catch(e) {
+                      setDeleteLog(`❌ ${e.message}`);
+                    }
+                    setDeleting(false);
+                  }} style={{
+                    background:"#1c0606", border:`1px solid ${T.red}`,
+                    color:T.red, borderRadius:9, padding:"10px 16px",
+                    cursor: deleting ? "default" : "pointer", fontSize:13, textAlign:"left",
+                    opacity: deleting ? 0.6 : 1,
+                  }}>
+                    🌐 Șterge local + de pe site
+                    <div style={{ fontSize:11, color:T.red+"99", marginTop:2 }}>Dispare pentru toți utilizatorii</div>
+                  </button>
+                  {deleteLog && (
+                    <div style={{ fontSize:11, color: deleteLog.startsWith("❌") ? T.red : T.green,
+                      fontFamily:"'JetBrains Mono',monospace" }}>{deleteLog}</div>
+                  )}
+                  <button disabled={deleting} onClick={() => setDeleteModal(null)} style={{
+                    background:"transparent", border:`1px solid ${T.border}`,
+                    color:T.muted, borderRadius:9, padding:"8px 16px",
+                    cursor:"pointer", fontSize:13,
+                  }}>Anulează</button>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       ) : (
@@ -550,12 +778,15 @@ function Menu({ allQ, generatedBatches, onStart, onDeleteBatch }) {
 /* ─── APP ─────────────────────────────────────────────────── */
 
 /* ─── ADMIN PANEL ─────────────────────────────────────────── */
-function AdminPanel({ allQ, onAddQuestions, onPlayNow, onBack }) {
+function AdminPanel({ allQ, chapters, onAddQuestions, onPlayNow, onBack }) {
   const [step, setStep] = useState("config");
   const [apiKey, setApiKey] = useState(() => sessionStorage.getItem("gemini_key") || "");
-  const [inputMode, setInputMode] = useState("pdf"); // "pdf" | "text" | "multi"
+  const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem("github_token") || "");
+  const [publishing, setPublishing] = useState(false);
+  const [inputMode, setInputMode] = useState("pdf"); // "pdf" | "text" | "multi" | "chapters"
   const [pdfFiles, setPdfFiles] = useState([]); // [{file, name}]
   const [pastedText, setPastedText] = useState("");
+  const [selectedChapters, setSelectedChapters] = useState([]);
   const [difficulty, setDifficulty] = useState("medium");
   const [count, setCount] = useState(50);
   const [topic, setTopic] = useState("");
@@ -594,10 +825,21 @@ function AdminPanel({ allQ, onAddQuestions, onPlayNow, onBack }) {
     });
   }
 
+  async function toText(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.onerror = rej;
+      r.readAsText(file);
+    });
+  }
+
   async function handleGenerate() {
     if (!apiKey) { addLog("Introdu API key-ul Gemini!", "error"); return; }
-    if (inputMode !== "text" && pdfFiles.length === 0) { addLog("Selectează cel puțin un PDF!", "error"); return; }
+    if (inputMode === "pdf" && pdfFiles.length === 0) { addLog("Selectează un PDF!", "error"); return; }
+    if (inputMode === "multi" && pdfFiles.length === 0) { addLog("Selectează cel puțin un PDF!", "error"); return; }
     if (inputMode === "text" && !pastedText.trim()) { addLog("Lipește text mai întâi!", "error"); return; }
+    if (inputMode === "chapters" && selectedChapters.length === 0) { addLog("Selectează cel puțin un capitol!", "error"); return; }
 
     setLog([]);
     setStep("generating");
@@ -609,41 +851,81 @@ function AdminPanel({ allQ, onAddQuestions, onPlayNow, onBack }) {
 
       const topicHint = topic ? `Focusează-te pe subiectul: ${topic}.` : "Acoperă toate subiectele din document uniform.";
 
+      const singleCount = Math.round(count * 0.6);
+      const multiCount = Math.round(count * 0.25);
+      const orderCount = count - singleCount - multiCount;
+
       const prompt = `Ești un profesor de informatică. Generează exact ${count} întrebări de tip quiz ${diffLabel} bazate pe materialul atașat.
 
 ${topicHint}
 
+TIPURI DE ÎNTREBĂRI — generează OBLIGATORIU toate cele 3 tipuri în proporțiile exacte:
+- ${singleCount} întrebări de tip "single" (un singur răspuns corect)
+- ${multiCount} întrebări de tip "multi" (2-3 răspunsuri corecte din 4-5 variante)
+- ${orderCount} întrebări de tip "order" (ordonează pașii/comenzile în ordinea corectă)
+
 REGULI CRITICE:
 1. Toate variantele de răspuns trebuie să aibă lungimi SIMILARE (±15 caractere) — nu da de gol răspunsul corect prin lungime
-2. Răspunsul corect trebuie distribuit uniform la pozițiile 0, 1, 2, 3
-3. Variantele greșite trebuie să fie plauzibile și tehnic corecte parțial
-4. Întrebările trebuie să testeze înțelegerea, nu memorarea
+2. Răspunsul corect distribuit uniform la pozițiile 0, 1, 2, 3
+3. Variantele greșite să fie plauzibile și tehnic corecte parțial
+4. Întrebările să testeze înțelegerea, nu memorarea
+5. Pentru "order": options = lista de pași/comenzi în ordine amestecată, answers = [indexul corect al pasului 1, indexul pasului 2, ...] adică ordinea corectă ca indici
 
-Returnează DOAR un array JSON valid, fără markdown, fără explicații, fără \`\`\`json:
+FORMAT JSON — Returnează DOAR un array JSON valid, fără markdown, fără \`\`\`json:
 [
   {
     "id": 1000,
     "topic": "Numele capitolului",
     "type": "single",
-    "question": "Textul întrebării?",
+    "question": "Întrebare cu un singur răspuns?",
     "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
     "answers": [2]
+  },
+  {
+    "id": 1001,
+    "topic": "Numele capitolului",
+    "type": "multi",
+    "question": "Care dintre următoarele sunt corecte?",
+    "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
+    "answers": [0, 2]
+  },
+  {
+    "id": 1002,
+    "topic": "Numele capitolului",
+    "type": "order",
+    "question": "Ordonează pașii pentru a instala un pachet:",
+    "options": ["apt-get install pachet", "sudo su", "apt-get update", "exit"],
+    "answers": [1, 3, 2, 0]
   }
 ]
 
-ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${count} întrebări.`;
+ID-urile să înceapă de la 1000 și să fie consecutive. Generează EXACT ${count} întrebări (${singleCount} single + ${multiCount} multi + ${orderCount} order).`;
 
       let parts = [];
 
-      if (inputMode === "text") {
+      if (inputMode === "chapters") {
+        const selected = chapters.filter(c => selectedChapters.includes(c.id));
+        const combined = selected.map(c => `=== ${c.label} ===\n\n${c.text}`).join("\n\n");
+        const totalTokens = selected.reduce((s,c) => s+c.tokens, 0);
+        addLog(`Capitole: ${selected.map(c=>c.label).join(", ")}`, "info");
+        addLog(`~${totalTokens.toLocaleString()} tokens. Trimit la Gemini...`, "info");
+        parts = [{ text: `Materialul de studiu:\n\n${combined}\n\n---\n\n${prompt}` }];
+      } else if (inputMode === "text") {
         addLog(`Text: ${pastedText.length.toLocaleString()} caractere. Trimit la Gemini...`, "info");
         parts = [{ text: `Materialul de studiu:\n\n${pastedText}\n\n---\n\n${prompt}` }];
       } else {
         const filesToProcess = inputMode === "multi" ? pdfFiles : [pdfFiles[0]];
         for (const { file, name } of filesToProcess) {
-          addLog(`Convertesc ${name} (${(file.size/1024/1024).toFixed(1)} MB)...`, "info");
-          const b64 = await toBase64(file);
-          parts.push({ inline_data: { mime_type: "application/pdf", data: b64 } });
+          addLog(`Procesez ${name} (${(file.size/1024/1024).toFixed(1)} MB)...`, "info");
+          if (name.endsWith(".txt")) {
+            const txt = await toText(file);
+            parts.push({ text: `Conținut fișier ${name}:
+
+${txt}` });
+          } else {
+            const b64 = await toBase64(file);
+            parts.push({ inline_data: { mime_type: "application/pdf", data: b64 } });
+          }
         }
         parts.push({ text: prompt });
         addLog(`${filesToProcess.length} fișier(e) trimise. Gemini procesează...`, "info");
@@ -713,6 +995,86 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
     a.click();
   }
 
+  async function publishToGitHub(allBatches) {
+    if (!githubToken) { addLog("Introdu GitHub Token!", "error"); return; }
+    setPublishing(true);
+    addLog("Conectez la GitHub...", "info");
+
+    try {
+      // Step 1: get current questions.json SHA + content
+      const REPO = "ToWXP/quiz-calc";
+      const FILE = "public/questions.json";
+      const headers = {
+        "Authorization": `token ${githubToken}`,
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+      };
+
+      const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
+      if (!fileResp.ok) { addLog(`Eroare GitHub: ${fileResp.status} ${fileResp.statusText}`, "error"); setPublishing(false); return; }
+      const fileData = await fileResp.json();
+      const sha = fileData.sha;
+
+      // Step 2: decode current questions.json
+      const currentJSON = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+
+      // Step 3: merge all batches into correct difficulty pools, renumber IDs ascending from newest
+      // Collect all AI questions grouped by difficulty
+      const byDiff = { easy: [], medium: [], hard: [] };
+      // Sort batches newest first
+      const sorted = [...allBatches].sort((a, b) => b.id - a.id);
+      sorted.forEach(batch => {
+        const d = batch.difficulty;
+        if (byDiff[d]) byDiff[d].push(...batch.questions);
+      });
+
+      // Merge: new AI questions first (newest), then existing
+      const merged = {};
+      for (const diff of ["easy", "medium", "hard"]) {
+        const existing = currentJSON[diff] || [];
+        const aiQ = byDiff[diff];
+        // Remove duplicates by question text
+        const existingTexts = new Set(existing.map(q => q.question));
+        const newOnly = aiQ.filter(q => !existingTexts.has(q.question));
+        merged[diff] = [...newOnly, ...existing];
+      }
+
+      // Renumber IDs: start from 1, newest first within each pool
+      let idCounter = 1;
+      for (const diff of ["easy", "medium", "hard"]) {
+        merged[diff] = merged[diff].map(q => ({ ...q, id: idCounter++ }));
+      }
+
+      const totalNew = Object.values(byDiff).reduce((s, a) => s + a.length, 0);
+      addLog(`Adaug ${totalNew} întrebări noi. Totaluri: easy=${merged.easy.length}, medium=${merged.medium.length}, hard=${merged.hard.length}`, "info");
+
+      // Step 4: commit
+      const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))));
+      const now = new Date().toLocaleString("ro-RO");
+      const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify({
+          message: `Add ${totalNew} AI-generated questions (${now})`,
+          content: newContent,
+          sha,
+        }),
+      });
+
+      if (!commitResp.ok) {
+        const err = await commitResp.json();
+        addLog(`Eroare commit: ${err.message}`, "error");
+        setPublishing(false); return;
+      }
+
+      sessionStorage.setItem("github_token", githubToken);
+      addLog("✅ Publicat pe GitHub! Site-ul se va actualiza în ~2 minute.", "success");
+    } catch(e) {
+      addLog(`Eroare: ${e.message}`, "error");
+    }
+    setPublishing(false);
+  }
+
   const S = {
     wrap: { width:"100%", maxWidth:560, margin:"0 auto" },
     card: { background:T.card, border:`1px solid ${T.border}`, borderRadius:16, padding:28 },
@@ -756,12 +1118,21 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
           </div>
         </div>
 
+        <div>
+          <label style={S.label}>GitHub Token (pentru publicare permanentă)</label>
+          <input style={S.input} type="password" placeholder="ghp_..." autoComplete="off"
+            value={githubToken} onChange={e => setGithubToken(e.target.value)} />
+          <div style={{ fontSize:11, color:T.muted, marginTop:4 }}>
+            github.com → Settings → Developer Settings → Personal Access Tokens → bifează <strong style={{color:T.accent}}>repo</strong>
+          </div>
+        </div>
+
         {/* Input mode tabs */}
         <div>
           <label style={S.label}>Sursă material</label>
-          <div style={{ display:"flex", gap:8, marginBottom:12 }}>
-            {[["pdf","📄 Un PDF"], ["multi","📚 Mai multe PDF-uri"], ["text","📋 Paste text"]].map(([mode, label]) => (
-              <button key={mode} onClick={() => setInputMode(mode)} style={S.tabBtn(inputMode===mode, T.accent)}>
+          <div style={{ display:"flex", gap:6, marginBottom:12, flexWrap:"wrap" }}>
+            {[["pdf","📄 Un PDF"], ["multi","📚 Mai multe fișiere"], ["text","📋 Paste text"], ["chapters","📖 Capitole USO"]].map(([mode, label]) => (
+              <button key={mode} onClick={() => setInputMode(mode)} style={{...S.tabBtn(inputMode===mode, T.accent), flex:"none", padding:"7px 12px"}}>
                 {label}
               </button>
             ))}
@@ -784,7 +1155,7 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
                               cursor:"pointer", color:T.muted }}>
                 <span style={{ fontSize:20 }}>➕</span>
                 <span>Adaugă PDF-uri...</span>
-                <input type="file" accept=".pdf" multiple onChange={handlePDFMulti} style={{ display:"none" }} />
+                <input type="file" accept=".pdf,.txt" multiple onChange={handlePDFMulti} style={{ display:"none" }} />
               </label>
               {pdfFiles.map(({ name, file }) => (
                 <div key={name} style={{ display:"flex", alignItems:"center", gap:8,
@@ -821,6 +1192,57 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
                 {pastedText.length > 0
                   ? `${pastedText.length.toLocaleString()} caractere (~${Math.round(pastedText.length/4).toLocaleString()} tokens)`
                   : "0 caractere"}
+              </div>
+            </div>
+          )}
+
+          {/* Chapters selector */}
+          {inputMode === "chapters" && (
+            <div>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:8 }}>
+                <span style={{ fontSize:11, color:T.muted }}>
+                  {selectedChapters.length === 0 ? "Niciun capitol selectat" :
+                   `${selectedChapters.length} capitol(e) — ~${chapters.filter(c=>selectedChapters.includes(c.id)).reduce((s,c)=>s+c.tokens,0).toLocaleString()} tokens`}
+                </span>
+                <div style={{ display:"flex", gap:6 }}>
+                  <button onClick={() => setSelectedChapters(chapters.map(c=>c.id))} style={{
+                    fontSize:11, color:T.accent, background:"transparent",
+                    border:`1px solid ${T.accent}44`, borderRadius:5, padding:"3px 8px", cursor:"pointer"
+                  }}>Toate</button>
+                  <button onClick={() => setSelectedChapters([])} style={{
+                    fontSize:11, color:T.muted, background:"transparent",
+                    border:`1px solid ${T.border}`, borderRadius:5, padding:"3px 8px", cursor:"pointer"
+                  }}>Niciuna</button>
+                </div>
+              </div>
+              <div style={{ display:"flex", flexDirection:"column", gap:4, maxHeight:280, overflowY:"auto" }}>
+                {chapters.map(c => {
+                  const sel = selectedChapters.includes(c.id);
+                  return (
+                    <div key={c.id} onClick={() => setSelectedChapters(prev =>
+                      sel ? prev.filter(id=>id!==c.id) : [...prev, c.id]
+                    )} style={{
+                      display:"flex", alignItems:"center", gap:10,
+                      padding:"8px 12px", borderRadius:8, cursor:"pointer",
+                      background: sel ? T.accent+"18" : T.surface,
+                      border:`1px solid ${sel ? T.accent : T.border}`,
+                      transition:"all .15s",
+                    }}>
+                      <div style={{
+                        width:16, height:16, borderRadius:4, flexShrink:0,
+                        background: sel ? T.accent : "transparent",
+                        border:`1.5px solid ${sel ? T.accent : T.muted}`,
+                        display:"flex", alignItems:"center", justifyContent:"center",
+                      }}>
+                        {sel && <span style={{ color:"#000", fontSize:11, fontWeight:700 }}>✓</span>}
+                      </div>
+                      <span style={{ flex:1, fontSize:13, color: sel ? T.text : T.muted }}>{c.label}</span>
+                      <span style={{ fontSize:10, color:T.muted, fontFamily:"'JetBrains Mono',monospace" }}>
+                        ~{c.tokens.toLocaleString()}t
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -899,6 +1321,7 @@ ID-urile să înceapă de la 1000 și să fie consecutive. Generează exact ${co
         <button style={S.btn(T.accent)} onClick={onBack}>
           🤖 Vezi toate întrebările AI
         </button>
+
         <button style={S.btn(T.yellow)} onClick={downloadJSON}>
           ⬇ Descarcă questions.json
         </button>
@@ -918,6 +1341,7 @@ export default function App() {
   const [screen, setScreen] = useState("loading");
   const [allQ, setAllQ] = useState({easy:[], medium:[], hard:[]});
   // generatedBatches: [{id, difficulty, date, source, questions:[]}]
+  const [chapters, setChapters] = useState([]);
   const [generatedBatches, setGeneratedBatches] = useState(() => {
     try { return JSON.parse(localStorage.getItem("generated_batches") || "[]"); }
     catch { return []; }
@@ -930,10 +1354,20 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("./questions.json")
-      .then(r => { if (!r.ok) throw new Error("Nu s-a putut încărca questions.json"); return r.json(); })
-      .then(data => { setAllQ(data); setScreen("menu"); })
-      .catch(e => { setError(e.message); setScreen("error"); });
+    Promise.all([
+      fetch("./questions.json").then(r => { if (!r.ok) throw new Error("Nu s-a putut încărca questions.json"); return r.json(); }),
+      fetch("./ai_questions.json").then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch("./chapters.json").then(r => r.ok ? r.json() : []).catch(() => []),
+    ]).then(([qData, aiData, chapData]) => {
+      setAllQ(qData);
+      setChapters(chapData);
+      // Merge remote AI batches with local ones (remote takes priority, deduplicate by id)
+      const localBatches = JSON.parse(localStorage.getItem("generated_batches") || "[]");
+      const remoteIds = new Set(aiData.map(b => b.id));
+      const localOnly = localBatches.filter(b => !remoteIds.has(b.id));
+      setGeneratedBatches([...aiData, ...localOnly]);
+      setScreen("menu");
+    }).catch(e => { setError(e.message); setScreen("error"); });
   }, []);
 
   function saveBatches(batches) {
@@ -950,6 +1384,54 @@ export default function App() {
 
   function deleteBatch(id) {
     saveBatches(generatedBatches.filter(b => b.id !== id));
+  }
+
+  async function publishBatch(batch, githubToken) {
+    const REPO = "ToWXP/quiz-calc";
+    const FILE = "public/ai_questions.json";
+    const headers = {
+      "Authorization": `token ${githubToken}`,
+      "Accept": "application/vnd.github.v3+json",
+      "Content-Type": "application/json",
+    };
+
+    // Get current ai_questions.json (create if doesn't exist)
+    let sha = null;
+    let currentBatches = [];
+    const fileResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, { headers });
+    if (fileResp.ok) {
+      const fileData = await fileResp.json();
+      sha = fileData.sha;
+      currentBatches = JSON.parse(atob(fileData.content.replace(/\n/g, "")));
+    } else if (fileResp.status !== 404) {
+      throw new Error(`GitHub: ${fileResp.status} ${fileResp.statusText}`);
+    }
+
+    // Check duplicate
+    const existingIds = new Set(currentBatches.map(b => b.id));
+    if (existingIds.has(batch.id)) throw new Error("Acest batch e deja publicat!");
+
+    // Add new batch at top (newest first)
+    const updated = [batch, ...currentBatches];
+
+    const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(updated, null, 2))));
+    const now = new Date().toLocaleString("ro-RO");
+
+    const body = {
+      message: `Add AI batch: ${batch.questions.length} questions (${batch.difficulty}, ${now})`,
+      content: newContent,
+    };
+    if (sha) body.sha = sha;
+
+    const commitResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+      method: "PUT", headers, body: JSON.stringify(body),
+    });
+    if (!commitResp.ok) {
+      const err = await commitResp.json();
+      throw new Error(`Commit error: ${err.message}`);
+    }
+    sessionStorage.setItem("github_token", githubToken);
+    return batch.questions.length;
   }
 
   function start(count, diff) {
@@ -1021,6 +1503,7 @@ export default function App() {
             generatedBatches={generatedBatches}
             onStart={start}
             onDeleteBatch={deleteBatch}
+            onPublishBatch={publishBatch}
           />
           <button
             onClick={() => setScreen("admin")}
@@ -1036,6 +1519,7 @@ export default function App() {
       {screen === "admin" && (
         <AdminPanel
           allQ={allQ}
+          chapters={chapters}
           onAddQuestions={addGeneratedQuestions}
           onPlayNow={(diff, qs) => {
             setQuestions(shuffle(qs));
