@@ -1,1 +1,1677 @@
-[]
+[
+  {
+    "id": 1772888917259,
+    "difficulty": "hard",
+    "date": "07.03.2026 15:08",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 17257,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Care dintre următoarele afirmații descrie cel mai precis rolul unui proces într-un sistem de operare modern?",
+        "options": [
+          "Un proces este un fișier static ce conține instrucțiuni pentru sistem.",
+          "Un proces este o aplicație compilaă, gata de execuție, stocată pe disc.",
+          "Un proces este o interfață grafică pentru interacțiunea directă a utilizatorului.",
+          "Un proces este o entitate activă ce folosește resursele sistemului pentru o acțiune."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17258,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Ce rol esențial joacă înțelegerea proceselor pentru un dezvoltator de aplicații, conform materialului?",
+        "options": [
+          "Asigurarea compatibilității cu diverse versiuni de sistem de operare.",
+          "Monitorizarea constantă a securității sistemului de operare.",
+          "Proiectarea aplicațiilor pentru utilizarea eficientă a resurselor hardware.",
+          "Optimizarea vitezei de încărcare a programelor în memoria principală."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17259,
+        "topic": "Procese",
+        "type": "single",
+        "question": "De ce un browser web precum Google Chrome pornește mai multe procese, chiar și pentru un singur tab?",
+        "options": [
+          "Pentru a asigura o mai bună compatibilitate cu diverse plugin-uri și extensii.",
+          "Pentru a distribui sarcina de procesare uniform pe nucleele CPU disponibile.",
+          "Pentru a izola erorile și a preveni blocarea întregului browser la un singur tab.",
+          "Pentru a permite o încărcare mai rapidă a resurselor și conținutului paginilor web."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17260,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Cum contribuie sistemul de operare la integritatea și buna funcționare a sistemului prin izolarea resurselor proceselor?",
+        "options": [
+          "Prin prevenirea accesului unui proces la resursele de rețea ale altui proces.",
+          "Prin garantarea că un proces nu poate accesa sau corupe resursele altui proces.",
+          "Prin asigurarea că fiecare proces rulează într-un mediu virtualizat complet.",
+          "Prin alocarea dinamică a resurselor, evitând conflictele de memorie partajată."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 17261,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "Care este diferența fundamentală dintre un program și un proces, conform textului?",
+        "options": [
+          "Programul este o entitate activă, în timp ce procesul este o entitate pasivă.",
+          "Programul este codul sursă, iar procesul este versiunea sa executabilă și compilată.",
+          "Programul este un fișier static, iar procesul este o entitate dinamică în execuție.",
+          "Programul rulează în kernel, pe când procesul rulează în spațiul de utilizator."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17262,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "Ce semnificație are termenul \"imaginea procesului\" în contextul dat?",
+        "options": [
+          "Descrie conținutul fișierului executabil din care a fost creat procesul.",
+          "Reprezintă starea vizuală a aplicației afișată pe ecran de către proces.",
+          "Se referă la structura de date internă a procesului din memoria RAM.",
+          "Indică contextul de securitate și permisiunile asociate unui proces."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17263,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "De ce este incorect tehnic să ne referim la \"procesul Firefox\" în loc de \"un proces Firefox\"?",
+        "options": [
+          "Deoarece un proces Firefox poate avea mai multe sub-procese interne.",
+          "Deoarece Firefox este o aplicație multi-platformă și nu un singur proces.",
+          "Deoarece numele identifică imaginea procesului, nu un proces unic în sistem.",
+          "Deoarece procesele sunt efemere, iar numele nu pot fi asociate permanent."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17264,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Care dintre următoarele atribute ale unui proces este garantat a fi unic și neschimbabil pe durata rulării sale?",
+        "options": [
+          "Prioritatea de rulare, ajustată dinamic de către sistemul de operare.",
+          "Utilizatorul (UID) care deține procesul, ce poate fi modificat de root.",
+          "Terminalul asociat, care se poate schimba la trecerea în background.",
+          "Identificatorul unic (PID) al procesului, atribuit la momentul creării."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17265,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Ce implicație are faptul că un utilizator obișnuit poate doar crește valoarea `nice` a unui proces pe care îl deține?",
+        "options": [
+          "Reduce prioritatea procesului, fiind \"mai drăguț\" cu alte procese din sistem.",
+          "Îmbunătățește performanța procesului prin alocarea mai multor resurse.",
+          "Permite procesului să acceseze resurse partajate cu o viteză superioară.",
+          "Asigură că procesul va fi planificat mai des pe procesor, rulând mai rapid."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17266,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Utilitarul `ps` în Linux, rulat cu opțiunea `-e -f`, afișează o coloană `PPID`. Ce informație indică această coloană?",
+        "options": [
+          "Identificatorul unic al procesului, esențial pentru gestionare.",
+          "Numărul de procese copil create de procesul respectiv.",
+          "Identificatorul procesului părinte, crucial pentru ierarhia sistemului.",
+          "Prioritatea procesului la nivelul sistemului de operare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17267,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "De ce este important pentru un inginer de sistem să monitorizeze procesele și resursele utilizate de acestea?",
+        "options": [
+          "Pentru a optimiza consumul de energie al componentelor hardware.",
+          "Pentru a verifica integritatea datelor stocate pe sistemul de fișiere.",
+          "Pentru a asigura o distribuție echitabilă a pachetelor de rețea.",
+          "Pentru a preveni atacurile de securitate și abuzul de resurse ale sistemului."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17268,
+        "topic": "4.2.3 Starea proceselor",
+        "type": "single",
+        "question": "Ce înseamnă starea \"ready\" sau \"runnable\" pentru un proces în sistemul de operare?",
+        "options": [
+          "Procesul rulează activ pe un nucleu de procesor și execută instrucțiuni.",
+          "Procesul este blocat, așteptând finalizarea unei operații de I/O lente.",
+          "Procesul este pregătit să ruleze, dar așteaptă alocarea unui procesor.",
+          "Procesul a fost suspendat manual de utilizator și nu mai consumă resurse."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17269,
+        "topic": "4.2.3 Starea proceselor",
+        "type": "single",
+        "question": "Cum este corelată valoarea \"load average\" afișată de utilitarul `uptime` cu starea proceselor?",
+        "options": [
+          "Reflectă numărul de procese aflate în starea \"ready\" sau \"runnable\".",
+          "Indică numărul total de procese care au rulat pe sistem în ultima oră.",
+          "Măsoară procentul de utilizare a memoriei RAM de către procesele active.",
+          "Reprezintă media proceselor blocate în așteptarea operațiilor de disc."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17270,
+        "topic": "4.2.4 Prioritatea proceselor",
+        "type": "single",
+        "question": "În Linux, cum afectează o valoare `nice` mai mare prioritatea de planificare a unui proces?",
+        "options": [
+          "Procesul primește o prioritate mai bună, fiind planificat mai des pe CPU.",
+          "Procesul este mutat automat în background, eliberând terminalul.",
+          "Procesul își crește accesul la resursele de I/O, fără a afecta CPU.",
+          "Procesul primește o prioritate mai slabă, cedând CPU altor procese."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17271,
+        "topic": "4.2.4 Prioritatea proceselor",
+        "type": "single",
+        "question": "Ce utilitar Linux este folosit pentru a modifica prioritatea unui proces *la rulare* (run-time)?",
+        "options": [
+          "`nice`, pentru a porni un proces cu o prioritate specifică.",
+          "`ps`, pentru a vizualiza detaliile de prioritate ale proceselor.",
+          "`renice`, pentru a ajusta prioritatea unui proces deja activ.",
+          "`top`, pentru a monitoriza dinamic prioritățile proceselor."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17272,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "Care este principalul rol al shell-ului în crearea de procese noi în linia de comandă?",
+        "options": [
+          "Să servească drept proces părinte pentru procesele noi create de utilizator.",
+          "Să preia controlul exclusiv al terminalului după pornirea fiecărui proces.",
+          "Să monitorizeze utilizarea resurselor de către procesele copil și să le închidă.",
+          "Să compileze codul sursă al programelor înainte de a le încărca în memorie."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17273,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "În Linux, ce se întâmplă cu un proces \"orfan\", al cărui proces părinte și-a încheiat execuția?",
+        "options": [
+          "Procesul orfan este terminat automat de către sistemul de operare.",
+          "Procesul orfan continuă să ruleze fără un părinte până la finalizarea sa.",
+          "Procesul orfan este adoptat de către procesul `init` și devine copilul său.",
+          "Procesul orfan își creează un nou proces părinte dintr-un alt proces activ."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17274,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "De ce este problematică rularea unei aplicații grafice precum Firefox direct în foreground dintr-un terminal?",
+        "options": [
+          "Consumă excesiv de multe resurse de procesor, încetinind sistemul.",
+          "Creează o ierarhie de procese complexă, dificil de gestionat ulterior.",
+          "Nu poate afișa interfața grafică corect, deoarece terminalul este text-based.",
+          "Acaparează terminalul, împiedicând shell-ul să citească noi comenzi."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17275,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "Ce efect are combinația de taste `Ctrl+Z` asupra unui proces care rulează în foreground într-un terminal Linux?",
+        "options": [
+          "Termină imediat procesul, eliberând resursele ocupate.",
+          "Îl aduce în foreground dacă anterior era în background și suspendat.",
+          "Redirecționează ieșirea standard a procesului către un fișier temporar.",
+          "Suspendă procesul și îl mută în background în starea \"stopped\"."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17276,
+        "topic": "4.3.4 Procesul init",
+        "type": "single",
+        "question": "Care este rolul principal al procesului `init` (sau `systemd` în distribuțiile moderne) într-un sistem Linux?",
+        "options": [
+          "Gestionează toate conexiunile de rețea și serviciile asociate.",
+          "Monitorizează și ajustează dinamic prioritățile tuturor proceselor active.",
+          "Este primul proces al sistemului și rădăcina ierarhiei de procese.",
+          "Asigură securitatea sistemului prin filtrarea accesului la fișierele critice."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17277,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "Ce rol joacă tabela descriptorilor de fișiere pentru un proces?",
+        "options": [
+          "Stochează calea absolută către toate fișierele accesate de sistem.",
+          "Conține lista tuturor fișierelor executabile disponibile pentru procesare.",
+          "Asigură coerența datelor prin blocarea accesului concurent la fișiere.",
+          "Gestionează referințele procesului către fișierele deschise și resurse I/O."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17278,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "De ce primii trei descriptori de fișiere (0, 1, 2) sunt alocați standard în orice proces Linux?",
+        "options": [
+          "Pentru a facilita comunicarea inter-proces prin canale de memorie partajată.",
+          "Pentru a asigura compatibilitatea cu aplicațiile legacy care utilizează aceste indexuri.",
+          "Pentru interacțiunea standard cu procesul: intrarea, ieșirea și eroarea standard.",
+          "Pentru a stoca informații critice despre starea procesului și a sistemului."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17279,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "Ce se înțelege prin \"redirectarea unui descriptor de fișier\" în contextul shell-ului?",
+        "options": [
+          "Modificarea drepturilor de acces la fișier pentru un anumit proces.",
+          "Copierea conținutului unui fișier într-un alt fișier specificat de descriptor.",
+          "Schimbarea referinței unui descriptor standard de la terminal la un fișier.",
+          "Anularea legăturii dintre un proces și fișierele pe care le-a deschis."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17280,
+        "topic": "4.5 Operații cu procese. Interacțiunea între procese",
+        "type": "single",
+        "question": "Care dintre următoarele scenarii *nu* este o cauză validă pentru încheierea execuției unui proces?",
+        "options": [
+          "Atingerea sfârșitului programului prin execuția completă a instrucțiunilor.",
+          "Apelul unei rutine de încheiere explicită, cum ar fi `exit()` în C.",
+          "Întâlnirea unei condiții neașteptate, precum accesul la memorie invalidă.",
+          "Primirea unui semnal `SIGCONT` de la un alt proces privilegiat."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17281,
+        "topic": "4.5 Operații cu procese. Interacțiunea între procese",
+        "type": "single",
+        "question": "Ce semnificație are un cod de ieșire (exit code) egal cu 0 pentru un proces în Linux?",
+        "options": [
+          "Procesul a fost terminat forțat de sistemul de operare din motive de eroare.",
+          "Procesul a eșuat în executarea sarcinii sale și a returnat un rezultat invalid.",
+          "Procesul s-a încheiat cu succes, fără erori sau probleme semnalate.",
+          "Procesul a fost suspendat temporar și este gata să își reia execuția."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17282,
+        "topic": "4.5.2 Semnale",
+        "type": "single",
+        "question": "De ce semnalele `SIGSTOP` și `SIGKILL` sunt considerate speciale în Linux și nu pot fi ignorate de un proces?",
+        "options": [
+          "Sunt semnale utilizate exclusiv pentru comunicarea între procese kernel.",
+          "Acestea sunt singurele semnale care pot fi trimise de un utilizator obișnuit.",
+          "Ele sunt esențiale pentru controlul fundamental al proceselor și stabilitatea sistemului.",
+          "Sunt semnale rezervate pentru operații de depanare și audit de securitate."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17283,
+        "topic": "4.5.2 Semnale",
+        "type": "single",
+        "question": "Care este diferența principală între semnalele `SIGINT` (Ctrl+C) și `SIGQUIT` (Ctrl+\\) din perspectiva comportamentului implicit?",
+        "options": [
+          "`SIGINT` poate fi ignorat de proces, în timp ce `SIGQUIT` este mai puternic și mai dificil de ignorat.",
+          "`SIGINT` suspendă procesul, în timp ce `SIGQUIT` îl termină imediat.",
+          "`SIGINT` trimite procesului un mesaj de avertizare, iar `SIGQUIT` unul de eroare.",
+          "`SIGINT` este utilizat pentru procese GUI, iar `SIGQUIT` pentru procese CLI."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17284,
+        "topic": "4.5.3 Înla˘ntuirea comenzilor",
+        "type": "single",
+        "question": "Ce realizează operatorul de înlănțuire `&&` atunci când este folosit între două comenzi în shell (e.g., `comm1 && comm2`)?",
+        "options": [
+          "Rulează `comm1` și `comm2` simultan, în paralel, pentru eficiență maximă.",
+          "Rulează `comm2` doar dacă `comm1` a eșuat (exit code diferit de 0).",
+          "Rulează `comm1`, apoi `comm2`, indiferent de rezultatul primei comenzi.",
+          "Rulează `comm2` doar dacă `comm1` s-a încheiat cu succes (exit code 0)."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17285,
+        "topic": "4.5.4 Comunicarea prin pipe-uri",
+        "type": "single",
+        "question": "Conform filozofiei Unix, de ce este preferată înlănțuirea comenzilor prin pipe-uri (`|`) pentru sarcini complexe?",
+        "options": [
+          "Pentru a reduce consumul de memorie prin evitarea fișierelor temporare.",
+          "Pentru a asigura o mai bună securitate prin izolarea completă a proceselor.",
+          "Pentru că încurajează crearea de utilitare mici, specializate, combinate eficient.",
+          "Pentru a permite rularea comenzilor pe servere diferite, distribuind sarcina."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17286,
+        "topic": "4.6 Interactivitatea proceselor",
+        "type": "single",
+        "question": "Care este diferența cheie dintre un proces interactiv și unul neinteractiv (batch), conform textului?",
+        "options": [
+          "Procesele interactive necesită intrare de la utilizator, iar cele neinteractive nu.",
+          "Procesele interactive rulează doar în foreground, iar cele neinteractive în background.",
+          "Procesele interactive sunt create de utilizator, iar cele neinteractive de sistem.",
+          "Procesele interactive folosesc un terminal, iar cele neinteractive folosesc rețeaua."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17287,
+        "topic": "4.6.1 Terminale",
+        "type": "single",
+        "question": "De ce un proces aflat în foreground \"acaparează\" intrarea standard a terminalului, conform materialului?",
+        "options": [
+          "Pentru a preveni conflictele de date și a asigura coerența informațiilor.",
+          "Pentru a optimiza performanța I/O prin reducerea numărului de context switch-uri.",
+          "Pentru a izola procesul de alte procese și a preveni accesul neautorizat la input.",
+          "Pentru că este singurul proces care poate primi input de la tastatură la un moment dat."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17288,
+        "topic": "4.6.3 Procese daemon",
+        "type": "single",
+        "question": "Care dintre următoarele caracteristici *nu* este tipică pentru un proces daemon (serviciu) în Linux?",
+        "options": [
+          "Are ca proces părinte un shell interactiv.",
+          "Rulează în background, fără interacțiune directă cu utilizatorul.",
+          "Oferă un serviciu sistemului, cum ar fi planificarea sau indexarea.",
+          "Nu are un terminal asociat (descriptorii standard redirecționați)."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17289,
+        "topic": "4.6.4 Detasarea de terminal",
+        "type": "single",
+        "question": "De ce este utilă daemonizarea unui proces, cum ar fi un client Bittorrent, pe un server la distanță accesat prin SSH?",
+        "options": [
+          "Pentru a îmbunătăți viteza de descărcare a fișierelor prin optimizarea rețelei.",
+          "Pentru a asigura că procesul consumă mai puține resurse de procesor și memorie.",
+          "Pentru a permite procesului să continue rularea chiar și după închiderea sesiunii SSH.",
+          "Pentru a facilita monitorizarea în timp real a progresului descărcării de la distanță."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17290,
+        "topic": "4.6.4.1 nohup, disown",
+        "type": "single",
+        "question": "Ce semnal încearcă să ignore un proces rulat cu `nohup` pentru a persista după închiderea terminalului?",
+        "options": [
+          "`SIGTERM`, semnalul de terminare grațioasă a procesului.",
+          "`SIGKILL`, semnalul de terminare forțată a procesului.",
+          "`SIGHUP`, semnalul trimis la închiderea terminalului.",
+          "`SIGSTOP`, semnalul de suspendare a execuției procesului."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17291,
+        "topic": "4.6.5 screen, tmux, byobu, dtach",
+        "type": "single",
+        "question": "Care este principalul avantaj al utilizării unui multiplexor de terminal precum `tmux` sau `screen` pentru rularea unei aplicații interactive la distanță?",
+        "options": [
+          "Permite rularea aplicațiilor grafice direct în terminal, fără a necesita X forwarding.",
+          "Asigură o mai bună performanță a rețelei prin comprimarea traficului de date.",
+          "Facilitează deconectarea și reconectarea la sesiunea terminalului fără a întrerupe aplicația.",
+          "Oferă o interfață grafică îmbunătățită pentru gestionarea proceselor din terminal."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17292,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "Ce utilitar Linux este cel mai adecvat pentru a investiga utilizarea discului (I/O) de către procese în timp real?",
+        "options": [
+          "`ps`, pentru a obține un instantaneu al proceselor active și a consumului lor.",
+          "`top`, pentru a monitoriza utilizarea procesorului și memoriei de către procese.",
+          "`htop`, o versiune interactivă și îmbunătățită a utilitarului `top`.",
+          "`iotop`, pentru a vizualiza activitatea de I/O pe disc a fiecărui proces."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17293,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "Pentru ce tip de investigație detaliată a unui proces sunt utile utilitarele `ltrace` și `strace`?",
+        "options": [
+          "Pentru a urmări utilizarea resurselor de rețea și conexiunile deschise de proces.",
+          "Pentru a monitoriza modificările aduse fișierelor de configurare ale procesului.",
+          "Pentru a depana erorile de memorie și a identifica scurgerile de memorie.",
+          "Pentru a analiza apelurile de bibliotecă și de sistem realizate de către proces."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17294,
+        "topic": "4.8 Anexă: Sistemul de fișiere procfs",
+        "type": "single",
+        "question": "Ce reprezintă directoarele numerice din sistemul de fișiere virtual `procfs` (`/proc`) în Linux?",
+        "options": [
+          "Identificatorii unici ai utilizatorilor activi în sistem la un moment dat.",
+          "Punctele de montare pentru dispozitivele de stocare atașate sistemului.",
+          "Identificatorii de proces (PID) pentru fiecare proces în execuție.",
+          "Numerele de versiune ale modulelor kernel încărcate în memorie."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17295,
+        "topic": "4.9 Anexă: Internele pornirii unui proces. Loading",
+        "type": "single",
+        "question": "Care este rolul principal al \"loader-ului\" sistemului de operare în procesul de pornire a unui proces?",
+        "options": [
+          "Să interpreteze executabilul, să aloce memorie și să încarce instrucțiunile și datele.",
+          "Să gestioneze toate evenimentele de I/O generate de proces pe durata execuției.",
+          "Să stabilească prioritățile de planificare ale procesului înainte de a fi executat.",
+          "Să asigure comunicarea inter-proces prin intermediul pipe-urilor și semnalelor."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17296,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Ce tip de procese sunt responsabile pentru servicii precum conectarea la rețea sau actualizarea ceasului sistemului, fără interacțiune directă cu utilizatorul?",
+        "options": [
+          "Procese interactive, care necesită input constant de la utilizator.",
+          "Procese de background, ce pot fi aduse ulterior în foreground la cerere.",
+          "Procese neinteractive, numite servicii sau daemoni, cu rol de gestiune.",
+          "Procese de sistem, ce rulează exclusiv în spațiul de kernel pentru securitate."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17297,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Care dintre următoarele este un mecanism oferit de sistemul de operare pentru a asigura \"comportamentul echitabil al proceselor\"?",
+        "options": [
+          "Izolarea resurselor pentru a preveni accesul neautorizat între procese.",
+          "Alocarea dinamică a resurselor pentru a evita blocajele de memorie.",
+          "Asigurarea că un proces nu utilizează excesiv resurse precum CPU sau memorie.",
+          "Implementarea unor protocoale stricte de comunicare inter-proces securizată."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17298,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "De ce este crucial ca un proces să aibă un PID (Process ID) unic?",
+        "options": [
+          "Pentru a facilita vizualizarea imaginii procesului în sistemul de fișiere.",
+          "Pentru a asigura că mai multe procese pot rula simultan din același program.",
+          "Pentru a stoca eficient argumentele de linie de comandă și variabilele de mediu.",
+          "Pentru a permite sistemului de operare să identifice și să gestioneze individual procesul."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17299,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Un proces poate deschide și lucra cu fișiere sau canale de comunicare în rețea. La ce moment îi sunt alocate aceste resurse?",
+        "options": [
+          "Exclusiv la încărcarea programului (load-time), pentru optimizare.",
+          "Doar la rulare (run-time), la cererea explicită a procesului însuși.",
+          "Atât la încărcare, cât și dinamic, pe parcursul rulării sale.",
+          "Doar dacă procesul are prioritate ridicată și acces privilegiat la kernel."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17300,
+        "topic": "4.2.2 Utilitare pentru urmărirea proceselor",
+        "type": "single",
+        "question": "Care este principala diferență de funcționalitate între utilitarele `ps` și `top` în Linux?",
+        "options": [
+          "`ps` afișează un instantaneu, în timp ce `top` monitorizează dinamic procesele.",
+          "`ps` este pentru procese kernel, iar `top` este pentru procese user-space.",
+          "`ps` permite modificarea priorității, `top` doar vizualizarea resurselor.",
+          "`ps` afișează ierarhia, pe când `top` listează doar procesele active."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17301,
+        "topic": "4.2.3 Starea proceselor",
+        "type": "single",
+        "question": "Un proces aflat în starea \"blocked\" sau \"sleeping\" așteaptă, de obicei, ce tip de eveniment?",
+        "options": [
+          "Să fie planificat pe procesor pentru a-și continua execuția.",
+          "Finalizarea unei operații de intrare/ieșire (I/O) sau o resursă.",
+          "Un semnal de la procesul părinte pentru a-și schimba prioritatea.",
+          "Alocarea de memorie suplimentară de la sistemul de operare."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 17302,
+        "topic": "4.2.4 Prioritatea proceselor",
+        "type": "single",
+        "question": "De ce un utilizator neprivilegiat în Linux nu poate scădea valoarea `nice` a unui proces pe care îl deține?",
+        "options": [
+          "Pentru a preveni abuzul de resurse prin creșterea nejustificată a priorității.",
+          "Scăderea valorii `nice` ar putea bloca alte procese importante ale sistemului.",
+          "Această acțiune necesită acces direct la hardware-ul procesorului, restricționat.",
+          "Doar procesul `init` are permisiunea de a modifica prioritatea proceselor."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17303,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "În Windows, legăturile ierarhice dintre procese sunt descrise ca fiind \"mai slabe\" decât în Linux. Ce înseamnă acest lucru?",
+        "options": [
+          "Procesele copil nu pot moșteni resurse de la procesele părinte în Windows.",
+          "Ierarhia de procese în Windows se resetează la fiecare repornire a sistemului.",
+          "Procesele părinte în Windows nu pot termina execuția proceselor copil.",
+          "Un proces Windows poate comunica în același mod cu părintele și cu alte procese."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17304,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "Ce utilitar este folosit pentru a afișa o listă a proceselor care rulează în background în shell-ul curent?",
+        "options": [
+          "`ps -e`, pentru a vedea toate procesele din sistem, indiferent de stare.",
+          "`top`, pentru o vizualizare interactivă a utilizării resurselor de sistem.",
+          "`jobs`, pentru a lista joburile (procesele) gestionate de shell-ul curent.",
+          "`bg`, pentru a muta un proces din foreground în background și a-l rula."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17305,
+        "topic": "4.3.4 Procesul init",
+        "type": "single",
+        "question": "În contextul ierarhiei de procese Linux, de ce este procesul `init` considerat esențial pentru funcționarea sistemului?",
+        "options": [
+          "El gestionează toate operațiile de rețea și asigură conectivitatea.",
+          "Este singurul proces care poate accesa hardware-ul direct.",
+          "Moartea sa face sistemul de operare neutilizabil, fiind rădăcina ierarhiei.",
+          "Controlează alocarea dinamică a memoriei pentru toate aplicațiile."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17306,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "De ce editoarele de text, în general, citesc conținutul fișierelor în memorie (buffer) și nu editează direct fișierul de pe disc?",
+        "options": [
+          "Pentru a asigura compatibilitatea cu diverse sisteme de fișiere.",
+          "Pentru a permite salvarea automată a modificărilor în fundal, fără intervenție.",
+          "Pentru a oferi o viteză sporită în lucrul cu editorul, discul fiind mai lent.",
+          "Pentru a preveni coruperea fișierului original în cazul unei erori de sistem."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17307,
+        "topic": "4.5 Operații cu procese. Interacțiunea între procese",
+        "type": "single",
+        "question": "Ce rol are comanda `kill` în Linux atunci când este folosită cu un PID specific?",
+        "options": [
+          "Oprește temporar execuția procesului, permițând reluarea ulterioară.",
+          "Modifică prioritatea de planificare a procesului pentru a-i aloca mai multe resurse.",
+          "Afișează informații detaliate despre resursele utilizate de procesul respectiv.",
+          "Trimite un semnal specific (implicit `SIGTERM`) către proces, inițiind terminarea sa."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17308,
+        "topic": "4.5.2 Semnale",
+        "type": "single",
+        "question": "Ce se întâmplă dacă un utilizator încearcă să termine un proces aflat în foreground folosind `Ctrl+Z`?",
+        "options": [
+          "Procesul este terminat imediat, eliberând terminalul pentru noi comenzi.",
+          "Procesul ignoră comanda și continuă să ruleze în foreground, blocând terminalul.",
+          "Procesul este suspendat și mutat în background, continuând să consume resurse.",
+          "Sistemul solicită confirmarea utilizatorului înainte de a executa acțiunea."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17309,
+        "topic": "4.5.4 Comunicarea prin pipe-uri",
+        "type": "single",
+        "question": "Un \"one-liner\" în shell, folosind operatorul pipe (`|`), permite ce tip de comunicare între comenzi?",
+        "options": [
+          "Transferă ieșirea standard a unei comenzi direct la intrarea standard a următoarei.",
+          "Permite partajarea memoriei între comenzi pentru un transfer de date rapid.",
+          "Asigură execuția paralelă a comenzilor, fiecare rulând pe un nucleu CPU diferit.",
+          "Redirecționează erorile unei comenzi către un fișier jurnal pentru depanare."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17310,
+        "topic": "4.6.2 Procese neinteractive",
+        "type": "single",
+        "question": "Ce se înțelege prin \"detașarea de terminal\" a unui proces, în contextul proceselor neinteractive?",
+        "options": [
+          "Procesul pierde orice legătură cu terminalul, iar aceasta nu poate fi restaurată.",
+          "Procesul este suspendat și poate fi reconectat ulterior la același terminal.",
+          "Procesul este mutat într-un terminal virtual separat, invizibil utilizatorului.",
+          "Procesul își redirecționează ieșirea către un fișier temporar, fără a afecta terminalul."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17311,
+        "topic": "4.6.4.1 nohup, disown",
+        "type": "single",
+        "question": "Care este dezavantajul principal al utilizării `nohup` sau `disown` pentru daemonizarea unui proces?",
+        "options": [
+          "Procesul devine mai vulnerabil la atacuri de securitate din cauza lipsei de terminal.",
+          "Procesul consumă mai multe resurse de sistem, deoarece nu este gestionat de shell.",
+          "Se pierde interactivitatea cu procesul, acesta rulând în background fără input/output direct.",
+          "Nu poate fi oprit ulterior decât prin repornirea întregului sistem de operare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17312,
+        "topic": "4.6.5 screen, tmux, byobu, dtach",
+        "type": "single",
+        "question": "Ce funcționalitate suplimentară oferă `tmux` sau `screen` față de `dtach`, conform materialului?",
+        "options": [
+          "Permite crearea de sub-ferestre de terminal multiple într-o singură sesiune.",
+          "Asigură o securitate mai bună prin criptarea traficului dintre client și server.",
+          "Optimizează utilizarea memoriei RAM prin partajarea resurselor între sesiuni.",
+          "Facilitează depanarea programelor prin integrarea cu un debugger."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17313,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "De ce monitorizarea continuă a proceselor și a resurselor utilizate este o formă de asigurare a securității unui sistem?",
+        "options": [
+          "Permite detectarea rapidă a abuzurilor de resurse sau a comportamentelor suspecte.",
+          "Criptează automat datele sensibile accesate de procesele care rulează.",
+          "Îmbunătățește performanța generală a sistemului prin optimizarea proceselor.",
+          "Blochează proactiv accesul proceselor necunoscute la fișierele de sistem."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17314,
+        "topic": "4.8 Anexă: Sistemul de fișiere procfs",
+        "type": "single",
+        "question": "Ce tip de informații despre un proces pot fi găsite în fișierul `/proc/<PID>/status`?",
+        "options": [
+          "Calea către fișierul executabil din care a fost creat procesul.",
+          "Lista completă a tuturor descriptorilor de fișiere deschiși de proces.",
+          "Ierarhia proceselor copil create de procesul respectiv.",
+          "Starea curentă a procesului (ex: running, sleeping) și alte detalii."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17315,
+        "topic": "4.9 Anexă: Internele pornirii unui proces. Loading",
+        "type": "single",
+        "question": "Pe lângă încărcarea instrucțiunilor și datelor, ce alte elemente plasează loader-ul pe stiva procesului pentru a fi accesibile la `run-time`?",
+        "options": [
+          "Doar adresa de memorie a punctului de intrare (entry point) a programului.",
+          "Doar lista bibliotecilor dinamice necesare pentru funcționarea programului.",
+          "Argumentele programului și variabilele de mediu moștenite de la shell.",
+          "Contextul de securitate al procesului și permisiunile de acces la resurse."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17316,
+        "topic": "Procese - Sumar",
+        "type": "single",
+        "question": "Care dintre următoarele afirmații este o caracteristică fundamentală a unui proces, conform sumarului capitolului?",
+        "options": [
+          "Un proces execută o acțiune izolată de altele și folosește resurse de sistem.",
+          "Un proces este o aplicație care rulează în întregime în spațiul kernel.",
+          "Un proces este un fișier executabil stocat permanent pe sistemul de fișiere.",
+          "Un proces este o componentă pasivă care așteaptă comenzi de la sistem."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17317,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Ce atribut al unui proces este cel mai adesea modificat pentru a influența cât de des are acces la procesor?",
+        "options": [
+          "PID (Process ID), pentru a-i acorda o identitate unică și prioritară.",
+          "PPID (Parent Process ID), pentru a-l asocia unui părinte cu privilegii sporite.",
+          "Prioritatea de rulare (nice value în Linux), care afectează planificarea CPU.",
+          "UID (User ID), pentru a-i oferi acces la resurse restricționate."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17318,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "De ce un proces poate avea un singur proces părinte, dar oricâte procese copil?",
+        "options": [
+          "Pentru a menține o structură arborescentă clară și ușor de urmărit a ierarhiei.",
+          "Pentru a simplifica gestionarea resurselor partajate între procese.",
+          "Pentru a preveni deadlock-urile și condițiile de cursă în planificarea proceselor.",
+          "Pentru că fiecare proces este o instanță unică și nu poate avea mai mulți creatori."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17319,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "Ce se întâmplă cu procesele active într-un terminal dacă shell-ul se închide (ex: prin `exit` sau `Ctrl+D`)?",
+        "options": [
+          "Toate procesele active sunt mutate automat în background și persistă.",
+          "Doar procesele aflate în foreground sunt terminate, cele din background continuă.",
+          "Toate procesele active, inclusiv cele din background, sunt, în mod normal, omorâte.",
+          "Sistemul de operare suspendă toate procesele până la o nouă sesiune de terminal."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17320,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "Ce limitează dimensiunea tabelei descriptorilor de fișiere a unui proces (ex: 1024 de intrări în Linux)?",
+        "options": [
+          "Numărul maxim de fișiere fizice care pot fi stocate pe sistemul de fișiere.",
+          "Capacitatea memoriei RAM disponibile pentru procesele din kernel.",
+          "Prevenirea utilizării abuzive a resurselor de sistem prin deschiderea excesivă de fișiere.",
+          "Restricțiile impuse de arhitectura hardware a procesorului pentru I/O."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17321,
+        "topic": "4.5.2 Semnale",
+        "type": "single",
+        "question": "Care dintre următoarele combinații de taste este recomandată pentru a omorî un proces aflat în foreground, dacă `Ctrl+C` eșuează?",
+        "options": [
+          "`Ctrl+\\`, care trimite semnalul `SIGQUIT`, mai puternic decât `SIGINT`.",
+          "`Ctrl+Z`, pentru a suspenda procesul și a-l muta în background.",
+          "`Alt+F4`, o metodă universală pentru închiderea aplicațiilor grafice.",
+          "`Print Screen`, pentru a captura o imagine a ecranului înainte de crash."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17322,
+        "topic": "4.6.3 Procese daemon",
+        "type": "single",
+        "question": "De ce un proces daemon este adesea configurat să redirecționeze descriptorii standard (0, 1, 2) către `/dev/null`?",
+        "options": [
+          "Pentru a preveni scrierea de informații inutile pe disc și a economisi spațiu.",
+          "Pentru a îmbunătăți performanța I/O prin evitarea operațiilor de citire/scriere lente.",
+          "Pentru a ascunde informațiile sensibile de la utilizatorii neautorizați.",
+          "Pentru a asigura că procesul nu încearcă să interacționeze cu un terminal inexistent."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17323,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "Ce informații critice pot fi obținute prin investigarea directorului `/proc/<PID>/fd`?",
+        "options": [
+          "Numele fișierului executabil din care a fost creat procesul.",
+          "Starea curentă a procesului și consumul său de resurse.",
+          "Tabela descriptorilor de fișiere, indicând fișierele deschise de proces.",
+          "Lista tuturor proceselor copil create de procesul cu PID-ul respectiv."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17324,
+        "topic": "4.9 Anexă: Internele pornirii unui proces. Loading",
+        "type": "single",
+        "question": "Care este principalul impact al argumentelor programului și al variabilelor de mediu asupra funcționării proceselor?",
+        "options": [
+          "Influentează comportamentul procesului încă de la momentul încărcării (load-time).",
+          "Determinarea arhitecturii hardware pe care va rula procesul.",
+          "Asigurarea că procesul este izolat complet de alte procese din sistem.",
+          "Stabilirea priorității de planificare a procesului pe procesor."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17325,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Ce resursă de sistem este folosită de un proces pentru a stoca instrucțiunile executabile și datele prelucrate?",
+        "options": [
+          "Sistemul de fișiere, pentru stocare permanentă și acces rapid.",
+          "Procesorul, pentru execuția logică a instrucțiunilor și calcul.",
+          "Memoria, care include zone pentru cod, date și stiva procesului.",
+          "Dispozitivele de I/O, pentru comunicarea externă și persistarea datelor."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17326,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "Un program este considerat o \"entitate statică\". Ce implică această descriere?",
+        "options": [
+          "Că poate fi executat doar pe un singur tip de arhitectură hardware.",
+          "Că necesită intervenția utilizatorului pentru a-și schimba starea.",
+          "Că este un fișier executabil care nu se modifică în timpul rulării.",
+          "Că ocupă o cantitate fixă de memorie, independent de execuție."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17327,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Ce rol au atributele `UID` (User ID) și `GID` (Group ID) pentru un proces?",
+        "options": [
+          "Identificarea procesului unic în sistem pentru operații de administrare.",
+          "Determinarea priorității de rulare a procesului pe procesor.",
+          "Indică terminalul de la care a fost pornit procesul pentru interacțiune.",
+          "Stabilirea permisiunilor de acces la resurse pentru procesul respectiv."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17328,
+        "topic": "4.2.3 Starea proceselor",
+        "type": "single",
+        "question": "Câte procese pot fi simultan în starea \"running\" pe un sistem cu un singur nucleu de procesor?",
+        "options": [
+          "Unul singur, deoarece un singur proces poate executa instrucțiuni la un moment dat.",
+          "Zero, deoarece procesele nu pot rula efectiv pe un singur nucleu.",
+          "Oricâte, sistemul de operare gestionând iluzia paralelismului prin context switching.",
+          "Maxim două, unul în foreground și unul în background, pentru eficiență."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17329,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "Ce se întâmplă cu un proces copil dacă procesul său părinte moare, iar sistemul nu implementează adoptarea orfanilor (spre deosebire de Linux)?",
+        "options": [
+          "Procesul copil este automat adoptat de cel mai apropiat proces activ din ierarhie.",
+          "Procesul copil continuă să ruleze, dar nu mai poate comunica cu sistemul de operare.",
+          "Procesul copil devine un proces \"zombie\", ocupând resurse, dar neexecutând nimic.",
+          "Comportamentul este nedefinit și poate duce la instabilitatea sistemului."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17330,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "De ce un proces suspendat (`stopped`) în background nu poate fi adus în foreground fără o acțiune explicită a utilizatorului?",
+        "options": [
+          "Pentru că a pierdut accesul la resursele de procesor și memorie.",
+          "Pentru că nu mai are o legătură activă cu terminalul de la care a pornit.",
+          "Pentru că sistemul de operare prioritizează procesele care rulează activ.",
+          "Pentru că utilizatorul trebuie să decidă când și dacă procesul își reia execuția."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17331,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "Ce se întâmplă cu un fișier deschis de un proces atunci când procesul își încheie execuția, în mod normal?",
+        "options": [
+          "Sistemul de operare închide automat toate descriptorii de fișiere ai procesului.",
+          "Fișierul rămâne deschis și devine accesibil altor procese din sistem.",
+          "Fișierul este șters automat de pe disc, pentru a elibera spațiu.",
+          "Se creează o copie de rezervă a fișierului, pentru a preveni pierderea datelor."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17332,
+        "topic": "4.5 Operații cu procese. Interacțiunea între procese",
+        "type": "single",
+        "question": "Care este principalul mecanism de comunicare între procese în Linux, utilizat și pentru terminarea acestora?",
+        "options": [
+          "Apelurile de sistem directe către kernel pentru schimb de date.",
+          "Memoria partajată, care permite accesul direct la date între procese.",
+          "Semnalele, care sunt notificări trimise de un proces altuia sau de sistem.",
+          "Fișierele temporare, folosite pentru a stoca informații de comunicare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17333,
+        "topic": "4.6.1 Terminale",
+        "type": "single",
+        "question": "Ce utilitar Linux este folosit pentru a identifica numele terminalului curent asociat shell-ului?",
+        "options": [
+          "`tty`, care afișează numele fișierului dispozitiv al terminalului.",
+          "`ps`, pentru a lista toate terminalele active și procesele asociate.",
+          "`ls /dev`, pentru a vedea lista de dispozitive disponibile, inclusiv terminalele.",
+          "`whoami`, pentru a afișa utilizatorul curent și terminalul său principal."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17334,
+        "topic": "4.6.3 Procese daemon",
+        "type": "single",
+        "question": "Care dintre următoarele este o diferență cheie între un proces daemon și o aplicație grafică interactivă care rulează fără terminal?",
+        "options": [
+          "Doar daemonii pot fi porniți la boot-ul sistemului, aplicațiile grafice nu.",
+          "Daemonii consumă mai puține resurse de sistem decât aplicațiile grafice similare.",
+          "Aplicațiile grafice au o interfață directă de interacțiune cu utilizatorul, daemonii nu.",
+          "Doar aplicațiile grafice pot fi mutate între foreground și background."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17335,
+        "topic": "4.6.4.1 nohup, disown",
+        "type": "single",
+        "question": "Ce se întâmplă cu procesul părinte al unui proces rulat cu `nohup` după ce shell-ul inițial este închis?",
+        "options": [
+          "Procesul copil este adoptat de către procesul `init` și continuă să ruleze.",
+          "Procesul părinte este terminat, iar procesul copil este șters.",
+          "Procesul copil este suspendat până la o nouă sesiune de terminal.",
+          "Procesul părinte își transferă controlul către un alt shell activ."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17336,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "Când este cel mai util să se utilizeze utilitarul `sysstat` pentru monitorizarea resurselor unui sistem?",
+        "options": [
+          "Pentru a obține un instantaneu rapid al stării curente a sistemului.",
+          "Pentru a depana erori de programare la nivel de apeluri de sistem.",
+          "Pentru monitorizarea continuă și verificarea trendurilor în utilizarea resurselor.",
+          "Pentru a identifica fișierele deschise de un proces într-un anumit moment."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17337,
+        "topic": "4.8 Anexă: Sistemul de fișiere procfs",
+        "type": "single",
+        "question": "Ce informație cheie poate fi obținută dintr-o intrare precum `/proc/cpuinfo` în Linux?",
+        "options": [
+          "Detalii despre configurația plăcii de bază și a memoriei RAM instalate.",
+          "Lista completă a tuturor proceselor active și a PID-urilor acestora.",
+          "Statisticile de utilizare a rețelei pentru fiecare interfață de rețea.",
+          "Informații despre tipul, numărul și frecvența procesoarelor sistemului."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17338,
+        "topic": "Procese - Sumar",
+        "type": "single",
+        "question": "Care este scopul principal al izolării resurselor între procese, conform sumarului capitolului?",
+        "options": [
+          "Pentru a permite fiecărui proces să acceseze toate resursele sistemului.",
+          "Pentru a distribui uniform sarcina de lucru pe mai multe nuclee de procesor.",
+          "Pentru a asigura că un proces nu poate corupe sau afecta alte procese.",
+          "Pentru a facilita comunicarea securizată și eficientă între procese."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17339,
+        "topic": "4.1 Programe și procese",
+        "type": "single",
+        "question": "Ce utilitar Linux este menționat pentru a vizualiza programul (fișierul executabil) din care a fost creat un proces, cum ar fi Firefox?",
+        "options": [
+          "`ls`, pentru a lista conținutul directorului de instalare al programului.",
+          "`cat`, pentru a afișa codul sursă al programului executabil.",
+          "`ps`, cu opțiuni care arată calea completă a comenzii rulate.",
+          "`file`, pentru a determina tipul fișierului executabil specific."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17340,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Care dintre următoarele atribute ale unui proces este cel mai adesea folosit de sistemul de operare pentru a separa și izola procesele între utilizatori diferiți?",
+        "options": [
+          "PID (Process ID), pentru identificarea unică la nivel de sistem.",
+          "PPID (Parent Process ID), pentru a asigura ierarhia de securitate.",
+          "UID (User ID) și GID (Group ID), care definesc permisiunile de acces.",
+          "Starea procesului, pentru a controla accesul la resurse în funcție de activitate."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17341,
+        "topic": "4.2.4 Prioritatea proceselor",
+        "type": "single",
+        "question": "Ce utilitar Linux este folosit pentru a porni un proces cu o valoare `nice` modificată (la load-time)?",
+        "options": [
+          "`renice`, pentru ajustări dinamice ale priorității.",
+          "`ps -o nice`, pentru vizualizarea valorii `nice` a proceselor.",
+          "`nice`, pentru a seta prioritatea la pornirea programului.",
+          "`top`, pentru a monitoriza impactul valorii `nice` asupra performanței."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17342,
+        "topic": "4.3 Ierarhia de procese",
+        "type": "single",
+        "question": "Ce se înțelege prin \"cod de ieșire (exit code)\" transmis de un proces copil către părintele său?",
+        "options": [
+          "O valoare numerică ce indică modul în care s-a încheiat execuția procesului.",
+          "Identificatorul unic al procesului copil, necesar pentru gestionare.",
+          "O referință la resursele de memorie folosite de procesul copil.",
+          "Un mesaj de eroare detaliat în cazul unei terminări neașteptate."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17343,
+        "topic": "4.3.3 Foreground și background",
+        "type": "single",
+        "question": "Care este rolul operatorului `&` la sfârșitul unei comenzi în shell (ex: `command &`)?",
+        "options": [
+          "Termină procesul curent și pornește o nouă instanță în foreground.",
+          "Redirecționează ieșirea standard a comenzii către un fișier temporar.",
+          "Rulează comanda în background, permițând shell-ului să accepte noi comenzi.",
+          "Suspendă execuția comenzii până la o acțiune explicită a utilizatorului."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17344,
+        "topic": "4.4 Procese și fișiere",
+        "type": "single",
+        "question": "Ce utilitar Linux este folosit pentru a afișa fișierele deschise de un anumit proces?",
+        "options": [
+          "`cat`, pentru a vizualiza conținutul fișierelor text deschise.",
+          "`find`, pentru a localiza fișierele pe sistemul de fișiere după diverse criterii.",
+          "`lsof`, care listează toate fișierele și socket-urile deschise de procese.",
+          "`grep`, pentru a căuta șiruri de caractere în fișierele deschise de proces."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17345,
+        "topic": "4.5.4 Comunicarea prin pipe-uri",
+        "type": "single",
+        "question": "Ce se întâmplă cu descriptorii de fișiere standard (stdin, stdout, stderr) ai proceselor conectate printr-un pipe?",
+        "options": [
+          "`stdout` al primului proces este redirecționat către `stdin` al celui de-al doilea.",
+          "`stdout` și `stderr` ale ambelor procese sunt redirecționate către același fișier.",
+          "Toți descriptorii standard sunt închiși pentru a preveni interferențele de date.",
+          "`stdin` al ambelor procese primește date de la tastatură simultan."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17346,
+        "topic": "4.6.3 Procese daemon",
+        "type": "single",
+        "question": "În Windows, cum sunt denumite procesele care rulează neinteractiv, în background, și sunt detașate de terminal?",
+        "options": [
+          "Daemoni, similar cu terminologia utilizată în sistemele Unix.",
+          "Servicii, gestionate de un subsistem dedicat pentru stabilitate.",
+          "Aplicații de fundal, care pot fi aduse în prim plan la cerere.",
+          "Procese de sistem, ce rulează cu privilegii înalte pentru operații critice."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 17347,
+        "topic": "4.6.4.1 nohup, disown",
+        "type": "single",
+        "question": "Care este diferența funcțională cheie între `nohup` și `disown` în contextul daemonizării unui proces?",
+        "options": [
+          "`nohup` afectează procesul copil să ignore `SIGHUP`, `disown` afectează shell-ul.",
+          "`nohup` redirecționează automat I/O, `disown` necesită redirecționare manuală.",
+          "`nohup` pornește procesul în foreground, `disown` îl mută în background.",
+          "`nohup` necesită privilegii root, `disown` poate fi folosit de utilizatori obișnuiți."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17348,
+        "topic": "4.6.5 screen, tmux, byobu, dtach",
+        "type": "single",
+        "question": "Ce se întâmplă cu o sesiune `tmux` sau `screen` dacă shell-ul de la care a fost pornită este închis?",
+        "options": [
+          "Sesiunea este terminată automat, pierzând toate procesele active în ea.",
+          "Sesiunea este suspendată, dar poate fi reluată doar de la același terminal.",
+          "Sesiunea rămâne activă și poate fi reatașată ulterior de la un alt shell.",
+          "Toate procesele din sesiune sunt mutate în background, detașate de terminal."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17349,
+        "topic": "4.7 Investigarea proceselor",
+        "type": "single",
+        "question": "Ce utilitar Windows este echivalentul funcțional al comenzilor `ps` și `top` din Linux pentru monitorizarea proceselor?",
+        "options": [
+          "PowerShell, pentru a executa scripturi de automatizare a sistemului.",
+          "Registry Editor, pentru a vizualiza și modifica setările de sistem.",
+          "Task Manager, care oferă o interfață grafică pentru procese și resurse.",
+          "Event Viewer, pentru a analiza logurile de evenimente ale sistemului."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17350,
+        "topic": "4.8 Anexă: Sistemul de fișiere procfs",
+        "type": "single",
+        "question": "De ce `procfs` este considerat un sistem de fișiere \"virtual\" în Linux?",
+        "options": [
+          "Deoarece stochează fișiere criptate și inaccesibile utilizatorilor obișnuiți.",
+          "Deoarece conținutul său este generat dinamic și nu are suport pe disc.",
+          "Deoarece este accesibil doar prin intermediul unor apeluri de sistem speciale.",
+          "Deoarece este o implementare a unui sistem de fișiere de rețea distribuit."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 17351,
+        "topic": "4.9 Anexă: Internele pornirii unui proces. Loading",
+        "type": "single",
+        "question": "Ce componentă a sistemului de operare este responsabilă pentru a face legătura cu bibliotecile dinamice și a le încărca în memorie la nevoie pentru un proces?",
+        "options": [
+          "Scheduler-ul, care gestionează ordinea de execuție a proceselor.",
+          "Memory Manager-ul, care alocă și eliberează blocurile de memorie.",
+          "Loader-ul, care pregătește programul executabil pentru rulare.",
+          "Kernel-ul, care supraveghează toate operațiile de nivel jos ale sistemului."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17352,
+        "topic": "Procese",
+        "type": "single",
+        "question": "Ce mecanism utilizează sistemul de operare pentru a arbitra accesul la resurse partajate (ex: un fișier) de către mai multe procese?",
+        "options": [
+          "Prin ordonarea acceselor pentru a preveni suprascrierea informațiilor între procese.",
+          "Prin alocarea exclusivă a resursei către un singur proces la un moment dat.",
+          "Prin crearea de copii separate ale resursei pentru fiecare proces în parte.",
+          "Prin notificarea utilizatorului ori de câte ori apare un conflict de acces."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17353,
+        "topic": "4.2 Resursele și atributele unui proces",
+        "type": "single",
+        "question": "Ce informație poate fi obținută dintr-un proces prin atributul \"timp de rulare pe procesor\"?",
+        "options": [
+          "Durata totală de timp de când procesul a fost pornit în sistem.",
+          "Timpul estimat până la finalizarea execuției procesului curent.",
+          "Intervalul de timp în care procesul a fost în starea \"ready\" sau \"blocked\".",
+          "Timpul efectiv petrecut de proces în execuție pe un procesor."
+        ],
+        "answers": [
+          3
+        ]
+      },
+      {
+        "id": 17354,
+        "topic": "4.2.3 Starea proceselor",
+        "type": "single",
+        "question": "Ce indică un \"load average\" mare pe un sistem Linux?",
+        "options": [
+          "Sistemul are multă memorie RAM liberă, indicând o utilizare ineficientă.",
+          "Există multe procese blocate în așteptarea operațiilor de I/O de rețea.",
+          "Sistemul este puternic încărcat, cu multe procese \"ready\" care așteaptă CPU.",
+          "Numărul de nuclee de procesor este insuficient pentru sarcinile active."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 17355,
+        "topic": "4.5.2 Semnale",
+        "type": "single",
+        "question": "Ce se întâmplă dacă un proces ignoră semnalul `SIGINT` (trimis de `Ctrl+C`), iar utilizatorul dorește să-l termine?",
+        "options": [
+          "Utilizatorul ar trebui să încerce `Ctrl+\\`, care trimite `SIGQUIT`, un semnal mai puternic.",
+          "Procesul va continua să ruleze, deoarece `SIGINT` nu poate fi forțat.",
+          "Sistemul de operare va termina automat procesul după o perioadă de timp.",
+          "Procesul va fi mutat în background, eliberând terminalul pentru alte comenzi."
+        ],
+        "answers": [
+          0
+        ]
+      },
+      {
+        "id": 17356,
+        "topic": "4.6.4 Detasarea de terminal",
+        "type": "single",
+        "question": "Care este principalul motiv pentru care o aplicație grafică interactivă nu este considerată un proces daemon, chiar dacă rulează fără terminal asociat?",
+        "options": [
+          "Aplicațiile grafice folosesc resurse de sistem mult mai mari decât daemonii.",
+          "Daemonii sunt porniți exclusiv de procesul `init`, nu de utilizatori.",
+          "Aplicațiile grafice au o interfață directă de interacțiune cu utilizatorul.",
+          "Aplicațiile grafice nu pot fi daemonizate folosind `nohup` sau `disown`."
+        ],
+        "answers": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1772890574537,
+    "difficulty": "easy",
+    "date": "07.03.2026 15:36",
+    "source": "PDF",
+    "questions": [
+      {
+        "id": 74535,
+        "topic": "Cap 0 - Introducere",
+        "type": "single",
+        "question": "Ce elemente formeazÄ lumea informaÈiei digitale (IT&C)?",
+        "options": [
+          "Doar infrastructura de reÈea Èi date.",
+          "Sisteme de calcul Èi software de bazÄ.",
+          "Sisteme de calcul, infrastructurÄ Èi date.",
+          "Doar servere Èi echipamente de stocare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 74536,
+        "topic": "0.1 Sisteme de calcul",
+        "type": "single",
+        "question": "Care este cea mai importantÄ caracteristicÄ a software-ului?",
+        "options": [
+          "Viteza mare de execuÈie a programelor.",
+          "Flexibilitatea Èi adaptabilitatea sa.",
+          "Necesitatea de a schimba echipamentul.",
+          "Integrarea exclusivÄ cu hardware-ul."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 74537,
+        "topic": "0.2 Sistemul de operare",
+        "type": "single",
+        "question": "Ce componentÄ centralÄ a sistemului de operare gestioneazÄ resursele hardware?",
+        "options": [
+          "InterfaÈa de apeluri de sistem.",
+          "AplicaÈiile de sistem software.",
+          "Nucleul sistemului de operare.",
+          "Shell-ul sistemului de operare."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 74538,
+        "topic": "0.2.1 Alegerea sistemului de operare",
+        "type": "single",
+        "question": "Care este un avantaj principal al sistemelor Android comparativ cu iOS?",
+        "options": [
+          "Integrare software/hardware superioarÄ.",
+          "Versiuni puÈine Èi foarte stabile.",
+          "O gamÄ largÄ de dispozitive mai ieftine.",
+          "Dezvoltarea aplicaÈiilor doar pe macOS."
+        ],
+        "answers": [
+          2
+        ]
+      },
+      {
+        "id": 74539,
+        "topic": "0.3 Lumea Linux",
+        "type": "single",
+        "question": "Ce Ã®nseamnÄ conceptul de software liber (open source) Ã®n lumea Linux?",
+        "options": [
+          "Software-ul poate fi folosit gratuit, fÄrÄ costuri.",
+          "Codul sursÄ este accesibil Èi poate fi modificat.",
+          "AplicaÈiile sunt dezvoltate exclusiv de companii.",
+          "Este un sistem de operare bazat pe Unix."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 74540,
+        "topic": "0.3.2 GNU/Linux. DistribuÈii",
+        "type": "single",
+        "question": "Care dintre urmÄtoarele afirmaÈii descrie cel mai bine o distribuÈie GNU/Linux?",
+        "options": [
+          "Doar nucleul sistemului de operare Linux.",
+          "Un cumul de software cu nucleul Èi aplicaÈii.",
+          "O versiune a sistemului de operare UNIX.",
+          "Un set de aplicaÈii fÄrÄ un nucleu."
+        ],
+        "answers": [
+          1
+        ]
+      },
+      {
+        "id": 74541,
+        "topic": "0.1 Sisteme de calcul",
+        "type": "multi",
+        "question": "Care dintre urmÄtoarele reprezintÄ exemple de sisteme de calcul conform textului? (Alege 2)",
+        "options": [
+          "Un ceas inteligent (smartwatch).",
+          "O consolÄ pentru jocuri video.",
+          "Un bec inteligent.",
+          "Un proiector.",
+          "Un senzor de temperaturÄ."
+        ],
+        "answers": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 74542,
+        "topic": "0.2 Sistemul de operare",
+        "type": "multi",
+        "question": "Care sunt douÄ dintre rolurile principale ale unui sistem de operare? (Alege 2)",
+        "options": [
+          "Asigurarea portabilitÄÈii aplicaÈiilor.",
+          "Ascunderea complexitÄÈii hardware-ului.",
+          "Limitarea accesului la resurse hardware.",
+          "Eliminarea necesitÄÈii de securitate.",
+          "Controlul exclusiv al unei aplicaÈii."
+        ],
+        "answers": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 74543,
+        "topic": "0.2.1 Alegerea sistemului de operare",
+        "type": "multi",
+        "question": "Ce opÈiuni are un utilizator care doreÈte sÄ foloseascÄ douÄ sisteme de operare pe acelaÈi sistem de calcul? (Alege 2)",
+        "options": [
+          "Instalarea separatÄ pe douÄ sisteme fizice.",
+          "Utilizarea unei maÈini virtuale.",
+          "Configurarea unui sistem dual-boot.",
+          "Rularea simultanÄ a ambelor OS direct.",
+          "Folosirea unui singur sistem de operare."
+        ],
+        "answers": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": 74544,
+        "topic": "0.3.4 Instalarea Linux",
+        "type": "order",
+        "question": "OrdoneazÄ paÈii generali pentru instalarea unui sistem de operare Linux pe un sistem fizic.",
+        "options": [
+          "Realizarea instalÄrii efective a sistemului.",
+          "DescÄrcarea imaginii ISO a distribuÈiei.",
+          "Pornirea sistemului de pe mediul bootabil.",
+          "Crearea unui mediu bootabil din imaginea ISO."
+        ],
+        "answers": [
+          1,
+          3,
+          2,
+          0
+        ]
+      }
+    ]
+  }
+]
