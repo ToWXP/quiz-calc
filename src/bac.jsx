@@ -178,7 +178,7 @@ function Quiz({ questions, onFinish, onMenu }) {
   function next() {
     if (isLast) {
       const history = states.map((s, i) => s ? { topic:questions[i].topic, correct:s.correct } : null);
-      onFinish(score, history, questions, states);
+      onFinish(score, history);
     } else setCur(c => c + 1);
   }
 
@@ -299,15 +299,13 @@ function Quiz({ questions, onFinish, onMenu }) {
 }
 
 /* ─── RESULTS ────────────────────────────────────────────── */
-function Results({ score, total, history, questions, states, onMenu, onRetry }) {
+function Results({ score, total, history, onMenu, onRetry }) {
   const pct = score / total;
   const [emoji, grade, col] =
     pct>=.9 ? ["🏆","Excelent!",T.green] :
     pct>=.7 ? ["👍","Bine!",T.accent] :
     pct>=.5 ? ["📚","Mai studiază",T.yellow] :
     ["💡","Continuă!",T.red];
-
-  const [reviewIdx, setReviewIdx] = useState(null);
 
   const stats = {};
   history.filter(Boolean).forEach(h => {
@@ -316,225 +314,54 @@ function Results({ score, total, history, questions, states, onMenu, onRetry }) 
     if (h.correct) stats[h.topic].c++;
   });
 
-  const reviewQ = reviewIdx !== null ? questions[reviewIdx] : null;
-  const reviewSt = reviewIdx !== null ? states[reviewIdx] : null;
-
   return (
-    <div style={{ width:"100%", maxWidth:620 }}>
-      <div style={{
-        background:T.card, border:`1px solid ${T.border}`, borderRadius:20,
-        padding:"36px 28px 32px", display:"flex", flexDirection:"column",
-        alignItems:"center", boxShadow:`0 0 80px ${col}15`,
-      }}>
-        <div style={{ fontSize:56, marginBottom:8 }}>{emoji}</div>
-        <div style={{ fontSize:18, fontWeight:600, color:T.muted, marginBottom:10 }}>{grade}</div>
-        <div style={{ display:"flex", alignItems:"baseline", gap:4, marginBottom:4 }}>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:80, fontWeight:700, color:col }}>{score}</span>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:28, color:T.border }}>/{total}</span>
-        </div>
-        <div style={{ fontSize:12, color:T.muted, marginBottom:32, fontFamily:"'JetBrains Mono',monospace" }}>
-          {Math.round(pct*100)}% corect
-        </div>
-
-        {/* Question grid */}
-        {questions.length > 0 && (
-          <div style={{ width:"100%", marginBottom:28 }}>
-            <div style={{ fontSize:10, fontWeight:700, color:T.muted, textTransform:"uppercase", letterSpacing:".1em", marginBottom:12 }}>
-              Revezi întrebările
-            </div>
-            <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
-              {questions.map((q, i) => {
-                const st = states[i];
-                const correct = st?.correct;
-                const skipped = !st;
-                const bg = skipped ? "#1a1000" : correct ? "#0d2e1a" : "#2d0f0f";
-                const bc = skipped ? T.orange : correct ? T.green : T.red;
-                const textCol = skipped ? T.orange : correct ? T.green : T.red;
-                return (
-                  <button key={i} onClick={() => setReviewIdx(i)} style={{
-                    width:40, height:40, borderRadius:9,
-                    background:bg, border:`1.5px solid ${bc}`,
-                    color:textCol, fontSize:13, fontWeight:700,
-                    fontFamily:"'JetBrains Mono',monospace",
-                    cursor:"pointer", transition:"transform .1s, box-shadow .1s",
-                    display:"flex", alignItems:"center", justifyContent:"center",
-                    boxShadow: reviewIdx === i ? `0 0 0 2px ${bc}` : "none",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.transform="scale(1.12)"}
-                  onMouseLeave={e => e.currentTarget.style.transform="scale(1)"}
-                  >
-                    {i + 1}
-                  </button>
-                );
-              })}
-            </div>
-            <div style={{ display:"flex", gap:16, marginTop:10, flexWrap:"wrap" }}>
-              <div style={{ display:"flex", alignItems:"center", gap:5, fontSize:11, color:T.green }}>
-                <div style={{ width:10, height:10, borderRadius:3, background:"#0d2e1a", border:`1.5px solid ${T.green}` }} />
-                Corect ({history.filter(h=>h?.correct).length})
-              </div>
-              <div style={{ display:"flex", alignItems:"center", gap:5, fontSize:11, color:T.red }}>
-                <div style={{ width:10, height:10, borderRadius:3, background:"#2d0f0f", border:`1.5px solid ${T.red}` }} />
-                Greșit ({history.filter(h=>h && !h.correct).length})
-              </div>
-              <div style={{ display:"flex", alignItems:"center", gap:5, fontSize:11, color:T.orange }}>
-                <div style={{ width:10, height:10, borderRadius:3, background:"#1a0e00", border:`1.5px solid ${T.orange}` }} />
-                Sărite ({history.filter(h=>!h).length})
-              </div>
-            </div>
-          </div>
-        )}
-
-        {Object.keys(stats).length>0 && (
-          <div style={{ width:"100%", marginBottom:28 }}>
-            <div style={{ fontSize:10, fontWeight:700, color:T.muted, textTransform:"uppercase", letterSpacing:".1em", marginBottom:12 }}>Pe capitole</div>
-            {Object.entries(stats).map(([topic,s]) => {
-              const p=s.c/s.t;
-              const c=p===1?T.green:p>=.5?T.yellow:T.red;
-              return (
-                <div key={topic} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
-                  <span style={{ fontSize:11, color:T.muted, width:160, flexShrink:0, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{topic}</span>
-                  <div style={{ flex:1, height:4, background:T.surface, borderRadius:2, overflow:"hidden" }}>
-                    <div style={{ width:`${p*100}%`, height:"100%", background:c, borderRadius:2, transition:"width .6s ease" }} />
-                  </div>
-                  <span style={{ fontSize:10, color:T.muted, fontFamily:"'JetBrains Mono',monospace", width:26, textAlign:"right" }}>{s.c}/{s.t}</span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        <div style={{ display:"flex", gap:12 }}>
-          <button onClick={onRetry} style={{
-            padding:"11px 28px", borderRadius:10, border:"none",
-            background:`linear-gradient(135deg,#047857,#0369a1)`,
-            color:"#fff", fontFamily:"'Outfit',sans-serif", fontSize:14, fontWeight:700, cursor:"pointer",
-          }}>↺ Reia Quiz</button>
-          <button onClick={onMenu} style={{
-            padding:"11px 28px", borderRadius:10,
-            border:`1px solid ${T.borderHi}`, background:"transparent",
-            color:T.muted, fontFamily:"'Outfit',sans-serif", fontSize:14, fontWeight:600, cursor:"pointer",
-          }}>Meniu</button>
-        </div>
+    <div style={{
+      width:"100%", maxWidth:580, background:T.card,
+      border:`1px solid ${T.border}`, borderRadius:20,
+      padding:"36px 28px 32px", display:"flex", flexDirection:"column",
+      alignItems:"center", boxShadow:`0 0 80px ${col}15`,
+    }}>
+      <div style={{ fontSize:56, marginBottom:8 }}>{emoji}</div>
+      <div style={{ fontSize:18, fontWeight:600, color:T.muted, marginBottom:10 }}>{grade}</div>
+      <div style={{ display:"flex", alignItems:"baseline", gap:4, marginBottom:4 }}>
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:80, fontWeight:700, color:col }}>{score}</span>
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:28, color:T.border }}>/{total}</span>
+      </div>
+      <div style={{ fontSize:12, color:T.muted, marginBottom:32, fontFamily:"'JetBrains Mono',monospace" }}>
+        {Math.round(pct*100)}% corect
       </div>
 
-      {/* Review modal */}
-      {reviewQ && (
-        <div style={{
-          position:"fixed", inset:0, background:"#000c",
-          display:"flex", alignItems:"center", justifyContent:"center",
-          zIndex:999, padding:16,
-        }} onClick={() => setReviewIdx(null)}>
-          <div onClick={e => e.stopPropagation()} style={{
-            background:T.card, border:`1px solid ${T.borderHi}`,
-            borderRadius:18, padding:"24px 22px", width:"100%", maxWidth:580,
-            maxHeight:"85vh", overflowY:"auto",
-            boxShadow:`0 0 60px #000a`,
-          }}>
-            {/* Modal header */}
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
-              <div style={{ display:"flex", gap:8, alignItems:"center" }}>
-                <span style={{
-                  fontFamily:"'JetBrains Mono',monospace", fontSize:12,
-                  color:T.muted, background:T.surface, padding:"3px 10px",
-                  borderRadius:6, border:`1px solid ${T.border}`,
-                }}>#{reviewIdx + 1}</span>
-                {!reviewSt ? (
-                  <Tag color={T.orange} bg="#1a0e00">⊘ Sărit</Tag>
-                ) : (
-                  <Tag color={reviewSt.correct ? T.green : T.red} bg={reviewSt.correct ? "#061c10" : "#1c0606"}>
-                    {reviewSt.correct ? "✓ Corect" : "✗ Greșit"}
-                  </Tag>
-                )}
-                <Tag color={reviewQ.type==="order"?T.orange:reviewQ.type==="multi"?T.purple:T.muted} bg="#0f0f1a">
-                  {reviewQ.type==="order"?"⇅ Ordonare":reviewQ.type==="multi"?"☑ Multi":"◉ Single"}
-                </Tag>
+      {Object.keys(stats).length>0 && (
+        <div style={{ width:"100%", marginBottom:28 }}>
+          <div style={{ fontSize:10, fontWeight:700, color:T.muted, textTransform:"uppercase", letterSpacing:".1em", marginBottom:12 }}>Pe capitole</div>
+          {Object.entries(stats).map(([topic,s]) => {
+            const p=s.c/s.t;
+            const c=p===1?T.green:p>=.5?T.yellow:T.red;
+            return (
+              <div key={topic} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
+                <span style={{ fontSize:11, color:T.muted, width:160, flexShrink:0, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{topic}</span>
+                <div style={{ flex:1, height:4, background:T.surface, borderRadius:2, overflow:"hidden" }}>
+                  <div style={{ width:`${p*100}%`, height:"100%", background:c, borderRadius:2, transition:"width .6s ease" }} />
+                </div>
+                <span style={{ fontSize:10, color:T.muted, fontFamily:"'JetBrains Mono',monospace", width:26, textAlign:"right" }}>{s.c}/{s.t}</span>
               </div>
-              <div style={{ display:"flex", gap:8 }}>
-                <button onClick={() => setReviewIdx(i => Math.max(0, i-1))} disabled={reviewIdx===0} style={{
-                  width:32, height:32, borderRadius:7, border:`1px solid ${T.border}`,
-                  background:T.surface, color:reviewIdx===0?T.border:T.muted,
-                  cursor:reviewIdx===0?"default":"pointer", fontSize:16,
-                }}>‹</button>
-                <button onClick={() => setReviewIdx(i => Math.min(questions.length-1, i+1))} disabled={reviewIdx===questions.length-1} style={{
-                  width:32, height:32, borderRadius:7, border:`1px solid ${T.border}`,
-                  background:T.surface, color:reviewIdx===questions.length-1?T.border:T.muted,
-                  cursor:reviewIdx===questions.length-1?"default":"pointer", fontSize:16,
-                }}>›</button>
-                <button onClick={() => setReviewIdx(null)} style={{
-                  width:32, height:32, borderRadius:7, border:`1px solid ${T.border}`,
-                  background:T.surface, color:T.muted, cursor:"pointer", fontSize:16,
-                }}>✕</button>
-              </div>
-            </div>
-
-            <Tag color={T.accent} bg="#001e2a">{reviewQ.topic}</Tag>
-            <p style={{ fontSize:15, lineHeight:1.7, margin:"14px 0 18px", color:T.text, whiteSpace:"pre-wrap" }}>
-              {reviewQ.question}
-            </p>
-
-            {reviewQ.type === "order" ? (
-              <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-                <div style={{ fontSize:12, color:T.muted, marginBottom:4, fontFamily:"'JetBrains Mono',monospace" }}>Ordinea corectă:</div>
-                {reviewQ.answers.map((idx, pos) => {
-                  const skippedQ = !reviewSt;
-                  const userPos = reviewSt?.orderState ? reviewSt.orderState[pos] : null;
-                  const isRight = !skippedQ && userPos === idx;
-                  const borderCol = skippedQ ? T.orange : isRight ? T.green : T.red;
-                  const bgCol = skippedQ ? "#1a0e00" : isRight ? "#0d2e1a" : "#2d0f0f";
-                  return (
-                    <div key={pos} style={{
-                      display:"flex", gap:10, alignItems:"center", padding:"10px 14px", borderRadius:9,
-                      background: bgCol, border:`1.5px solid ${borderCol}`,
-                    }}>
-                      <span style={{ fontSize:11, fontFamily:"'JetBrains Mono',monospace", color:T.muted, minWidth:20 }}>{pos+1}.</span>
-                      <code style={{ flex:1, fontSize:13, color: borderCol, fontFamily:"'JetBrains Mono',monospace", whiteSpace:"pre-wrap" }}>
-                        {reviewQ.options[idx]}
-                      </code>
-                      <span style={{ fontSize:14 }}>{skippedQ ? "→" : isRight ? "✓" : "✗"}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-                {reviewQ.options.map((opt, i) => {
-                  const skippedQ = !reviewSt;
-                  const isCorrect = reviewQ.answers.includes(i);
-                  const wasSelected = reviewSt?.selected?.includes(i);
-                  const isWrong = wasSelected && !isCorrect;
-                  let bg=T.surface, bc=T.border, col="#94a3b8", lbg="#080f1a";
-                  if (skippedQ && isCorrect) { bg="#1a0e00"; bc=T.orange; col=T.orange; lbg="#2a1800"; }
-                  else if (!skippedQ && isCorrect) { bg="#061c10"; bc=T.green; col=T.green; lbg="#0a2e18"; }
-                  else if (isWrong) { bg="#1c0606"; bc=T.red; col=T.red; lbg="#2e0a0a"; }
-                  return (
-                    <div key={i} style={{
-                      display:"flex", alignItems:"center", gap:12, padding:"11px 14px",
-                      borderRadius:10, background:bg, border:`1.5px solid ${bc}`, color:col,
-                    }}>
-                      <span style={{
-                        width:26, height:26, borderRadius:6, flexShrink:0,
-                        display:"flex", alignItems:"center", justifyContent:"center",
-                        fontSize:11, fontWeight:800, fontFamily:"'JetBrains Mono',monospace",
-                        background: lbg, border:`1px solid ${bc}44`,
-                      }}>{["A","B","C","D","E"][i]}</span>
-                      <span style={{ flex:1, lineHeight:1.5, whiteSpace:"pre-wrap" }}>{opt}</span>
-                      <span style={{ fontSize:14, fontWeight:700 }}>
-                        {skippedQ && isCorrect ? "→" : isCorrect && !skippedQ ? "✓" : isWrong ? "✗" : ""}
-                      </span>
-                    </div>
-                  );
-                })}
-                {!reviewSt && (
-                  <div style={{ fontSize:12, color:T.orange, marginTop:6, fontFamily:"'JetBrains Mono',monospace", opacity:.8 }}>
-                    ⊘ Întrebare săritată — răspunsul corect este marcat cu portocaliu
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+            );
+          })}
         </div>
       )}
+
+      <div style={{ display:"flex", gap:12 }}>
+        <button onClick={onRetry} style={{
+          padding:"11px 28px", borderRadius:10, border:"none",
+          background:`linear-gradient(135deg,#047857,#0369a1)`,
+          color:"#fff", fontFamily:"'Outfit',sans-serif", fontSize:14, fontWeight:700, cursor:"pointer",
+        }}>↺ Reia Quiz</button>
+        <button onClick={onMenu} style={{
+          padding:"11px 28px", borderRadius:10,
+          border:`1px solid ${T.borderHi}`, background:"transparent",
+          color:T.muted, fontFamily:"'Outfit',sans-serif", fontSize:14, fontWeight:600, cursor:"pointer",
+        }}>Meniu</button>
+      </div>
     </div>
   );
 }
@@ -1019,34 +846,21 @@ function AdminPanel({ allQ, chapters, onAddQuestions, onPlayNow, onBack }) {
       const multiCount = Math.round(count * 0.25);
       const orderCount = count - singleCount - multiCount;
 
-      const posA = Math.ceil(singleCount / 4);
-      const posB = Math.ceil((singleCount - posA) / 3);
-      const posC = Math.ceil((singleCount - posA - posB) / 2);
-      const posD = singleCount - posA - posB - posC;
-
       const prompt = `Ești un profesor de informatică. Generează exact ${count} întrebări de tip quiz ${diffLabel} bazate pe materialul atașat.
 
 ${topicHint}
 
 TIPURI DE ÎNTREBĂRI — generează OBLIGATORIU toate cele 3 tipuri în proporțiile exacte:
 - ${singleCount} întrebări de tip "single" (un singur răspuns corect)
-- ${multiCount} întrebări de tip "multi" (2-3 răspunsuri corecte din 4-5 variante) — textul întrebării trebuie să specifice explicit câte răspunsuri sunt corecte, ex: "Care DOUĂ dintre următoarele..." sau la sfârșit "(alegeți 2 răspunsuri corecte)"
+- ${multiCount} întrebări de tip "multi" (2-3 răspunsuri corecte din 4-5 variante)
 - ${orderCount} întrebări de tip "order" (ordonează pașii/comenzile în ordinea corectă)
-
-DISTRIBUȚIA POZIȚIILOR PENTRU ÎNTREBĂRILE "single" — OBLIGATORIE:
-Împarte cele ${singleCount} întrebări single în 4 grupe EGALE și generează-le intercalat (A, B, C, D, A, B, C, D...):
-  · Grupa A (${posA} întrebări): answers = [0] — răspunsul corect este primul
-  · Grupa B (${posB} întrebări): answers = [1] — răspunsul corect este al doilea
-  · Grupa C (${posC} întrebări): answers = [2] — răspunsul corect este al treilea
-  · Grupa D (${posD} întrebări): answers = [3] — răspunsul corect este al patrulea
-INTERZIS să pui răspunsul corect la aceeași poziție de două ori consecutiv.
 
 REGULI CRITICE:
 1. Toate variantele de răspuns trebuie să aibă lungimi SIMILARE (±15 caractere) — nu da de gol răspunsul corect prin lungime
-2. Variantele greșite să fie plauzibile și tehnic corecte parțial
-3. Întrebările să testeze înțelegerea, nu memorarea
-4. Pentru "order": options = lista de pași/comenzi în ordine amestecată, answers = [indexul corect al pasului 1, indexul pasului 2, ...] adică ordinea corectă ca indici
-5. Înainte de a scrie JSON-ul final, verifică că pozițiile answers[] pentru întrebările single urmează pattern-ul 0,1,2,3,0,1,2,3... și că nu apar două la fel consecutiv
+2. Răspunsul corect distribuit uniform la pozițiile 0, 1, 2, 3
+3. Variantele greșite să fie plauzibile și tehnic corecte parțial
+4. Întrebările să testeze înțelegerea, nu memorarea
+5. Pentru "order": options = lista de pași/comenzi în ordine amestecată, answers = [indexul corect al pasului 1, indexul pasului 2, ...] adică ordinea corectă ca indici
 
 FORMAT JSON — Returnează DOAR un array JSON valid, fără markdown, fără \`\`\`json:
 [
@@ -1056,26 +870,18 @@ FORMAT JSON — Returnează DOAR un array JSON valid, fără markdown, fără \`
     "type": "single",
     "question": "Întrebare cu un singur răspuns?",
     "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
-    "answers": [0]
+    "answers": [2]
   },
   {
     "id": 1001,
     "topic": "Numele capitolului",
-    "type": "single",
-    "question": "A doua întrebare single?",
-    "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
-    "answers": [1]
-  },
-  {
-    "id": 1002,
-    "topic": "Numele capitolului",
     "type": "multi",
-    "question": "Care DOUĂ dintre următoarele sunt corecte?",
+    "question": "Care dintre următoarele sunt corecte?",
     "options": ["Varianta A", "Varianta B", "Varianta C", "Varianta D"],
     "answers": [0, 2]
   },
   {
-    "id": 1003,
+    "id": 1002,
     "topic": "Numele capitolului",
     "type": "order",
     "question": "Ordonează pașii pentru a instala un pachet:",
@@ -1156,19 +962,6 @@ ${txt}` });
       // Validate
       questions = questions.filter(q => q.question && q.options?.length >= 2 && q.answers?.length >= 1);
       if (!questions.length) { addLog("Nicio întrebare validă.", "error"); setStep("config"); return; }
-
-      // Fix answer position distribution for single questions: rotate 0,1,2,3,0,1,2,3...
-      let posCounter = 0;
-      questions = questions.map(q => {
-        if (q.type !== "single" || q.answers.length !== 1) return q;
-        const targetPos = posCounter % 4;
-        posCounter++;
-        const currentPos = q.answers[0];
-        if (currentPos === targetPos) return q;
-        const opts = [...q.options];
-        [opts[currentPos], opts[targetPos]] = [opts[targetPos], opts[currentPos]];
-        return { ...q, options: opts, answers: [targetPos] };
-      });
 
       const base = Date.now() % 100000;
       questions = questions.map((q, i) => ({ ...q, id: base + i }));
@@ -1460,8 +1253,6 @@ export default function App() {
   const [questions, setQuestions] = useState([]);
   const [finalScore, setFinalScore] = useState(0);
   const [finalHistory, setFinalHistory] = useState([]);
-  const [finalQuestions, setFinalQuestions] = useState([]);
-  const [finalStates, setFinalStates] = useState([]);
   const [pendingCount, setPendingCount] = useState(20);
   const [pendingDiff, setPendingDiff] = useState("easy");
   const [error, setError] = useState(null);
@@ -1533,11 +1324,9 @@ export default function App() {
     setScreen("quiz");
   }
 
-  function finish(score, history, qs, sts) {
+  function finish(score, history) {
     setFinalScore(score);
     setFinalHistory(history);
-    setFinalQuestions(qs || []);
-    setFinalStates(sts || []);
     setScreen("results");
   }
 
@@ -1620,8 +1409,6 @@ export default function App() {
         <Results
           score={finalScore} total={questions.length}
           history={finalHistory}
-          questions={finalQuestions}
-          states={finalStates}
           onMenu={() => setScreen("menu")}
           onRetry={() => start(pendingCount, pendingDiff)}
         />
